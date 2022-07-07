@@ -9,13 +9,13 @@ const styles = StyleSheet.create({
         width: '100%',
     },  
     title: {
-        fontSize: 20,
+        fontSize: 24,
         color: '#3F3F3F',
         fontWeight: 'bold',
         marginBottom: 4,
     },
     subtitle: {
-        fontSize: 14,
+        fontSize: 18,
         color: '#535353',
     }
 })
@@ -28,7 +28,7 @@ const OnBoardingButton = ({ title = 'title', subtitle = 'subtitle', ...props}) =
                     <Text style={styles.title}>{title}</Text>
                 </View>
                 <View>
-                    <Text>{subtitle}</Text>
+                    <Text style={styles.subtitle}>{subtitle}</Text>
                 </View>
             </View>
         </TouchableOpacity>

@@ -1,7 +1,6 @@
-import { Image, View } from "react-native"
-import { StyleSheet, Text } from "react-native"
-import OnBoardingButton from "../../../components/Buttons/OnBoarding"
-import AccentPattern from '../../../../assets/accent-pattern.png'
+import { Image, View, StyleSheet, Text } from "react-native"
+import OnBoardingButton from "components/Buttons/OnBoarding"
+import AccentPattern from "assets/accent-pattern.png"
 
 const styles = StyleSheet.create({
     container: {
@@ -14,19 +13,20 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     heading: {
-        fontSize: 28,
+        fontSize: 32,
         fontWeight: "bold",
         color: '#000000',
         marginBottom: 4,
     },
     subtitle: {
-        fontSize: 20,
+        fontSize: 26,
         color: '#535353',
 
     }
 })
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }) => {
+
     return (
         <View style={styles.container}>
             <View>
@@ -41,8 +41,12 @@ const WelcomeScreen = () => {
             >
                 Apakah kamu sudah memiliki hafalan Alquran saat ini?
             </Text>
-            <View style={{ marginTop: 24, width: '100%' }}>
-                <OnBoardingButton title='Sudah' subtitle='Masukkan catatan hafalan saya.' />
+            <View style={{ marginTop: 24, width: '100%', zIndex: 3, elevation: 3 }}>
+                <OnBoardingButton
+                    title='Sudah'
+                    subtitle='Masukkan catatan hafalan saya.'
+                    onPress={() => navigation.navigate('InputMemorization')}
+                />
                 <OnBoardingButton title='Belum' subtitle='Mulai catatan hafalan saya dari awal.' style={{ marginTop: 16}} />
             </View>
             <Image source={AccentPattern} style={{ position: 'absolute', right: 0, bottom: 0}} />
