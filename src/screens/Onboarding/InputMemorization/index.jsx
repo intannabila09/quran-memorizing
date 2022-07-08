@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const InputMemorization = () => {
+const InputMemorization = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.subtitle}>
@@ -29,6 +29,7 @@ const InputMemorization = () => {
                 <OnBoardingButton
                     title="Berdasarkan Juz"
                     subtitle="Tandai Juz yang sudah saya hafalkan"
+                    onPress={() => navigation.navigate('InputByJuz')}
                 />
                 <OnBoardingButton
                     title="Berdasarkan Surat"
