@@ -36,16 +36,16 @@ const InputBySurah = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{ position: 'relative', zIndex: 3, elevation: 3, width: '100%'}}>
-            <Text style={{ marginBottom: 24, fontSize: 32, fontWeight: 'bold'}}>Pilih surat dan ayat yang sudah kamu hafalkan</Text>
-            <CheckableListInput
-                style={{
-                    height: 500,
-                    marginBottom: 24,
-                }}
-                items={SurahItems}
-                renderItem={renderSurahItem}
-            />
-            <PrimaryButton title="Selanjutnya" />
+                <Text style={{ marginBottom: 24, fontSize: 32, fontWeight: 'bold'}}>Pilih surat dan ayat yang sudah kamu hafalkan</Text>
+                <CheckableListInput
+                    style={{
+                        height: 500,
+                        marginBottom: 24,
+                    }}
+                    items={SurahItems}
+                    renderItem={renderSurahItem}
+                />
+                <PrimaryButton title="Selanjutnya"  onPress={() => navigation.navigate('PersonalizationConfig') }/>
                 <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={() => navigation.goBack()}/>
             </View>
             <View style={{ position: 'absolute', bottom: 0, right: 0, zIndex: 1, elevation: 1 }}>

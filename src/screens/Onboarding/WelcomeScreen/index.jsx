@@ -47,7 +47,7 @@ const WelcomeScreen = ({ navigation }) => {
                     subtitle='Masukkan catatan hafalan saya.'
                     onPress={() => navigation.navigate('InputMemorization')}
                 />
-                <OnBoardingButton title='Belum' subtitle='Mulai catatan hafalan saya dari awal.' style={{ marginTop: 16}} />
+                <OnBoardingButton title='Belum' subtitle='Mulai catatan hafalan saya dari awal.' style={{ marginTop: 16}}  onPress={() => navigation.navigate('PersonalizationConfig') } />
             </View>
             <Image source={AccentPattern} style={{ position: 'absolute', right: 0, bottom: 0}} />
         </View>

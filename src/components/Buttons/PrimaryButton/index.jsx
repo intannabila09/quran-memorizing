@@ -14,9 +14,9 @@ const styles = StyleSheet.create({
     }
 })
 
-const PrimaryButton = ({ title = 'Primary Button'}) => {
+const PrimaryButton = ({ title = 'Primary Button', onPress = () => {}}) => {
     return (
-        <TouchableOpacity style={styles.primary_button_container}>
+        <TouchableOpacity style={styles.primary_button_container} onPress={onPress}>
             <Text style={styles.title}>{title}</Text>
         </TouchableOpacity>
     )

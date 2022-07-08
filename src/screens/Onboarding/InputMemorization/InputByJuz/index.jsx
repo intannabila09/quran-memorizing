@@ -64,7 +64,7 @@ const InputByJuz = ({ navigation }) => {
                     renderItem={renderJuzItem}
                     items={JuzItems}
                 />
-                <PrimaryButton title="Selanjutnya" />
+                <PrimaryButton title="Selanjutnya" onPress={() => navigation.navigate('PersonalizationConfig') }/>
                 <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={() => navigation.goBack()}/>
             </View>
             <View style={{ position: 'absolute', zIndex: 1, elevation: 1, right: 0, bottom: 0 }}>
