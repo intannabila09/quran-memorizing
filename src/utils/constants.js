@@ -174,7 +174,7 @@ export const TikrarCount = [
   },
   {
     value: 50,
-    label: '50Kali'
+    label: '50 Kali'
   }
 ]
 

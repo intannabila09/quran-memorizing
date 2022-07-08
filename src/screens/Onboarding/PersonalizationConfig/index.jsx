@@ -1,7 +1,12 @@
+import { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Image } from "react-native"
 import AccentPattern from 'assets/accent-pattern.png'
 import TextButton from 'components/Buttons/TextButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
+
+import firstWord from 'assets/visibilityMode/firstWord.png'
+import hideAll from 'assets/visibilityMode/hideAll.png'
+import summary from 'assets/visibilityMode/summary.png'
 
 import {
     TikrarDuration,
@@ -10,7 +15,13 @@ import {
     AyahVisibilityMode,
 } from 'utils/constants'
 
-import DropDownPicker from "react-native-dropdown-picker"
+import DropDownPicker from 'react-native-dropdown-picker'
+
+/**
+ * Todo
+ * Create custom theme for dropdown
+ * https://github.com/hossein-zare/react-native-dropdown-picker/blob/5.x/src/themes/light/index.js
+ */
 
 const styles = StyleSheet.create({
     container: {
@@ -26,26 +37,165 @@ const styles = StyleSheet.create({
 })
 
 const PersonalizationConfig = ({ navigation }) => {
+    const [activeOption, setActiveOption] = useState('tikrarDuration')
+
+    const [ayahVisibilityOptionsOpen, setAyahVisbilityOptionsOpen] = useState(false)
+    const [ayahVisbilityValue, setAyahVisibilityValue] = useState('firstWord')
+
+    const [tikrarModeOptionsOpen, setTikrarModeOptionsOpen] = useState(false)
+    const [tikrarModeValue, setTikrarModeValue] = useState('duration')
+
+    const [tikrarCountOptionsOpen, setTikrarCountOptionsOpen] = useState(false)
+    const [tikrarCountValue, setTikrarCountValue] = useState(10)
+
+    const [tikrarDurationOptionsOpen, setTikrarDurationOptionsOpen] = useState(false)
+    const [tikrarDurationValue, setTikrarDurationValue] = useState('1min')
+
+    useEffect(() => {
+        if (ayahVisibilityOptionsOpen) setActiveOption('ayahVisibility')
+        if (tikrarModeOptionsOpen) setActiveOption('tikrarMode')
+        if (tikrarCountOptionsOpen) setActiveOption('tikrarCount')
+        if (tikrarDurationOptionsOpen) setActiveOption('tikrarDuration')
+    },[
+        ayahVisibilityOptionsOpen,
+        tikrarModeOptionsOpen,
+        tikrarCountOptionsOpen,
+        tikrarDurationOptionsOpen
+    ])
+
     return (
         <View style={styles.container}>
+            <View style={{ width: '100%', marginBottom: 40 }}>
+                <Text style={{ fontSize: 28, fontWeight: 'bold', marginBottom: 8 }}>Konfiguras Gaya Menghafal</Text>
+                <Text style={{ fontSize: 14, color: '#A7A7A7' }}>Kamu dapat mengubahnya nanti di pengaturan.</Text>
+            </View>
             <View style={{ position: 'relative', width: '100%', elevation: 3, zIndex: 3}}>
                 <View style={{ marginBottom: 24 }}>
-                    <Text style={{ fontSize: 24, marginBottom: 8, fontWeight: '600'}}>Mode Tutup Ayat</Text>
+                    <Image
+                        source={(() => {
+                            switch (ayahVisbilityValue) {
+                                case 'firstWord':
+                                    return firstWord
+                                case 'hideAll':
+                                    return hideAll
+                                case 'summary':
+                                    return summary
+                            }
+                        })()}
+                    />
+                </View>
+                <View
+                    style={{
+                        marginBottom: 24,
+                        position: 'relative',
+                        zIndex: activeOption === 'ayahVisibility' ? 4 : 3,
+                        elevation: activeOption === 'ayahVisibility' ? 4 : 3,
+                    }}
+                >
+                    <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Mode Tutup Ayat</Text>
                     <DropDownPicker
+                        open={ayahVisibilityOptionsOpen}
+                        value={ayahVisbilityValue}
                         items={AyahVisibilityMode}
+                        setOpen={setAyahVisbilityOptionsOpen}
+                        setValue={setAyahVisibilityValue}
+                        style={{
+                            borderWidth: 1,
+                            borderColor: '#D6D6D6',
+                            borderRadius: 8,
+                            backgroundColor: '#FBFBFB',
+                        }}
+                        textStyle={{
+                            fontWeight: '600'
+                        }}
                     />
                 </View>
-                <View style={{ marginBottom: 24 }}>
-                    <Text style={{ fontSize: 24, marginBottom: 8, fontWeight: '600'}}>Metode Tikrar Ayat</Text>
+                <View
+                    style={{
+                        marginBottom: 24,
+                        position: 'relative',
+                        zIndex: activeOption === 'tikrarMode' ? 4 : 3,
+                        elevation: activeOption === 'tikrarMode' ? 4 : 3,
+                    }}>
+                    <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Metode Tikrar</Text>
                     <DropDownPicker
-                    
+                        open={tikrarModeOptionsOpen}
+                        value={tikrarModeValue}
+                        items={TikrarMethod}
+                        setOpen={setTikrarModeOptionsOpen}
+                        setValue={setTikrarModeValue}
+                        style={{
+                            borderWidth: 1,
+                            borderColor: '#D6D6D6',
+                            borderRadius: 8,
+                            backgroundColor: '#FBFBFB',
+                        }}
+                        textStyle={{
+                            fontWeight: '600'
+                        }}
                     />
                 </View>
-                <View style={{ marginBottom: 68 }}>
-                    <DropDownPicker
-                    
-                    />
-                </View>
+                {
+                    tikrarModeValue === 'duration' && (
+                        <View
+                            style={{
+                                marginBottom: 24,
+                                position: 'relative',
+                                zIndex: activeOption === 'tikrarDuration' ? 4 : 3,
+                                elevation: activeOption === 'tikrarDuration' ? 4 : 3,
+                            }}
+                        >
+                            <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Durasi Tikrar</Text>
+                            <DropDownPicker
+                                open={tikrarDurationOptionsOpen}
+                                value={tikrarDurationValue}
+                                items={TikrarDuration}
+                                setOpen={setTikrarDurationOptionsOpen}
+                                setValue={setTikrarDurationValue}
+                                style={{
+                                    borderWidth: 1,
+                                    borderColor: '#D6D6D6',
+                                    borderRadius: 8,
+                                    backgroundColor: '#FBFBFB',
+                                }}
+                                textStyle={{
+                                    fontWeight: '600'
+                                }}
+                            />
+                        </View>
+                    )
+                }
+                {
+                    tikrarModeValue === 'count' && (
+                        <View
+                            style={{
+                                marginBottom: 24,
+                                position: 'relative',
+                                zIndex: activeOption === 'tikrarCount' ? 4 : 3,
+                                elevation: activeOption === 'tikrarCount' ? 4 : 3,
+                                
+                            }}
+                        >
+                            <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Jumlah Tikrar</Text>
+                            <DropDownPicker
+                                open={tikrarCountOptionsOpen}
+                                value={tikrarCountValue}
+                                items={TikrarCount}
+                                setOpen={setTikrarCountOptionsOpen}
+                                setValue={setTikrarCountValue}
+                                style={{
+                                    borderWidth: 1,
+                                    borderColor: '#D6D6D6',
+                                    borderRadius: 8,
+                                    backgroundColor: '#FBFBFB',
+                                }}
+                                textStyle={{
+                                    fontWeight: '600'
+                                }}
+                            />
+                        </View>
+                    )
+                }
                 <PrimaryButton title="Selesai" />
                 <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={() => navigation.goBack()}/>
             </View>
