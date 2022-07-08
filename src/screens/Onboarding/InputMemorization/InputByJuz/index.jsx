@@ -7,6 +7,8 @@ import CheckableListInput from 'components/CheckableListInput'
 import { JuzItems } from 'utils/constants'
 import JuzInputListItem from 'components/JuzInputListItem';
 
+import { useOnBoardingState } from '../../../../context/OnBoardingContext'
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -20,9 +22,36 @@ const styles = StyleSheet.create({
     }
 })
 
-const renderJuzItem = (item) => <JuzInputListItem juz={item} />
 
 const InputByJuz = ({ navigation }) => {
+    const { onBoardingState, dispatch } = useOnBoardingState()
+    const renderJuzItem = (juz) => {
+        return (
+            <JuzInputListItem
+                juz={juz}
+                checked={onBoardingState?.memorized?.juz?.includes(juz.item.id)}
+                onPress={() => {
+                    const memorized = onBoardingState?.memorized?.juz?.includes(juz.item.id)
+                    switch(memorized) {
+                        case true:
+                            dispatch({
+                                action: 'REMOVE_JUZ',
+                                payload: juz.item.id
+                            })
+                            break;
+                        case false:
+                            dispatch({
+                                action: 'ADD_JUZ',
+                                payload: juz.item.id
+                            })
+                        default:
+                            break;
+                    }
+                }}
+            />
+        )
+    }
+
     return (
         <View style={styles.container}>
             <View style={{ width: '100%', position: 'relative', zIndex: 3, elevation: 3 }}>

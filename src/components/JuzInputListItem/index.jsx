@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Checkbox from 'expo-checkbox'
 
 const styles = StyleSheet.create({
@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
     }
 })
 
-const JuzInputListItem = ({ juz, checked = true }) => {
+const JuzInputListItem = ({ juz, checked = false, onPress = () => {} }) => {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
             <Text style={{ color: '#000000', fontSize: 20}}>{juz.item.label}</Text>
             <Checkbox
                 style={{
@@ -34,7 +34,7 @@ const JuzInputListItem = ({ juz, checked = true }) => {
                 value={checked}
                 color={checked ? '#1DC25D' : null}
             />
-        </View>
+        </TouchableOpacity>
     )
 }
 
