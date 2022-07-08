@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
         width: 32,
         height: 32,
         backgroundColor: '#F7F7F7',
-        // flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: '4px',
@@ -75,8 +74,7 @@ const AyatInSurah = ({ surahNumber = null, numberOfAyat = 0 }) => {
     )
 }
 
-const SurahInputListItem = ({ surah }) => {
-    const [showAyat, setShowAyat] = useState(false)
+const SurahInputListItem = ({ surah, showAyat, setShowAyat }) => {
     return (
         <View style={styles.container}>
             <View style={styles.detail_container}>
@@ -125,7 +123,10 @@ const SurahInputListItem = ({ surah }) => {
                         borderTopWidth: 1,
                         borderTopColor: '#F7F7F7',
                     }}
-                    onPress={() => setShowAyat(!showAyat)}
+                    onPress={() => {
+                        if (!showAyat) return setShowAyat(surah.item.no)
+                        else return setShowAyat(null)
+                    }}
                 >
                     <Text style={{ color: '#696969'}}>
                         Lihat Ayat

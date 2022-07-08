@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {StyleSheet, View, Image, Text} from 'react-native'
 import AccentPattern from 'assets/accent-pattern.png'
 import TextButton from 'components/Buttons/TextButton'
@@ -22,13 +23,14 @@ const styles = StyleSheet.create({
 
 const InputBySurah = ({ navigation }) => {
     const { onBoardingState, dispatch } = useOnBoardingState()
-    /**
-     * TODO: Implement logic only one surah can be opened at a time
-     */
+    const [activeSurah, setActiveSurah] = useState(null)
+    
     const renderSurahItem = (surah) => {
         return (
             <SurahInputListItem
                 surah={surah}
+                showAyat={activeSurah === surah.item.no}
+                setShowAyat={setActiveSurah}
             />
         )
     }
