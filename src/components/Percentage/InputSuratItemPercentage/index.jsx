@@ -9,7 +9,7 @@ const InputSuratItemPercentage = ({
         <View style={{ marginTop: 12 }}>
             <View style={{ height: 4, width: '100%', backgroundColor: '#EAEAEA', borderRadius: '999px'}}>
                 <View
-                    style={{ height: '100%', width: `50%`, borderRadius: '999px'}}
+                    style={{ height: '100%', width: `${(memorized/total)*100}%`, borderRadius: '999px'}}
                 >
                     <LinearGradient
                         colors={['#26E065', '#13A355']}

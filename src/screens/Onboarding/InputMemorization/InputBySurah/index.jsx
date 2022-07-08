@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 })
 
 const InputBySurah = ({ navigation }) => {
-    const { onBoardingState, dispatch } = useOnBoardingState()
     const [activeSurah, setActiveSurah] = useState(null)
     
     const renderSurahItem = (surah) => {

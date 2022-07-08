@@ -9,7 +9,25 @@ const OnBoardingContext = createContext({})
 const initialOnBoardingState = {
     memorized: {
         juz: [],
-        surah: []
+        surah: [
+            '1:1',
+            '1:2',
+            '1:3',
+            '1:4',
+            '1:5',
+            '1:6',
+            '1:7',
+            '2:1',
+            '2:2',
+            '2:3',
+            '2:4',
+            '2:5',
+            '2:6',
+            '2:7',
+            '2:8',
+            '2:9',
+            '2:10',
+        ]
     }
 }
 
@@ -40,9 +58,10 @@ const OnBoardingStateReducer = (state,
                 return {
                     ...state,
                     memorized: {
+                        ...state.memorized,
                         juz: [],
                         surah: [
-                            ...state.memorized.surah,
+                            ...state.memorized.surah.filter((item) => !item.includes(`${payload.numberOfSurah}:`)),
                             ...Array.from({ length: payload.numberOfAyah }, (_, i) => i + 1)
                             .map((ayah) => {
                                 return `${payload.numberOfSurah}:${ayah}`
@@ -51,13 +70,15 @@ const OnBoardingStateReducer = (state,
                     }
                 }
             case 'REMOVE_ALL_AYAH_IN_SURAH':
-                return {
+                const newState = {
                     ...state,
                     memorized: {
+                        ...state.memorized,
                         juz: [],
                         surah: state.memorized.surah.filter(surah => !surah.includes(`${payload.numberOfSurah}:`))
                     }
                 }
+                return newState;
             case 'ADD_ONE_AYAH_IN_SURAH':
                 return {
                     ...state,

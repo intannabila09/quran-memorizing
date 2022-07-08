@@ -1,7 +1,7 @@
-import { useState } from 'react'
 import Checkbox from "expo-checkbox"
 import { View, StyleSheet, Text, TouchableOpacity, Animated } from "react-native"
 import { AntDesign } from '@expo/vector-icons';
+import { useOnBoardingState } from '../../context/OnBoardingContext';
 
 import InputSuratItemPercentage from 'components/Percentage/InputSuratItemPercentage';
 
@@ -35,38 +35,82 @@ const styles = StyleSheet.create({
 
 const AyatInSurah = ({ surahNumber = null, numberOfAyat = 0 }) => {
     if (numberOfAyat <= 0 || !surahNumber) return false
+    const { onBoardingState, dispatch } = useOnBoardingState()
+    const memorizedAyah = onBoardingState.memorized.surah
+        .filter((item) => item.includes(`${surahNumber}:`))
+        .map((item) => item.split(':')[1])
+        .map((item) => Number(item))
+
+    const memorizeThisAyah = (numberOfThisAyat) => {
+        dispatch({
+            action: 'ADD_ONE_AYAH_IN_SURAH',
+            payload: {
+                numberOfSurah: surahNumber,
+                numberOfAyah: numberOfThisAyat
+            }
+        })
+    }
+
+    const unmemorizeThisAyah = (numberOfThisAyat) => {
+        dispatch({
+            action: 'REMOVE_ONE_AYAH_IN_SURAH',
+            payload: {
+                numberOfSurah: surahNumber,
+                numberOfAyah: numberOfThisAyat
+            }
+        })
+    }
+
+    const thisAyahIsMemorized = (
+        numberOfAyah,
+        _memorizedAyah
+    ) => {
+        return _memorizedAyah.includes(numberOfAyah)
+    }
     return (
         <View>
             {Array.from({ length: numberOfAyat }, (_, i) => i + 1)
                 .map((ayat) => {
                     return (
-                        <View
-                            key={`${surahNumber}-${ayat}`}
-                            style={{
-                                paddingVertical: 12,
-                                paddingHorizontal: 16,
-                                backgroundColor: '#FDFDFD',
-                                borderTopWidth: 1,
-                                borderTopColor: '#F7F7F7',
-                                flex: 1,
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
+                        <TouchableOpacity
+                            onPress={() => {
+                                if (!thisAyahIsMemorized(ayat,memorizedAyah)) {
+                                    memorizeThisAyah(ayat)
+                                } else {
+                                    unmemorizeThisAyah(ayat)
+                                }
                             }}
+                            key={`${surahNumber}-${ayat}`}
                         >
-                            <Text style={{ fontWeight: '500' }}>
-                                Ayat {ayat}
-                            </Text>
-                            <Checkbox
+                            <View
                                 style={{
-                                    width: 16,
-                                    height: 16,
-                                    borderWidth: 1,
-                                    borderRadius: '4px',
-                                    borderColor: '#AEAEAE'
+                                    paddingVertical: 12,
+                                    paddingHorizontal: 16,
+                                    backgroundColor: '#FDFDFD',
+                                    borderTopWidth: 1,
+                                    borderTopColor: '#F7F7F7',
+                                    flex: 1,
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
                                 }}
-                            />
-                        </View>
+                            >
+                                <Text style={{ fontWeight: '500' }}>
+                                    Ayat {ayat}
+                                </Text>
+                                <Checkbox
+                                    style={{
+                                        width: 16,
+                                        height: 16,
+                                        borderWidth: 1,
+                                        borderRadius: '4px',
+                                        borderColor: '#AEAEAE'
+                                    }}
+                                    color={thisAyahIsMemorized(ayat,memorizedAyah) ? '#1DC25D' : null}
+                                    value={thisAyahIsMemorized(ayat,memorizedAyah)}
+                                />
+                            </View>
+                        </TouchableOpacity>
                     )
                 })
             }
@@ -75,36 +119,77 @@ const AyatInSurah = ({ surahNumber = null, numberOfAyat = 0 }) => {
 }
 
 const SurahInputListItem = ({ surah, showAyat, setShowAyat }) => {
+    const { onBoardingState, dispatch } = useOnBoardingState()
+    const memorizedAyah = onBoardingState.memorized.surah.filter((item) => item.includes(`${surah.item.no}:`))
+    const checked = memorizedAyah.length === Number(surah.item.numberOfAyah)
+
+    const memorizeAllAyahInThisSurah = () => {
+        dispatch({
+            action: 'ADD_ALL_AYAH_IN_SURAH',
+            payload: {
+                numberOfSurah: surah.item.no,
+                numberOfAyah: surah.item.numberOfAyah
+            }
+        })
+    }
+
+    const unmemorizeAllAyahInThisSurah = () => {
+        return dispatch({
+            action: 'REMOVE_ALL_AYAH_IN_SURAH',
+            payload: {
+                numberOfSurah: surah.item.no,
+                numberOfAyah: surah.item.numberOfAyah
+            }
+        })
+    }
+
     return (
         <View style={styles.container}>
-            <View style={styles.detail_container}>
-                <View style={styles.detail_container_surah}>
-                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row'}}>
-                        <View style={styles.number_wrapper}>
-                            <Text style={{ fontSize: 14, fontWeight: '600', color: '#000000'}}>
-                                {surah.item.no}
-                            </Text>
+            <TouchableOpacity
+                onPress={() => {
+                    if (!checked) {
+                        memorizeAllAyahInThisSurah()
+                    } else {
+                        unmemorizeAllAyahInThisSurah()
+                    }
+                }}
+            >
+                <View style={styles.detail_container}>
+                    <View style={styles.detail_container_surah}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row'}}>
+                            <View style={styles.number_wrapper}>
+                                <Text style={{ fontSize: 14, fontWeight: '600', color: '#000000'}}>
+                                    {surah.item.no}
+                                </Text>
+                            </View>
+                            <View style={{ marginLeft: 12}}>
+                                <Text style={{ fontSize: 14, fontWeight: '600' }}>
+                                    {surah.item.name}
+                                </Text>
+                            </View>
                         </View>
-                        <View style={{ marginLeft: 12}}>
-                            <Text style={{ fontSize: 14, fontWeight: '600' }}>
-                                {surah.item.name}
-                            </Text>
-                        </View>
+                            <Checkbox
+                                style={{
+                                    width: 16,
+                                    height: 16,
+                                    borderWidth: 1,
+                                    borderRadius: '4px',
+                                    borderColor: '#AEAEAE'
+                                }}
+                                color={checked ? '#1DC25D' : null}
+                                value={checked}
+                                // onValueChange={(value) => {
+                                //     if (value) {
+                                //         memorizeAllAyahInThisSurah()
+                                //     } else {
+                                //         unmemorizeAllAyahInThisSurah()
+                                //     }
+                                // }}
+                            />
                     </View>
-                    <View>
-                        <Checkbox
-                            style={{
-                                width: 16,
-                                height: 16,
-                                borderWidth: 1,
-                                borderRadius: '4px',
-                                borderColor: '#AEAEAE'
-                            }}
-                        />
-                    </View>
+                    <InputSuratItemPercentage total={Number(surah.item.numberOfAyah)} memorized={memorizedAyah.length}  />
                 </View>
-                <InputSuratItemPercentage total={surah.item.numberOfAyah} />
-            </View>
+            </TouchableOpacity>
             {
                 showAyat && (
                 <View>
