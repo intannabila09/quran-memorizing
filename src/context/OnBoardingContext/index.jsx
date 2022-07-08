@@ -28,7 +28,6 @@ const OnBoardingStateReducer = (state,
                     },
                 }
             case 'REMOVE_JUZ':
-                console.log('remove', payload)
                 return {
                     ...state,
                     memorized: {

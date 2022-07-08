@@ -37,6 +37,7 @@ const InputMemorization = ({ navigation }) => {
                     style={{
                         marginTop: 12,
                     }}
+                    onPress={() => navigation.navigate('InputBySurah')}
                 />
             </View>
             <Image source={AccentPattern} style={{ position: 'absolute', right: 0, bottom: 0}} />

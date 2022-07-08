@@ -7,6 +7,7 @@ import WelcomeScreen from 'screens/Onboarding/WelcomeScreen';
 import InputMemorization from 'screens/Onboarding/InputMemorization';
 import InputByJuz from 'screens/Onboarding/InputMemorization/InputByJuz';
 import { OnBoardingProvider } from './context/OnBoardingContext';
+import InputBySurah from 'screens/Onboarding/InputMemorization/InputBySurah';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ const App = () => {
             <Stack.Screen name="Welcome" component={WelcomeScreen} />
             <Stack.Screen name="InputMemorization" component={InputMemorization} />
             <Stack.Screen name="InputByJuz" component={InputByJuz} />
+            <Stack.Screen name="InputBySurah" component={InputBySurah} />
         </Stack.Navigator>
       </NavigationContainer>
     </OnBoardingProvider>
