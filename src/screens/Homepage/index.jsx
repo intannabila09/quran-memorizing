@@ -3,13 +3,13 @@ import UpperSection from 'components/Homepage/UpperSection';
 import LowerSection from 'components/Homepage/LowerSection';
 import { StatusBar } from 'expo-status-bar';
 
-const Homepage = () => {
+const Homepage = ({ navigation }) => {
     return (
         <>
         <View style={{ backgroundColor: '#FFFFFF', width: '100%', height: 48}} />
             <SafeAreaView>
                 <ScrollView>
-                    <UpperSection />
+                    <UpperSection navigation={navigation} />
                     <LowerSection />
                 </ScrollView>
                 <StatusBar style="dark" />

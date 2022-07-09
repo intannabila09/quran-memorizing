@@ -11,6 +11,7 @@ import InputBySurah from 'screens/Onboarding/InputMemorization/InputBySurah';
 import PersonalizationConfig from 'screens/Onboarding/PersonalizationConfig';
 
 import Homepage from 'screens/Homepage';
+import MemorizationProgress from 'screens/Progress';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +21,7 @@ const App = () => {
       <NavigationContainer
       >
         <Stack.Navigator
-          initialRouteName="Welcome"
+          initialRouteName="Homepage"
           screenOptions={{
             headerShown: false,
           }}
@@ -34,6 +35,9 @@ const App = () => {
 
             {/* Homepage */}
             <Stack.Screen name="Homepage" component={Homepage} />
+
+            {/* Memorization Progress */}
+            <Stack.Screen name="MemorizationProgress" component={MemorizationProgress} />
         </Stack.Navigator>
       </NavigationContainer>
     </OnBoardingProvider>

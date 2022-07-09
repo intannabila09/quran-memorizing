@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const UpperSection = () => {
+const UpperSection = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{ position: 'absolute', top: 0, right: 0}}>
@@ -68,6 +68,7 @@ const UpperSection = () => {
                         borderColor: '#E4E4E4',
                         borderRadius: 8,
                     }}
+                    onPress={() => navigation.navigate('MemorizationProgress')}
                 >
                     <Text
                         style={{
