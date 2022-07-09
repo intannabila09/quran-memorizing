@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { SafeAreaView, TouchableOpacity, StyleSheet, View, Text, TextInput, FlatList, ScrollView } from "react-native"
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import { Fontisto, MaterialIcons } from '@expo/vector-icons';
+import { SafeAreaView, TouchableOpacity, StyleSheet, View, Text, TextInput } from "react-native"
+import { Ionicons, FontAwesome } from '@expo/vector-icons'
+import { Fontisto, MaterialIcons } from '@expo/vector-icons'
 import SurahProgressList from 'components/Progress/Surah'
+import JuzProgressList from 'components/Progress/Juz'
 
 const styles = StyleSheet.create({
     container: {
@@ -88,60 +89,70 @@ const MemorizationProgress = ({ navigation }) => {
                         </View>
                     </View>
                     {/* Search Input */}
-                    <View
-                        style={{
-                            paddingHorizontal: 16,
-                            paddingVertical: 12,
-                            backgroundColor: '#FFFFFF',
-                            marginTop: 12,
-                            borderWidth: 1,
-                            borderColor: '#D1D1D1',
-                            borderRadius: 12,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'space-between'
-                        }}
-                    >
-                        <View style={{ flexDirection: 'row' }}>
-                            <Fontisto name="search" size={12} color="#797979" style={{ marginTop: 2}} />
-                            <TextInput
+                    {
+                        activeTab === 'surah' && (
+                            <View
                                 style={{
-                                    marginLeft: 8,
-                                    width: '90%',
-                                    marginVertical: -12,
-                                    height: 40,
+                                    paddingHorizontal: 16,
+                                    paddingVertical: 12,
+                                    backgroundColor: '#FFFFFF',
+                                    marginTop: 12,
+                                    borderWidth: 1,
+                                    borderColor: '#D1D1D1',
+                                    borderRadius: 12,
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between'
                                 }}
-                                placeholder="Ketik surat yang ingin dicari"
-                                value={searchQuery}
-                                onChangeText={(q) => {
-                                    if (!q) return setSearchQuery(null)
-                                    setSearchQuery(q)
-                                }}
-                                underlineColorAndroid="transparent"
-                            />
-                        </View>
-                        {
-                            searchQuery && (
-                                <TouchableOpacity
-                                    style={{
-                                        width: 40,
-                                        height: 40,
-                                        marginVertical: -40,
-                                        marginHorizontal: -16,
-                                        alignItems: 'center',
-                                        justifyContent: 'center'
-                                    }}
-                                    onPress={() => setSearchQuery(null)}
-                                >
-                                    <MaterialIcons name="highlight-remove" size={16} color="#797979" style={{ marginTop: 1}} />
-                                </TouchableOpacity>
-                            )
-                        }
-                    </View>
+                            >
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Fontisto name="search" size={12} color="#797979" style={{ marginTop: 2}} />
+                                    <TextInput
+                                        style={{
+                                            marginLeft: 8,
+                                            width: '90%',
+                                            marginVertical: -12,
+                                            height: 40,
+                                        }}
+                                        placeholder="Ketik surat yang ingin dicari"
+                                        value={searchQuery}
+                                        onChangeText={(q) => {
+                                            if (!q) return setSearchQuery(null)
+                                            setSearchQuery(q)
+                                        }}
+                                        underlineColorAndroid="transparent"
+                                    />
+                                </View>
+                                {
+                                    searchQuery && (
+                                        <TouchableOpacity
+                                            style={{
+                                                width: 40,
+                                                height: 40,
+                                                marginVertical: -40,
+                                                marginHorizontal: -16,
+                                                alignItems: 'center',
+                                                justifyContent: 'center'
+                                            }}
+                                            onPress={() => setSearchQuery(null)}
+                                        >
+                                            <MaterialIcons name="highlight-remove" size={16} color="#797979" style={{ marginTop: 1}} />
+                                        </TouchableOpacity>
+                                    )
+                                }
+                            </View>
+                        )
+                    }
                     {/* Surah Progress List */}
                     {activeTab === 'surah' && (
                         <View style={{ marginTop: 20, paddingBottom: 40, backgroundColor: '#FFFFFF' }}>
                              <SurahProgressList search={searchQuery} />
+                        </View>
+                    )}
+                    {/* Juz Progress List */}
+                    {activeTab === 'juz' && (
+                        <View style={{ marginTop: 20, paddingBottom: 40, backgroundColor: '#FFFFFF' }}>
+                            <JuzProgressList />
                         </View>
                     )}
                 </View>
