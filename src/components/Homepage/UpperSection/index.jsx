@@ -9,7 +9,7 @@ import LastMemorizedBanner from 'components/Homepage/LastMemorizedBanner';
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 64,
+        paddingTop: 8,
         paddingBottom: 24,
         paddingHorizontal: 20,
         backgroundColor: '#FFFFFF',
