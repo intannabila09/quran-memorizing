@@ -40,7 +40,7 @@ const PersonalizationConfig = ({ navigation }) => {
     const [activeOption, setActiveOption] = useState('tikrarDuration')
 
     const [ayahVisibilityOptionsOpen, setAyahVisbilityOptionsOpen] = useState(false)
-    const [ayahVisbilityValue, setAyahVisibilityValue] = useState('firstWord')
+    const [ayahVisibilityValue, setAyahVisibilityValue] = useState('firstWord')
 
     const [tikrarModeOptionsOpen, setTikrarModeOptionsOpen] = useState(false)
     const [tikrarModeValue, setTikrarModeValue] = useState('duration')
@@ -63,6 +63,16 @@ const PersonalizationConfig = ({ navigation }) => {
         tikrarDurationOptionsOpen
     ])
 
+    const submitMemorizingConfiguration = () => {
+        const memorizingConfiguration = {
+            ayahVisibilityMode: ayahVisibilityValue,
+            tikrarMethod: tikrarModeValue,
+            tikrarImplementation: tikrarModeValue === 'count' ? tikrarCountValue : tikrarDurationValue,
+        }
+        console.log(memorizingConfiguration)
+        navigation.navigate('Homepage')
+    }
+
     return (
         <View style={styles.container}>
             <View style={{ width: '100%', marginBottom: 40 }}>
@@ -73,7 +83,7 @@ const PersonalizationConfig = ({ navigation }) => {
                 <View style={{ marginBottom: 24 }}>
                     <Image
                         source={(() => {
-                            switch (ayahVisbilityValue) {
+                            switch (ayahVisibilityValue) {
                                 case 'firstWord':
                                     return firstWord
                                 case 'hideAll':
@@ -82,6 +92,7 @@ const PersonalizationConfig = ({ navigation }) => {
                                     return summary
                             }
                         })()}
+                        style={{ width: 311, height: 135 }}
                     />
                 </View>
                 <View
@@ -95,7 +106,7 @@ const PersonalizationConfig = ({ navigation }) => {
                     <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Mode Tutup Ayat</Text>
                     <DropDownPicker
                         open={ayahVisibilityOptionsOpen}
-                        value={ayahVisbilityValue}
+                        value={ayahVisibilityValue}
                         items={AyahVisibilityMode}
                         setOpen={setAyahVisbilityOptionsOpen}
                         setValue={setAyahVisibilityValue}
@@ -196,7 +207,10 @@ const PersonalizationConfig = ({ navigation }) => {
                         </View>
                     )
                 }
-                <PrimaryButton title="Selesai" />
+                <PrimaryButton
+                    title="Selesai"
+                    onPress={submitMemorizingConfiguration}
+                />
                 <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={() => navigation.goBack()}/>
             </View>
             <View

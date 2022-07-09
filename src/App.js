@@ -10,6 +10,8 @@ import { OnBoardingProvider } from './context/OnBoardingContext';
 import InputBySurah from 'screens/Onboarding/InputMemorization/InputBySurah';
 import PersonalizationConfig from 'screens/Onboarding/PersonalizationConfig';
 
+import Homepage from 'screens/Homepage';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -23,11 +25,15 @@ const App = () => {
             headerShown: false,
           }}
         >
+            {/* Onboarding Screen */}
             <Stack.Screen name="Welcome" component={WelcomeScreen} />
             <Stack.Screen name="InputMemorization" component={InputMemorization} />
             <Stack.Screen name="InputByJuz" component={InputByJuz} />
             <Stack.Screen name="InputBySurah" component={InputBySurah} />
             <Stack.Screen name="PersonalizationConfig" component={PersonalizationConfig} />
+
+            {/* Homepage */}
+            <Stack.Screen name="Homepage" component={Homepage} />
         </Stack.Navigator>
       </NavigationContainer>
     </OnBoardingProvider>
