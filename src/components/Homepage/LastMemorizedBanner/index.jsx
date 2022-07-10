@@ -6,6 +6,7 @@ import Quran from 'assets/Quran.png'
 
 const LastMemorizedBanner = ({
     style,
+    navigation
 }) => {
     return (
         <LinearGradient
@@ -57,6 +58,7 @@ const LastMemorizedBanner = ({
                         borderColor: 'rgba(255, 255, 255, 0.3)',
                         backgroundColor: 'rgba(0, 190, 74, 0.3)',
                     }}
+                    onPress={() => navigation.navigate('Mushaf')}
                 >
                     <Text style={{ color: '#FFFFFF', fontWeight: '600', marginRight: 4}}>
                         Buka

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Image } from "react-native"
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native"
 import AccentPattern from 'assets/accent-pattern.png'
 import TextButton from 'components/Buttons/TextButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
@@ -16,6 +16,7 @@ import {
 } from 'utils/constants'
 
 import DropDownPicker from 'react-native-dropdown-picker'
+import { Entypo } from '@expo/vector-icons';
 
 /**
  * Todo
@@ -207,10 +208,19 @@ const PersonalizationConfig = ({ navigation }) => {
                         </View>
                     )
                 }
-                <PrimaryButton
-                    title="Selesai"
-                    onPress={submitMemorizingConfiguration}
-                />
+                <View style={{ flexDirection: 'row'}}>
+                    <TouchableOpacity style={{ alignItems: 'center', backgroundColor: '#FFFFFF',borderWidth: 1, borderColor: '#e0e0e0', justifyContent: 'center', paddingHorizontal: 16, marginRight: 8, borderRadius: '12px'}}>
+                        <Entypo name="help-with-circle" size={16} color="#757575" />
+                    </TouchableOpacity>
+                    <PrimaryButton
+                        title="Selesai"
+                        onPress={submitMemorizingConfiguration}
+                        style={{
+                            width: 'auto',
+                            flexGrow: 1,
+                        }}
+                    />
+                </View>
                 <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={() => navigation.goBack()}/>
             </View>
             <View

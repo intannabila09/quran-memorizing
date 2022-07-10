@@ -12,6 +12,7 @@ import PersonalizationConfig from 'screens/Onboarding/PersonalizationConfig';
 
 import Homepage from 'screens/Homepage';
 import MemorizationProgress from 'screens/Progress';
+import Mushaf from 'screens/Mushaf';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,9 @@ const App = () => {
 
             {/* Memorization Progress */}
             <Stack.Screen name="MemorizationProgress" component={MemorizationProgress} />
+
+            {/* Mushaf */}
+            <Stack.Screen name="Mushaf" component={Mushaf} />
         </Stack.Navigator>
       </NavigationContainer>
     </OnBoardingProvider>

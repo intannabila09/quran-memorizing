@@ -83,7 +83,7 @@ const UpperSection = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
             <View>
-                <LastMemorizedBanner />
+                <LastMemorizedBanner navigation={navigation} />
             </View>
         </View>
     )
