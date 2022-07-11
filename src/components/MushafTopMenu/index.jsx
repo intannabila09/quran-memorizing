@@ -1,16 +1,23 @@
-import { View } from "react-native"
+import { Text, Animated } from "react-native"
 
-const MushafTopMenu = () => {
+const MushafTopMenu = ({ top = 0 }) => {
     return (
-        <View
+        <Animated.View
             style={{
-                backgroundColor: '#FFFFFF',
+                width: '100%',
                 height: 50,
-
+                backgroundColor: '#FFFFFF',
+                position: 'absolute',
+                top: top,
+                paddingHorizontal: 20,
+                borderBottomWidth: 1,
+                borderBottomColor: '#E0E0E0',
+                paddingTop: 4,
+                zIndex: 3
             }}
         >
-
-        </View>
+            <Text>Top Menu</Text>
+        </Animated.View>
     )
 }
 

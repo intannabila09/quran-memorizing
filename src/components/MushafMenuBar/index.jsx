@@ -1,21 +1,24 @@
-import { TouchableOpacity, View, Text, Image } from 'react-native'
+import { TouchableOpacity, View, Text, Image, Animated } from 'react-native'
 import { FontAwesome5, FontAwesome, Entypo } from '@expo/vector-icons';
 import tikrarPlus from 'assets/tikrarPlus.png'
 
-const MushafMenuBar = () => {
+const MushafMenuBar = ({ bottom = 13 }) => {
     return (
-        <View
+        <Animated.View
             style={{
                 width: '100%',
                 height: 85,
                 backgroundColor: '#FFFFFF',
                 position: 'absolute',
-                bottom: 13,
+                bottom: bottom,
                 paddingHorizontal: 20,
+                borderTopWidth: 1,
+                borderTopColor: '#E0E0E0',
+                paddingTop: 4,
             }}
         >
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}> */}
                     <TouchableOpacity style={{ marginLeft: 0, alignItems: 'center', paddingVertical: 8, paddingHorizontal: 20}}>
                         <FontAwesome name="play" size={24} color="#A0A0A0" />
                         {/* <Text style={{ fontSize: 12, marginTop: 4, color: '#A0A0A0'}}>
@@ -28,7 +31,7 @@ const MushafMenuBar = () => {
                             Setting Audio
                         </Text> */}
                     </TouchableOpacity>
-                </View>
+                {/* </View> */}
                 <TouchableOpacity
                     style={{
                         backgroundColor: '#1DC25D',
@@ -56,7 +59,7 @@ const MushafMenuBar = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </Animated.View>
     )
 }
 
