@@ -178,13 +178,6 @@ const SurahInputListItem = ({ surah, showAyat, setShowAyat }) => {
                                 }}
                                 color={checked ? '#1DC25D' : null}
                                 value={checked}
-                                // onValueChange={(value) => {
-                                //     if (value) {
-                                //         memorizeAllAyahInThisSurah()
-                                //     } else {
-                                //         unmemorizeAllAyahInThisSurah()
-                                //     }
-                                // }}
                             />
                     </View>
                     <InputSuratItemPercentage total={Number(surah.item.numberOfAyah)} memorized={memorizedAyah.length}  />

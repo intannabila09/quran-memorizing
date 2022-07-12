@@ -7,27 +7,14 @@ import {
 const OnBoardingContext = createContext({})
 
 const initialOnBoardingState = {
+    personalization: {
+        ayahVisibility: 'firstWord',
+        tikrarMethod: 'duration',
+        tikrarMethodImplementation: '1min',
+    },
     memorized: {
         juz: [],
-        surah: [
-            '1:1',
-            '1:2',
-            '1:3',
-            '1:4',
-            '1:5',
-            '1:6',
-            '1:7',
-            '2:1',
-            '2:2',
-            '2:3',
-            '2:4',
-            '2:5',
-            '2:6',
-            '2:7',
-            '2:8',
-            '2:9',
-            '2:10',
-        ]
+        surah: []
     }
 }
 
@@ -96,6 +83,14 @@ const OnBoardingStateReducer = (state,
                     memorized: {
                         juz: [],
                         surah: state.memorized.surah.filter(surah => surah !== `${payload.numberOfSurah}:${payload.numberOfAyah}`),
+                    }
+                }
+            case 'SET_PERSONALIZATION':
+                return {
+                    ...state,
+                    personalization: {
+                        ...state.personalization,
+                        [payload.field]: payload.value
                     }
                 }
         }

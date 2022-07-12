@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native"
 import AccentPattern from 'assets/accent-pattern.png'
 import TextButton from 'components/Buttons/TextButton'
@@ -17,6 +17,7 @@ import {
 
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Entypo } from '@expo/vector-icons';
+import { useOnBoardingState } from '../../../context/OnBoardingContext'
 
 /**
  * Todo
@@ -38,19 +39,20 @@ const styles = StyleSheet.create({
 })
 
 const PersonalizationConfig = ({ navigation }) => {
+    const { onBoardingState, dispatch } = useOnBoardingState()
     const [activeOption, setActiveOption] = useState('tikrarDuration')
 
     const [ayahVisibilityOptionsOpen, setAyahVisbilityOptionsOpen] = useState(false)
-    const [ayahVisibilityValue, setAyahVisibilityValue] = useState('firstWord')
+    const [ayahVisibilityValue, setAyahVisibilityValue] = useState(onBoardingState.personalization.ayahVisibility)
 
     const [tikrarModeOptionsOpen, setTikrarModeOptionsOpen] = useState(false)
-    const [tikrarModeValue, setTikrarModeValue] = useState('duration')
+    const [tikrarModeValue, setTikrarModeValue] = useState(onBoardingState.personalization.tikrarMethod)
 
     const [tikrarCountOptionsOpen, setTikrarCountOptionsOpen] = useState(false)
-    const [tikrarCountValue, setTikrarCountValue] = useState(10)
+    const [tikrarCountValue, setTikrarCountValue] = useState(onBoardingState.personalization.tikrarMethodImplementation)
 
     const [tikrarDurationOptionsOpen, setTikrarDurationOptionsOpen] = useState(false)
-    const [tikrarDurationValue, setTikrarDurationValue] = useState('1min')
+    const [tikrarDurationValue, setTikrarDurationValue] = useState(onBoardingState.personalization.tikrarMethodImplementation)
 
     useEffect(() => {
         if (ayahVisibilityOptionsOpen) setActiveOption('ayahVisibility')
@@ -70,8 +72,29 @@ const PersonalizationConfig = ({ navigation }) => {
             tikrarMethod: tikrarModeValue,
             tikrarImplementation: tikrarModeValue === 'count' ? tikrarCountValue : tikrarDurationValue,
         }
-        console.log(memorizingConfiguration)
-        navigation.navigate('Homepage')
+        console.log(onBoardingState)
+        // navigation.navigate('Homepage')
+    }
+
+    const dispatchPersonalizationValue = (value, field) => {
+        dispatch({
+            action: 'SET_PERSONALIZATION',
+            payload: {
+                field,
+                value,
+            }
+        })
+        if (field === 'tikrarMethod') {
+            if (value === 'duration') setTikrarDurationValue('1min')
+            if (value === 'count') setTikrarCountValue(10)
+            dispatch({
+                action: 'SET_PERSONALIZATION',
+                payload: {
+                    field: 'tikrarMethodImplementation',
+                    value: value === 'duration' ? '1min' : 10
+                }
+            })
+        }
     }
 
     return (
@@ -111,6 +134,7 @@ const PersonalizationConfig = ({ navigation }) => {
                         items={AyahVisibilityMode}
                         setOpen={setAyahVisbilityOptionsOpen}
                         setValue={setAyahVisibilityValue}
+                        onChangeValue={val => dispatchPersonalizationValue(val, 'ayahVisibility')}
                         style={{
                             borderWidth: 1,
                             borderColor: '#D6D6D6',
@@ -136,6 +160,7 @@ const PersonalizationConfig = ({ navigation }) => {
                         items={TikrarMethod}
                         setOpen={setTikrarModeOptionsOpen}
                         setValue={setTikrarModeValue}
+                        onChangeValue={val => dispatchPersonalizationValue(val,'tikrarMethod')}
                         style={{
                             borderWidth: 1,
                             borderColor: '#D6D6D6',
@@ -164,6 +189,7 @@ const PersonalizationConfig = ({ navigation }) => {
                                 items={TikrarDuration}
                                 setOpen={setTikrarDurationOptionsOpen}
                                 setValue={setTikrarDurationValue}
+                                onChangeValue={val => dispatchPersonalizationValue(val,'tikrarMethodImplementation')}
                                 style={{
                                     borderWidth: 1,
                                     borderColor: '#D6D6D6',
@@ -195,6 +221,7 @@ const PersonalizationConfig = ({ navigation }) => {
                                 items={TikrarCount}
                                 setOpen={setTikrarCountOptionsOpen}
                                 setValue={setTikrarCountValue}
+                                onChangeValue={val => dispatchPersonalizationValue(val,'tikrarMethodImplementation')}
                                 style={{
                                     borderWidth: 1,
                                     borderColor: '#D6D6D6',
