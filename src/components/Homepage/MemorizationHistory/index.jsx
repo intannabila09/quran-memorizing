@@ -26,7 +26,7 @@ const MEMORIZATION_HISTORY_DATA = [
 
 const MemorizationHistory = () => {
     return (
-        <View style={{ marginTop: 24 }}>
+        <View style={{ marginTop: 24, paddingBottom: 50 }}>
             <Text style={{ fontSize: 18, color: '#333333', fontWeight: '500', marginBottom: 16 }}>
                 Riwayat Hafalan Terakhir
             </Text>

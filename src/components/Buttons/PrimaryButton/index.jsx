@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         padding: 16,
         width: '100%',
-        borderRadius: '12px',
+        borderRadius: 12,
     },
     title: {
         color: '#FFFFFF',

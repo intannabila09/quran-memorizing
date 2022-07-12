@@ -209,7 +209,7 @@ const PersonalizationConfig = ({ navigation }) => {
                     )
                 }
                 <View style={{ flexDirection: 'row'}}>
-                    <TouchableOpacity style={{ alignItems: 'center', backgroundColor: '#FFFFFF',borderWidth: 1, borderColor: '#e0e0e0', justifyContent: 'center', paddingHorizontal: 16, marginRight: 8, borderRadius: '12px'}}>
+                    <TouchableOpacity style={{ alignItems: 'center', backgroundColor: '#FFFFFF',borderWidth: 1, borderColor: '#e0e0e0', justifyContent: 'center', paddingHorizontal: 16, marginRight: 8, borderRadius: 12}}>
                         <Entypo name="help-with-circle" size={16} color="#757575" />
                     </TouchableOpacity>
                     <PrimaryButton

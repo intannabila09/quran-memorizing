@@ -15,21 +15,21 @@ const HomepageSecondaryPercentage = ({ style, memorized, total, juz }) => {
                     height: 8,
                     width: '100%',
                     backgroundColor: '#EAEAEA',
-                    borderRadius: '999px',
+                    borderRadius: 999,
                     marginTop: 8,
                     borderWidth: 1,
                     borderColor: '#EEEEEE'
                 }}
             >
                 <View
-                    style={{ height: '100%', width: `${(memorized/total)*100}%`, borderRadius: '999px'}}
+                    style={{ height: '100%', width: `${(memorized/total)*100}%`, borderRadius: 999}}
                 >
                     <LinearGradient
                         colors={['#26E065', '#13A355']}
                         style={{
                             height: '100%',
                             width: '100%',
-                            borderRadius: '999px'
+                            borderRadius: 999
                         }}
                         end={{
                             x: 1,

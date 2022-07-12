@@ -3,9 +3,9 @@ import { TouchableOpacity, View, Text, StyleSheet } from "react-native"
 const styles = StyleSheet.create({
     button_container: {
         padding: 20,
-        borderWidth: '1px',
+        borderWidth: 1,
         borderColor: '#DFDFDF',
-        borderRadius: '12px',
+        borderRadius: 12,
         width: '100%',
     },  
     title: {

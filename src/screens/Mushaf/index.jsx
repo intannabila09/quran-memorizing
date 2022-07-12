@@ -40,15 +40,12 @@ const Mushaf = () => {
     return (
         <>
         <View style={{ backgroundColor: '#FFFFFF', height: 47}} />
-            <SafeAreaView onPress={() => console.log('a')}>
+            <SafeAreaView>
                 <View style={styles.container}>
                     <MushafTopMenu top={topMenuPosition} />
                         <View style={{ flexGrow: 1, backgroundColor: '#FFFFFF' }}>
                             <QuranPages showMenu={showMenu} setShowMenu={setShowMenu} />
                         </View>
-                    {/* <View style={{ width: '100%', height: '82%', backgroundColor: '#FFFFFF' }}>
-                        <ImageBackground source={Test} style={{ width: '100%', height: '100%'}} resizeMode="contain"  />
-                    </View> */}
                     <MushafMenuBar bottom={bottomMenuPosition} />
                 </View>
             </SafeAreaView>

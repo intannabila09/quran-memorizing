@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
         borderWidth: 1,
         borderColor: '#DFDFDF',
-        borderRadius: '12px',
+        borderRadius: 12,
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',

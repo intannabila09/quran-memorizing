@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFFFFF',
         width: '100%',
-        height: '100%'
+        height: '98%'
     },
     page: {
         width: width,
@@ -29,6 +29,7 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
                         width: '100%',
                         height: '100%',
                     }}
+                    showsHorizontalScrollIndicator={false}
                     horizontal={true}
                     pagingEnabled={true}
                     snapToInterval={width}

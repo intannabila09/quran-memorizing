@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#E6E6E6',
         width: '100%',
-        borderRadius: '8px',
+        borderRadius: 8,
         marginBottom: 8,
     },
     detail_container: {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F7F7F7',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: '4px',
+        borderRadius: 4,
     }
 })
 
@@ -103,7 +103,7 @@ const AyatInSurah = ({ surahNumber = null, numberOfAyat = 0 }) => {
                                         width: 16,
                                         height: 16,
                                         borderWidth: 1,
-                                        borderRadius: '4px',
+                                        borderRadius: 4,
                                         borderColor: '#AEAEAE'
                                     }}
                                     color={thisAyahIsMemorized(ayat,memorizedAyah) ? '#1DC25D' : null}
@@ -173,7 +173,7 @@ const SurahInputListItem = ({ surah, showAyat, setShowAyat }) => {
                                     width: 16,
                                     height: 16,
                                     borderWidth: 1,
-                                    borderRadius: '4px',
+                                    borderRadius: 4,
                                     borderColor: '#AEAEAE'
                                 }}
                                 color={checked ? '#1DC25D' : null}

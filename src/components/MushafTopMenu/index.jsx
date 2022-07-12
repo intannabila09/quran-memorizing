@@ -13,7 +13,8 @@ const MushafTopMenu = ({ top = 0 }) => {
                 borderBottomWidth: 1,
                 borderBottomColor: '#E0E0E0',
                 paddingTop: 4,
-                zIndex: 3
+                zIndex: 3,
+                justifyContent: 'center'
             }}
         >
             <Text>Top Menu</Text>
