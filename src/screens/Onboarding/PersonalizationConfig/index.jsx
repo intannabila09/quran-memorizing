@@ -19,6 +19,9 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import { Entypo } from '@expo/vector-icons';
 import { useOnBoardingState } from '../../../context/OnBoardingContext'
 
+// Storage
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 /**
  * Todo
  * Create custom theme for dropdown
@@ -66,17 +69,21 @@ const PersonalizationConfig = ({ navigation }) => {
         tikrarDurationOptionsOpen
     ])
 
-    const submitMemorizingConfiguration = () => {
-        const memorizingConfiguration = {
-            ayahVisibilityMode: ayahVisibilityValue,
-            tikrarMethod: tikrarModeValue,
-            tikrarImplementation: tikrarModeValue === 'count' ? tikrarCountValue : tikrarDurationValue,
+    const submitMemorizingConfiguration = async () => {
+        try {
+            const {initialUsage, ...resProps} = onBoardingState
+            await AsyncStorage.setItem(
+                'userPreferences',
+                JSON.stringify(resProps)
+            )
+            dispatch({
+                action: 'SET_ONBOARDING_STATUS',
+                payload: false,
+            })
+            navigation.navigate('Homepage')
+        } catch (error) {
+            console.log(error)
         }
-        console.log(onBoardingState)
-        /**
-         * TODO: save configuration state to local state
-         */
-        navigation.navigate('Homepage')
     }
 
     const dispatchPersonalizationValue = (value, field) => {

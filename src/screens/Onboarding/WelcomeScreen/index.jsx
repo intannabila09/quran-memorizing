@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
 })
 
 const WelcomeScreen = ({ navigation }) => {
-
     return (
         <View style={styles.container}>
             <View>

@@ -35,15 +35,15 @@ const MushafMenuBar = ({ bottom = 13 }) => {
                 <TouchableOpacity
                     style={{
                         backgroundColor: '#1DC25D',
-                        paddingLeft: 13,
-                        paddingRight: 11,
-                        paddingVertical: 12,
+                        width: 58,
+                        height: 58,
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         borderRadius: 999,
-                        textAlign: 'center',
                     }}
                     onPress={increaseCounter}
                 >
-                    <Image source={tikrarPlus} style={{ width: 35, height: 32}}/>
+                    <FontAwesome5 name="angle-double-up" size={32} color="#FFFFFF" style={{ marginBottom: 0 }} />
                 </TouchableOpacity>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                     <TouchableOpacity style={{ marginLeft: 0, alignItems: 'center', paddingVertical: 8, paddingHorizontal: 20}}>

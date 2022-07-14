@@ -6,18 +6,6 @@ import {
 
 const OnBoardingContext = createContext({})
 
-const initialOnBoardingState = {
-    personalization: {
-        ayahVisibility: 'firstWord',
-        tikrarMethod: 'duration',
-        tikrarMethodImplementation: '1min',
-    },
-    memorized: {
-        juz: [],
-        surah: []
-    }
-}
-
 const OnBoardingStateReducer = (state,
     {
         action,
@@ -93,13 +81,32 @@ const OnBoardingStateReducer = (state,
                         [payload.field]: payload.value
                     }
                 }
+            case 'SET_ONBOARDING_STATUS':
+                return {
+                    ...state,
+                    initialUsage: payload,
+                }
+            case 'SET_USER_DATA': 
+                return {
+                    ...payload,
+                }
         }
     }
 
 export const OnBoardingProvider = ({ children }) => {
     const [onBoardingState, dispatch] = useReducer(
         OnBoardingStateReducer,
-        initialOnBoardingState
+        {
+            personalization: {
+                ayahVisibility: 'firstWord',
+                tikrarMethod: 'duration',
+                tikrarMethodImplementation: '1min',
+            },
+            memorized: {
+                juz: [],
+                surah: []
+            }
+        }
     )
 
     return (

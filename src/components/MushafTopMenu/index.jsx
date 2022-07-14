@@ -3,13 +3,9 @@ import { useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
 
 import TikrarCount from "../Tikrar/Count";
-import { useMushafState } from "context/MushafContext";
 import TikrarDuration from "../Tikrar/Duration";
 
 const MushafTopMenu = ({ top = 0, navigation }) => {
-    const { mushafState } = useMushafState()
-    console.log(mushafState)
-    
     return (
         <Animated.View
             style={{

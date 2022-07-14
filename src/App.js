@@ -13,40 +13,93 @@ import PersonalizationConfig from 'screens/Onboarding/PersonalizationConfig';
 import Homepage from 'screens/Homepage';
 import MemorizationProgress from 'screens/Progress';
 import Mushaf from 'screens/Mushaf';
+import Loading from 'screens/Onboarding/Loading';
+
+// Storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Context
+import { useOnBoardingState } from 'context/OnBoardingContext';
+import { useEffect, useState } from 'react';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const [loading,setLoading] = useState(true)
+  const { onBoardingState, dispatch } = useOnBoardingState()
+
+  const getUserPreference = async () => {
+    setLoading(true)
+    try {
+      const value = await AsyncStorage.getItem('userPreferences');
+      if (value !== null) {
+        dispatch({
+          action: 'SET_ONBOARDING_STATUS',
+          payload: false
+        })
+        dispatch({
+          action: 'SET_USER_DATA',
+          payload: JSON.parse(value),
+        })
+        return setLoading(false)
+      }
+      dispatch({
+        action: 'SET_ONBOARDING_STATUS',
+        payload: true,
+      })
+      return setLoading(false)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    getUserPreference()
+  },[])
+
+  if (loading) return <Loading />
+
   return (
-    <OnBoardingProvider>
       <NavigationContainer
       >
         {/* TODO: protect route based on personalization value */}
         <Stack.Navigator
-          initialRouteName="Homepage"
+          initialRouteName="Welcome"
           screenOptions={{
             headerShown: false,
           }}
         >
-            {/* Onboarding Screen */}
-            <Stack.Screen name="Welcome" component={WelcomeScreen} />
-            <Stack.Screen name="InputMemorization" component={InputMemorization} />
-            <Stack.Screen name="InputByJuz" component={InputByJuz} />
-            <Stack.Screen name="InputBySurah" component={InputBySurah} />
-            <Stack.Screen name="PersonalizationConfig" component={PersonalizationConfig} />
-
-            {/* Homepage */}
-            <Stack.Screen name="Homepage" component={Homepage} />
-
-            {/* Memorization Progress */}
-            <Stack.Screen name="MemorizationProgress" component={MemorizationProgress} />
-
-            {/* Mushaf */}
-            <Stack.Screen name="Mushaf" component={Mushaf} />
+          {onBoardingState?.initialUsage && (
+            <>
+              {/* Onboarding Screen */}
+              <Stack.Screen name="Welcome" component={WelcomeScreen} />
+              <Stack.Screen name="InputMemorization" component={InputMemorization} />
+              <Stack.Screen name="InputByJuz" component={InputByJuz} />
+              <Stack.Screen name="InputBySurah" component={InputBySurah} />
+              <Stack.Screen name="PersonalizationConfig" component={PersonalizationConfig} />
+            </>
+          )}
+          {!onBoardingState?.initialUsage && (
+            <>
+              {/* Homepage */}
+              <Stack.Screen name="Homepage" component={Homepage} />
+              {/* Memorization Progress */}
+              <Stack.Screen name="MemorizationProgress" component={MemorizationProgress} />
+              {/* Mushaf */}
+              <Stack.Screen name="Mushaf" component={Mushaf} />
+            </>
+          )}
         </Stack.Navigator>
       </NavigationContainer>
-    </OnBoardingProvider>
   );
 }
 
-registerRootComponent(App)
+const AppWrapper = () => {
+  return (
+    <OnBoardingProvider>
+      <App />
+    </OnBoardingProvider>
+  )
+}
+
+registerRootComponent(AppWrapper)
