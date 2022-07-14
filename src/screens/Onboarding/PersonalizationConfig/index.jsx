@@ -73,7 +73,10 @@ const PersonalizationConfig = ({ navigation }) => {
             tikrarImplementation: tikrarModeValue === 'count' ? tikrarCountValue : tikrarDurationValue,
         }
         console.log(onBoardingState)
-        // navigation.navigate('Homepage')
+        /**
+         * TODO: save configuration state to local state
+         */
+        navigation.navigate('Homepage')
     }
 
     const dispatchPersonalizationValue = (value, field) => {

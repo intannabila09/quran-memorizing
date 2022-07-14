@@ -21,8 +21,9 @@ const App = () => {
     <OnBoardingProvider>
       <NavigationContainer
       >
+        {/* TODO: protect route based on personalization value */}
         <Stack.Navigator
-          initialRouteName="Welcome"
+          initialRouteName="Homepage"
           screenOptions={{
             headerShown: false,
           }}

@@ -1,6 +1,12 @@
-import { Text, Animated } from "react-native"
+import { Text, Animated, TouchableOpacity } from "react-native"
+import { useState } from 'react'
+import { AntDesign } from '@expo/vector-icons';
 
-const MushafTopMenu = ({ top = 0 }) => {
+import TikrarCount from "../Tikrar/Count";
+
+const MushafTopMenu = ({ top = 0, navigation }) => {
+    const [tikrarMethod, setTikrarMethod] = useState('count')
+    
     return (
         <Animated.View
             style={{
@@ -12,12 +18,26 @@ const MushafTopMenu = ({ top = 0 }) => {
                 paddingHorizontal: 20,
                 borderBottomWidth: 1,
                 borderBottomColor: '#E0E0E0',
-                paddingTop: 4,
                 zIndex: 3,
-                justifyContent: 'center'
+                flexDirection: 'row',
+                alignItems: 'center'
             }}
         >
-            <Text>Top Menu</Text>
+            <TouchableOpacity
+                style={{
+                    paddingRight: 12,
+                    borderRightWidth: 1,
+                    borderRightColor: '#E6E6E6'
+                }}
+                onPress={() => navigation.goBack()}
+            >
+                <AntDesign name="arrowleft" size={24} color="black" />
+            </TouchableOpacity>
+            {
+                tikrarMethod === 'count' && (
+                    <TikrarCount />
+                )
+            }
         </Animated.View>
     )
 }

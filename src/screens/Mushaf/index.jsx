@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { Text, View, SafeAreaView, StatusBar, TouchableOpacity, StyleSheet, ImageBackground, Pressable, Animated } from 'react-native'
-import Test from 'assets/test.png'
 import MushafMenuBar from 'components/MushafMenuBar'
 import MushafTopMenu from 'components/MushafTopMenu'
 import QuranPages from 'components/Mushaf/QuranPages'
+import { MushafProvider } from '../../context/MushafContext'
 
 const styles = StyleSheet.create({
     container: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const Mushaf = () => {
+const Mushaf = ({ navigation }) => {
     const [showMenu, setShowMenu] = useState(false)
     const bottomMenuPosition = useRef(new Animated.Value(0)).current
     const topMenuPosition = useRef(new Animated.Value(0)).current
@@ -38,18 +38,18 @@ const Mushaf = () => {
     },[showMenu])
 
     return (
-        <>
-        <View style={{ backgroundColor: '#FFFFFF', height: 47}} />
-            <SafeAreaView>
-                <View style={styles.container}>
-                    <MushafTopMenu top={topMenuPosition} />
-                        <View style={{ flexGrow: 1, backgroundColor: '#FFFFFF' }}>
-                            <QuranPages showMenu={showMenu} setShowMenu={setShowMenu} />
-                        </View>
-                    <MushafMenuBar bottom={bottomMenuPosition} />
-                </View>
-            </SafeAreaView>
-        </>
+        <MushafProvider>
+            <View style={{ backgroundColor: '#FFFFFF', height: 47}} />
+                <SafeAreaView>
+                    <View style={styles.container}>
+                        <MushafTopMenu top={topMenuPosition} navigation={navigation} />
+                            <View style={{ flexGrow: 1, backgroundColor: '#FFFFFF' }}>
+                                <QuranPages showMenu={showMenu} setShowMenu={setShowMenu} />
+                            </View>
+                        <MushafMenuBar bottom={bottomMenuPosition} />
+                    </View>
+                </SafeAreaView>
+        </MushafProvider>
     )
 }
 
