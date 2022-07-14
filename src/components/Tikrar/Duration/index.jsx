@@ -15,23 +15,29 @@ const styles = StyleSheet.create({
     }
 })
 
-const TikrarDuration = ({ total = 10, durationTarget = 100 }) => {
+const TikrarDuration = ({ total = 10, durationTarget = 70 }) => {
     const { mushafState, dispatch } = useMushafState()
 
     const [duration,setDuration] = useState(durationTarget)
 
     useEffect(() => {
+        let setNewDuration;
+
         if (duration > 0) {
-            setTimeout(() => {
+            setNewDuration = setTimeout(() => {
                 setDuration(duration-1)
             },1000)
+        }
+
+        return () => {
+            clearTimeout(setNewDuration)
         }
     },[duration])
 
     const formatTime = (durationLeft) => {
         let minutes = Math.floor(durationLeft/60)
         let seconds = durationLeft - minutes*60
-        return `${minutes}:${seconds === 0 ? '00' : seconds}`
+        return `${minutes}:${seconds === 0 ? '00' : String(seconds).length === 1 ? `0${seconds}` : seconds}`
     }
 
     const resetCounter = () => {
@@ -87,7 +93,18 @@ const TikrarDuration = ({ total = 10, durationTarget = 100 }) => {
                         />
                     </View>
                 </View>
-                <Text style={{ marginLeft: 8, flexGrow: 1 }}>{formatTime(duration)}</Text>
+                <View
+                    style={{
+                        paddingRight: 20,
+                        marginLeft: 4,
+                        flexGrow: 1,
+                        width: 32,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Text>{formatTime(duration)}</Text>
+                </View>
             </View>
     )
 }
