@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useMushafState } from 'context/MushafContext';
+import { useState, useEffect } from 'react'
 
 const styles = StyleSheet.create({
     container: {
@@ -9,14 +10,29 @@ const styles = StyleSheet.create({
         paddingHorizontal: 0,
         flexDirection: 'row',
         alignItems: 'center',
-        // justifyContent: 'space-between',
         paddingLeft: 12,
         flexGrow: 1,
     }
 })
 
-const TikrarCount = ({ total = 10 }) => {
+const TikrarDuration = ({ total = 10, durationTarget = 100 }) => {
     const { mushafState, dispatch } = useMushafState()
+
+    const [duration,setDuration] = useState(durationTarget)
+
+    useEffect(() => {
+        if (duration > 0) {
+            setTimeout(() => {
+                setDuration(duration-1)
+            },1000)
+        }
+    },[duration])
+
+    const formatTime = (durationLeft) => {
+        let minutes = Math.floor(durationLeft/60)
+        let seconds = durationLeft - minutes*60
+        return `${minutes}:${seconds === 0 ? '00' : seconds}`
+    }
 
     const resetCounter = () => {
         return dispatch({
@@ -55,7 +71,7 @@ const TikrarCount = ({ total = 10 }) => {
                     }}
                 >
                     <View
-                        style={{ height: '100%', width: `${(mushafState.count/total)*100}%`, borderRadius: 999}}
+                        style={{ height: '100%', width: `${((durationTarget-duration)/durationTarget)*100}%`, borderRadius: 999}}
                     >
                         <LinearGradient
                             colors={['#26E065', '#13A355']}
@@ -71,9 +87,9 @@ const TikrarCount = ({ total = 10 }) => {
                         />
                     </View>
                 </View>
-                <Text style={{ marginLeft: 8, flexGrow: 1 }}>{`${mushafState.count}/${total}`}</Text>
+                <Text style={{ marginLeft: 8, flexGrow: 1 }}>{formatTime(duration)}</Text>
             </View>
     )
 }
 
-export default TikrarCount
+export default TikrarDuration

@@ -3,9 +3,12 @@ import { useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
 
 import TikrarCount from "../Tikrar/Count";
+import { useMushafState } from "context/MushafContext";
+import TikrarDuration from "../Tikrar/Duration";
 
 const MushafTopMenu = ({ top = 0, navigation }) => {
-    const [tikrarMethod, setTikrarMethod] = useState('count')
+    const { mushafState } = useMushafState()
+    console.log(mushafState)
     
     return (
         <Animated.View
@@ -34,8 +37,13 @@ const MushafTopMenu = ({ top = 0, navigation }) => {
                 <AntDesign name="arrowleft" size={24} color="black" />
             </TouchableOpacity>
             {
-                tikrarMethod === 'count' && (
+                mushafState.tikrarMethod === 'count' && (
                     <TikrarCount />
+                )
+            }
+            {
+                mushafState.tikrarMethod === 'duration' && (
+                    <TikrarDuration />
                 )
             }
         </Animated.View>
