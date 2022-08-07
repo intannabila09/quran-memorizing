@@ -92,7 +92,7 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
                                     {
                                         ayahPositions.length > 0
                                         && ayahPositions.map((item,idx) => {
-                                            const ayah = `{item.key.split(':')[0]}:${item.key.split(':')[1]}}`
+                                            const ayah = `${item.key.split(':')[0]}:${item.key.split(':')[1]}`
                                             return (
                                                 <VerseButton
                                                     index={idx}

@@ -26,8 +26,39 @@ export const PAGES_CONTENT = {
                 }
             ]
         },
-        // '112:2',
-        // '112:3',
+        {
+            key: "603-3",
+            verse: '112:3',
+            coord: [
+                {
+                    key: "112:3:1",
+                    top: 21.5,
+                    right: 74,
+                    width: 20,
+                    height: 5,
+                },
+                {
+                    key: "112:3:2",
+                    top: 26.6,
+                    right: 2,
+                    width: 33,
+                    height: 5,
+                }
+            ]
+        },
+        {
+            key: "603-4",
+            verse: '112:4',
+            coord: [
+                {
+                    key: "112:4:1",
+                    top: 26.6,
+                    right: 35,
+                    width: 59,
+                    height: 5,
+                }
+            ]
+        }
         // '112:4',
         // '113:1',
         // '113:2',
