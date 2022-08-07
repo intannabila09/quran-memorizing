@@ -6,6 +6,7 @@ import HomepagePrimaryPercentage from 'components/Percentage/HomepagePrimaryPerc
 import HomepageSecondaryPercentage from 'components/Percentage/HomepageSecondaryPercentage';
 
 import LastMemorizedBanner from 'components/Homepage/LastMemorizedBanner';
+import { useOnBoardingState } from '../../../context/OnBoardingContext';
 
 const styles = StyleSheet.create({
     container: {
@@ -18,6 +19,8 @@ const styles = StyleSheet.create({
 })
 
 const UpperSection = ({ navigation }) => {
+    const { onBoardingState } = useOnBoardingState()
+    console.log(onBoardingState)
     return (
         <View style={styles.container}>
             <View style={{ position: 'absolute', top: 0, right: 0}}>

@@ -7,7 +7,7 @@ import { MushafProvider } from '../../context/MushafContext'
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#f8f5e9',
         width: '100%',
         height: '100%',
         position: 'relative',
@@ -39,11 +39,11 @@ const Mushaf = ({ navigation }) => {
 
     return (
         <MushafProvider>
-            <View style={{ backgroundColor: '#FFFFFF', height: 47}} />
+            <View style={{ backgroundColor: showMenu ? '#f8f5e9' : '#FFFFFF', height: 47}} />
                 <SafeAreaView>
                     <View style={styles.container}>
                         <MushafTopMenu top={topMenuPosition} navigation={navigation} />
-                            <View style={{ flexGrow: 1, backgroundColor: '#FFFFFF' }}>
+                            <View style={{ flexGrow: 1, backgroundColor: '#f8f5e9' }}>
                                 <QuranPages showMenu={showMenu} setShowMenu={setShowMenu} />
                             </View>
                         <MushafMenuBar bottom={bottomMenuPosition} />

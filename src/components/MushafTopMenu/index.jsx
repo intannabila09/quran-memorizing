@@ -4,8 +4,10 @@ import { AntDesign } from '@expo/vector-icons';
 
 import TikrarCount from "../Tikrar/Count";
 import TikrarDuration from "../Tikrar/Duration";
+import { useMushafState } from "context/MushafContext";
 
 const MushafTopMenu = ({ top = 0, navigation }) => {
+    const { mushafState } = useMushafState()
     return (
         <Animated.View
             style={{

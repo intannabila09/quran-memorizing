@@ -8,7 +8,7 @@ const MushafContext = createContext({})
 
 const initialMushafState = {
     count: 0,
-    tikrarMethod: 'duration'
+    tikrarMethod: 'count'
 }
 
 const MushafStateReducer = (
