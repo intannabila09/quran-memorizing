@@ -2,6 +2,7 @@ import { TouchableOpacity, View, Image, Animated } from 'react-native'
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import tikrarPlus from 'assets/tikrarPlus.png'
 import { useMushafState } from 'context/MushafContext';
+import { useOnBoardingState } from '../../context/OnBoardingContext';
 
 const MushafMenuBar = ({ bottom = 13 }) => {
     const { dispatch } = useMushafState()
