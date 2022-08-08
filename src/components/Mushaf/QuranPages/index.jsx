@@ -1,25 +1,31 @@
-import { useRef, useState, useEffect } from "react"
-import { View, SafeAreaView, StyleSheet, Text, ScrollView, ImageBackground, Dimensions, FlatList, Pressable, TouchableOpacity } from "react-native"
+import {
+    useRef,
+    useState,
+    useEffect
+} from "react"
+import {
+    SafeAreaView,
+    Dimensions,
+    FlatList
+} from "react-native"
 import PageMapper from "assets/mushaf/pages/PageMapper"
 import { PAGES_CONTENT } from "utils/pagesContent"
-import VerseButton from "components/Buttons/VerseButton"
+import { useMushafState } from "context/MushafContext"
+import RenderPage from "./RenderPage"
 
 const { width } = Dimensions.get('window')
 
-const styles = StyleSheet.create({
-    page: {
-        width: width,
-        backgroundColor: '#f8f5e9',
-        position: 'relative',
-    }
-})
-
 const QuranPages = ({ showMenu, setShowMenu}) => {
-    const [pages,setPages] = useState(['603','602','601','600'])
+    const [pages] = useState(['603','602','601','600'])
     const [activePage,setActivePage] = useState(null)
-    const [currentContent,setCurrentContent] = useState(null)
+    const [_,setCurrentContent] = useState(null)
     const flatListRef = useRef(null)
+
     const [ayahPositions,setAyahPositions] = useState([])
+    const [covers,setCovers] = useState([])
+
+    const {mushafState} = useMushafState()
+    const {visibilityMode} = mushafState
 
     // Active Ayah
     const [activeAyah,setActiveAyah] = useState(null)
@@ -30,6 +36,17 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
             setActivePage(viewableItems[0].item)
         }
     })
+
+    const verseLongPress = (ayah) => {
+        setActiveAyah(ayah)
+        console.log('long press', ayah)
+    }
+
+    const versePress = () => {
+        setActiveAyah(null)
+        setShowMenu(!showMenu)
+        console.log('press')
+    }
 
     useEffect(() => {
         if (activePage) {
@@ -47,16 +64,21 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
         }
     },[activePage])
 
-    const verseLongPress = (ayah) => {
-        setActiveAyah(ayah)
-        console.log('long press', ayah)
-    }
-
-    const versePress = () => {
-        setActiveAyah(null)
-        setShowMenu(!showMenu)
-        console.log('press')
-    }
+    useEffect(() => {
+        if (
+            !visibilityMode
+            || visibilityMode === 'all'
+        ) return setCovers([])
+        const newCovers = 
+            PAGES_CONTENT[activePage]
+                .map((ayah) => {
+                    return ayah.covers[visibilityMode]
+                })
+                .reduce((acc,cur) => {
+                    return [...acc, ...cur]
+                },[])
+        setCovers(newCovers)
+    },[visibilityMode])
 
     return (
         <SafeAreaView>
@@ -72,49 +94,21 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
                 decelerationRate={0}
                 data={pages}
                 keyExtractor={(item) => item.toString()}
-                renderItem={((page) => {
-                    return (
-                        <Pressable onPress={() => {
-                            setShowMenu(!showMenu)
-                            setActiveAyah(null)
-                        }}>
-                            <View
-                                style={styles.page}
-                            >
-                                <ImageBackground
-                                    source={PageMapper()[0].pages[23-page.index]}
-                                    style={{
-                                        position: 'relative',
-                                        aspectRatio: 0.506,
-                                    }}
-                                    resizeMode="contain"
-                                >
-                                    {
-                                        ayahPositions.length > 0
-                                        && ayahPositions.map((item,idx) => {
-                                            const ayah = `${item.key.split(':')[0]}:${item.key.split(':')[1]}`
-                                            return (
-                                                <VerseButton
-                                                    index={idx}
-                                                    key={item.key}
-                                                    height={item.height}
-                                                    width={item.width}
-                                                    top={item.top}
-                                                    right={item.right}
-                                                    onPress={versePress}
-                                                    onLongPress={verseLongPress}
-                                                    ayah={ayah}
-                                                    active={activeAyah === ayah}
-                                                />
-                                            )
-                                        })
-                                    }
-                                </ImageBackground>
-                            </View>
-                        </Pressable>
-                    )
-                })
-                }
+                renderItem={(page) => (
+                    <RenderPage
+                        showMenu={{
+                            value: showMenu,
+                            setValue: setShowMenu,
+                        }}
+                        source={PageMapper()[0].pages[23-page.index]}
+                        activeAyah={activeAyah}
+                        ayahPositions={ayahPositions}
+                        versePress={versePress}
+                        verseLongPress={verseLongPress}
+                        covers={covers}
+                        activePage={activePage}
+                    />
+                )}
             />
         </SafeAreaView>
     )

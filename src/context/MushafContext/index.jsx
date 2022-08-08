@@ -3,12 +3,14 @@ import {
     createContext,
     useReducer,
 } from 'react'
+import { VISIBILITY_MODE } from '../../utils/enums'
 
 const MushafContext = createContext({})
 
 const initialMushafState = {
     count: 0,
-    tikrarMethod: 'count'
+    tikrarMethod: 'count',
+    visibilityMode: VISIBILITY_MODE[0]
 }
 
 const MushafStateReducer = (
@@ -27,6 +29,13 @@ const MushafStateReducer = (
             return {
                 ...state,
                 count: 0,
+            }
+        case 'TOGGLE_VIEW_MODE':
+            const currentIndex = VISIBILITY_MODE.indexOf(state.visibilityMode)
+            const newIndex = currentIndex === VISIBILITY_MODE.length - 1 ? 0 : currentIndex + 1
+            return {
+                ...state,
+                visibilityMode: VISIBILITY_MODE[newIndex],
             }
         default:
             return state

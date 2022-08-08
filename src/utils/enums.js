@@ -1,0 +1,1 @@
+export const VISIBILITY_MODE = ['all', 'firstWord', 'invisible']
