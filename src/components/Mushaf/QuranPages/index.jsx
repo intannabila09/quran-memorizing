@@ -9,14 +9,15 @@ import {
     FlatList
 } from "react-native"
 import PageMapper from "assets/mushaf/pages/PageMapper"
-import { PAGES_CONTENT } from "utils/pagesContent"
+import { PAGES_CONTENT } from "assets/mushaf/pages/pagesContent"
 import { useMushafState } from "context/MushafContext"
 import RenderPage from "./RenderPage"
 
 const { width } = Dimensions.get('window')
 
 const QuranPages = ({ showMenu, setShowMenu}) => {
-    const [pages] = useState(['603','602','601','600'])
+    const [activeJuz,setActiveJuz] = useState(30)
+    const [pages] = useState(['23','22','21','20'])
     const [activePage,setActivePage] = useState(null)
     const [_,setCurrentContent] = useState(null)
     const flatListRef = useRef(null)
@@ -53,7 +54,7 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
             setActiveAyah(null)
             setCurrentContent(PAGES_CONTENT[activePage])
             const newAyahPositions =
-            PAGES_CONTENT[activePage]
+            PageMapper()[activeJuz].pages[activePage].content
                 .map((ayah) => {
                     return ayah.coord
                 })
@@ -61,6 +62,8 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
                     return [...acc, ...cur]
                 },[])
             setAyahPositions(newAyahPositions)
+
+            console.log()
         }
     },[activePage])
 
@@ -94,21 +97,23 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
                 decelerationRate={0}
                 data={pages}
                 keyExtractor={(item) => item.toString()}
-                renderItem={(page) => (
-                    <RenderPage
-                        showMenu={{
-                            value: showMenu,
-                            setValue: setShowMenu,
-                        }}
-                        source={PageMapper()[0].pages[23-page.index]}
-                        activeAyah={activeAyah}
-                        ayahPositions={ayahPositions}
-                        versePress={versePress}
-                        verseLongPress={verseLongPress}
-                        covers={covers}
-                        activePage={activePage}
-                    />
-                )}
+                renderItem={(page) => {
+                    return (
+                        <RenderPage
+                            showMenu={{
+                                value: showMenu,
+                                setValue: setShowMenu,
+                            }}
+                            source={PageMapper()[activeJuz]?.pages[page.item]?.image ?? null}
+                            activeAyah={activeAyah}
+                            ayahPositions={ayahPositions}
+                            versePress={versePress}
+                            verseLongPress={verseLongPress}
+                            covers={covers}
+                            activePage={activePage}
+                        />
+                    )
+                }}
             />
         </SafeAreaView>
     )
