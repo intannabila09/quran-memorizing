@@ -8,8 +8,7 @@ import {
     Dimensions,
     FlatList
 } from "react-native"
-import PageMapper from "assets/mushaf/pages/PageMapper"
-import { PAGES_CONTENT } from "assets/mushaf/pages/pagesContent"
+import ContentMapper from "assets/mushaf/ContentMapper"
 import { useMushafState } from "context/MushafContext"
 import RenderPage from "./RenderPage"
 
@@ -52,9 +51,9 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
     useEffect(() => {
         if (activePage) {
             setActiveAyah(null)
-            setCurrentContent(PAGES_CONTENT[activePage])
+            setCurrentContent(ContentMapper()[activeJuz].pages[activePage].content)
             const newAyahPositions =
-            PageMapper()[activeJuz].pages[activePage].content
+            ContentMapper()[activeJuz].pages[activePage].content
                 .map((ayah) => {
                     return ayah.coord
                 })
@@ -62,8 +61,6 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
                     return [...acc, ...cur]
                 },[])
             setAyahPositions(newAyahPositions)
-
-            console.log()
         }
     },[activePage])
 
@@ -73,7 +70,7 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
             || visibilityMode === 'all'
         ) return setCovers([])
         const newCovers = 
-            PAGES_CONTENT[activePage]
+            ContentMapper()[activeJuz].pages[activePage].content
                 .map((ayah) => {
                     return ayah.covers[visibilityMode]
                 })
@@ -104,7 +101,7 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
                                 value: showMenu,
                                 setValue: setShowMenu,
                             }}
-                            source={PageMapper()[activeJuz]?.pages[page.item]?.image ?? null}
+                            source={ContentMapper()[activeJuz]?.pages[page.item]?.image ?? null}
                             activeAyah={activeAyah}
                             ayahPositions={ayahPositions}
                             versePress={versePress}

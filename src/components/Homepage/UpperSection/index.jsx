@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
 const UpperSection = ({ navigation }) => {
     const { onBoardingState } = useOnBoardingState()
-    console.log(onBoardingState)
+    // console.log(onBoardingState)
     return (
         <View style={styles.container}>
             <View style={{ position: 'absolute', top: 0, right: 0}}>
