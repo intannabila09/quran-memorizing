@@ -10,7 +10,12 @@ const MushafContext = createContext({})
 const initialMushafState = {
     count: 0,
     tikrarMethod: 'count',
-    visibilityMode: VISIBILITY_MODE[0]
+    // Normal Setting
+    // visibilityMode: VISIBILITY_MODE[0]
+    // First Word Development
+    // visibilityMode: VISIBILITY_MODE[1]
+    // Invisible Development
+    visibilityMode: VISIBILITY_MODE[2]
 }
 
 const MushafStateReducer = (

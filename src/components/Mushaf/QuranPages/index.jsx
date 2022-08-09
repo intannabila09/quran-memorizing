@@ -66,19 +66,21 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
 
     useEffect(() => {
         if (
-            !visibilityMode
-            || visibilityMode === 'all'
+            (!visibilityMode
+            || visibilityMode === 'all')
         ) return setCovers([])
-        const newCovers = 
-            ContentMapper()[activeJuz].pages[activePage].content
-                .map((ayah) => {
-                    return ayah.covers[visibilityMode]
-                })
-                .reduce((acc,cur) => {
-                    return [...acc, ...cur]
-                },[])
-        setCovers(newCovers)
-    },[visibilityMode,activePage])
+        if (currentContent) {
+            const newCovers = 
+                currentContent
+                    .map((ayah) => {
+                        return ayah.covers[visibilityMode]
+                    })
+                    .reduce((acc,cur) => {
+                        return [...acc, ...cur]
+                    },[])
+            setCovers(newCovers)
+        }
+    },[visibilityMode,currentContent])
 
     return (
         <SafeAreaView>
