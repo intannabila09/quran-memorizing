@@ -18,7 +18,7 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
     const [activeJuz,setActiveJuz] = useState(30)
     const [pages] = useState(['23','22','21','20'])
     const [activePage,setActivePage] = useState(null)
-    const [_,setCurrentContent] = useState(null)
+    const [currentContent,setCurrentContent] = useState(null)
     const flatListRef = useRef(null)
 
     const [ayahPositions,setAyahPositions] = useState([])
@@ -78,7 +78,7 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
                     return [...acc, ...cur]
                 },[])
         setCovers(newCovers)
-    },[visibilityMode])
+    },[visibilityMode,activePage])
 
     return (
         <SafeAreaView>
@@ -97,6 +97,7 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
                 renderItem={(page) => {
                     return (
                         <RenderPage
+                            page={page}
                             showMenu={{
                                 value: showMenu,
                                 setValue: setShowMenu,

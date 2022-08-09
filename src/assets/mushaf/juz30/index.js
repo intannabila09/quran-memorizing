@@ -11,7 +11,7 @@ export default Data = () => ({
         },
         '22': {
             image: require('assets/mushaf/juz30/pages/602.png'),
-            content: []
+            content: require('assets/mushaf/juz30/content/22.json')
         },
         '23': {
             image: require('assets/mushaf/juz30/pages/603.png'),

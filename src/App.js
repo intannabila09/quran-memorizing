@@ -64,7 +64,7 @@ const App = () => {
       >
         {/* TODO: protect route based on personalization value */}
         <Stack.Navigator
-          initialRouteName="Welcome"
+          initialRouteName="Mushaf"
           screenOptions={{
             headerShown: false,
           }}

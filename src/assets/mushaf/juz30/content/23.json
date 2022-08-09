@@ -155,7 +155,15 @@
     {
         "key": "603-5",
         "verse": "113:1",
-        "coord": [],
+        "coord": [
+            {
+                "key": "113:1:1",
+                "top": 42,
+                "right": 2,
+                "width": 44,
+                "height": 5
+            }
+        ],
         "covers": {
             "firstWord": [],
             "invisible": []
@@ -164,7 +172,15 @@
     {
         "key": "603-6",
         "verse": "113:2",
-        "coord": [],
+        "coord": [
+            {
+                "key": "113:2:1",
+                "top": 42,
+                "right": 46,
+                "width": 37,
+                "height": 5
+            }
+        ],
         "covers": {
             "firstWord": [],
             "invisible": []
@@ -173,7 +189,22 @@
     {
         "key": "603-7",
         "verse": "113:3",
-        "coord": [],
+        "coord": [
+            {
+                "key": "113:3:1",
+                "top": 42,
+                "right": 83,
+                "width": 11,
+                "height": 5
+            },
+            {
+                "key": "113:3:2",
+                "top": 47.1,
+                "right": 2,
+                "width": 49,
+                "height": 5
+            }
+        ],
         "covers": {
             "firstWord": [],
             "invisible": []
@@ -182,7 +213,22 @@
     {
         "key": "603-8",
         "verse": "113:4",
-        "coord": [],
+        "coord": [
+            {
+                "key": "113:4:1",
+                "top": 47.1,
+                "right": 51,
+                "width": 43,
+                "height": 5
+            },
+            {
+                "key": "113:4:2",
+                "top": 52.2,
+                "right": 12,
+                "width": 19,
+                "height": 5
+            }
+        ],
         "covers": {
             "firstWord": [],
             "invisible": []
@@ -191,7 +237,15 @@
     {
         "key": "603-9",
         "verse": "113:5",
-        "coord": [],
+        "coord": [
+            {
+                "key": "113:5:1",
+                "top": 52.2,
+                "right": 31,
+                "width": 53,
+                "height": 5
+            }
+        ],
         "covers": {
             "firstWord": [],
             "invisible": []
@@ -200,7 +254,15 @@
     {
         "key": "603-10",
         "verse": "114:1",
-        "coord": [],
+        "coord": [
+            {
+                "key": "114:1:1",
+                "top": 67.6,
+                "right": 2,
+                "width": 41.5,
+                "height": 5
+            }
+        ],
         "covers": {
             "firstWord": [],
             "invisible": []
@@ -209,7 +271,15 @@
     {
         "key": "603-11",
         "verse": "114:2",
-        "coord": [],
+        "coord": [
+            {
+                "key": "114:2:1",
+                "top": 67.6,
+                "right": 43.5,
+                "width": 29,
+                "height": 5
+            }
+        ],
         "covers": {
             "firstWord": [],
             "invisible": []
@@ -218,7 +288,22 @@
     {
         "key": "603-12",
         "verse": "114:3",
-        "coord": [],
+        "coord": [
+            {
+                "key": "114:3:1",
+                "top": 67.6,
+                "right": 72.5,
+                "width": 21.3,
+                "height": 5
+            },
+            {
+                "key": "114:3:2",
+                "top": 72.8,
+                "right": 2,
+                "width": 5.3,
+                "height": 5
+            }
+        ],
         "covers": {
             "firstWord": [],
             "invisible": []
@@ -227,7 +312,15 @@
     {
         "key": "603-13",
         "verse": "114:4",
-        "coord": [],
+        "coord": [
+            {
+                "key": "114:4:1",
+                "top": 72.8,
+                "right": 7.3,
+                "width": 59,
+                "height": 5
+            }
+        ],
         "covers": {
             "firstWord": [],
             "invisible": []
@@ -236,7 +329,22 @@
     {
         "key": "603-14",
         "verse": "114:5",
-        "coord": [],
+        "coord": [
+            {
+                "key": "114:5:1",
+                "top": 72.8,
+                "right": 66.3,
+                "width": 27.5,
+                "height": 5
+            },
+            {
+                "key": "114:5:2",
+                "top": 77.8,
+                "right": 2,
+                "width": 46,
+                "height": 5
+            }
+        ],
         "covers": {
             "firstWord": [],
             "invisible": []
@@ -245,7 +353,15 @@
     {
         "key": "603-15",
         "verse": "114:6",
-        "coord": [],
+        "coord": [
+            {
+                "key": "114:6:1",
+                "top": 77.8,
+                "right": 48,
+                "width": 45.8,
+                "height": 5
+            }
+        ],
         "covers": {
             "firstWord": [],
             "invisible": []

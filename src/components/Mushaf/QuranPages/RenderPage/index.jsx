@@ -29,6 +29,9 @@ const RenderPage = ({
     verseLongPress = () => {},
     covers = [],
     setActiveAyah = () => {},
+    // Used to chech if current page is displayed on screen
+    page = {},
+    activePage = null
 }) => {
     return (
         <Pressable onPress={() => {
