@@ -3,11 +3,11 @@ export default Data = () => ({
     pages: {
         "20": {
             image: require('assets/mushaf/juz30/pages/600.png'),
-            content: []
+            content: require('assets/mushaf/juz30/content/20.json'),
         },
         '21': {
             image: require('assets/mushaf/juz30/pages/601.png'),
-            content: []
+            content: require('assets/mushaf/juz30/content/21.json')
         },
         '22': {
             image: require('assets/mushaf/juz30/pages/602.png'),

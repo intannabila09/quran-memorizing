@@ -16,7 +16,7 @@ const { width } = Dimensions.get('window')
 
 const QuranPages = ({ showMenu, setShowMenu}) => {
     const [activeJuz,setActiveJuz] = useState(30)
-    const [pages] = useState([/*'23',*/'22','21','20'])
+    const [pages] = useState(['23','22','21','20'])
     const [activePage,setActivePage] = useState(null)
     const [currentContent,setCurrentContent] = useState(null)
     const flatListRef = useRef(null)
@@ -26,6 +26,11 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
 
     const {mushafState} = useMushafState()
     const {visibilityMode} = mushafState
+
+    // START – DEVELOPMENT VARIABLES
+    const [firstWordCovers,setFirstWordCovers] = useState([])
+    const [invisibleCovers,setInvisibleCovers] = useState([])
+    // END – DEVELOPMENT VARIABLES
 
     // Active Ayah
     const [activeAyah,setActiveAyah] = useState(null)
@@ -82,6 +87,31 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
         }
     },[visibilityMode,currentContent])
 
+    useEffect(() => {
+        if (currentContent) {
+            // START – DEVELOPMENT VARIABLES
+                const newFirstWordCovers =
+                currentContent
+                    .map((ayah) => {
+                        return ayah.covers["firstWord"]
+                    })
+                    .reduce((acc,cur) => {
+                        return [...acc, ...cur]
+                    },[])
+            setFirstWordCovers(newFirstWordCovers)
+            const newInvisibleCovers =
+                currentContent
+                    .map((ayah) => {
+                        return ayah.covers["invisible"]
+                    })
+                    .reduce((acc,cur) => {
+                        return [...acc, ...cur]
+                    },[])
+            setInvisibleCovers(newInvisibleCovers)
+        // END – DEVELOPMENT VARIABLES
+        }
+    },[currentContent])
+
     return (
         <SafeAreaView>
             <FlatList
@@ -111,6 +141,10 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
                             verseLongPress={verseLongPress}
                             covers={covers}
                             activePage={activePage}
+                            // START – DEVELOPMENT VARIABLES
+                            invisibleCovers={invisibleCovers}
+                            firstWordCovers={firstWordCovers}
+                            // END – DEVELOPMENT VARIABLES
                         />
                     )
                 }}

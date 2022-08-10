@@ -31,7 +31,11 @@ const RenderPage = ({
     setActiveAyah = () => {},
     // Used to chech if current page is displayed on screen
     page = {},
-    activePage = null
+    activePage = null,
+    // START – DEVELOPMENT VARIABLES
+    firstWordCovers = [],
+    invisibleCovers = [],
+    // END – DEVELOPMENT VARIABLES
 }) => {
     return (
         <Pressable onPress={() => {
@@ -57,7 +61,13 @@ const RenderPage = ({
                         verseLongPress={verseLongPress}
                     />
                     {/* Covers Layer */}
-                    <AyahCovers covers={covers} />
+                    <AyahCovers
+                        covers={covers}
+                        // START – DEVELOPMENT VARIABLES
+                        firstWords={firstWordCovers}
+                        invisibles={invisibleCovers}
+                        // END – DEVELOPMENT VARIABLES
+                    />
                 </ImageBackground>
             </View>
         </Pressable>
