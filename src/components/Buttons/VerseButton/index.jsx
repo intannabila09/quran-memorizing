@@ -19,8 +19,8 @@ const VerseButton = ({
                 right: `${right}%`,
                 width: `${width}%`,
                 height: `${height}%`,
-                // backgroundColor: active ? 'rgba(249,205,29,0.3)' : 'rgba(0,0,0,0)',
-                backgroundColor: index % 2 === 0 ? 'rgba(255,0,0,0.3)' : 'rgba(255,0,0,0.5)',
+                backgroundColor: active ? 'rgba(249,205,29,0.3)' : 'rgba(0,0,0,0)',
+                // backgroundColor: index % 2 === 0 ? 'rgba(255,0,0,0.3)' : 'rgba(255,0,0,0.5)',
                 position: 'absolute',
             }}
             onPress={onPress}
