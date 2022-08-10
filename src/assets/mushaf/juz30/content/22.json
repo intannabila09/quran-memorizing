@@ -5,10 +5,10 @@
         "coord": [
             {
                 "key": "109:1:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 21.6,
+                "right": 6,
+                "width": 47,
+                "height": 4.8
             }
         ],
         "covers": {
@@ -22,10 +22,10 @@
         "coord": [
             {
                 "key": "109:2:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 21.6,
+                "right": 53,
+                "width": 45,
+                "height": 4.8
             }
         ],
         "covers": {
@@ -39,10 +39,10 @@
         "coord": [
             {
                 "key": "109:3:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 26.8,
+                "right": 6,
+                "width": 50,
+                "height": 4.792
             }
         ],
         "covers": {
@@ -56,10 +56,10 @@
         "coord": [
             {
                 "key": "109:4:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 26.8,
+                "right": 56,
+                "width": 42,
+                "height": 4.792
             }
         ],
         "covers": {
@@ -73,10 +73,10 @@
         "coord": [
             {
                 "key": "109:5:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 31.8,
+                "right": 6,
+                "width": 50,
+                "height": 4.8
             }
         ],
         "covers": {
@@ -90,10 +90,10 @@
         "coord": [
             {
                 "key": "109:6:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 31.8,
+                "right": 56,
+                "width": 42,
+                "height": 4.8
             }
         ],
         "covers": {
@@ -107,10 +107,10 @@
         "coord": [
             {
                 "key": "110:1:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 47.3,
+                "right": 6,
+                "width": 60,
+                "height": 4.7
             }
         ],
         "covers": {
@@ -124,10 +124,17 @@
         "coord": [
             {
                 "key": "110:2:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 47.3,
+                "right": 66,
+                "width": 32,
+                "height": 4.7
+            },
+            {
+                "key": "110:2:2",
+                "top": 52.4,
+                "right": 6,
+                "width": 54,
+                "height": 4.7
             }
         ],
         "covers": {
@@ -141,10 +148,17 @@
         "coord": [
             {
                 "key": "110:3:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 52.4,
+                "right": 60,
+                "width": 38,
+                "height": 4.7
+            },
+            {
+                "key": "110:3:2",
+                "top": 57.5,
+                "right": 22,
+                "width": 61.5,
+                "height": 4.7
             }
         ],
         "covers": {
@@ -158,10 +172,10 @@
         "coord": [
             {
                 "key": "111:1:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 72.85,
+                "right": 6,
+                "width": 49.5,
+                "height": 4.75
             }
         ],
         "covers": {
@@ -175,10 +189,17 @@
         "coord": [
             {
                 "key": "111:2:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 72.85,
+                "right": 55.5,
+                "width": 42.3,
+                "height": 4.75
+            },
+            {
+                "key": "111:2:2",
+                "top": 78,
+                "right": 6,
+                "width": 20,
+                "height": 4.75
             }
         ],
         "covers": {
@@ -192,10 +213,10 @@
         "coord": [
             {
                 "key": "111:3:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 78,
+                "right": 26,
+                "width": 53,
+                "height": 4.75
             }
         ],
         "covers": {
@@ -209,10 +230,17 @@
         "coord": [
             {
                 "key": "111:4:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 78,
+                "right": 79,
+                "width": 19,
+                "height": 4.75
+            },
+            {
+                "key": "111:4:2",
+                "top": 83.2,
+                "right": 6,
+                "width": 33,
+                "height": 4.85
             }
         ],
         "covers": {
@@ -226,10 +254,10 @@
         "coord": [
             {
                 "key": "111:5:1",
-                "top": 0,
-                "right": 0,
-                "width": 0,
-                "height": 0
+                "top": 83.2,
+                "right": 39,
+                "width": 59,
+                "height": 4.85
             }
         ],
         "covers": {

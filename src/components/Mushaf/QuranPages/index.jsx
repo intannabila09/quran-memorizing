@@ -16,7 +16,7 @@ const { width } = Dimensions.get('window')
 
 const QuranPages = ({ showMenu, setShowMenu}) => {
     const [activeJuz,setActiveJuz] = useState(30)
-    const [pages] = useState(['23','22','21','20'])
+    const [pages] = useState([/*'23',*/'22','21','20'])
     const [activePage,setActivePage] = useState(null)
     const [currentContent,setCurrentContent] = useState(null)
     const flatListRef = useRef(null)

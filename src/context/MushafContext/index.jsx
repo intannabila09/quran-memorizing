@@ -11,11 +11,11 @@ const initialMushafState = {
     count: 0,
     tikrarMethod: 'count',
     // Normal Setting
-    // visibilityMode: VISIBILITY_MODE[0]
+    visibilityMode: VISIBILITY_MODE[0]
     // First Word Development
     // visibilityMode: VISIBILITY_MODE[1]
     // Invisible Development
-    visibilityMode: VISIBILITY_MODE[2]
+    // visibilityMode: VISIBILITY_MODE[2]
 }
 
 const MushafStateReducer = (
