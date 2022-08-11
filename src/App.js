@@ -27,7 +27,7 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   const [loading,setLoading] = useState(true)
-  const { onBoardingState, dispatch } = useOnBoardingState()
+  const { _, dispatch } = useOnBoardingState()
   const { userDataState, dispatch: userDispatch } = useUserData()
 
   console.log('userData', userDataState)
@@ -41,7 +41,7 @@ const App = () => {
           action: 'SET_ONBOARDING_STATUS',
           payload: false
         })
-        dispatch({
+        userDispatch({
           action: 'SET_USER_DATA',
           payload: JSON.parse(value),
         })

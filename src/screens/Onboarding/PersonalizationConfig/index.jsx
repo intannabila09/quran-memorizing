@@ -17,10 +17,11 @@ import {
 
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Entypo } from '@expo/vector-icons';
-import { useOnBoardingState } from '../../../context/OnBoardingContext'
+import { useOnBoardingState } from 'context/OnBoardingContext'
 
 // Storage
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useUserData } from 'context/UserDataContext'
 
 /**
  * Todo
@@ -44,6 +45,8 @@ const styles = StyleSheet.create({
 const PersonalizationConfig = ({ navigation }) => {
     const { onBoardingState, dispatch } = useOnBoardingState()
     const [activeOption, setActiveOption] = useState('tikrarDuration')
+
+    const { dispatch: userDataDispatch } = useUserData
 
     const [ayahVisibilityOptionsOpen, setAyahVisbilityOptionsOpen] = useState(false)
     const [ayahVisibilityValue, setAyahVisibilityValue] = useState(onBoardingState.personalization.ayahVisibility)
@@ -79,6 +82,16 @@ const PersonalizationConfig = ({ navigation }) => {
             dispatch({
                 action: 'SET_ONBOARDING_STATUS',
                 payload: false,
+            })
+            userDataDispatch({
+                action: 'SET_USER_DATA',
+                payload:
+                    Object.keys(onBoardingState)
+                        .filter(key => key !== 'initialUsage')
+                        .reduce((acc, key) => {
+                            acc[key] = onBoardingState[key]
+                            return acc
+                        }, {})
             })
             navigation.navigate('Homepage')
         } catch (error) {

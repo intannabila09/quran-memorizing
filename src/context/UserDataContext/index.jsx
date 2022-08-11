@@ -6,8 +6,8 @@ import {
 
 const UserDataContext = createContext({})
 
-const userDataReducer = (_, {type,payload}) => {
-    switch (type) {
+const userDataReducer = (_, {action,payload}) => {
+    switch (action) {
         case 'SET_USER_DATA':
             return payload
         case 'REMOVE_USER_DATA':

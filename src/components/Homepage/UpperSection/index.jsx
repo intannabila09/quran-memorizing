@@ -60,7 +60,7 @@ const UpperSection = ({ navigation }) => {
                 </View>
             </View>
             {
-                !onBoardingState?.initialUsage && (
+                onBoardingState?.initialUsage && (
                     <View style={{
                         marginTop: 20,
                         padding: 16,
