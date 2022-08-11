@@ -21,12 +21,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // Context
 import { useOnBoardingState } from 'context/OnBoardingContext';
 import { useEffect, useState } from 'react';
+import { UserDataProvider, useUserData } from 'context/UserDataContext';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   const [loading,setLoading] = useState(true)
   const { onBoardingState, dispatch } = useOnBoardingState()
+  const { userDataState, dispatch: userDispatch } = useUserData()
+
+  console.log('userData', userDataState)
 
   const getUserPreference = async () => {
     setLoading(true)
@@ -69,26 +73,18 @@ const App = () => {
             headerShown: false,
           }}
         >
-          {onBoardingState?.initialUsage && (
-            <>
               {/* Onboarding Screen */}
               <Stack.Screen name="Welcome" component={WelcomeScreen} />
               <Stack.Screen name="InputMemorization" component={InputMemorization} />
               <Stack.Screen name="InputByJuz" component={InputByJuz} />
               <Stack.Screen name="InputBySurah" component={InputBySurah} />
               <Stack.Screen name="PersonalizationConfig" component={PersonalizationConfig} />
-            </>
-          )}
-          {!onBoardingState?.initialUsage && (
-            <>
               {/* Homepage */}
               <Stack.Screen name="Homepage" component={Homepage} />
               {/* Memorization Progress */}
               <Stack.Screen name="MemorizationProgress" component={MemorizationProgress} />
               {/* Mushaf */}
               <Stack.Screen name="Mushaf" component={Mushaf} />
-            </>
-          )}
         </Stack.Navigator>
       </NavigationContainer>
   );
@@ -96,9 +92,11 @@ const App = () => {
 
 const AppWrapper = () => {
   return (
-    <OnBoardingProvider>
-      <App />
-    </OnBoardingProvider>
+    <UserDataProvider>
+      <OnBoardingProvider>
+        <App />
+      </OnBoardingProvider>
+    </UserDataProvider>
   )
 }
 

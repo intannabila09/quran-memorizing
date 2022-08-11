@@ -59,58 +59,63 @@ const UpperSection = ({ navigation }) => {
                     </Text>
                 </View>
             </View>
-            <View style={{
-                marginTop: 20,
-                padding: 16,
-                borderWidth: 1,
-                borderColor: '#dbeafe',
-                backgroundColor: '#eff6ff',
-                borderRadius: 8
-            }}>
-                <View style={{ flexDirection: 'row'}}>
-                    <FontAwesome5 name="info-circle" size={16} color="#1e3a8a" />
-                    <Text
-                        style={{
-                            marginLeft: 4,
-                            fontSize: 18,
-                            fontWeight: '600',
-                            color: '#1e3a8a',
-                        }}
-                    >
-                        Sudah Memiliki Hafalan?
-                    </Text>
-                </View>
-                <Text style={{ marginTop: 4, fontSize: 14, color: '#1e40af', lineHeight: 20}}>
-                    Kamu dapat memasukkan progress hafalanmu ke dalam aplikasi ini dan memilih gaya menghafal yang kamu suka
-                </Text>
-                <View style={{ flexDirection: 'row', marginTop: 8, justifyContent: 'space-between'}}>
-                    <TouchableOpacity
-                        style={{
-                            width: '49%',
-                            paddingHorizontal: 8,
-                            paddingVertical: 10,
-                            borderRadius: 6,
-                            backgroundColor: '#dbeafe'
-                        }}
-                    >
-                        <Text style={{ textAlign: 'center', color: '#1e3a8a', fontWeight: '500'}}>Abaikan</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={{
-                            width: '49%',
-                            paddingHorizontal: 8,
-                            paddingVertical: 10,
-                            borderWidth: 1,
-                            borderRadius: 6,
-                            justifyContent: 'center',
-                            borderColor: '#1d4ed8',
-                            backgroundColor: '#1e40af'
-                        }}
-                    >
-                        <Text style={{textAlign: 'center', color: '#eff6ff', fontWeight: '500' }}>Masukkan Hafalan</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            {
+                !onBoardingState?.initialUsage && (
+                    <View style={{
+                        marginTop: 20,
+                        padding: 16,
+                        borderWidth: 1,
+                        borderColor: '#dbeafe',
+                        backgroundColor: '#eff6ff',
+                        borderRadius: 8
+                    }}>
+                        <View style={{ flexDirection: 'row'}}>
+                            <FontAwesome5 name="info-circle" size={16} color="#1e3a8a" />
+                            <Text
+                                style={{
+                                    marginLeft: 4,
+                                    fontSize: 18,
+                                    fontWeight: '600',
+                                    color: '#1e3a8a',
+                                }}
+                            >
+                                Sudah Memiliki Hafalan?
+                            </Text>
+                        </View>
+                        <Text style={{ marginTop: 4, fontSize: 14, color: '#1e40af', lineHeight: 20}}>
+                            Kamu dapat memasukkan progress hafalanmu ke dalam aplikasi ini dan memilih gaya menghafal yang kamu suka
+                        </Text>
+                        <View style={{ flexDirection: 'row', marginTop: 8, justifyContent: 'space-between'}}>
+                            <TouchableOpacity
+                                style={{
+                                    width: '49%',
+                                    paddingHorizontal: 8,
+                                    paddingVertical: 10,
+                                    borderRadius: 6,
+                                    backgroundColor: '#dbeafe'
+                                }}
+                            >
+                                <Text style={{ textAlign: 'center', color: '#1e3a8a', fontWeight: '500'}}>Abaikan</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={{
+                                    width: '49%',
+                                    paddingHorizontal: 8,
+                                    paddingVertical: 10,
+                                    borderWidth: 1,
+                                    borderRadius: 6,
+                                    justifyContent: 'center',
+                                    borderColor: '#1d4ed8',
+                                    backgroundColor: '#1e40af'
+                                }}
+                                onPress={() => navigation.navigate('InputMemorization')}
+                            >
+                                <Text style={{textAlign: 'center', color: '#eff6ff', fontWeight: '500' }}>Masukkan Hafalan</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                )
+            }
             <View style={{ marginTop: 20 }}>
                 <TouchableOpacity
                     style={{
