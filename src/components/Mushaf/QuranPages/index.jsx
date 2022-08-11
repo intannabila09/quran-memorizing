@@ -64,6 +64,12 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
         }
     },[activeJuz])
 
+    useEffect(() => {
+        setTimeout(() => {
+            setShowMenu(!showMenu)
+        },1000)
+    },[])
+
     // START – DEVELOPMENT VARIABLES
     // useEffect(() => {
     //     if (currentContent) {
