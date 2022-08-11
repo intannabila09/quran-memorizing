@@ -18,18 +18,16 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
     const [activeJuz,setActiveJuz] = useState(30)
     const [pages] = useState(['23','22','21','20'])
     const [activePage,setActivePage] = useState(null)
-    const [currentContent,setCurrentContent] = useState(null)
+    const [content,setContent] = useState(null)
+    const [_,setCurrentContent] = useState(null)
     const flatListRef = useRef(null)
-
-    const [ayahPositions,setAyahPositions] = useState([])
-    const [covers,setCovers] = useState([])
 
     const {mushafState} = useMushafState()
     const {visibilityMode} = mushafState
 
     // START – DEVELOPMENT VARIABLES
-    const [firstWordCovers,setFirstWordCovers] = useState([])
-    const [invisibleCovers,setInvisibleCovers] = useState([])
+    // const [firstWordCovers,setFirstWordCovers] = useState({})
+    // const [invisibleCovers,setInvisibleCovers] = useState({})
     // END – DEVELOPMENT VARIABLES
 
     // Active Ayah
@@ -57,60 +55,39 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
         if (activePage) {
             setActiveAyah(null)
             setCurrentContent(ContentMapper()[activeJuz].pages[activePage].content)
-            const newAyahPositions =
-            ContentMapper()[activeJuz].pages[activePage].content
-                .map((ayah) => {
-                    return ayah.coord
-                })
-                .reduce((acc,cur) => {
-                    return [...acc, ...cur]
-                },[])
-            setAyahPositions(newAyahPositions)
         }
     },[activePage])
 
     useEffect(() => {
-        if (
-            (!visibilityMode
-            || visibilityMode === 'all')
-        ) return setCovers([])
-        if (currentContent) {
-            const newCovers = 
-                currentContent
-                    .map((ayah) => {
-                        return ayah.covers[visibilityMode]
-                    })
-                    .reduce((acc,cur) => {
-                        return [...acc, ...cur]
-                    },[])
-            setCovers(newCovers)
+        if (activeJuz) {
+            setContent(ContentMapper()[activeJuz].pages)
         }
-    },[visibilityMode,currentContent])
+    },[activeJuz])
 
-    useEffect(() => {
-        if (currentContent) {
-            // START – DEVELOPMENT VARIABLES
-                const newFirstWordCovers =
-                currentContent
-                    .map((ayah) => {
-                        return ayah.covers["firstWord"]
-                    })
-                    .reduce((acc,cur) => {
-                        return [...acc, ...cur]
-                    },[])
-            setFirstWordCovers(newFirstWordCovers)
-            const newInvisibleCovers =
-                currentContent
-                    .map((ayah) => {
-                        return ayah.covers["invisible"]
-                    })
-                    .reduce((acc,cur) => {
-                        return [...acc, ...cur]
-                    },[])
-            setInvisibleCovers(newInvisibleCovers)
-        // END – DEVELOPMENT VARIABLES
-        }
-    },[currentContent])
+    // START – DEVELOPMENT VARIABLES
+    // useEffect(() => {
+    //     if (currentContent) {
+            //     const newFirstWordCovers =
+            //     currentContent
+            //         .map((ayah) => {
+            //             return ayah.covers["firstWord"]
+            //         })
+            //         .reduce((acc,cur) => {
+            //             return [...acc, ...cur]
+            //         },[])
+            // setFirstWordCovers(newFirstWordCovers)
+            // const newInvisibleCovers =
+            //     currentContent
+            //         .map((ayah) => {
+            //             return ayah.covers["invisible"]
+            //         })
+            //         .reduce((acc,cur) => {
+            //             return [...acc, ...cur]
+            //         },[])
+            // setInvisibleCovers(newInvisibleCovers)
+        // }
+    // },[currentContent])
+    // END – DEVELOPMENT VARIABLES
 
     return (
         <SafeAreaView>
@@ -127,6 +104,7 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
                 data={pages}
                 keyExtractor={(item) => item.toString()}
                 renderItem={(page) => {
+                    if (!content) return <></>
                     return (
                         <RenderPage
                             page={page}
@@ -134,16 +112,32 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
                                 value: showMenu,
                                 setValue: setShowMenu,
                             }}
-                            source={ContentMapper()[activeJuz]?.pages[page.item]?.image ?? null}
+                            source={content[page.item]?.image ?? null}
                             activeAyah={activeAyah}
-                            ayahPositions={ayahPositions}
+                            ayahPositions={
+                                content[page.item]?.content
+                                .map((ayah) => {
+                                    return ayah.coord
+                                })
+                                .reduce((acc,cur) => {
+                                    return [...acc, ...cur]
+                                },[])
+                            }
                             versePress={versePress}
                             verseLongPress={verseLongPress}
-                            covers={covers}
+                            covers={
+                                content[page.item]?.content
+                                .map((ayah) => {
+                                    return ayah.covers[visibilityMode] ?? []
+                                })
+                                .reduce((acc,cur) => {
+                                    return [...acc, ...cur]
+                                },[])
+                            }
                             activePage={activePage}
                             // START – DEVELOPMENT VARIABLES
-                            invisibleCovers={invisibleCovers}
-                            firstWordCovers={firstWordCovers}
+                            // invisibleCovers={invisibleCovers}
+                            // firstWordCovers={firstWordCovers}
                             // END – DEVELOPMENT VARIABLES
                         />
                     )
