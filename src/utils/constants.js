@@ -152,25 +152,31 @@ export const JuzItems = [
 ]
 
 export const TikrarDuration = [
+  // s
   {
     value: '1min',
     label: '1 Menit',
+    ms: 60,
   },
   {
     value: '3min',
     label: '3 Menit',
+    ms: 180,
   },
   {
     value: '5min',
     label: '5 Menit',
+    ms: 300,
   },
   {
     value: '10min',
     label: '10 Menit',
+    ms: 600,
   },
   {
     value: '15min',
     label: '15 Menit',
+    ms: 900,
   }
 ]
 
@@ -219,7 +225,7 @@ export const AyahVisibilityMode = [
   },
   {
     label: 'Sembunyikan seluruh bagian ayat',
-    value: 'hideAll',
+    value: 'invisible',
   }
 ]
 

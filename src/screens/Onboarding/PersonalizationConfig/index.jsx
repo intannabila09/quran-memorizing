@@ -46,7 +46,7 @@ const PersonalizationConfig = ({ navigation }) => {
     const { onBoardingState, dispatch } = useOnBoardingState()
     const [activeOption, setActiveOption] = useState('tikrarDuration')
 
-    const { dispatch: userDataDispatch } = useUserData
+    const { dispatch: userDataDispatch } = useUserData()
 
     const [ayahVisibilityOptionsOpen, setAyahVisbilityOptionsOpen] = useState(false)
     const [ayahVisibilityValue, setAyahVisibilityValue] = useState(onBoardingState.personalization.ayahVisibility)
@@ -85,13 +85,7 @@ const PersonalizationConfig = ({ navigation }) => {
             })
             userDataDispatch({
                 action: 'SET_USER_DATA',
-                payload:
-                    Object.keys(onBoardingState)
-                        .filter(key => key !== 'initialUsage')
-                        .reduce((acc, key) => {
-                            acc[key] = onBoardingState[key]
-                            return acc
-                        }, {})
+                payload: resProps
             })
             navigation.navigate('Homepage')
         } catch (error) {
@@ -133,7 +127,7 @@ const PersonalizationConfig = ({ navigation }) => {
                             switch (ayahVisibilityValue) {
                                 case 'firstWord':
                                     return firstWord
-                                case 'hideAll':
+                                case 'invisible':
                                     return hideAll
                                 case 'summary':
                                     return summary

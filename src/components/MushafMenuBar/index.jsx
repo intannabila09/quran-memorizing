@@ -13,6 +13,12 @@ const MushafMenuBar = ({ bottom = 13 }) => {
         })
     }
 
+    const toggleTimerState = () => {
+        dispatch({
+            action: 'TOGGLE_TIMER_STATE',
+        })
+    }
+
     const handleToggleViewMode = () => {
         dispatch({
             action: 'TOGGLE_VIEW_MODE',
@@ -49,9 +55,15 @@ const MushafMenuBar = ({ bottom = 13 }) => {
                         justifyContent: 'center',
                         borderRadius: 999,
                     }}
-                    onPress={increaseCounter}
+                    onPress={mushafState.tikrarMethod === 'count' ? increaseCounter : toggleTimerState}
                 >
-                    <FontAwesome5 name="angle-double-up" size={32} color="#FFFFFF" style={{ marginBottom: 0 }} />
+                    {mushafState.tikrarMethod === 'count' ? (
+                        <FontAwesome5 name="angle-double-up" size={32} color="#FFFFFF" style={{ marginBottom: 0 }} />
+                    ): mushafState.timerState === 'iddle' ? (
+                        <FontAwesome name="play" size={24} color="#FFFFFF" style={{ marginLeft: 4}} />
+                    ): (
+                        <FontAwesome name="pause" size={24} color="#FFFFFF" />
+                    )}
                 </TouchableOpacity>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                     <TouchableOpacity style={{ marginLeft: 0, alignItems: 'center', paddingVertical: 8, paddingHorizontal: 20}}>

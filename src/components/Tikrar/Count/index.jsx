@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const TikrarCount = ({ total = 10 }) => {
+const TikrarCount = () => {
     const { mushafState, dispatch } = useMushafState()
 
     const resetCounter = () => {
@@ -55,7 +55,7 @@ const TikrarCount = ({ total = 10 }) => {
                     }}
                 >
                     <View
-                        style={{ height: '100%', width: `${(mushafState.count/total)*100}%`, borderRadius: 999}}
+                        style={{ height: '100%', width: `${(mushafState.count/mushafState.maxCount)*100}%`, borderRadius: 999}}
                     >
                         <LinearGradient
                             colors={['#26E065', '#13A355']}
@@ -71,7 +71,7 @@ const TikrarCount = ({ total = 10 }) => {
                         />
                     </View>
                 </View>
-                <Text style={{ marginLeft: 8, flexGrow: 1 }}>{`${mushafState.count}/${total}`}</Text>
+                <Text style={{ marginLeft: 8, flexGrow: 1 }}>{`${mushafState.count}/${mushafState.maxCount}`}</Text>
             </View>
     )
 }

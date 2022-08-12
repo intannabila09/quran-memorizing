@@ -17,22 +17,24 @@ const styles = StyleSheet.create({
 
 const TikrarDuration = ({ total = 10, durationTarget = 70 }) => {
     const { mushafState, dispatch } = useMushafState()
+    const { timerState } = mushafState
 
-    const [duration,setDuration] = useState(durationTarget)
+    const [duration,setDuration] = useState(mushafState.duration)
 
     useEffect(() => {
-        let setNewDuration;
-
-        if (duration > 0) {
-            setNewDuration = setTimeout(() => {
-                setDuration(duration-1)
-            },1000)
+        const runTimer = () => {
+            let setNewDuration;
+            if (duration > 0) {
+                setNewDuration = setTimeout(() => {
+                    setDuration(duration-1)
+                },1000)
+            }
+            return () => {
+                clearTimeout(setNewDuration)
+            }
         }
-
-        return () => {
-            clearTimeout(setNewDuration)
-        }
-    },[duration])
+        if (timerState === 'running') runTimer()
+    },[duration, timerState])
 
     const formatTime = (durationLeft) => {
         let minutes = Math.floor(durationLeft/60)
@@ -41,9 +43,10 @@ const TikrarDuration = ({ total = 10, durationTarget = 70 }) => {
     }
 
     const resetCounter = () => {
-        return dispatch({
-            action: 'RESET_COUNT',
+        dispatch({
+            action: 'RESET_REMAINING_DURATION'
         })
+        return setDuration(mushafState.duration)
     }
     return (
             <View

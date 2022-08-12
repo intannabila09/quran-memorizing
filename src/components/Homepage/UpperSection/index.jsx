@@ -6,7 +6,9 @@ import HomepagePrimaryPercentage from 'components/Percentage/HomepagePrimaryPerc
 import HomepageSecondaryPercentage from 'components/Percentage/HomepageSecondaryPercentage';
 
 import LastMemorizedBanner from 'components/Homepage/LastMemorizedBanner';
-import { useOnBoardingState } from '../../../context/OnBoardingContext';
+import { useOnBoardingState } from 'context/OnBoardingContext';
+import { useUserData } from 'context/UserDataContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const styles = StyleSheet.create({
     container: {
@@ -19,8 +21,21 @@ const styles = StyleSheet.create({
 })
 
 const UpperSection = ({ navigation }) => {
-    const { onBoardingState } = useOnBoardingState()
-    // console.log(onBoardingState)
+    const { onBoardingState, dispatch } = useOnBoardingState()
+    const { dispatch: userDispatch} = useUserData()
+    
+    const handleIgnoreOnboarding = async () => {
+        const { initialUsage, ...resProps } = onBoardingState
+        await AsyncStorage.setItem("userPreferences", JSON.stringify(resProps))
+        dispatch({
+            type: 'SET_ONBOARDING_STATUS',
+            payload: false
+        })
+        userDispatch({
+            action: 'SET_USER_DATA',
+            payload: resProps
+        })
+    }
     return (
         <View style={styles.container}>
             <View style={{ position: 'absolute', top: 0, right: 0}}>
@@ -69,7 +84,7 @@ const UpperSection = ({ navigation }) => {
                         backgroundColor: '#eff6ff',
                         borderRadius: 8
                     }}>
-                        <View style={{ flexDirection: 'row'}}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center'}}>
                             <FontAwesome5 name="info-circle" size={16} color="#1e3a8a" />
                             <Text
                                 style={{
@@ -94,6 +109,7 @@ const UpperSection = ({ navigation }) => {
                                     borderRadius: 6,
                                     backgroundColor: '#dbeafe'
                                 }}
+                                onPress={handleIgnoreOnboarding}
                             >
                                 <Text style={{ textAlign: 'center', color: '#1e3a8a', fontWeight: '500'}}>Abaikan</Text>
                             </TouchableOpacity>

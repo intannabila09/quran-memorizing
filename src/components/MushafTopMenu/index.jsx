@@ -41,7 +41,7 @@ const MushafTopMenu = ({ top = 0, navigation }) => {
             }
             {
                 mushafState.tikrarMethod === 'duration' && (
-                    <TikrarDuration />
+                    <TikrarDuration durationTarget={mushafState.duration} />
                 )
             }
         </Animated.View>

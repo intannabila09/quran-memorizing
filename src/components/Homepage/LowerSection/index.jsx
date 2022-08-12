@@ -1,7 +1,8 @@
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
 import { Fontisto } from '@expo/vector-icons';
 import MemorizationHistory from 'components/Homepage/MemorizationHistory';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const styles = StyleSheet.create({
     container: {
@@ -25,6 +26,30 @@ const LowerSection = () => {
                 })()}
             />
             <MemorizationHistory />
+            {/* DELETE IN PRODUCTION */}
+            <View style={{ marginTop: 16}}>
+                <TouchableOpacity
+                    style={{
+                        padding: 12,
+                        borderRadius: 8,
+                        backgroundColor: 'red',
+                    }}
+                    onPress={async () => {
+                        try {
+                            await AsyncStorage.clear()
+                        } catch(e) {
+                            console.log(e)
+                        }
+                        console.log('cleared')
+                    }}
+                >
+                    <Text style={{
+                        color: '#FFFFFF',
+                        textAlign: 'center',
+                        fontWeight: "500"
+                    }}>Delete Storage</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
