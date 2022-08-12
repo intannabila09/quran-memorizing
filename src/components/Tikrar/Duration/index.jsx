@@ -20,20 +20,25 @@ const TikrarDuration = ({ total = 10, durationTarget = 70 }) => {
     const { timerState } = mushafState
 
     const [duration,setDuration] = useState(mushafState.duration)
+    const [timeoutKey,setTimeoutKey] = useState(null)
+
+    // Ad timeout canceller when reset
 
     useEffect(() => {
         const runTimer = () => {
             let setNewDuration;
-            if (duration > 0) {
+            if (duration > 0 && timerState === 'running') {
                 setNewDuration = setTimeout(() => {
-                    setDuration(duration-1)
+                    setDuration((prev) => prev - 1)
                 },1000)
+                setTimeoutKey(setNewDuration)
             }
+            if (timerState === 'iddle') return clearTimeout(timeoutKey)
             return () => {
                 clearTimeout(setNewDuration)
             }
         }
-        if (timerState === 'running') runTimer()
+        runTimer()
     },[duration, timerState])
 
     const formatTime = (durationLeft) => {
@@ -46,7 +51,7 @@ const TikrarDuration = ({ total = 10, durationTarget = 70 }) => {
         dispatch({
             action: 'RESET_REMAINING_DURATION'
         })
-        return setDuration(mushafState.duration)
+        return setDuration(durationTarget)
     }
     return (
             <View

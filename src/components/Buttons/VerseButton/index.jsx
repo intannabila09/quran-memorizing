@@ -25,7 +25,9 @@ const VerseButton = ({
             }}
             onPress={onPress}
             onLongPress={() => onLongPress(ayah)}
-        />
+        >
+            {/* <Text style={{ position: 'absolute' , bottom: 0}}>Test</Text> */}
+        </TouchableOpacity>
     )
 }
 

@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
-import { Text, View, SafeAreaView, StatusBar, TouchableOpacity, StyleSheet, ImageBackground, Pressable, Animated } from 'react-native'
+import { View, SafeAreaView, StyleSheet, Animated } from 'react-native'
 import MushafMenuBar from 'components/MushafMenuBar'
 import MushafTopMenu from 'components/MushafTopMenu'
 import QuranPages from 'components/Mushaf/QuranPages'
-import { MushafProvider } from '../../context/MushafContext'
+import { MushafProvider } from 'context/MushafContext'
 
 const styles = StyleSheet.create({
     container: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 })
 
 const Mushaf = ({ navigation }) => {
-    const [showMenu, setShowMenu] = useState(false)
+    const [showMenu, setShowMenu] = useState(true)
     const bottomMenuPosition = useRef(new Animated.Value(0)).current
     const topMenuPosition = useRef(new Animated.Value(0)).current
 
