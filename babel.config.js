@@ -13,8 +13,9 @@ module.exports = function(api) {
             'utils': './src/utils',
             'context': './src/context',
           },
-        }
+        },
       ],
+      'react-native-reanimated/plugin'
     ]
   };
 };

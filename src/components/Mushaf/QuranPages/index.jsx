@@ -14,7 +14,7 @@ import RenderPage from "./RenderPage"
 
 const { width } = Dimensions.get('window')
 
-const QuranPages = ({ showMenu, setShowMenu}) => {
+const QuranPages = ({ showMenu, setShowMenu, handleDisplayAyahMenu = () => {} }) => {
     const [activeJuz,setActiveJuz] = useState(30)
     const [pages] = useState(['23','22','21','20'])
     const [activePage,setActivePage] = useState(null)
@@ -42,7 +42,7 @@ const QuranPages = ({ showMenu, setShowMenu}) => {
 
     const verseLongPress = (ayah) => {
         setActiveAyah(ayah)
-        console.log('long press', ayah)
+        handleDisplayAyahMenu(ayah)
     }
 
     const versePress = () => {

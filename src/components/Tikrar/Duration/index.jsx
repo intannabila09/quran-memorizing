@@ -22,8 +22,6 @@ const TikrarDuration = ({ total = 10, durationTarget = 70 }) => {
     const [duration,setDuration] = useState(mushafState.duration)
     const [timeoutKey,setTimeoutKey] = useState(null)
 
-    // Ad timeout canceller when reset
-
     useEffect(() => {
         const runTimer = () => {
             let setNewDuration;
