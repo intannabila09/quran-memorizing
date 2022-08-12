@@ -14,6 +14,7 @@ const initialMushafState = {
     count: 0,
     maxCount: Infinity,
     duration: TikrarDuration[0].ms,
+    selectedAyah: null,
     remainingDuration: 0,
     // iddle | running
     timerState: 'iddle',
@@ -83,6 +84,11 @@ const MushafStateReducer = (
                 ...(payload.tikrarMethod === 'count' && {
                     maxCount: payload.tikrarMethodImplementation,
                 })
+            }
+        case 'SET_SELECTED_AYAH':
+            return {
+                ...state,
+                selectedAyah: payload,
             }
         default:
             return state

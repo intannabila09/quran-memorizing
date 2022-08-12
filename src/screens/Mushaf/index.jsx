@@ -6,7 +6,8 @@ import QuranPages from 'components/Mushaf/QuranPages'
 import { MushafProvider } from 'context/MushafContext'
 
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet'
-import CustomBackdrop from 'components/CustomBackdrop'
+import AyahMenuContent from 'components/BottomSheet/AyahMenuContent'
+import { useMushafState } from 'context/MushafContext'
 
 const styles = StyleSheet.create({
     container: {
@@ -25,7 +26,9 @@ const Mushaf = ({ navigation }) => {
 
     const ayahMenuRef = useRef(null)
     const snapPoints = useMemo(() => ['40%', '50%'],[])
-    const [ayahMenuVisible,setAyahMenuVisible] = useState(true)
+    const [ayahMenuVisible,setAyahMenuVisible] = useState(false)
+
+    const { dispatch } = useMushafState()
 
     const handleSnapChange = (index) => {
         if (index === -1) return setAyahMenuVisible(false)
@@ -46,11 +49,15 @@ const Mushaf = ({ navigation }) => {
 
     const handleDisplayAyahMenu = (ayah) => {
         setAyahMenuVisible(true)
-        console.log(ayahMenuRef)
+        console.log('ayah', ayah)
+        dispatch({
+            action: 'SET_SELECTED_AYAH',
+            payload: ayah
+        })
     }
 
     useEffect(() => {
-        toggleMenu(showMenu)
+        toggleMenu(!showMenu)
     },[showMenu])
 
     const renderBottomSheetBackdrop = useCallback(
@@ -65,7 +72,7 @@ const Mushaf = ({ navigation }) => {
 
     return (
         <>
-            <View style={{ backgroundColor: showMenu ? '#f8f5e9' : '#FFFFFF', height: 47}} />
+            <View style={{ backgroundColor: !showMenu ? '#f8f5e9' : '#FFFFFF', height: 47}} />
             <SafeAreaView>
                 <View style={styles.container}>
                     <MushafTopMenu top={topMenuPosition} navigation={navigation} />
@@ -88,9 +95,7 @@ const Mushaf = ({ navigation }) => {
                             enablePanDownToClose
                             onChange={handleSnapChange}
                         >
-                            <View style={{ paddingHorizontal: 20}}>
-                                <Text>Awesome 🎉</Text>
-                            </View>
+                            <AyahMenuContent />
                         </BottomSheet>
                     )
                 }

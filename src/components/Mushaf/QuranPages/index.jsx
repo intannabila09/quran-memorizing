@@ -66,7 +66,7 @@ const QuranPages = ({ showMenu, setShowMenu, handleDisplayAyahMenu = () => {} })
 
     useEffect(() => {
         setTimeout(() => {
-            setShowMenu(!showMenu)
+            setShowMenu(false)
         },1000)
     },[])
 
@@ -120,6 +120,7 @@ const QuranPages = ({ showMenu, setShowMenu, handleDisplayAyahMenu = () => {} })
                             }}
                             source={content[page.item]?.image ?? null}
                             activeAyah={activeAyah}
+                            setActiveAyah={setActiveAyah}
                             ayahPositions={
                                 content[page.item]?.content
                                 .map((ayah) => {

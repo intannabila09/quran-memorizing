@@ -39,8 +39,8 @@ const RenderPage = ({
 }) => {
     return (
         <Pressable onPress={() => {
-            showMenu.setValue(!showMenu.value)
             setActiveAyah(null)
+            showMenu.setValue(!showMenu.value)
         }}>
             <View
                 style={styles.page}
