@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { View, FlatList } from 'react-native'
 import { SurahItems } from 'utils/constants';
+import { useUserData } from 'context/UserDataContext'
 
 import ProgressSurahItem from './Item'
 
@@ -17,7 +18,27 @@ const SurahProgressList = ({
     sortBy = 'number',
     search = null,
 }) => {
-    const [surahList,setSurahList] = useState(SurahItems);
+    const [surahList,setSurahList] = useState([]);
+    const {userDataState} = useUserData()
+
+    useEffect(() => {
+        if (userDataState) {
+            const newSurahList = SurahItems.reduce((acc,cur) => {
+                const memorized = 
+                    userDataState.memorized.surah[cur.no] ?
+                        userDataState.memorized.surah[cur.no].length : 0
+                return [
+                    ...acc,
+                    {
+                        ...cur,
+                        memorized,
+                    }
+                ]
+            }, [])
+            setSurahList(newSurahList)
+        }
+    },[userDataState])
+
     return (
         <View style={{ backgroundColor: '#FFFFFF'}}>
             <FlatList
