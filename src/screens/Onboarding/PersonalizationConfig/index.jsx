@@ -75,19 +75,20 @@ const PersonalizationConfig = ({ navigation }) => {
     const submitMemorizingConfiguration = async () => {
         try {
             const {initialUsage, ...resProps} = onBoardingState
-            await AsyncStorage.setItem(
-                'userPreferences',
-                JSON.stringify(resProps)
-            )
-            dispatch({
-                action: 'SET_ONBOARDING_STATUS',
-                payload: false,
-            })
-            userDataDispatch({
-                action: 'SET_USER_DATA',
-                payload: resProps
-            })
-            navigation.navigate('Homepage')
+            console.log(resProps)
+            // await AsyncStorage.setItem(
+            //     'userPreferences',
+            //     JSON.stringify(resProps)
+            // )
+            // dispatch({
+            //     action: 'SET_ONBOARDING_STATUS',
+            //     payload: false,
+            // })
+            // userDataDispatch({
+            //     action: 'SET_USER_DATA',
+            //     payload: resProps
+            // })
+            // navigation.navigate('Homepage')
         } catch (error) {
             console.log(error)
         }

@@ -12,7 +12,7 @@ const MushafContext = createContext({})
 
 const initialMushafState = {
     count: 0,
-    maxCount: Infinity,
+    maxCount: 40,
     duration: TikrarDuration[0].ms,
     selectedAyah: null,
     remainingDuration: 0,
@@ -20,7 +20,7 @@ const initialMushafState = {
     timerState: 'iddle',
     tikrarMethod: 'count',
     // Normal Setting
-    ayahVisibility: VISIBILITY_MODE[0],
+    ayahVisibility: VISIBILITY_MODE[1],
     visibilityMode: VISIBILITY_MODE[0]
     // --First Word Development--
     // visibilityMode: VISIBILITY_MODE[1]

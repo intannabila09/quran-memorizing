@@ -2,152 +2,453 @@ export const JuzItems = [
   {
     id: "juz1",
     label: "Juz 1",
-    numberOfAyah: 148
+    numberOfAyah: 148,
+    range: {
+      start: {
+        surah: 1,
+        ayah: 1,
+      },
+      end: {
+        surah: 2,
+        ayah:141
+      }
+    }
   },
   {
     id: "juz2",
     label: "Juz 2",
-    numberOfAyah: 111
+    numberOfAyah: 111,
+    range: {
+      start: {
+        surah: 2,
+        ayah: 142,
+      },
+      end: {
+        surah: 2,
+        ayah: 252,
+      }
+    }
   },
   {
     id: "juz3",
     label: "Juz 3",
-    numberOfAyah: 126
+    numberOfAyah: 126,
+    range: {
+      start: {
+        surah: 2,
+        ayah: 253,
+      },
+      end: {
+        surah: 3,
+        ayah: 91,
+      }
+    }
   },
   {
     id: "juz4",
     label: "Juz 4",
-    numberOfAyah: 131
+    numberOfAyah: 131,
+    range: {
+      start: {
+        surah: 3,
+        ayah: 92,
+      },
+      end: {
+        surah: 4,
+        ayah: 23,
+      }
+    }
   },
   {
     id: "juz5",
     label: "Juz 5",
-    numberOfAyah: 124
+    numberOfAyah: 124,
+    range: {
+      start: {
+        surah: 4,
+        ayah: 24,
+      },
+      end: {
+        surah: 4,
+        ayah: 147,
+      }
+    }
   },
   {
     id: "juz6",
     label: "Juz 6",
-    numberOfAyah: 110
+    numberOfAyah: 110,
+    range: {
+      start: {
+        surah: 4,
+        ayah: 148,
+      },
+      end: {
+        surah: 5,
+        ayah: 82,
+      }
+    }
   },
   {
     id: "juz7",
     label: "Juz 7",
-    numberOfAyah: 149
+    numberOfAyah: 149,
+    range: {
+      start: {
+        surah: 5,
+        ayah: 83,
+      },
+      end: {
+        surah: 6,
+        ayah: 110,
+      }
+    }
   },
   {
     id: "juz8",
     label: "Juz 8",
-    numberOfAyah: 142
+    numberOfAyah: 142,
+    range: {
+      start: {
+        surah: 6,
+        ayah: 111,
+      },
+      end: {
+        surah: 7,
+        ayah: 87,
+      }
+    }
   },
   {
     id: "juz9",
     label: "Juz 9",
-    numberOfAyah: 159
+    numberOfAyah: 159,
+    range: {
+      start: {
+        surah: 7,
+        ayah: 88,
+      },
+      end: {
+        surah: 8,
+        ayah: 40,
+      }
+    }
   },
   {
     id: "juz10",
     label: "Juz 10",
-    numberOfAyah: 127
+    numberOfAyah: 127,
+    range: {
+      start: {
+        surah: 8,
+        ayah: 41,
+      },
+      end: {
+        surah: 9,
+        ayah: 93,
+      }
+    }
   },
   {
     id: "juz11",
     label: "Juz 11",
-    numberOfAyah: 151
+    numberOfAyah: 151,
+    range: {
+      start: {
+        surah: 9,
+        ayah: 94,
+      },
+      end: {
+        surah: 11,
+        ayah: 5,
+      }
+    }
   },
   {
     id: "juz12",
     label: "Juz 12",
-    numberOfAyah: 170
+    numberOfAyah: 170,
+    range: {
+      start: {
+        surah: 11,
+        ayah: 6,
+      },
+      end: {
+        surah: 12,
+        ayah: 52,
+      }
+    }
   },
   {
     id: "juz13",
     label: "Juz 13",
-    numberOfAyah: 154
+    numberOfAyah: 154,
+    range: {
+      start: {
+        surah: 12,
+        ayah: 53,
+      },
+      end: {
+        surah: 14,
+        ayah: 52,
+      }
+    }
   },
   {
     id: "juz14",
     label: "Juz 14",
-    numberOfAyah: 227
+    numberOfAyah: 227,
+    range: {
+      start: {
+        surah: 15,
+        ayah: 1,
+      },
+      end: {
+        surah: 16,
+        ayah: 128,
+      }
+    }
   },
   {
     id: "juz15",
     label: "Juz 15",
-    numberOfAyah: 185
+    numberOfAyah: 185,
+    range: {
+      start: {
+        surah: 17,
+        ayah: 1,
+      },
+      end: {
+        surah: 18,
+        ayah: 74,
+      }
+    }
   },
   {
     id: "juz16",
     label: "Juz 16",
-    numberOfAyah: 269
+    numberOfAyah: 269,
+    range: {
+      start: {
+        surah: 18,
+        ayah: 75,
+      },
+      end: {
+        surah: 20,
+        ayah: 135,
+      }
+    }
   },
   {
     id: "juz17",
     label: "Juz 17",
-    numberOfAyah: 190
+    numberOfAyah: 190,
+    range: {
+      start: {
+        surah: 21,
+        ayah: 1,
+      },
+      end: {
+        surah: 22,
+        ayah: 78,
+      }
+    }
   },
   {
     id: "juz18",
     label: "Juz 18",
-    numberOfAyah: 202
+    numberOfAyah: 202,
+    range: {
+      start: {
+        surah: 23,
+        ayah: 1,
+      },
+      end: {
+        surah: 25,
+        ayah: 20,
+      }
+    }
   },
   {
     id: "juz19",
     label: "Juz 19",
-    numberOfAyah: 339
+    numberOfAyah: 339,
+    range: {
+      start: {
+        surah: 27,
+        ayah: 56,
+      },
+      end: {
+        surah: 29,
+        ayah: 45,
+      }
+    }
   },
   {
     id: "juz20",
     label: "Juz 20",
-    numberOfAyah: 171
+    numberOfAyah: 171,
+    range: {
+      start: {
+        surah: 27,
+        ayah: 56,
+      },
+      end: {
+        surah: 29,
+        ayah: 45,
+      }
+    }
   },
   {
     id: "juz21",
     label: "Juz 21",
-    numberOfAyah: 178
+    numberOfAyah: 178,
+    range: {
+      start: {
+        surah: 29,
+        ayah: 46,
+      },
+      end: {
+        surah: 33,
+        ayah: 30,
+      }
+    }
   },
   {
     id: "juz22",
     label: "Juz 22",
-    numberOfAyah: 169
+    numberOfAyah: 169,
+    range: {
+      start: {
+        surah: 33,
+        ayah: 31,
+      },
+      end: {
+        surah: 36,
+        ayah: 27,
+      }
+    }
   },
   {
     id: "juz23",
     label: "Juz 23",
-    numberOfAyah: 357
+    numberOfAyah: 357,
+    range: {
+      start: {
+        surah: 36,
+        ayah: 28,
+      },
+      end: {
+        surah: 39,
+        ayah: 31,
+      }
+    }
   },
   {
     id: "juz24",
     label: "Juz 24",
-    numberOfAyah: 175
+    numberOfAyah: 175,
+    range: {
+      start: {
+        surah: 39,
+        ayah: 32,
+      },
+      end: {
+        surah: 41,
+        ayah: 46,
+      }
+    }
   },
   {
     id: "juz25",
     label: "Juz 25",
-    numberOfAyah: 246
+    numberOfAyah: 246,
+    range: {
+      start: {
+        surah: 41,
+        ayah: 47,
+      },
+      end: {
+        surah: 45,
+        ayah: 32,
+      }
+    }
   },
   {
     id: "juz26",
     label: "Juz 26",
-    numberOfAyah: 195
+    numberOfAyah: 195,
+    range: {
+      start: {
+        surah: 45,
+        ayah: 33,
+      },
+      end: {
+        surah: 51,
+        ayah: 30,
+      }
+    }
   },
   {
     id: "juz27",
     label: "Juz 27",
-    numberOfAyah: 399
+    numberOfAyah: 399,
+    range: {
+      start: {
+        surah: 51,
+        ayah: 31,
+      },
+      end: {
+        surah: 57,
+        ayah: 29,
+      }
+    }
   },
   {
     id: "juz28",
     label: "Juz 28",
-    numberOfAyah: 137
+    numberOfAyah: 137,
+    range: {
+      start: {
+        surah: 58,
+        ayah: 1,
+      },
+      end: {
+        surah: 66,
+        ayah: 12,
+      }
+    }
+
   },
   {
     id: "juz29",
     label: "Juz 29",
-    numberOfAyah: 431
+    numberOfAyah: 431,
+    range: {
+      start: {
+        surah: 67,
+        ayah: 1,
+      },
+      end: {
+        surah: 77,
+        ayah: 50,
+      }
+    }
   },
   {
     id: "juz30",
     label: "Juz 30",
-    numberOfAyah: 564
+    numberOfAyah: 564,
+    range: {
+      start: {
+        surah: 78,
+        ayah: 1,
+      },
+      end: {
+        surah: 114,
+        ayah: 6,
+      }
+    }
   }
 ]
 
@@ -1257,3 +1558,124 @@ export const SurahItems = [
     category: "Makiyah"
   }
 ]
+
+export const SURAH_TO_JUZ = {
+  "1": 1,
+  "2": {
+    "1-141": 1,
+    "142-252": 2,
+    "253-286": 3,
+  },
+  "3": {
+    "1-91": 3,
+    "92-200": 4,
+  },
+  "4": {
+    "1-23": 4,
+    "24-147": 5,
+    "148-176": 6,
+  },
+  "5": {
+    "1-82": 6,
+    "83-120": 7,
+  },
+  "6": {
+    "1-110": 7,
+    "111-165": 8,
+  },
+  "7": {
+    "1-87": 8,
+    "88-206": 9,
+  },
+  "8": {
+    "1-40": 9,
+    "41-75": 10,
+  },
+  "9": {
+    "1-93": 10,
+    "94-129": 11,
+  },
+  "10": 11,
+  "11": {
+    "1-52": 11,
+    "6-123": 12,
+  },
+  "12": {
+    "1-52": 12,
+    "53-111": 13,
+  },
+  "13": 13,
+  "14": 13,
+  "15": 14,
+  "16": 14,
+  "17": 15,
+  "18": {
+    "1-74": 15,
+    "75-110": 16,
+  },
+  "19": 16,
+  "20": 16,
+  "21": 17,
+  "22": 17,
+  "23": 18,
+  "24": 18,
+  "25": {
+    "1-20": 18,
+    "21-40": 19,
+  },
+  "26": 19,
+  "27": {
+    "1-55": 19,
+    "56-93": 20,
+  },
+  "28": 20,
+  "29": {
+    "1-45": 20,
+    "46-69": 21,
+  },
+  "30": 21,
+  "32": 21,
+  "33": {
+    "1-30": 21,
+    "31-34": 22,
+  },
+  "34": 22,
+  "35": 22,
+  "36": {
+    "1-27": 22,
+    "28-36": 23,
+  },
+  "37": 23,
+  "38": 23,
+  "39": {
+    "1-31": 23,
+    "32-75": 24,
+  },
+  "40": 24,
+  "41": {
+    "1-46": 24,
+    "47-54": 25,
+  },
+  "42": 25,
+  "43": 25,
+  "44": 25,
+  "45": {
+    "1-32": 25,
+    "32-37": 26,
+  },
+  "46": 26,
+  "47": 26,
+  "48": 26,
+  "49": 26,
+  "50": 26,
+  "51": {
+    "1-30": 26,
+    "31-60": 27,
+  },
+  "52": 27,
+  "53": 27,
+  "54": 27,
+  "55": 27,
+  "56": 27,
+  "57": 27,
+}
