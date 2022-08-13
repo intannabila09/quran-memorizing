@@ -22,7 +22,7 @@ const SurahProgressList = ({
     const {userDataState} = useUserData()
 
     useEffect(() => {
-        if (userDataState) {
+        if (userDataState?.memorized?.surah) {
             const newSurahList = SurahItems.reduce((acc,cur) => {
                 const memorized = 
                     userDataState.memorized.surah[cur.no] ?
@@ -36,6 +36,8 @@ const SurahProgressList = ({
                 ]
             }, [])
             setSurahList(newSurahList)
+        } else {
+            setSurahList(SurahItems)
         }
     },[userDataState])
 

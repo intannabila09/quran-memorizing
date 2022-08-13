@@ -14,7 +14,7 @@ const JuzProgressList = ({
     const { userDataState } = useUserData()
 
     useEffect(() => {
-        if (userDataState) {
+        if (userDataState?.memorized?.juz) {
             const newJuzList = JuzItems.reduce((acc,cur) => {
                 const memorized =
                     userDataState.memorized.juz[cur.id.replace(/^juz/,'')] || 0
@@ -27,6 +27,8 @@ const JuzProgressList = ({
                 ]
             },[])
             setJuzList(newJuzList)
+        } else {
+            setJuzList(JuzItems)
         }
     },[userDataState])
 

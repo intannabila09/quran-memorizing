@@ -2,6 +2,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const ProgressSurahItem = ({surah}) => {
+    const memorized = surah.item.memorized ?? 0
     return (
         <TouchableOpacity>
             <View
@@ -51,7 +52,7 @@ const ProgressSurahItem = ({surah}) => {
                 }}
             >
                 <View
-                    style={{ height: '100%', width: `${(surah.item.memorized/surah.item.numberOfAyah)*100}%`, borderRadius: 999}}
+                    style={{ height: '100%', width: `${(memorized/surah.item.numberOfAyah)*100}%`, borderRadius: 999}}
                 >
                     <LinearGradient
                         colors={['#26E065', '#13A355']}
@@ -70,7 +71,7 @@ const ProgressSurahItem = ({surah}) => {
             <View style={{ marginTop: 6, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
-                        {surah.item.memorized}
+                        {memorized}
                     </Text>
                     <Text style={{ fontSize: 12, marginLeft: 3 }}>
                         ayat dari
@@ -84,7 +85,7 @@ const ProgressSurahItem = ({surah}) => {
                 </View>
                 <View>
                     <Text style={{ fontSize: 16, color: '#3F4043', fontWeight: 'bold'}}>
-                        {Math.floor((surah.item.memorized/surah.item.numberOfAyah) * 100)}%
+                        {Math.floor((memorized/surah.item.numberOfAyah) * 100)}%
                     </Text>
                 </View>
             </View>

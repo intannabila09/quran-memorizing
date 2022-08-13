@@ -83,7 +83,7 @@ const PersonalizationConfig = ({ navigation }) => {
 
             if (resProps.memorized.juz.length > 0) {
                 memorizedJuz = resProps.memorized.juz.reduce((acc, curr) => {
-                    acc[curr] = JuzItems.find((juz) => juz.id === curr).numberOfAyah
+                    acc[String(curr.replace(/^juz/,''))] = JuzItems.find((juz) => juz.id === curr).numberOfAyah
                     return acc
                 },{})
                 memorizedSurah = Object.keys(memorizedJuz)
@@ -130,14 +130,6 @@ const PersonalizationConfig = ({ navigation }) => {
                         return acc
                     },{})
             }
-            
-            console.log({
-                personalization: resProps['personalization'],
-                memorized: {
-                    surah: memorizedSurah,
-                    juz: memorizedJuz,
-                }
-            })
 
             await AsyncStorage.setItem(
                 'userPreferences',
@@ -146,7 +138,8 @@ const PersonalizationConfig = ({ navigation }) => {
                     memorized: {
                         surah: memorizedSurah,
                         juz: memorizedJuz,
-                    }
+                    },
+                    memorizationHistory: []
                 })
             )
             dispatch({

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import AccentPattern from "assets/accent-pattern.png"
@@ -9,6 +10,12 @@ import LastMemorizedBanner from 'components/Homepage/LastMemorizedBanner';
 import { useOnBoardingState } from 'context/OnBoardingContext';
 import { useUserData } from 'context/UserDataContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { SurahItems, JuzItems } from 'utils/constants'
+import { findJuzFromAyah } from 'utils/helpers';
+
+import { useIsFocused } from '@react-navigation/native'
+import _ from 'lodash'
 
 const styles = StyleSheet.create({
     container: {
@@ -22,7 +29,18 @@ const styles = StyleSheet.create({
 
 const UpperSection = ({ navigation }) => {
     const { onBoardingState, dispatch } = useOnBoardingState()
-    const { dispatch: userDispatch} = useUserData()
+    const { userDataState, dispatch: userDispatch} = useUserData()
+    const isFocused = useIsFocused()
+
+    const [lastMemorizedData,setLastMemorizedData] = useState({
+        surahName: 'An-Nas',
+        memorizedAyah: 0,
+        totalAyah: 6,
+        juzName: 'Juz 30',
+        memorizedAyahInJuz: 0,
+        totalAyahInJuz: 564,
+        totalMemorizedInQuran: 0,
+    })
     
     const handleIgnoreOnboarding = async () => {
         const { initialUsage, ...resProps } = onBoardingState
@@ -36,6 +54,30 @@ const UpperSection = ({ navigation }) => {
             payload: resProps
         })
     }
+
+    useEffect(() => {
+        if (!_.isEmpty(userDataState)) {
+            const lastSurahMemorizedNo =
+                String(Math.max(...Object.keys(userDataState.memorized.surah).map((item) => Number(item))))
+    
+            const lastSurahMemorized = SurahItems.find((item) => item.no === lastSurahMemorizedNo)
+            const lastAyahMemorized = userDataState.memorized.surah[lastSurahMemorizedNo][userDataState.memorized.surah[lastSurahMemorizedNo].length - 1]
+            const lastJuzMemorizedId = `juz${findJuzFromAyah(lastSurahMemorizedNo,lastAyahMemorized)}`
+            const lastJuzMemorized = JuzItems.find((item) => item.id === lastJuzMemorizedId)
+            const totalMemorizedInQuran = Object.values(userDataState.memorized.juz).reduce((acc, curr) => acc + curr, 0)
+    
+            setLastMemorizedData({
+                surahName: lastSurahMemorized.name,
+                memorizedAyah: userDataState.memorized.surah[lastSurahMemorizedNo].length,
+                totalAyah: lastSurahMemorized.numberOfAyah,
+                juzName: lastJuzMemorized.label,
+                totalAyahInJuz: lastJuzMemorized.numberOfAyah,
+                memorizedAyahInJuz: userDataState.memorized.juz[findJuzFromAyah(lastSurahMemorizedNo,lastAyahMemorized)],
+                totalMemorizedInQuran: totalMemorizedInQuran
+            })
+        }
+    },[isFocused])
+
     return (
         <View style={styles.container}>
             <View style={{ position: 'absolute', top: 0, right: 0}}>
@@ -54,20 +96,20 @@ const UpperSection = ({ navigation }) => {
             </View>
             <HomepagePrimaryPercentage
                 style={{ marginTop: 16 }}
-                surah={'An-Nas'}
-                memorized={3}
-                total={6}
+                surah={lastMemorizedData.surahName}
+                memorized={lastMemorizedData.memorizedAyah}
+                total={lastMemorizedData.totalAyah}
             />
             <View style={{ marginTop: 16, flexDirection: 'row', justifyContent: 'space-between' }}>
                 <HomepageSecondaryPercentage
-                    memorized={255}
-                    total={564}
-                    juz={30}
+                    memorized={lastMemorizedData.memorizedAyahInJuz}
+                    total={lastMemorizedData.totalAyahInJuz}
+                    juz={lastMemorizedData.juzName}
                     style={{ flexGrow: 1 }}
                 />
                 <View style={{  paddingLeft: 16, borderLeftWidth: 1, borderLeftColor: '#EEEDED', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 16, fontWeight: '600'}}>
-                        18%
+                        {(lastMemorizedData.totalMemorizedInQuran/6236).toPrecision(2) * 100}%
                     </Text>
                     <Text style={{ fontWeight: '500', fontSize: 12, marginTop: 4 }}>
                         dari Alquran

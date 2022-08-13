@@ -9,7 +9,7 @@ const HomepageSecondaryPercentage = ({ style, memorized, total, juz }) => {
                 paddingRight: 16,
             }}
         >
-            <Text style={{ fontSize: 20, fontWeight: 'bold'}}>Juz {juz}</Text>
+            <Text style={{ fontSize: 20, fontWeight: 'bold'}}>{juz}</Text>
             <View
                 style={{
                     height: 8,
@@ -40,7 +40,7 @@ const HomepageSecondaryPercentage = ({ style, memorized, total, juz }) => {
             </View>
             <View style={{ marginTop: 8, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
              <Text style={{ fontSize: 12}}>
-                {`${memorized} ayat dari ${total} ayat Juz ${juz}`}
+                {`${memorized} ayat dari ${total} ayat ${juz}`}
              </Text>
              <Text style={{ fontSize: 14, fontWeight: 'bold'}}>
                 {`${Math.floor((memorized/total) * 100)}%`}

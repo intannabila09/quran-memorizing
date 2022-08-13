@@ -66,7 +66,7 @@ const App = () => {
       >
         {/* TODO: protect route based on personalization value */}
         <Stack.Navigator
-          initialRouteName="MemorizationProgress"
+          initialRouteName="Homepage"
           screenOptions={{
             headerShown: false,
           }}
