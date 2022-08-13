@@ -1,7 +1,8 @@
 import { Text, View, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 
-const ProgressJuzItem = ({ juz, memorized = 100 }) => {
+
+const ProgressJuzItem = ({ juz }) => {
     return (
         <TouchableOpacity>
             <View
@@ -42,7 +43,7 @@ const ProgressJuzItem = ({ juz, memorized = 100 }) => {
                 }}
             >
                 <View
-                    style={{ height: '100%', width: `${(memorized/juz.item.numberOfAyah)*100}%`, borderRadius: 999}}
+                    style={{ height: '100%', width: `${(juz.item.memorized/juz.item.numberOfAyah)*100}%`, borderRadius: 999}}
                 >
                     <LinearGradient
                         colors={['#26E065', '#13A355']}
@@ -61,7 +62,7 @@ const ProgressJuzItem = ({ juz, memorized = 100 }) => {
             <View style={{ marginTop: 6, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
-                        {memorized}
+                        {juz.item.memorized}
                     </Text>
                     <Text style={{ fontSize: 12, marginLeft: 3 }}>
                         ayat dari
@@ -75,7 +76,7 @@ const ProgressJuzItem = ({ juz, memorized = 100 }) => {
                 </View>
                 <View>
                     <Text style={{ fontSize: 16, color: '#3F4043', fontWeight: 'bold'}}>
-                        {Math.floor((memorized/juz.item.numberOfAyah) * 100)}%
+                        {Math.floor((juz.item.memorized/juz.item.numberOfAyah) * 100)}%
                     </Text>
                 </View>
             </View>

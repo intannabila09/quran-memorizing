@@ -30,8 +30,6 @@ const App = () => {
   const { _, dispatch } = useOnBoardingState()
   const { userDataState, dispatch: userDispatch } = useUserData()
 
-  console.log('userData', userDataState)
-
   const getUserPreference = async () => {
     setLoading(true)
     try {
@@ -68,7 +66,7 @@ const App = () => {
       >
         {/* TODO: protect route based on personalization value */}
         <Stack.Navigator
-          initialRouteName="Homepage"
+          initialRouteName="MemorizationProgress"
           screenOptions={{
             headerShown: false,
           }}
