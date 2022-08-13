@@ -60,7 +60,7 @@ const MushafMenuBar = ({ bottom = 13 }) => {
                     {mushafState.tikrarMethod === 'count' ? (
                         <FontAwesome5 name="angle-double-up" size={32} color="#FFFFFF" style={{ marginBottom: 0 }} />
                     ): mushafState.timerState === 'iddle' ? (
-                        <FontAwesome name="play" size={24} color="#FFFFFF" style={{ marginLeft: 4}} />
+                        <FontAwesome5 name="stopwatch" size={24} color="#FFFFFF" />
                     ): (
                         <FontAwesome name="pause" size={24} color="#FFFFFF" />
                     )}
