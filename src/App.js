@@ -30,7 +30,7 @@ const App = () => {
   const { _, dispatch } = useOnBoardingState()
   const { userDataState, dispatch: userDispatch } = useUserData()
 
-  // console.log('userData', userDataState)
+  console.log('userData', userDataState)
 
   const getUserPreference = async () => {
     setLoading(true)

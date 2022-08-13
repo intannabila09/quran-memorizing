@@ -18,10 +18,12 @@ import {
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Entypo } from '@expo/vector-icons';
 import { useOnBoardingState } from 'context/OnBoardingContext'
+import { JuzItems, JUZ_TO_SURAH } from 'utils/constants'
 
 // Storage
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useUserData } from 'context/UserDataContext'
+import { findJuzFromAyah } from '../../../utils/helpers'
 
 /**
  * Todo
@@ -75,20 +77,93 @@ const PersonalizationConfig = ({ navigation }) => {
     const submitMemorizingConfiguration = async () => {
         try {
             const {initialUsage, ...resProps} = onBoardingState
-            console.log(resProps)
-            // await AsyncStorage.setItem(
-            //     'userPreferences',
-            //     JSON.stringify(resProps)
-            // )
-            // dispatch({
-            //     action: 'SET_ONBOARDING_STATUS',
-            //     payload: false,
-            // })
-            // userDataDispatch({
-            //     action: 'SET_USER_DATA',
-            //     payload: resProps
-            // })
-            // navigation.navigate('Homepage')
+
+            let memorizedSurah = {}
+            let memorizedJuz = {}
+
+            if (resProps.memorized.juz.length > 0) {
+                memorizedJuz = resProps.memorized.juz.reduce((acc, curr) => {
+                    acc[curr] = JuzItems.find((juz) => juz.id === curr).numberOfAyah
+                    return acc
+                },{})
+                memorizedSurah = Object.keys(memorizedJuz)
+                    .map((juzId) => {
+                        return juzId.replace(/^juz/, '')
+                    })
+                    .reduce((acc,curr) => {
+                        return [
+                            ...acc,
+                            ...JUZ_TO_SURAH[String(curr)]
+                        ]
+                    },[])
+                    .reduce((acc,curr) => {
+                        const [surah,ayah] = curr.split(':')
+                        if (!acc[String(surah)]) {
+                            acc[String(surah)] = [Number(ayah)]
+                        } else {
+                            acc[String(surah)].push(Number(ayah))
+                        }
+                        return acc
+                    },{})
+            }
+
+            if (resProps.memorized.surah.length > 0) {
+                memorizedSurah = resProps.memorized.surah
+                    .reduce((acc, curr) => {
+                        const [surah,ayah] = curr.split(':')
+                        if (!acc[String(surah)]) {
+                            acc[String(surah)] = [Number(ayah)]
+                        } else {
+                            acc[String(surah)].push(Number(ayah))
+                        }
+                        return acc
+                    },{})
+                memorizedJuz = resProps.memorized.surah
+                    .reduce((acc, curr) => {
+                        const [surah,ayah] = curr.split(':')
+                        const juz = findJuzFromAyah(Number(surah),Number(ayah))
+                        if (!acc[String(juz)]) {
+                            acc[String(juz)] = 1
+                        } else {
+                            acc[String(juz)] += 1
+                        }
+                        return acc
+                    },{})
+            }
+            
+            console.log({
+                personalization: resProps['personalization'],
+                memorized: {
+                    surah: memorizedSurah,
+                    juz: memorizedJuz,
+                }
+            })
+
+            await AsyncStorage.setItem(
+                'userPreferences',
+                JSON.stringify({
+                    personalization: resProps['personalization'],
+                    memorized: {
+                        surah: memorizedSurah,
+                        juz: memorizedJuz,
+                    }
+                })
+            )
+            dispatch({
+                action: 'SET_ONBOARDING_STATUS',
+                payload: false,
+            })
+            userDataDispatch({
+                action: 'SET_USER_DATA',
+                payload: {
+                    personalization: resProps['personalization'],
+                    memorized: {
+                        surah: memorizedSurah,
+                        juz: memorizedJuz,
+                    }
+                }
+            })
+            navigation.navigate('Homepage')
         } catch (error) {
             console.log(error)
         }
