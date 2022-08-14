@@ -67,16 +67,35 @@ const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
             console.log(error)
         }
     }
-
-    console.log(Object.keys(userDataState))
     
-    const unmemorizeAyah = (target) => {
-        console.log('unmemorize', target)
-        // Implement save new user data state
-
-        // Implement save memorization history
-        
-        // Implement update user storage data
+    const unmemorizeAyah = async (target) => {
+        try {
+            const [surahIndex,ayahNumber] = target.split(":")
+            const memorizedSurah = userDataState.memorized.surah
+            const memorizedJuz = userDataState.memorized.juz
+            const juzOfAyah = findJuzFromAyah(surahIndex,ayahNumber)
+    
+            memorizedSurah[surahIndex] = memorizedSurah[surahIndex].filter(ayah => ayah !== ayahNumber)
+            memorizedJuz[juzOfAyah] -= 1
+            if (memorizedSurah[surahIndex].length === 0) delete memorizedSurah[surahIndex]
+            if (memorizedJuz[juzOfAyah] === 0) delete memorizedJuz[juzOfAyah]
+    
+            const newUserDataState = {
+                ...userDataState,
+                memorized: {
+                    juz: memorizedJuz,
+                    surah: memorizedSurah,
+                }
+            }
+    
+            dispatch({
+                action: 'SET_USER_DATA',
+                payload: newUserDataState
+            })  
+            await AsyncStorage.setItem("userPreferences", JSON.stringify(newUserDataState))
+        } catch (error) {
+            console.log(error)
+        }
     }
     
     const AYAH_MENU_ITEMS = (memorized) => [
