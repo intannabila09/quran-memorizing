@@ -10,7 +10,7 @@ const renderList = (surah) => <ProgressSurahItem surah={surah} />
 const generateSurahNameAliases = (surahName) => {
     return [
         surahName.toLowerCase(),
-        surahName.toLowerCase().replace(/[^a-z]/gi, '')
+        surahName.toLowerCase().replace(/[^a-z]/gi, ''),
     ]
 }
 

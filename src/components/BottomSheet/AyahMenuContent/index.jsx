@@ -4,6 +4,7 @@ import { SurahItems } from "utils/constants";
 import { useMushafState } from "context/MushafContext";
 import AyahMenuButton from "components/Buttons/AyahMenuButton";
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { useUserData } from "context/UserDataContext";
 
 const styles = StyleSheet.create({
     container: {
@@ -11,34 +12,54 @@ const styles = StyleSheet.create({
     }
 })
 
-const AYAH_MENU_ITEMS = (memorized) => [
-    {
-        key: 'memorize',
-        label: `${memorized ? 'Tandai Belum Hafal' : 'Tandai Sudah Hafal'}`,
-        icon: !memorized ? <FontAwesome name="check-square-o" size={16} color="black" /> : <FontAwesome name="times-circle-o" size={16} color="black" />
-    },
-    {
-        key: 'copy',
-        label: 'Salin Ayat',
-        icon: <FontAwesome5 name="copy" size={16} color="black" />,
-    },
-    {
-        key: 'note',
-        label: 'Tambahkan Catatan',
-        icon: <FontAwesome name="pencil-square-o" size={16} color="black" />
-    },
-    {
-        key: 'play',
-        label: 'Putar Audio',
-        icon: <FontAwesome5 name="play" size={16} color="black" />
-    }
-]
-
-const AyahMenuContent = () => {
+const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
     const {mushafState} = useMushafState()
     const { selectedAyah } = mushafState
     const [activeAyah,setActiveAyah] = useState({ surahNumber: 0, surahName: "", ayah: "" })
-    const [memorized,setMemorized] = useState(false)
+    const { userDataState, dispatch } = useUserData()
+
+    const memorizeAyah = (target) => {
+        console.log('memorize', target)
+        // Implement save new user data state
+
+        // Implement save memorization history
+
+        // Implement update user storage data
+
+    }
+    
+    const unmemorizeAyah = (target) => {
+        console.log('unmemorize', target)
+        // Implement save new user data state
+
+        // Implement save memorization history
+        
+        // Implement update user storage data
+    }
+    
+    const AYAH_MENU_ITEMS = (memorized) => [
+        {
+            key: 'memorize',
+            label: `${memorized ? 'Tandai Belum Hafal' : 'Tandai Sudah Hafal'}`,
+            icon: !memorized ? <FontAwesome name="check-square-o" size={16} color="black" /> : <FontAwesome name="times-circle-o" size={16} color="black" />,
+            action: memorized ? unmemorizeAyah : memorizeAyah
+        },
+        {
+            key: 'copy',
+            label: 'Salin Ayat',
+            icon: <FontAwesome5 name="copy" size={16} color="black" />,
+        },
+        {
+            key: 'note',
+            label: 'Tambahkan Catatan',
+            icon: <FontAwesome name="pencil-square-o" size={16} color="black" />
+        },
+        {
+            key: 'play',
+            label: 'Putar Audio',
+            icon: <FontAwesome5 name="play" size={16} color="black" />
+        }
+    ]
     
     useEffect(() => {
         if (selectedAyah) {
@@ -46,8 +67,6 @@ const AyahMenuContent = () => {
             setActiveAyah({ surahNumber: SurahItems[surahIndex-1].no, surahName: SurahItems[surahIndex-1].name, ayah: ayahNumber })
         }
     },[selectedAyah])
-
-    console.log(activeAyah)
 
     return (
         <View style={styles.container}>
@@ -80,7 +99,12 @@ const AyahMenuContent = () => {
             <View>
                 {AYAH_MENU_ITEMS(memorized).map(item => {
                     return (
-                        <AyahMenuButton menu={item} key={item.key} />
+                        <AyahMenuButton
+                            menu={item}
+                            key={item.key}
+                            forwardedRef={forwardedRef}
+                            target={selectedAyah}
+                        />
                     )
                 })}
             </View>

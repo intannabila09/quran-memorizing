@@ -1,7 +1,11 @@
 import { TouchableOpacity, Text, View } from "react-native"
 
-const AyahMenuButton = ({ menu }) => {
-    const { icon, label } = menu
+const AyahMenuButton = ({ menu, forwardedRef, target }) => {
+    const { 
+        icon,
+        label,
+        action = () => {}
+     } = menu
     return (
         <TouchableOpacity
             style={{
@@ -12,6 +16,10 @@ const AyahMenuButton = ({ menu }) => {
                 marginBottom: 8,
                 flexDirection: "row",
                 alignItems: "center",
+            }}
+            onPress={() => {
+                forwardedRef.current.close()
+                action(target)
             }}
         >
             <View style={{ marginRight: 4, width: 20, alignItems: 'center', justifyContent: 'center' }}>

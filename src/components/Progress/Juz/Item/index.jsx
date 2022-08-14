@@ -29,7 +29,7 @@ const ProgressJuzItem = ({ juz }) => {
                             color: '#3F4043',
                         }}
                     >
-                        {juz.item.label}.
+                        {juz.item.label}
                     </Text>
                 </View>
                 <View

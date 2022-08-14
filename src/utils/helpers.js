@@ -28,3 +28,8 @@ export const findJuzFromAyah = (surah,ayah) => {
         }
     }
 }
+
+// Get ayah id
+export const getAyahId = (surah,ayah) => {
+    
+}

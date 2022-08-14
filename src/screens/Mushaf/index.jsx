@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
-import { View, SafeAreaView, StyleSheet, Animated, Text } from 'react-native'
+import { useState, useEffect, useRef, useMemo, useCallback, forwardRef } from 'react'
+import { View, SafeAreaView, StyleSheet, Animated, Platform } from 'react-native'
 import MushafMenuBar from 'components/MushafMenuBar'
 import MushafTopMenu from 'components/MushafTopMenu'
 import QuranPages from 'components/Mushaf/QuranPages'
@@ -8,6 +8,7 @@ import { MushafProvider } from 'context/MushafContext'
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet'
 import AyahMenuContent from 'components/BottomSheet/AyahMenuContent'
 import { useMushafState } from 'context/MushafContext'
+import { useUserData } from 'context/UserDataContext'
 
 const styles = StyleSheet.create({
     container: {
@@ -19,6 +20,10 @@ const styles = StyleSheet.create({
     }
 })
 
+const { OS } = Platform
+
+const ForwardAyahMenuContent = forwardRef((props, ref) => <AyahMenuContent {...props} forwardedRef={ref} />)
+
 const Mushaf = ({ navigation }) => {
     const [showMenu, setShowMenu] = useState(true)
     const bottomMenuPosition = useRef(new Animated.Value(0)).current
@@ -28,7 +33,10 @@ const Mushaf = ({ navigation }) => {
     const snapPoints = useMemo(() => ['40%', '50%'],[])
     const [ayahMenuVisible,setAyahMenuVisible] = useState(false)
 
-    const { dispatch } = useMushafState()
+    const { mushafState, dispatch } = useMushafState()
+    const { selectedAyah } = mushafState
+    const { userDataState } = useUserData()
+    const { memorized } = userDataState
 
     const handleSnapChange = (index) => {
         if (index === -1) return setAyahMenuVisible(false)
@@ -36,7 +44,7 @@ const Mushaf = ({ navigation }) => {
 
     const toggleMenu = (menuVisible) => {
         Animated.timing(bottomMenuPosition, {
-            toValue: menuVisible ? -100 : 13,
+            toValue: menuVisible ? -100 : OS === 'ios' ? 15 : 32,
             duration: 200,
             useNativeDriver: false,
         }).start()
@@ -49,7 +57,6 @@ const Mushaf = ({ navigation }) => {
 
     const handleDisplayAyahMenu = (ayah) => {
         setAyahMenuVisible(true)
-        console.log('ayah', ayah)
         dispatch({
             action: 'SET_SELECTED_AYAH',
             payload: ayah
@@ -66,6 +73,7 @@ const Mushaf = ({ navigation }) => {
                 {...prop}
                 appearsOnIndex={0}
                 disappearsOnIndex={-1}
+                pressBehavior="close"
             />
         )
     )
@@ -95,7 +103,28 @@ const Mushaf = ({ navigation }) => {
                             enablePanDownToClose
                             onChange={handleSnapChange}
                         >
-                            <AyahMenuContent />
+                            <ForwardAyahMenuContent
+                                memorized={(() => {
+                                    if (selectedAyah) {
+                                        const [surahIndex,ayahNumber] = selectedAyah.split(':')
+                                        if (memorized.surah[surahIndex]) return memorized.surah[surahIndex].includes(Number(ayahNumber))
+                                        else return false
+                                    }
+                                    return false
+                                })()}
+                                ref={ayahMenuRef}
+                            />
+                            {/* <AyahMenuContent
+                                memorized={(() => {
+                                    if (selectedAyah) {
+                                        const [surahIndex,ayahNumber] = selectedAyah.split(':')
+                                        if (memorized.surah[surahIndex]) return memorized.surah[surahIndex].includes(Number(ayahNumber))
+                                        else return false
+                                    }
+                                    return false
+                                })()}
+                                reference={ayahMenuRef}
+                            /> */}
                         </BottomSheet>
                     )
                 }
