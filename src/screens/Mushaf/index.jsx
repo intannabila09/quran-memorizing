@@ -100,6 +100,7 @@ const Mushaf = ({ navigation }) => {
                             index={1}
                             snapPoints={snapPoints}
                             backdropComponent={renderBottomSheetBackdrop}
+                            {...(OS === 'android' && { handleComponent: null})}
                             enablePanDownToClose
                             onChange={handleSnapChange}
                         >

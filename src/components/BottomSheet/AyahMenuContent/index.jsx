@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, StyleSheet, Text } from "react-native"
+import { View, StyleSheet, Text, Platform, TouchableOpacity } from "react-native"
 import { SurahItems } from "utils/constants";
 import { useMushafState } from "context/MushafContext";
 import AyahMenuButton from "components/Buttons/AyahMenuButton";
@@ -11,6 +11,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
     }
 })
+
+const { OS: os } = Platform
 
 const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
     const {mushafState} = useMushafState()
@@ -69,32 +71,68 @@ const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
     },[selectedAyah])
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container}>     
             <View
                 style={{
                     paddingVertical: 16,
-                    paddingHorizontal: 8,
-                    paddingBottom: 20,
+                    paddingBottom: os === 'ios' ? 20 : 12,
                     flexDirection: "row",
-                    alignItems: 'center',
+                    alignItems: os === 'ios' ? 'center' : 'flex-start',
                     justifyContent: 'space-between',
                 }}
             >
-                <Text style={{ fontSize: 18, fontWeight: "700"}}>{`${activeAyah['surahNumber']}. ${activeAyah['surahName']}: ${activeAyah['ayah']}`}</Text>
-                <View
-                    style={{
-                        borderWidth: 1,
-                        paddingVertical: 4,
-                        paddingHorizontal: 12,
-                        borderRadius: 999,
-                        borderColor: memorized ? "#86efac" : "#e2e8f0",
-                        backgroundColor: memorized ? "#dcfce7" : "#f1f5f9",
-                    }}
-                >
-                    <Text style={{ fontWeight: "700", fontSize: 14, color: memorized ? "#16a34a" : "#475569"}}>
-                        {memorized ? 'Sudah Hafal' : 'Belum Hafal'}
-                    </Text>
+                <View>
+                    <Text style={{ fontSize: 18, fontWeight: "700"}}>{`${activeAyah['surahNumber']}. ${activeAyah['surahName']}: ${activeAyah['ayah']}`}</Text>
+                    {
+                        os === 'android' && (
+                            <View
+                                style={{
+                                    borderWidth: 1,
+                                    paddingVertical: 4,
+                                    paddingHorizontal: 12,
+                                    borderRadius: 999,
+                                    borderColor: memorized ? "#86efac" : "#e2e8f0",
+                                    backgroundColor: memorized ? "#dcfce7" : "#f1f5f9",
+                                    marginTop: 8
+                                }}
+                            >
+                                <Text style={{ fontWeight: "700", fontSize: 14, color: memorized ? "#16a34a" : "#475569", textAlign: 'center'}}>
+                                    {memorized ? 'Sudah Hafal' : 'Belum Hafal'}
+                                </Text>
+                            </View>
+                        )
+                    }
                 </View>
+                {
+                    os === 'ios' && (
+                        <View
+                            style={{
+                                borderWidth: 1,
+                                paddingVertical: 4,
+                                paddingHorizontal: 12,
+                                borderRadius: 999,
+                                borderColor: memorized ? "#86efac" : "#e2e8f0",
+                                backgroundColor: memorized ? "#dcfce7" : "#f1f5f9",
+                            }}
+                        >
+                            <Text style={{ fontWeight: "700", fontSize: 14, color: memorized ? "#16a34a" : "#475569"}}>
+                                {memorized ? 'Sudah Hafal' : 'Belum Hafal'}
+                            </Text>
+                        </View>
+                    )
+                }
+                {
+                    os === 'android' && (
+                        <TouchableOpacity
+                            onPress={() => {
+                                forwardedRef.current.close()
+                            }}
+                            style={{padding: 8, marginRight: -8, marginTop: -8 }}
+                        >
+                            <FontAwesome name="times-circle" size={24} color="black" />
+                        </TouchableOpacity>
+                    )
+                }
             </View>
             <View>
                 {AYAH_MENU_ITEMS(memorized).map(item => {
