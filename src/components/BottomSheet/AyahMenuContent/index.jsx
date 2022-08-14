@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
 const { OS: os } = Platform
 
 const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
-    console.log(memorized)
     const {mushafState} = useMushafState()
     const { selectedAyah } = mushafState
     const [activeAyah,setActiveAyah] = useState({ surahNumber: 0, surahName: "", ayah: "" })
@@ -41,9 +40,7 @@ const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
                 memorizedJuz[juzOfAyah] = 1
             }
     
-            // Implement save memorization history
             const memorizationHistory = userDataState.memorizationHistory
-            // console.log(userDataState)
             if (memorizationHistory.length >= 5) memorizationHistory.shift()
             memorizationHistory.push({
                 surahNumber: surahIndex,
@@ -60,8 +57,7 @@ const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
                 },
                 memorizationHistory: memorizationHistory
             }
-    
-            // Implement update user storage data
+
             dispatch({
                 action: 'SET_USER_DATA',
                 payload: newUserDataState
@@ -71,6 +67,8 @@ const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
             console.log(error)
         }
     }
+
+    console.log(Object.keys(userDataState))
     
     const unmemorizeAyah = (target) => {
         console.log('unmemorize', target)

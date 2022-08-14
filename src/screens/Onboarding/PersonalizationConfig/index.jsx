@@ -153,7 +153,8 @@ const PersonalizationConfig = ({ navigation }) => {
                     memorized: {
                         surah: memorizedSurah,
                         juz: memorizedJuz,
-                    }
+                    },
+                    memorizationHistory: []
                 }
             })
             navigation.navigate('Homepage')
