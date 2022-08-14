@@ -44,19 +44,27 @@ const UpperSection = ({ navigation }) => {
     
     const handleIgnoreOnboarding = async () => {
         const { initialUsage, ...resProps } = onBoardingState
-        await AsyncStorage.setItem("userPreferences", JSON.stringify(resProps))
+        const newUserData = {
+            ...resProps,
+            memorizationHistory: [],
+            memorized: {
+                juz: {},
+                surah: {},
+            }
+        }
+        await AsyncStorage.setItem("userPreferences", JSON.stringify(newUserData))
         dispatch({
             type: 'SET_ONBOARDING_STATUS',
             payload: false
         })
         userDispatch({
             action: 'SET_USER_DATA',
-            payload: resProps
+            payload: newUserData
         })
     }
 
     useEffect(() => {
-        if (!_.isEmpty(userDataState)) {
+        if (!_.isEmpty(userDataState) && !_.isEmpty(userDataState.memorized.surah)) {
             const lastSurahMemorizedNo =
                 String(Math.max(...Object.keys(userDataState.memorized.surah).map((item) => Number(item))))
     
@@ -109,7 +117,7 @@ const UpperSection = ({ navigation }) => {
                 />
                 <View style={{  paddingLeft: 16, borderLeftWidth: 1, borderLeftColor: '#EEEDED', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 16, fontWeight: '600'}}>
-                        {(lastMemorizedData.totalMemorizedInQuran/6236).toPrecision(2) * 100}%
+                        {(lastMemorizedData.totalMemorizedInQuran/6236).toPrecision(1) * 100}%
                     </Text>
                     <Text style={{ fontWeight: '500', fontSize: 12, marginTop: 4 }}>
                         dari Alquran

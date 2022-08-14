@@ -5,6 +5,8 @@ import { useMushafState } from "context/MushafContext";
 import AyahMenuButton from "components/Buttons/AyahMenuButton";
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { useUserData } from "context/UserDataContext";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { findJuzFromAyah } from 'utils/helpers'
 
 const styles = StyleSheet.create({
     container: {
@@ -15,19 +17,59 @@ const styles = StyleSheet.create({
 const { OS: os } = Platform
 
 const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
+    console.log(memorized)
     const {mushafState} = useMushafState()
     const { selectedAyah } = mushafState
     const [activeAyah,setActiveAyah] = useState({ surahNumber: 0, surahName: "", ayah: "" })
     const { userDataState, dispatch } = useUserData()
 
-    const memorizeAyah = (target) => {
-        console.log('memorize', target)
-        // Implement save new user data state
-
-        // Implement save memorization history
-
-        // Implement update user storage data
-
+    const memorizeAyah = async (target) => {
+        try {
+            const [surahIndex,ayahNumber] = target.split(":")
+            const memorizedSurah = userDataState.memorized.surah
+            const memorizedJuz = userDataState.memorized.juz
+            const juzOfAyah = findJuzFromAyah(surahIndex,ayahNumber)
+    
+            if (memorizedSurah[surahIndex]) {
+                memorizedSurah[surahIndex].push(ayahNumber)
+            } else {
+                memorizedSurah[surahIndex] = [ayahNumber]
+            }
+            if (memorizedJuz[juzOfAyah]) {
+                memorizedJuz[juzOfAyah] += 1
+            } else {
+                memorizedJuz[juzOfAyah] = 1
+            }
+    
+            // Implement save memorization history
+            const memorizationHistory = userDataState.memorizationHistory
+            // console.log(userDataState)
+            if (memorizationHistory.length >= 5) memorizationHistory.shift()
+            memorizationHistory.push({
+                surahNumber: surahIndex,
+                ayahNumber: ayahNumber,
+                surahName: SurahItems[surahIndex-1].name,
+                memorizedAt: new Date().getTime()
+            })
+    
+            const newUserDataState = {
+                ...userDataState,
+                memorized: {
+                    juz: memorizedJuz,
+                    surah: memorizedSurah,
+                },
+                memorizationHistory: memorizationHistory
+            }
+    
+            // Implement update user storage data
+            dispatch({
+                action: 'SET_USER_DATA',
+                payload: newUserDataState
+            })  
+            await AsyncStorage.setItem("userPreferences", JSON.stringify(newUserDataState))
+        } catch (error) {
+            console.log(error)
+        }
     }
     
     const unmemorizeAyah = (target) => {

@@ -108,24 +108,13 @@ const Mushaf = ({ navigation }) => {
                                 memorized={(() => {
                                     if (selectedAyah) {
                                         const [surahIndex,ayahNumber] = selectedAyah.split(':')
-                                        if (memorized.surah[surahIndex]) return memorized.surah[surahIndex].includes(Number(ayahNumber))
+                                        if (memorized.surah[surahIndex]) return memorized.surah[surahIndex].includes(ayahNumber)
                                         else return false
                                     }
                                     return false
                                 })()}
                                 ref={ayahMenuRef}
                             />
-                            {/* <AyahMenuContent
-                                memorized={(() => {
-                                    if (selectedAyah) {
-                                        const [surahIndex,ayahNumber] = selectedAyah.split(':')
-                                        if (memorized.surah[surahIndex]) return memorized.surah[surahIndex].includes(Number(ayahNumber))
-                                        else return false
-                                    }
-                                    return false
-                                })()}
-                                reference={ayahMenuRef}
-                            /> */}
                         </BottomSheet>
                     )
                 }
