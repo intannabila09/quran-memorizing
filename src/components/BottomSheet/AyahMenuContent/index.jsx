@@ -41,13 +41,21 @@ const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
             }
     
             const memorizationHistory = userDataState.memorizationHistory
-            if (memorizationHistory.length >= 5) memorizationHistory.shift()
-            memorizationHistory.push({
-                surahNumber: surahIndex,
-                ayahNumber: ayahNumber,
-                surahName: SurahItems[surahIndex-1].name,
-                memorizedAt: new Date().getTime()
-            })
+            const indexInHistory = memorizationHistory.findIndex((item) => item.surahNumber === surahIndex)
+            if (indexInHistory >= 0) {
+                memorizationHistory[indexInHistory].ayahNumber = ayahNumber
+                memorizationHistory[indexInHistory].memorizedAt = new Date().getTime()
+            } else {
+                memorizationHistory.push({
+                    surahNumber: surahIndex,
+                    ayahNumber: ayahNumber,
+                    surahName: SurahItems[surahIndex - 1].name,
+                    memorizedAt: new Date().getTime(),
+                })
+            }
+
+            memorizationHistory.sort((a,b) => b.memorizedAt - a.memorizedAt)
+            memorizationHistory.splice(5)
     
             const newUserDataState = {
                 ...userDataState,
