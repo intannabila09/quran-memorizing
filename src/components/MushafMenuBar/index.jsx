@@ -6,8 +6,13 @@ import { useOnBoardingState } from 'context/OnBoardingContext';
 
 import { Audio } from 'expo-av'
 
-const MushafMenuBar = ({ bottom = 13, handleDisplayTranslation = () => {} }) => {
+const MushafMenuBar = ({
+    bottom = 13,
+    handleDisplayTranslation = () => {},
+    handleDisplayAudioConfig = () => {},
+}) => {
     const { dispatch, mushafState } = useMushafState()
+    const { visibilityMode } = mushafState
 
     const increaseCounter = () => {
         dispatch({
@@ -72,7 +77,15 @@ const MushafMenuBar = ({ bottom = 13, handleDisplayTranslation = () => {} }) => 
                     >
                         <FontAwesome name="play" size={24} color="#A0A0A0" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ marginLeft: 0, alignItems: 'center', paddingVertical: 8, paddingHorizontal: 20}}>
+                    <TouchableOpacity
+                        style={{
+                            marginLeft: 0,
+                            alignItems: 'center',
+                            paddingVertical: 8,
+                            paddingHorizontal: 20
+                        }}
+                        onPress={handleDisplayAudioConfig}
+                    >
                         <MaterialCommunityIcons name="cog-play" size={24} color="#A0A0A0" />
                     </TouchableOpacity>
                 </View>
@@ -107,7 +120,7 @@ const MushafMenuBar = ({ bottom = 13, handleDisplayTranslation = () => {} }) => 
                         style={{ marginLeft: 0, alignItems: 'center', paddingVertical: 8, paddingHorizontal: 20}}
                         onPress={handleToggleViewMode}
                     >
-                        <FontAwesome name="eye" size={24} color="#A0A0A0" />
+                        <FontAwesome name="eye" size={24} color={visibilityMode === 'all' ? '#A0A0A0' : '#16a34a'} />
                     </TouchableOpacity>
                 </View>
             </View>

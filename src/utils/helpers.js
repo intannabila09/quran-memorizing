@@ -29,7 +29,6 @@ export const findJuzFromAyah = (surah,ayah) => {
     }
 }
 
-// Get ayah id
-export const getAyahId = (surah,ayah) => {
-    
+export const generateAyahAudioUrl = (edition,ayahId) => {
+    return `https://cdn.islamic.network/quran/audio/64/${edition}/${ayahId}.mp3`
 }

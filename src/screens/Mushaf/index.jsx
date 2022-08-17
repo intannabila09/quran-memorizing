@@ -11,6 +11,9 @@ import { useMushafState } from 'context/MushafContext'
 import { useUserData } from 'context/UserDataContext'
 import TranslationModalContent from 'components/BottomSheet/Translation'
 
+import PlayerProvider from 'context/PlayerContext'
+import AudioConfig from 'components/BottomSheet/AudioConfig'
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#f8f5e9',
@@ -25,6 +28,7 @@ const { OS } = Platform
 
 const ForwardAyahMenuContent = forwardRef((props, ref) => <AyahMenuContent {...props} forwardedRef={ref} />)
 const ForwardTranslationMenuContent = forwardRef((props, ref) => <TranslationModalContent {...props} forwardedRef={ref} />)
+const ForwardAudioConfig = forwardRef((props, ref) => <AudioConfig {...props} forwardedRef={ref} />)
 
 const Mushaf = ({ navigation }) => {
     const [showMenu, setShowMenu] = useState(true)
@@ -40,6 +44,11 @@ const Mushaf = ({ navigation }) => {
     const [translationModalVisible,setTranslationModalVisible] = useState(false)
     const translationModalSnapPoints = useMemo(() => ['50%', '70%'],[])
 
+    //Audio Config
+    const audioConfigRef = useRef(null)
+    const audioConfigSnaps = useMemo(() => ['50%', '70%'],[])
+    const [audioConfigVisible,setAudioConfigVisible] = useState(false)
+
     const { mushafState, dispatch } = useMushafState()
     const { selectedAyah } = mushafState
     const { userDataState } = useUserData()
@@ -51,6 +60,10 @@ const Mushaf = ({ navigation }) => {
 
     const handleTranslationSnapChange = (index) => {
         if (index === -1) return setTranslationModalVisible(false)
+    }
+
+    const handleAudioConfigSnapChange = (index) => {
+        if (index === -1) return setAudioConfigVisible(false)
     }
 
     const toggleMenu = (menuVisible) => {
@@ -76,6 +89,10 @@ const Mushaf = ({ navigation }) => {
 
     const handleDisplayTranslation = () => {
         setTranslationModalVisible(true)
+    }
+
+    const handleDisplayAudioConfig = () => {
+        setAudioConfigVisible(true)
     }
 
     useEffect(() => {
@@ -109,6 +126,7 @@ const Mushaf = ({ navigation }) => {
                     <MushafMenuBar
                         bottom={bottomMenuPosition}
                         handleDisplayTranslation={handleDisplayTranslation}
+                        handleDisplayAudioConfig={handleDisplayAudioConfig}
                     />
                 </View>
                 {
@@ -151,6 +169,21 @@ const Mushaf = ({ navigation }) => {
                         </BottomSheet>
                     )
                 }
+                {
+                    audioConfigVisible && (
+                        <BottomSheet
+                            ref={audioConfigRef}
+                            index={1}
+                            snapPoints={audioConfigSnaps}
+                            backdropComponent={renderBottomSheetBackdrop}
+                            {...(OS === 'android' && { handleComponent: null})}
+                            enablePanDownToClose
+                            onChange={handleAudioConfigSnapChange}
+                        >
+                            <ForwardAudioConfig ref={audioConfigRef} />
+                        </BottomSheet>
+                    )
+                }
             </SafeAreaView>
         </>
     )
@@ -159,7 +192,9 @@ const Mushaf = ({ navigation }) => {
 const MushafPage = ({ navigation }) => {
     return (
         <MushafProvider>
-            <Mushaf navigation={navigation} />
+            <PlayerProvider>
+                <Mushaf navigation={navigation} />
+            </PlayerProvider>
         </MushafProvider>
     )
 }
