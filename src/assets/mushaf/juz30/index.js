@@ -1,5 +1,6 @@
 export default Data = () => ({
     id: 30,
+    metadata: require('assets/mushaf/juz30/content/data.json'),
     pages: {
         "20": {
             image: require('assets/mushaf/juz30/pages/600.png'),

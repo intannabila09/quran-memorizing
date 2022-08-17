@@ -6,7 +6,7 @@ import { useOnBoardingState } from 'context/OnBoardingContext';
 
 import { Audio } from 'expo-av'
 
-const MushafMenuBar = ({ bottom = 13 }) => {
+const MushafMenuBar = ({ bottom = 13, handleDisplayTranslation = () => {} }) => {
     const { dispatch, mushafState } = useMushafState()
 
     const increaseCounter = () => {
@@ -25,6 +25,10 @@ const MushafMenuBar = ({ bottom = 13 }) => {
         dispatch({
             action: 'TOGGLE_VIEW_MODE',
         })
+    }
+
+    const handleViewTranslation = () => {
+        handleDisplayTranslation()
     }
 
     const quickPlay = async () => {
@@ -93,7 +97,10 @@ const MushafMenuBar = ({ bottom = 13 }) => {
                     )}
                 </TouchableOpacity>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flexGrow: 1}}>
-                    <TouchableOpacity style={{ marginLeft: 0, alignItems: 'center', paddingVertical: 8, paddingHorizontal: 20 }}>
+                    <TouchableOpacity
+                        style={{ marginLeft: 0, alignItems: 'center', paddingVertical: 8, paddingHorizontal: 20 }}
+                        onPress={handleViewTranslation}
+                    >
                         <FontAwesome5 name="globe-asia" size={24} color="#A0A0A0" />
                     </TouchableOpacity>
                     <TouchableOpacity

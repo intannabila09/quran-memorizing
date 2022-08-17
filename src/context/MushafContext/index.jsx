@@ -21,12 +21,16 @@ const initialMushafState = {
     tikrarMethod: 'count',
     // Normal Setting
     ayahVisibility: VISIBILITY_MODE[1],
-    visibilityMode: VISIBILITY_MODE[0]
+    visibilityMode: VISIBILITY_MODE[0],
     // --First Word Development--
     // visibilityMode: VISIBILITY_MODE[1]
     // Invisible Development
     // visibilityMode: VISIBILITY_MODE[2]
     // --------------------------
+    content: {
+        juz: null,
+        verses: [],
+    }
 }
 
 const MushafStateReducer = (
@@ -89,6 +93,11 @@ const MushafStateReducer = (
             return {
                 ...state,
                 selectedAyah: payload,
+            }
+        case 'SET_ACTIVE_CONTENT':
+            return {
+                ...state,
+                content: payload,
             }
         default:
             return state

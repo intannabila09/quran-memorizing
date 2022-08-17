@@ -9,6 +9,7 @@ import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet'
 import AyahMenuContent from 'components/BottomSheet/AyahMenuContent'
 import { useMushafState } from 'context/MushafContext'
 import { useUserData } from 'context/UserDataContext'
+import TranslationModalContent from 'components/BottomSheet/Translation'
 
 const styles = StyleSheet.create({
     container: {
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
 const { OS } = Platform
 
 const ForwardAyahMenuContent = forwardRef((props, ref) => <AyahMenuContent {...props} forwardedRef={ref} />)
+const ForwardTranslationMenuContent = forwardRef((props, ref) => <TranslationModalContent {...props} forwardedRef={ref} />)
 
 const Mushaf = ({ navigation }) => {
     const [showMenu, setShowMenu] = useState(true)
@@ -33,6 +35,11 @@ const Mushaf = ({ navigation }) => {
     const snapPoints = useMemo(() => ['40%', '50%'],[])
     const [ayahMenuVisible,setAyahMenuVisible] = useState(false)
 
+    // Translation
+    const translationModalRef = useRef(null)
+    const [translationModalVisible,setTranslationModalVisible] = useState(false)
+    const translationModalSnapPoints = useMemo(() => ['50%', '70%'],[])
+
     const { mushafState, dispatch } = useMushafState()
     const { selectedAyah } = mushafState
     const { userDataState } = useUserData()
@@ -40,6 +47,10 @@ const Mushaf = ({ navigation }) => {
 
     const handleSnapChange = (index) => {
         if (index === -1) return setAyahMenuVisible(false)
+    }
+
+    const handleTranslationSnapChange = (index) => {
+        if (index === -1) return setTranslationModalVisible(false)
     }
 
     const toggleMenu = (menuVisible) => {
@@ -61,6 +72,10 @@ const Mushaf = ({ navigation }) => {
             action: 'SET_SELECTED_AYAH',
             payload: ayah
         })
+    }
+
+    const handleDisplayTranslation = () => {
+        setTranslationModalVisible(true)
     }
 
     useEffect(() => {
@@ -91,7 +106,10 @@ const Mushaf = ({ navigation }) => {
                                 handleDisplayAyahMenu={handleDisplayAyahMenu}
                             />
                         </View>
-                    <MushafMenuBar bottom={bottomMenuPosition} />
+                    <MushafMenuBar
+                        bottom={bottomMenuPosition}
+                        handleDisplayTranslation={handleDisplayTranslation}
+                    />
                 </View>
                 {
                     ayahMenuVisible && (
@@ -115,6 +133,21 @@ const Mushaf = ({ navigation }) => {
                                 })()}
                                 ref={ayahMenuRef}
                             />
+                        </BottomSheet>
+                    )
+                }
+                {
+                    translationModalVisible && (
+                        <BottomSheet
+                            ref={translationModalRef}
+                            index={1}
+                            snapPoints={translationModalSnapPoints}
+                            backdropComponent={renderBottomSheetBackdrop}
+                            {...(OS === 'android' && { handleComponent: null})}
+                            enablePanDownToClose
+                            onChange={handleTranslationSnapChange}
+                        >
+                            <ForwardTranslationMenuContent ref={translationModalRef} />
                         </BottomSheet>
                     )
                 }

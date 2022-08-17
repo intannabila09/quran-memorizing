@@ -14,7 +14,11 @@ import RenderPage from "./RenderPage"
 
 const { width } = Dimensions.get('window')
 
-const QuranPages = ({ showMenu, setShowMenu, handleDisplayAyahMenu = () => {} }) => {
+const QuranPages = ({
+    showMenu,
+    setShowMenu,
+    handleDisplayAyahMenu = () => {},
+}) => {
     const [activeJuz,setActiveJuz] = useState(30)
     const [pages] = useState(['23','22','21','20'])
     const [activePage,setActivePage] = useState(null)
@@ -22,7 +26,7 @@ const QuranPages = ({ showMenu, setShowMenu, handleDisplayAyahMenu = () => {} })
     const [_,setCurrentContent] = useState(null)
     const flatListRef = useRef(null)
 
-    const {mushafState} = useMushafState()
+    const {mushafState, dispatch} = useMushafState()
     const {visibilityMode} = mushafState
 
     // START – DEVELOPMENT VARIABLES
@@ -55,6 +59,22 @@ const QuranPages = ({ showMenu, setShowMenu, handleDisplayAyahMenu = () => {} })
         if (activePage) {
             setActiveAyah(null)
             setCurrentContent(ContentMapper()[activeJuz].pages[activePage].content)
+            dispatch({
+                action: 'SET_ACTIVE_CONTENT',
+                payload: {
+                    juz: activeJuz,
+                    verses: ContentMapper()[activeJuz].pages[activePage].content
+                    .map((item) => item.verse)
+                    .reduce((acc,cur) => {
+                        if (!acc[cur.split(':')[0]]) {
+                            acc[cur.split(':')[0]] = [cur.split(':')[1]]
+                        } else {
+                            acc[cur.split(':')[0]].push(cur.split(':')[1])
+                        }
+                        return acc
+                    },{})
+                }
+            })
         }
     },[activePage])
 

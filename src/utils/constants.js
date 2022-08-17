@@ -7979,3 +7979,7 @@ export const JUZ_TO_SURAH = {
     '114:6',
   ],
 }
+
+export const AVAILABLE_QARI_NAMES = {
+  "alafasy": 'ar.alafasy',
+}
