@@ -64,25 +64,46 @@ const UpperSection = ({ navigation }) => {
     }
 
     useEffect(() => {
-        if (!_.isEmpty(userDataState) && !_.isEmpty(userDataState.memorized.surah)) {
-            const lastSurahMemorizedNo =
-                String(Math.max(...Object.keys(userDataState.memorized.surah).map((item) => Number(item))))
-    
-            const lastSurahMemorized = SurahItems.find((item) => item.no === lastSurahMemorizedNo)
-            const lastAyahMemorized = userDataState.memorized.surah[lastSurahMemorizedNo][userDataState.memorized.surah[lastSurahMemorizedNo].length - 1]
-            const lastJuzMemorizedId = `juz${findJuzFromAyah(lastSurahMemorizedNo,lastAyahMemorized)}`
-            const lastJuzMemorized = JuzItems.find((item) => item.id === lastJuzMemorizedId)
-            const totalMemorizedInQuran = Object.values(userDataState.memorized.juz).reduce((acc, curr) => acc + curr, 0)
-    
-            setLastMemorizedData({
-                surahName: lastSurahMemorized.name,
-                memorizedAyah: userDataState.memorized.surah[lastSurahMemorizedNo].length,
-                totalAyah: lastSurahMemorized.numberOfAyah,
-                juzName: lastJuzMemorized.label,
-                totalAyahInJuz: lastJuzMemorized.numberOfAyah,
-                memorizedAyahInJuz: userDataState.memorized.juz[findJuzFromAyah(lastSurahMemorizedNo,lastAyahMemorized)],
-                totalMemorizedInQuran: totalMemorizedInQuran
-            })
+        if (
+            !_.isEmpty(userDataState)
+            && !_.isEmpty(userDataState.memorized.surah)
+        ) {
+            if (userDataState.memorizationHistory.length === 0) {
+                const lastSurahMemorizedNo =
+                    String(Math.max(...Object.keys(userDataState.memorized.surah).map((item) => Number(item))))
+        
+                const lastSurahMemorized = SurahItems.find((item) => item.no === lastSurahMemorizedNo)
+                const lastAyahMemorized = userDataState.memorized.surah[lastSurahMemorizedNo][userDataState.memorized.surah[lastSurahMemorizedNo].length - 1]
+                const lastJuzMemorizedId = `juz${findJuzFromAyah(lastSurahMemorizedNo,lastAyahMemorized)}`
+                const lastJuzMemorized = JuzItems.find((item) => item.id === lastJuzMemorizedId)
+                const totalMemorizedInQuran = Object.values(userDataState.memorized.juz).reduce((acc, curr) => acc + curr, 0)
+        
+                setLastMemorizedData({
+                    surahName: lastSurahMemorized.name,
+                    memorizedAyah: userDataState.memorized.surah[lastSurahMemorizedNo].length,
+                    totalAyah: lastSurahMemorized.numberOfAyah,
+                    juzName: lastJuzMemorized.label,
+                    totalAyahInJuz: lastJuzMemorized.numberOfAyah,
+                    memorizedAyahInJuz: userDataState.memorized.juz[findJuzFromAyah(lastSurahMemorizedNo,lastAyahMemorized)],
+                    totalMemorizedInQuran: totalMemorizedInQuran
+                })
+            } else {
+                const lastMemorized = userDataState.memorizationHistory[0]
+                const lastSurahMemorized = SurahItems.find((item) => item.no === lastMemorized.surahNumber)
+                const lastJuzMemorizedId = findJuzFromAyah(lastMemorized.surahNumber,lastMemorized.ayahNumber)
+                const lastJuzMemorized = JuzItems.find((item) => item.id === `juz${lastJuzMemorizedId}`)
+                const totalMemorizedInQuran = Object.values(userDataState.memorized.juz).reduce((acc, curr) => acc + curr, 0)
+                
+                setLastMemorizedData({
+                    surahName: lastMemorized.surahName,
+                    memorizedAyah: lastMemorized.ayahNumber,
+                    totalAyah: lastSurahMemorized.numberOfAyah,
+                    juzName: lastJuzMemorized.label,
+                    totalAyahInJuz: lastJuzMemorized.numberOfAyah,
+                    memorizedAyahInJuz: userDataState.memorized.juz[lastJuzMemorizedId],
+                    totalMemorizedInQuran: totalMemorizedInQuran
+                })
+            }
         }
     },[isFocused])
 
