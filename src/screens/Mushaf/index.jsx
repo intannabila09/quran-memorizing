@@ -38,9 +38,6 @@ const Mushaf = ({ navigation }) => {
     const { userDataState } = useUserData()
     const { memorized } = userDataState
 
-    console.log(userDataState.memorizationHistory.length)
-    console.log(userDataState.memorizationHistory)
-
     const handleSnapChange = (index) => {
         if (index === -1) return setAyahMenuVisible(false)
     }
