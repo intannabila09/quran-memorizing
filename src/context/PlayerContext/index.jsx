@@ -17,6 +17,8 @@ const PlayerReducer = (state, { type, payload }) => {
         case 'SET_PLAYLIST':
             return {
                 ...state,
+                currentIndex: 0,
+                loop: 1,
                 playlist: payload
             }
         case 'SET_ALL_PLAYER_DATA':
