@@ -32,6 +32,7 @@ const QuranPages = ({
     const {visibilityMode} = mushafState
 
     const {playerState, dispatch: playerDispatch} = usePlayerProvider()
+    console.log(`${playerState?.currentIndex}/${playerState?.playlist.length - 1} loop: ${playerState?.loop}`)
 
     // START – DEVELOPMENT VARIABLES
     // const [firstWordCovers,setFirstWordCovers] = useState({})
@@ -79,7 +80,6 @@ const QuranPages = ({
                     },{})
                 }
             })
-            console.log(playerState)
         }
     },[activePage])
 

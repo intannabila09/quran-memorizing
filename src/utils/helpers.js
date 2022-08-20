@@ -49,6 +49,11 @@ export const generatePlaylistItems = (
     const playlistItems = []
     do {
         const maxAyah = AyahAddition[String(currentSurah)].ayah
+        if (currentAyah === 1 && currentSurah !== 1 && currentSurah !== 9) {
+            playlistItems.push(
+                generateAyahAudioUrl(edition,getAyahId(1,1))
+            )
+        }
         playlistItems.push(
             generateAyahAudioUrl(edition,getAyahId(currentSurah,currentAyah))
         )
@@ -66,9 +71,7 @@ export const generatePlaylistItems = (
         if (currentAyah === maxAyah) {
             currentSurah++
             currentAyah = 1
-            playlistItems.push(
-                generateAyahAudioUrl(edition,getAyahId(1,1))
-            )
+            continue
         }
         else currentAyah++
     } while (

@@ -8,6 +8,7 @@ const initialState = {
     // stopped || playing || paused
     status: 'stopped',
     currentIndex: 0,
+    currentIteration: 1,
     loop: 1,
 }
 
@@ -48,6 +49,21 @@ const PlayerReducer = (state, { type, payload }) => {
             return {
                 ...state,
                 status: 'stopped'
+            }
+        case 'PLAY_NEXT':
+            return {
+                ...state,
+                currentIndex: payload.index,
+            }
+        case 'INCREASE_CURRENT_ITERATION':
+            return {
+                ...state,
+                currentIteration: state.currentIteration + 1,
+            }
+        case 'DECREMENT_LOOP':
+            return {
+                ...state,
+                loop: state.loop - 1,
             }
     }
 }

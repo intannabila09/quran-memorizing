@@ -8,10 +8,6 @@ export const AVAILABLE_QARI_NAMES = {
     "sudais": {
         id: 'ar.abdurrahmaansudais',
         label: 'Abdurrahmaan As-Sudais',
-    },
-    "minshawi": {
-        id: 'ar.minshawi',
-        label: 'Minshawi',
     }
   }
   
@@ -30,5 +26,5 @@ export const AVAILABLE_QARI_NAMES = {
     "3": 3,
     "5": 5,
     "10": 10,
-    "Tanpa Henti": 'infinite',
+    "Tanpa Henti": Infinity,
   }

@@ -1,8 +1,7 @@
+import { useEffect, useState } from 'react';
 import { TouchableOpacity, View, Animated  } from 'react-native'
 import { FontAwesome5, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
-import tikrarPlus from 'assets/tikrarPlus.png'
 import { useMushafState } from 'context/MushafContext';
-import { useOnBoardingState } from 'context/OnBoardingContext';
 
 import { Audio } from 'expo-av'
 import { usePlayerProvider } from 'context/PlayerContext';
@@ -16,8 +15,10 @@ const MushafMenuBar = ({
     const { visibilityMode } = mushafState
 
     const { playerState, dispatch: playerDispatch } = usePlayerProvider()
+    const { status, playlist, currentIndex, currentIteration, loop, delay } = playerState
 
-    console.log('playlist', playerState?.playlist)
+    const [playerStatus, setPlayerStatus] = useState('stopped')
+    const [audio,setAudio] = useState(null)
 
     const increaseCounter = () => {
         dispatch({
@@ -41,19 +42,134 @@ const MushafMenuBar = ({
         handleDisplayTranslation()
     }
 
-    const quickPlay = async () => {
-        try {
-            // SoundPlayer.playUrl('https://cdn.islamic.network/quran/audio/128/ar.alafasy/262.mp3')
-            const {sound} = await Audio.Sound.createAsync(
-                {uri: 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/262.mp3'},
-                {shouldPlay: true}
-            )
-            console.log('playing')
-            await sound.replayAsync()
-        } catch (e) {
-            console.log(e)
+    const handlePlayerControl = async () => {
+        if (status === 'playing') {
+            await playerDispatch({
+                type: 'PAUSE_AUDIO',
+            })
+        } else {
+            await playerDispatch({
+                type: 'PLAY_AUDIO',
+            })
         }
     }
+
+    const _onPlaybackStatusUpdate = async playbackStatus => {
+        if (!playbackStatus.isLoaded) {
+            // Update your UI for the unloaded state
+            if (playbackStatus.error) {
+                playerDispatch({
+                    type: 'STOP_AUDIO',
+                })
+                console.log(`Encountered a fatal error during playback: ${playbackStatus.error}`);
+            }
+        } else {
+            if (playbackStatus.isPlaying) {
+                // Update your UI for the playing state
+              } else {
+                // Update your UI for the paused state
+                console.log('Implement pause audio')
+              }
+          
+              if (playbackStatus.isBuffering) {
+                // Update your UI for the buffering state
+                console.log('buffering')
+              }
+          
+              if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
+                setAudio(null)
+                if ( // not reached the end of the playlist
+                    currentIndex < playlist.length - 1
+                ) {
+                    // play next ayah
+                    setTimeout(() => {
+                        playerDispatch({
+                            type: 'PLAY_NEXT',
+                            payload: {
+                                index: currentIndex + 1,
+                            }
+                        })
+                    }, delay)
+                } else {
+                    // reached the end of the playlist
+                    // decrement loop
+                    if ((loop - 1) > 0) {
+                        playerDispatch({
+                            type: 'DECREMENT_LOOP'
+                        })
+                        // play first ayah
+                        setTimeout(() => {
+                            playerDispatch({
+                                type: 'PLAY_NEXT',
+                                payload: {
+                                    index: 0,
+                                }
+                            })
+                        }, delay)
+                    } else {
+                        // stop audio
+                        playerDispatch({
+                            type: 'STOP_AUDIO',
+                        })
+                    }
+                }
+              }
+        }
+    }
+
+    useEffect(() => {
+        const playerControl = async () => {
+            // Playing New Ayah
+            if (
+                status === 'playing' && !audio
+            ) {
+                setPlayerStatus('playing')
+                const { sound } = await Audio.Sound.createAsync(
+                    {
+                        uri: playlist[currentIndex]
+                    }
+                )
+                sound.setOnPlaybackStatusUpdate( _onPlaybackStatusUpdate )
+                await sound.playAsync()
+                setAudio(sound)
+            }
+
+            // Resuming current ayah
+            if (
+                status === 'playing' && audio
+            ) {
+                setPlayerStatus('playing')
+                await audio.playAsync()
+            }
+
+            // pause
+            if (
+                status === 'paused'
+            ) {
+                setPlayerStatus('paused')
+                await audio.pauseAsync()
+            }
+
+            // stop
+            if (status === 'stopped') {
+                if (audio) {
+                    setPlayerStatus('stopped')
+                    await audio.stopAsync()
+                    setAudio(null)
+                } else {
+                    setPlayerStatus('stopped')
+                }
+            }
+            return () => {
+                if (audio) {
+                    setPlayerStatus('stopped')
+                    audio.unloadAsync()
+                    setAudio(null)
+                }
+            }
+        }
+        playerControl()
+    },[status, currentIndex])
 
     return (
         <Animated.View
@@ -76,23 +192,56 @@ const MushafMenuBar = ({
                             marginLeft: 0,
                             alignItems: 'center',
                             paddingVertical: 8,
-                            paddingHorizontal: 20
+                            paddingHorizontal: 20,
+                            width: 60,
                         }}
-                        onPress={quickPlay}
+                        onPress={handlePlayerControl}
                     >
-                        <FontAwesome name="play" size={24} color="#A0A0A0" />
+                        {
+                            (status === 'stopped' || status === 'paused') &&
+                            <FontAwesome name="play" size={24} color="#A0A0A0" />
+                        }
+                        {
+                            status === 'playing' &&
+                            <FontAwesome name="pause" size={24} color="#A0A0A0" />
+                        }
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        style={{
-                            marginLeft: 0,
-                            alignItems: 'center',
-                            paddingVertical: 8,
-                            paddingHorizontal: 20
-                        }}
-                        onPress={handleDisplayAudioConfig}
-                    >
-                        <MaterialCommunityIcons name="cog-play" size={24} color="#A0A0A0" />
-                    </TouchableOpacity>
+                    {
+                        status === 'stopped' && (
+                            <TouchableOpacity
+                                style={{
+                                    marginLeft: 0,
+                                    alignItems: 'center',
+                                    paddingVertical: 8,
+                                    paddingHorizontal: 20,
+                                    width: 64,
+                                }}
+                                onPress={handleDisplayAudioConfig}
+                            >
+                                <MaterialCommunityIcons name="cog-play" size={24} color="#A0A0A0" />
+                            </TouchableOpacity>
+                        )
+                    }
+                    {
+                        (status === 'playing' || status === 'paused') && (
+                            <TouchableOpacity
+                                style={{
+                                    marginLeft: 0,
+                                    alignItems: 'center',
+                                    paddingVertical: 8,
+                                    paddingHorizontal: 20,
+                                    width: 64,
+                                }}
+                                onPress={() => {
+                                    playerDispatch({
+                                        type: 'STOP_AUDIO',
+                                    })
+                                }}
+                            >
+                                <FontAwesome name="stop" size={24} color="#A0A0A0" />
+                            </TouchableOpacity>
+                        )
+                    }
                 </View>
                 <TouchableOpacity
                     style={{
