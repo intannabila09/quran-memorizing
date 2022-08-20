@@ -98,15 +98,25 @@ const MushafMenuBar = ({
                         playerDispatch({
                             type: 'DECREMENT_LOOP'
                         })
-                        // play first ayah
-                        setTimeout(() => {
+                        // Handle infinitely play single ayah
+                        if (loop === Infinity && playlist.length === 1) {
                             playerDispatch({
                                 type: 'PLAY_NEXT',
                                 payload: {
-                                    index: 0,
+                                    index: -1,
                                 }
                             })
-                        }, delay)
+                        } else {
+                            // play first ayah
+                            setTimeout(() => {
+                                playerDispatch({
+                                    type: 'PLAY_NEXT',
+                                    payload: {
+                                        index: 0,
+                                    }
+                                })
+                            }, delay)
+                        }
                     } else {
                         // stop audio
                         playerDispatch({
@@ -127,7 +137,7 @@ const MushafMenuBar = ({
                 setPlayerStatus('playing')
                 const { sound } = await Audio.Sound.createAsync(
                     {
-                        uri: playlist[currentIndex]
+                        uri: currentIndex < 0 ? playlist[0] : playlist[currentIndex],
                     }
                 )
                 sound.setOnPlaybackStatusUpdate( _onPlaybackStatusUpdate )
