@@ -10,6 +10,8 @@ import {
     DELAY_OPTIONS
 } from 'utils/enums';
 import PrimaryButton from '../../Buttons/PrimaryButton';
+import { generatePlaylistItems } from 'utils/helpers';
+import { usePlayerProvider } from 'context/PlayerContext';
 
 const { OS: os } = Platform
 
@@ -23,6 +25,7 @@ const AudioConfig = ({
     forwardedRef,
     ...props
 }) => {
+    const { dispatch } = usePlayerProvider()
     const [optionsVisibility, setOptionsVisibility] = useState({
         startFromSurah: false,
         startFromAyah: false,
@@ -82,6 +85,27 @@ const AudioConfig = ({
                 )
             }
         })
+    }
+
+    const handlePlay = () => {
+        const playlistItems = generatePlaylistItems(
+            startFrom.surah,
+            startFrom.ayah,
+            until.surah,
+            until.ayah,
+            qari,
+        )
+        dispatch({
+            type: 'SET_ALL_PLAYER_DATA',
+            payload: {
+                playlist: playlistItems,
+                delay,
+                status: 'playing',
+                loop: repeat,
+                index: 0,
+            }
+        })
+        forwardedRef.current.close()
     }
 
     useEffect(() => {
@@ -329,7 +353,10 @@ const AudioConfig = ({
                     </View>
                 </View>
                 <View style={{ marginTop: 12 }}>
-                    <PrimaryButton title="Putar" />
+                    <PrimaryButton
+                        title="Putar"
+                        onPress={handlePlay}
+                    />
                 </View>
             </View>
         </View>

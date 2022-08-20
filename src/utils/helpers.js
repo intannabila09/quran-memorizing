@@ -1,4 +1,4 @@
-import { SURAH_TO_JUZ, JUZ_TO_SURAH } from "./constants"
+import { SURAH_TO_JUZ, JUZ_TO_SURAH, AyahAddition } from "./constants"
 
 
 export const personalizationIsEmpty = (personalizationState = {}) => {
@@ -31,4 +31,48 @@ export const findJuzFromAyah = (surah,ayah) => {
 
 export const generateAyahAudioUrl = (edition,ayahId) => {
     return `https://cdn.islamic.network/quran/audio/64/${edition}/${ayahId}.mp3`
+}
+
+export const getAyahId = (surah,ayah) => {
+    return AyahAddition[String(surah)].addition + ayah
+}
+
+export const generatePlaylistItems = (
+    surahStart,
+    ayahStart,
+    surahEnd,
+    ayahEnd,
+    edition
+) => {
+    let currentSurah = surahStart
+    let currentAyah = ayahStart
+    const playlistItems = []
+    do {
+        const maxAyah = AyahAddition[String(currentSurah)].ayah
+        playlistItems.push(
+            generateAyahAudioUrl(edition,getAyahId(currentSurah,currentAyah))
+        )
+        if (
+            currentSurah === surahEnd &&
+            currentAyah === ayahEnd
+        ) break
+        if (
+            currentSurah === surahEnd &&
+            currentAyah < ayahEnd
+        ) {
+            currentAyah++
+            continue
+        }
+        if (currentAyah === maxAyah) {
+            currentSurah++
+            currentAyah = 1
+            playlistItems.push(
+                generateAyahAudioUrl(edition,getAyahId(1,1))
+            )
+        }
+        else currentAyah++
+    } while (
+        currentSurah <= surahEnd
+    )
+    return playlistItems
 }

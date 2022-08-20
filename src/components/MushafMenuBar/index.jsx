@@ -5,6 +5,7 @@ import { useMushafState } from 'context/MushafContext';
 import { useOnBoardingState } from 'context/OnBoardingContext';
 
 import { Audio } from 'expo-av'
+import { usePlayerProvider } from 'context/PlayerContext';
 
 const MushafMenuBar = ({
     bottom = 13,
@@ -13,6 +14,10 @@ const MushafMenuBar = ({
 }) => {
     const { dispatch, mushafState } = useMushafState()
     const { visibilityMode } = mushafState
+
+    const { playerState, dispatch: playerDispatch } = usePlayerProvider()
+
+    console.log('playlist', playerState?.playlist)
 
     const increaseCounter = () => {
         dispatch({

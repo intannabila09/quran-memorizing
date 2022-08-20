@@ -11,6 +11,8 @@ import {
 import ContentMapper from "assets/mushaf/ContentMapper"
 import { useMushafState } from "context/MushafContext"
 import RenderPage from "./RenderPage"
+import { usePlayerProvider } from "context/PlayerContext"
+import { generatePlaylistItems } from "utils/helpers"
 
 const { width } = Dimensions.get('window')
 
@@ -23,11 +25,13 @@ const QuranPages = ({
     const [pages] = useState(['23','22','21','20'])
     const [activePage,setActivePage] = useState(null)
     const [content,setContent] = useState(null)
-    const [_,setCurrentContent] = useState(null)
+    const [currentContent,setCurrentContent] = useState(null)
     const flatListRef = useRef(null)
 
     const {mushafState, dispatch} = useMushafState()
     const {visibilityMode} = mushafState
+
+    const {playerState, dispatch: playerDispatch} = usePlayerProvider()
 
     // START – DEVELOPMENT VARIABLES
     // const [firstWordCovers,setFirstWordCovers] = useState({})
@@ -75,8 +79,28 @@ const QuranPages = ({
                     },{})
                 }
             })
+            console.log(playerState)
         }
     },[activePage])
+
+    useEffect(() => {
+        if (currentContent) {
+            const [surahStart, ayahStart] = currentContent[0].verse.split(':')
+            const [surahEnd, ayahEnd] = currentContent[currentContent.length - 1].verse.split(':')
+            if (playerState.status === 'stopped') {
+                playerDispatch({
+                    type: 'SET_PLAYLIST',
+                    payload: generatePlaylistItems(
+                        Number(surahStart),
+                        Number(ayahStart),
+                        Number(surahEnd),
+                        Number(ayahEnd),
+                        'ar.alafasy'
+                    )
+                })
+            }
+        }
+    },[currentContent])
 
     useEffect(() => {
         if (activeJuz) {

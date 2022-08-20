@@ -7,7 +7,8 @@ const initialState = {
     delay: 0,
     // stopped || playing || paused
     status: 'stopped',
-    currentAyah: null
+    currentIndex: 0,
+    loop: 1,
 }
 
 const PlayerReducer = (state, { type, payload }) => {
@@ -16,6 +17,22 @@ const PlayerReducer = (state, { type, payload }) => {
             return {
                 ...state,
                 playlist: payload
+            }
+        case 'SET_ALL_PLAYER_DATA':
+            const {
+                playlist,
+                delay,
+                status,
+                loop,
+                index,
+            } = payload
+            return {
+                ...state,
+                playlist,
+                delay,
+                status,
+                loop,
+                currentIndex: index,
             }
         case 'PLAY_AUDIO':
             return {

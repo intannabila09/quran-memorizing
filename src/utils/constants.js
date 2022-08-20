@@ -7979,3 +7979,462 @@ export const JUZ_TO_SURAH = {
     '114:6',
   ],
 }
+
+export const AyahAddition = {
+  "1": {
+    "ayah": 7,
+    "addition": 0
+  },
+  "2": {
+    "ayah": 286,
+    "addition": 7
+  },
+  "3": {
+    "ayah": 200,
+    "addition": 293
+  },
+  "4": {
+    "ayah": 176,
+    "addition": 493
+  },
+  "5": {
+    "ayah": 120,
+    "addition": 669
+  },
+  "6": {
+    "ayah": 165,
+    "addition": 789
+  },
+  "7": {
+    "ayah": 206,
+    "addition": 954
+  },
+  "8": {
+    "ayah": 75,
+    "addition": 1160
+  },
+  "9": {
+    "ayah": 129,
+    "addition": 1235
+  },
+  "10": {
+    "ayah": 109,
+    "addition": 1364
+  },
+  "11": {
+    "ayah": 123,
+    "addition": 1473
+  },
+  "12": {
+    "ayah": 111,
+    "addition": 1596
+  },
+  "13": {
+    "ayah": 43,
+    "addition": 1707
+  },
+  "14": {
+    "ayah": 52,
+    "addition": 1750
+  },
+  "15": {
+    "ayah": 99,
+    "addition": 1802
+  },
+  "16": {
+    "ayah": 128,
+    "addition": 1901
+  },
+  "17": {
+    "ayah": 111,
+    "addition": 2029
+  },
+  "18": {
+    "ayah": 110,
+    "addition": 2140
+  },
+  "19": {
+    "ayah": 98,
+    "addition": 2250
+  },
+  "20": {
+    "ayah": 135,
+    "addition": 2348
+  },
+  "21": {
+    "ayah": 112,
+    "addition": 2483
+  },
+  "22": {
+    "ayah": 78,
+    "addition": 2595
+  },
+  "23": {
+    "ayah": 118,
+    "addition": 2673
+  },
+  "24": {
+    "ayah": 64,
+    "addition": 2791
+  },
+  "25": {
+    "ayah": 77,
+    "addition": 2855
+  },
+  "26": {
+    "ayah": 227,
+    "addition": 2932
+  },
+  "27": {
+    "ayah": 93,
+    "addition": 3159
+  },
+  "28": {
+    "ayah": 88,
+    "addition": 3252
+  },
+  "29": {
+    "ayah": 69,
+    "addition": 3340
+  },
+  "30": {
+    "ayah": 60,
+    "addition": 3409
+  },
+  "31": {
+    "ayah": 34,
+    "addition": 3469
+  },
+  "32": {
+    "ayah": 30,
+    "addition": 3503
+  },
+  "33": {
+    "ayah": 73,
+    "addition": 3533
+  },
+  "34": {
+    "ayah": 54,
+    "addition": 3606
+  },
+  "35": {
+    "ayah": 45,
+    "addition": 3660
+  },
+  "36": {
+    "ayah": 83,
+    "addition": 3705
+  },
+  "37": {
+    "ayah": 182,
+    "addition": 3788
+  },
+  "38": {
+    "ayah": 88,
+    "addition": 3970
+  },
+  "39": {
+    "ayah": 75,
+    "addition": 4058
+  },
+  "40": {
+    "ayah": 85,
+    "addition": 4133
+  },
+  "41": {
+    "ayah": 54,
+    "addition": 4218
+  },
+  "42": {
+    "ayah": 53,
+    "addition": 4272
+  },
+  "43": {
+    "ayah": 89,
+    "addition": 4325
+  },
+  "44": {
+    "ayah": 59,
+    "addition": 4414
+  },
+  "45": {
+    "ayah": 37,
+    "addition": 4473
+  },
+  "46": {
+    "ayah": 35,
+    "addition": 4510
+  },
+  "47": {
+    "ayah": 38,
+    "addition": 4545
+  },
+  "48": {
+    "ayah": 29,
+    "addition": 4583
+  },
+  "49": {
+    "ayah": 18,
+    "addition": 4612
+  },
+  "50": {
+    "ayah": 45,
+    "addition": 4630
+  },
+  "51": {
+    "ayah": 60,
+    "addition": 4675
+  },
+  "52": {
+    "ayah": 49,
+    "addition": 4735
+  },
+  "53": {
+    "ayah": 62,
+    "addition": 4784
+  },
+  "54": {
+    "ayah": 55,
+    "addition": 4846
+  },
+  "55": {
+    "ayah": 78,
+    "addition": 4901
+  },
+  "56": {
+    "ayah": 96,
+    "addition": 4979
+  },
+  "57": {
+    "ayah": 29,
+    "addition": 5075
+  },
+  "58": {
+    "ayah": 22,
+    "addition": 5104
+  },
+  "59": {
+    "ayah": 24,
+    "addition": 5126
+  },
+  "60": {
+    "ayah": 13,
+    "addition": 5150
+  },
+  "61": {
+    "ayah": 14,
+    "addition": 5163
+  },
+  "62": {
+    "ayah": 11,
+    "addition": 5177
+  },
+  "63": {
+    "ayah": 11,
+    "addition": 5188
+  },
+  "64": {
+    "ayah": 18,
+    "addition": 5199
+  },
+  "65": {
+    "ayah": 12,
+    "addition": 5217
+  },
+  "66": {
+    "ayah": 12,
+    "addition": 5229
+  },
+  "67": {
+    "ayah": 30,
+    "addition": 5241
+  },
+  "68": {
+    "ayah": 52,
+    "addition": 5271
+  },
+  "69": {
+    "ayah": 52,
+    "addition": 5323
+  },
+  "70": {
+    "ayah": 44,
+    "addition": 5375
+  },
+  "71": {
+    "ayah": 28,
+    "addition": 5419
+  },
+  "72": {
+    "ayah": 28,
+    "addition": 5447
+  },
+  "73": {
+    "ayah": 20,
+    "addition": 5475
+  },
+  "74": {
+    "ayah": 56,
+    "addition": 5495
+  },
+  "75": {
+    "ayah": 40,
+    "addition": 5551
+  },
+  "76": {
+    "ayah": 31,
+    "addition": 5591
+  },
+  "77": {
+    "ayah": 50,
+    "addition": 5622
+  },
+  "78": {
+    "ayah": 40,
+    "addition": 5672
+  },
+  "79": {
+    "ayah": 46,
+    "addition": 5712
+  },
+  "80": {
+    "ayah": 42,
+    "addition": 5758
+  },
+  "81": {
+    "ayah": 29,
+    "addition": 5800
+  },
+  "82": {
+    "ayah": 19,
+    "addition": 5829
+  },
+  "83": {
+    "ayah": 36,
+    "addition": 5848
+  },
+  "84": {
+    "ayah": 25,
+    "addition": 5884
+  },
+  "85": {
+    "ayah": 22,
+    "addition": 5909
+  },
+  "86": {
+    "ayah": 17,
+    "addition": 5931
+  },
+  "87": {
+    "ayah": 19,
+    "addition": 5948
+  },
+  "88": {
+    "ayah": 26,
+    "addition": 5967
+  },
+  "89": {
+    "ayah": 30,
+    "addition": 5993
+  },
+  "90": {
+    "ayah": 20,
+    "addition": 6023
+  },
+  "91": {
+    "ayah": 15,
+    "addition": 6043
+  },
+  "92": {
+    "ayah": 21,
+    "addition": 6058
+  },
+  "93": {
+    "ayah": 11,
+    "addition": 6079
+  },
+  "94": {
+    "ayah": 8,
+    "addition": 6090
+  },
+  "95": {
+    "ayah": 8,
+    "addition": 6098
+  },
+  "96": {
+    "ayah": 19,
+    "addition": 6106
+  },
+  "97": {
+    "ayah": 5,
+    "addition": 6125
+  },
+  "98": {
+    "ayah": 8,
+    "addition": 6130
+  },
+  "99": {
+    "ayah": 8,
+    "addition": 6138
+  },
+  "100": {
+    "ayah": 11,
+    "addition": 6146
+  },
+  "101": {
+    "ayah": 11,
+    "addition": 6157
+  },
+  "102": {
+    "ayah": 8,
+    "addition": 6168
+  },
+  "103": {
+    "ayah": 3,
+    "addition": 6176
+  },
+  "104": {
+    "ayah": 9,
+    "addition": 6179
+  },
+  "105": {
+    "ayah": 5,
+    "addition": 6188
+  },
+  "106": {
+    "ayah": 4,
+    "addition": 6193
+  },
+  "107": {
+    "ayah": 7,
+    "addition": 6197
+  },
+  "108": {
+    "ayah": 3,
+    "addition": 6204
+  },
+  "109": {
+    "ayah": 6,
+    "addition": 6207
+  },
+  "110": {
+    "ayah": 3,
+    "addition": 6213
+  },
+  "111": {
+    "ayah": 5,
+    "addition": 6216
+  },
+  "112": {
+    "ayah": 4,
+    "addition": 6221
+  },
+  "113": {
+    "ayah": 5,
+    "addition": 6225
+  },
+  "114": {
+    "ayah": 6,
+    "addition": 6230
+  }
+}
