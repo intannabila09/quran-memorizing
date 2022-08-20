@@ -7,6 +7,8 @@ import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { useUserData } from "context/UserDataContext";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { findJuzFromAyah } from 'utils/helpers'
+import { usePlayerProvider } from "context/PlayerContext";
+import { generatePlaylistItems } from "utils/helpers";
 
 const styles = StyleSheet.create({
     container: {
@@ -21,6 +23,7 @@ const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
     const { selectedAyah } = mushafState
     const [activeAyah,setActiveAyah] = useState({ surahNumber: 0, surahName: "", ayah: "" })
     const { userDataState, dispatch } = useUserData()
+    const { dispatch: playerDispatch } = usePlayerProvider()
 
     const memorizeAyah = async (target) => {
         try {
@@ -105,6 +108,24 @@ const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
             console.log(error)
         }
     }
+
+    const playAyah = async (target) => {
+        const [surahIndex,ayahNumber] = target.split(":")
+        playerDispatch({
+            type: 'SET_ALL_PLAYER_DATA',
+            payload: {
+                playlist: generatePlaylistItems(
+                    Number(surahIndex),
+                    Number(ayahNumber),
+                    Number(surahIndex),
+                    Number(ayahNumber),
+                    'ar.alafasy',
+                    true,
+                ),
+                status: 'playing',
+            }
+        })
+    }
     
     const AYAH_MENU_ITEMS = (memorized) => [
         {
@@ -126,7 +147,8 @@ const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
         {
             key: 'play',
             label: 'Putar Audio',
-            icon: <FontAwesome5 name="play" size={16} color="black" />
+            icon: <FontAwesome5 name="play" size={16} color="black" />,
+            action: playAyah
         }
     ]
     

@@ -24,10 +24,10 @@ const PlayerReducer = (state, { type, payload }) => {
         case 'SET_ALL_PLAYER_DATA':
             const {
                 playlist,
-                delay,
+                delay = 0,
                 status,
-                loop,
-                index,
+                loop = 1,
+                index = 0,
             } = payload
             return {
                 ...state,
