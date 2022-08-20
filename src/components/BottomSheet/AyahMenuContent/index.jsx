@@ -9,6 +9,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { findJuzFromAyah } from 'utils/helpers'
 import { usePlayerProvider } from "context/PlayerContext";
 import { generatePlaylistItems } from "utils/helpers";
+import * as Clipboard from 'expo-clipboard'
+import ContentMapper from "assets/mushaf/ContentMapper"
 
 const styles = StyleSheet.create({
     container: {
@@ -126,6 +128,25 @@ const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
             }
         })
     }
+
+    const copyAyah = async (target) => {
+        const [surahIndex,ayahNumber] = target.split(":")
+        const juz = findJuzFromAyah(Number(surahIndex),Number(ayahNumber))
+        const surah = ContentMapper()[juz]
+            .metadata
+            .find(surah => surah.number === Number(surahIndex))
+        const ayah = surah.ayah.find(ayah => ayah.number === Number(ayahNumber))
+        const text =
+`
+${ayah.text}
+
+"${ayah.translation}"
+
+Surah ${surah.name.id}:${ayah.number}
+`
+        console.log(text)
+        Clipboard.setStringAsync(text)
+    }
     
     const AYAH_MENU_ITEMS = (memorized) => [
         {
@@ -138,6 +159,7 @@ const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
             key: 'copy',
             label: 'Salin Ayat',
             icon: <FontAwesome5 name="copy" size={16} color="black" />,
+            action: copyAyah,
         },
         {
             key: 'note',

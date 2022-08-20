@@ -65,7 +65,7 @@ const MushafMenuBar = ({
             }
         } else {
             if (playbackStatus.isPlaying) {
-                console.log(`${playbackStatus.playableDurationMillis}/${playbackStatus.positionMillis}`)
+                // console.log(`${playbackStatus.playableDurationMillis}/${playbackStatus.positionMillis}`)
                 // Update your UI for the playing state
               } else {
                 // Update your UI for the paused state
