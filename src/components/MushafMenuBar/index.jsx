@@ -84,14 +84,31 @@ const MushafMenuBar = ({
                             playerDispatch({
                                 type: 'DECREMENT_LOOP',
                             })
-                            setTimeout(() => {
+                            if (playlist.length === 1) {
                                 playerDispatch({
                                     type: 'PLAY_NEXT',
                                     payload: {
-                                        index: 0,
+                                        index: 1,
                                     }
-                                })    
-                            }, delay)
+                                })
+                                setTimeout(() => {
+                                    playerDispatch({
+                                        type: 'PLAY_NEXT',
+                                        payload: {
+                                            index: 0,
+                                        }
+                                    }) 
+                                }, delay)
+                            } else {
+                                setTimeout(() => {
+                                    playerDispatch({
+                                        type: 'PLAY_NEXT',
+                                        payload: {
+                                            index: 0,
+                                        }
+                                    })    
+                                }, delay)
+                            }
                         } else {
                             setAudio(null)
                             playerDispatch({
@@ -118,7 +135,7 @@ const MushafMenuBar = ({
                         }, delay)
                     }
                 } else {
-                    console.log('should stopr')
+                    console.log('should stop')
                     playerDispatch({
                         type: 'STOP_AUDIO',
                     })
@@ -132,10 +149,21 @@ const MushafMenuBar = ({
             if (status === 'playing') {
                 if (!audio) {
                     if (currentIndex === playlist.length) {
-                        playerDispatch({
-                            type: 'STOP_AUDIO',
-                        })
-                        return
+                        if (playlist.length > 1){
+                            playerDispatch({
+                                type: 'STOP_AUDIO',
+                            })
+                            return
+                        } else {
+                            if (loop > 0) {
+                                return
+                            } else {
+                                playerDispatch({
+                                    type: 'STOP_AUDIO',
+                                })
+                                return
+                            }
+                        }
                     }
                     const { sound: playbackObject } = await Audio.Sound.createAsync(
                         { uri: playlist[currentIndex] },

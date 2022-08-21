@@ -50,7 +50,8 @@ const UpperSection = ({ navigation }) => {
             memorized: {
                 juz: {},
                 surah: {},
-            }
+            },
+            notes: {},
         }
         await AsyncStorage.setItem("userPreferences", JSON.stringify(newUserData))
         dispatch({

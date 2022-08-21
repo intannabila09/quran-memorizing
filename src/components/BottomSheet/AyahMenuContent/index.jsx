@@ -20,7 +20,11 @@ const styles = StyleSheet.create({
 
 const { OS: os } = Platform
 
-const AyahMenuContent = ({ memorized = false, forwardedRef }) => {
+const AyahMenuContent = ({
+    memorized = false,
+    forwardedRef,
+    handleDisplayAddNote = () => {}
+}) => {
     const {mushafState} = useMushafState()
     const { selectedAyah } = mushafState
     const [activeAyah,setActiveAyah] = useState({ surahNumber: 0, surahName: "", ayah: "" })
@@ -147,6 +151,10 @@ Surah ${surah.name.id}:${ayah.number}
         console.log(text)
         Clipboard.setStringAsync(text)
     }
+
+    const addNote = async (target) => {
+        handleDisplayAddNote(target)
+    }
     
     const AYAH_MENU_ITEMS = (memorized) => [
         {
@@ -164,7 +172,8 @@ Surah ${surah.name.id}:${ayah.number}
         {
             key: 'note',
             label: 'Tambahkan Catatan',
-            icon: <FontAwesome name="pencil-square-o" size={16} color="black" />
+            icon: <FontAwesome name="pencil-square-o" size={16} color="black" />,
+            action: addNote,
         },
         {
             key: 'play',

@@ -13,6 +13,7 @@ import TranslationModalContent from 'components/BottomSheet/Translation'
 
 import PlayerProvider from 'context/PlayerContext'
 import AudioConfig from 'components/BottomSheet/AudioConfig'
+import AddNoteModalContent from 'components/BottomSheet/AddNote'
 
 const styles = StyleSheet.create({
     container: {
@@ -29,6 +30,7 @@ const { OS } = Platform
 const ForwardAyahMenuContent = forwardRef((props, ref) => <AyahMenuContent {...props} forwardedRef={ref} />)
 const ForwardTranslationMenuContent = forwardRef((props, ref) => <TranslationModalContent {...props} forwardedRef={ref} />)
 const ForwardAudioConfig = forwardRef((props, ref) => <AudioConfig {...props} forwardedRef={ref} />)
+const ForwardAddNote = forwardRef((props, ref) => <AddNoteModalContent {...props} forwardedRef={ref} />)
 
 const Mushaf = ({ navigation }) => {
     const [showMenu, setShowMenu] = useState(true)
@@ -44,10 +46,16 @@ const Mushaf = ({ navigation }) => {
     const [translationModalVisible,setTranslationModalVisible] = useState(false)
     const translationModalSnapPoints = useMemo(() => ['50%', '70%'],[])
 
-    //Audio Config
+    // Audio Config
     const audioConfigRef = useRef(null)
     const audioConfigSnaps = useMemo(() => ['50%', '70%'],[])
     const [audioConfigVisible,setAudioConfigVisible] = useState(false)
+
+    // Add Note
+    const [addNoteVisible,setAddNoteVisible] = useState(false)
+    const addNoteRef = useRef(null)
+    const addNoteSnaps = useMemo(() => ['100%'],[])
+    const [targetAyah,setTargetAyah] = useState('')
 
     const { mushafState, dispatch } = useMushafState()
     const { selectedAyah } = mushafState
@@ -64,6 +72,10 @@ const Mushaf = ({ navigation }) => {
 
     const handleAudioConfigSnapChange = (index) => {
         if (index === -1) return setAudioConfigVisible(false)
+    }
+
+    const handleAddNoteSnapChange = (index) => {
+        if (index === -1) return setAddNoteVisible(false)
     }
 
     const toggleMenu = (menuVisible) => {
@@ -93,6 +105,11 @@ const Mushaf = ({ navigation }) => {
 
     const handleDisplayAudioConfig = () => {
         setAudioConfigVisible(true)
+    }
+
+    const handleDisplayAddNote = (target) => {
+        setTargetAyah(target)
+        setAddNoteVisible(true)
     }
 
     useEffect(() => {
@@ -150,6 +167,7 @@ const Mushaf = ({ navigation }) => {
                                     return false
                                 })()}
                                 ref={ayahMenuRef}
+                                handleDisplayAddNote={handleDisplayAddNote}
                             />
                         </BottomSheet>
                     )
@@ -181,6 +199,21 @@ const Mushaf = ({ navigation }) => {
                             onChange={handleAudioConfigSnapChange}
                         >
                             <ForwardAudioConfig ref={audioConfigRef} />
+                        </BottomSheet>
+                    )
+                }
+                {
+                    addNoteVisible && (
+                        <BottomSheet
+                            ref={addNoteRef}
+                            index={0}
+                            snapPoints={addNoteSnaps}
+                            backdropComponent={renderBottomSheetBackdrop}
+                            {...(OS === 'android' && { handleComponent: null})}
+                            enablePanDownToClose
+                            onChange={handleAddNoteSnapChange}
+                        >
+                            <ForwardAddNote ref={addNoteRef} target={targetAyah} />
                         </BottomSheet>
                     )
                 }

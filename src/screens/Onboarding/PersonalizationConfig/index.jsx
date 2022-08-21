@@ -23,7 +23,7 @@ import { JuzItems, JUZ_TO_SURAH } from 'utils/constants'
 // Storage
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useUserData } from 'context/UserDataContext'
-import { findJuzFromAyah } from '../../../utils/helpers'
+import { findJuzFromAyah } from 'utils/helpers'
 
 /**
  * Todo
@@ -139,7 +139,8 @@ const PersonalizationConfig = ({ navigation }) => {
                         surah: memorizedSurah,
                         juz: memorizedJuz,
                     },
-                    memorizationHistory: []
+                    memorizationHistory: [],
+                    notes: {},
                 })
             )
             dispatch({
@@ -154,7 +155,8 @@ const PersonalizationConfig = ({ navigation }) => {
                         surah: memorizedSurah,
                         juz: memorizedJuz,
                     },
-                    memorizationHistory: []
+                    memorizationHistory: [],
+                    notes: {},
                 }
             })
             navigation.navigate('Homepage')
