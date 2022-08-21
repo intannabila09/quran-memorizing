@@ -50,7 +50,9 @@ const PlayerReducer = (state, { type, payload }) => {
         case 'STOP_AUDIO':
             return {
                 ...state,
-                status: 'stopped'
+                status: 'stopped',
+                currentIndex: 0,
+                currentIteration: 1,
             }
         case 'PLAY_NEXT':
             return {

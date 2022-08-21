@@ -15,9 +15,8 @@ const MushafMenuBar = ({
     const { visibilityMode } = mushafState
 
     const { playerState, dispatch: playerDispatch } = usePlayerProvider()
-    const { status, playlist, currentIndex, currentIteration, loop, delay } = playerState
+    const { status, playlist, currentIndex, loop, delay } = playerState
 
-    const [playerStatus, setPlayerStatus] = useState('stopped')
     const [audio,setAudio] = useState(null)
 
     const increaseCounter = () => {
@@ -54,133 +53,123 @@ const MushafMenuBar = ({
         }
     }
 
-    const _onPlaybackStatusUpdate = async playbackStatus => {
+    const _onPlaybackStatusUpdate = async (playbackStatus) => {
         if (!playbackStatus.isLoaded) {
-            // Update your UI for the unloaded state
             if (playbackStatus.error) {
-                playerDispatch({
-                    type: 'STOP_AUDIO',
-                })
-                console.log(`Encountered a fatal error during playback: ${playbackStatus.error}`);
+                console.log(`Encountered a fatal error during playback: ${playbackStatus.error}`)
             }
         } else {
             if (playbackStatus.isPlaying) {
-                // console.log(`${playbackStatus.playableDurationMillis}/${playbackStatus.positionMillis}`)
-                // Update your UI for the playing state
-              } else {
-                // Update your UI for the paused state
-                // console.log('Implement pause audio')
-              }
-          
-              if (playbackStatus.isBuffering) {
-                // Update your UI for the buffering state
-                // console.log('buffering')
-              }
-          
-              if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
-                setAudio(null)
-                if ( // not reached the end of the playlist
-                    currentIndex < playlist.length - 1
-                ) {
-                    // play next ayah
-                    setTimeout(() => {
-                        playerDispatch({
-                            type: 'PLAY_NEXT',
-                            payload: {
-                                index: currentIndex + 1,
-                            }
-                        })
-                    }, delay)
-                } else {
-                    // reached the end of the playlist
-                    // decrement loop
-                    if ((loop - 1) > 0) {
-                        playerDispatch({
-                            type: 'DECREMENT_LOOP'
-                        })
-                        // Handle infinitely play single ayah
-                        if (loop === Infinity && playlist.length === 1) {
+                //playing
+                // await playerDispatch({
+                //     type: 'PLAY_AUDIO',
+                // })
+            } else {
+                //paused
+                // await playerDispatch({
+                //     type: 'PAUSE_AUDIO',
+                // })
+            }
+            if (playbackStatus.didJustFinish) {
+                if (loop > 0) {
+                    if (
+                        // Reached to end of playlist
+                        currentIndex === playlist.length - 1
+                    ) {
+                        if (
+                            // Loopable
+                            (loop - 1) > 0
+                        ) {
+                            setAudio(null)
                             playerDispatch({
-                                type: 'PLAY_NEXT',
-                                payload: {
-                                    index: -1,
-                                }
+                                type: 'DECREMENT_LOOP',
                             })
-                        } else {
-                            // play first ayah
                             setTimeout(() => {
                                 playerDispatch({
                                     type: 'PLAY_NEXT',
                                     payload: {
                                         index: 0,
                                     }
+                                })    
+                            }, delay)
+                        } else {
+                            setAudio(null)
+                            playerDispatch({
+                                type: 'DECREMENT_LOOP',
+                            })
+                            setTimeout(() => {
+                                playerDispatch({
+                                    type: 'PLAY_NEXT',
+                                    payload: {
+                                        index: currentIndex + 1,
+                                    }
                                 })
                             }, delay)
                         }
                     } else {
-                        // stop audio
-                        playerDispatch({
-                            type: 'STOP_AUDIO',
-                        })
+                        setAudio(null)
+                        setTimeout(() => {
+                            playerDispatch({
+                                type: 'PLAY_NEXT',
+                                payload: {
+                                    index: currentIndex + 1,
+                                }
+                            })
+                        }, delay)
                     }
+                } else {
+                    console.log('should stopr')
+                    playerDispatch({
+                        type: 'STOP_AUDIO',
+                    })
                 }
-              }
+            }
         }
     }
 
     useEffect(() => {
         const playerControl = async () => {
-            // Playing New Ayah
-            if (
-                status === 'playing' && !audio
-            ) {
-                setPlayerStatus('playing')
-                const { sound } = await Audio.Sound.createAsync(
-                    {
-                        uri: currentIndex < 0 ? playlist[0] : playlist[currentIndex],
+            if (status === 'playing') {
+                if (!audio) {
+                    if (currentIndex === playlist.length) {
+                        playerDispatch({
+                            type: 'STOP_AUDIO',
+                        })
+                        return
                     }
-                )
-                sound.setOnPlaybackStatusUpdate( _onPlaybackStatusUpdate )
-                await sound.playAsync()
-                setAudio(sound)
+                    const { sound: playbackObject } = await Audio.Sound.createAsync(
+                        { uri: playlist[currentIndex] },
+                    )
+                    setAudio(playbackObject)
+                    playbackObject.setOnPlaybackStatusUpdate(_onPlaybackStatusUpdate)
+                    playbackObject.playAsync()
+                } else {
+                    console.log('resuming audio')
+                    await audio.playAsync()
+                }
             }
-
-            // Resuming current ayah
-            if (
-                status === 'playing' && audio
-            ) {
-                setPlayerStatus('playing')
-                await audio.playAsync()
-            }
-
-            // pause
-            if (
-                status === 'paused'
-            ) {
-                setPlayerStatus('paused')
+            if (status === 'paused' && audio) {
+                console.log('pause function')
                 await audio.pauseAsync()
             }
-
-            // stop
             if (status === 'stopped') {
                 if (audio) {
-                    setPlayerStatus('stopped')
+                    console.log('stop function')
                     await audio.stopAsync()
                     setAudio(null)
                 } else {
-                    setPlayerStatus('stopped')
+                    console.log('unhandled')
                 }
             }
             return () => {
                 if (audio) {
-                    setPlayerStatus('stopped')
                     audio.unloadAsync()
-                    setAudio(null)
                 }
             }
         }
         playerControl()
     },[status, currentIndex])
+
 
     return (
         <Animated.View
