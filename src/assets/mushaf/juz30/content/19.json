@@ -227,9 +227,9 @@
     "coord": [
       {
         "key": "101:7:1",
-        "top": 36.95,
-        "right": 80,
-        "width": 12,
+        "top": 42.05,
+        "right": 49,
+        "width": 43,
         "height": 4.7
       }
     ],
@@ -238,9 +238,59 @@
       "invisible": [
         {
           "key": "101:7:1",
-          "top": 36.95,
-          "right": 80,
-          "width": 12,
+          "top": 42.05,
+          "right": 49,
+          "width": 43,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "599-10",
+    "verse": "101:8",
+    "coord": [
+      {
+        "key": "101:8:1",
+        "top": 47.15,
+        "right": 5,
+        "width": 43,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [],
+      "invisible": [
+        {
+          "key": "101:8:1",
+          "top": 47.15,
+          "right": 5,
+          "width": 43,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "599-11",
+    "verse": "101:9",
+    "coord": [
+      {
+        "key": "101:9:1",
+        "top": 47.15,
+        "right": 55,
+        "width": 40,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [],
+      "invisible": [
+        {
+          "key": "101:9:1",
+          "top": 47.15,
+          "right": 55,
+          "width": 40,
           "height": 4.7
         }
       ]
