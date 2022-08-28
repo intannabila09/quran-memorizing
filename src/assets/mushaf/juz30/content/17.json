@@ -1,0 +1,141 @@
+[
+  {
+    "key": "597-1",
+    "verse": "97:1",
+    "coord": [
+      {
+        "key": "97:1:1",
+        "top": 21.6,
+        "right": 3,
+        "width": 39,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [],
+      "invisible": [
+        {
+          "key": "97:1:1",
+          "top": 21.6,
+          "right": 3,
+          "width": 39,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "597-2",
+    "verse": "97:2",
+    "coord": [
+      {
+        "key": "97:2:1",
+        "top": 21.6,
+        "right": 48,
+        "width": 38.8,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [],
+      "invisible": [
+        {
+          "key": "97:2:1",
+          "top": 21.6,
+          "right": 48,
+          "width": 38.8,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "597-3",
+    "verse": "97:3",
+    "coord": [
+      {
+        "key": "97:3:1",
+        "top": 26.7,
+        "right": 3,
+        "width": 46,
+        "height": 4.78
+      }
+    ],
+    "covers": {
+      "firstWord": [],
+      "invisible": [
+        {
+          "key": "97:3:1",
+          "top": 26.7,
+          "right": 3,
+          "width": 46,
+          "height": 4.78
+        }
+      ]
+    }
+  },
+  {
+    "key": "597-4",
+    "verse": "97:4",
+    "coord": [
+      {
+        "key": "97:4:1",
+        "top": 26.7,
+        "right": 55,
+        "width": 38,
+        "height": 4.78
+      },
+      {
+        "key": "97:4:2",
+        "top": 31.8,
+        "right": 3,
+        "width": 39.8,
+        "height": 4.78
+      }
+    ],
+    "covers": {
+      "firstWord": [],
+      "invisible": [
+        {
+          "key": "97:4:1",
+          "top": 26.7,
+          "right": 55,
+          "width": 38,
+          "height": 4.78
+        },
+        {
+          "key": "97:4:2",
+          "top": 31.8,
+          "right": 3,
+          "width": 39.8,
+          "height": 4.78
+        }
+      ]
+    }
+  },
+  {
+    "key": "597-5",
+    "verse": "97:5",
+    "coord": [
+      {
+        "key": "97:5:1",
+        "top": 31.8,
+        "right": 48.45,
+        "width": 39,
+        "height": 4.78
+      }
+    ],
+    "covers": {
+      "firstWord": [],
+      "invisible": [
+        {
+          "key": "97:5:1",
+          "top": 31.8,
+          "right": 48.45,
+          "width": 39,
+          "height": 4.78
+        }
+      ]
+    }
+  }
+]
