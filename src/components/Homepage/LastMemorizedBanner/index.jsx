@@ -3,11 +3,32 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import Quran from 'assets/Quran.png'
+import { useEffect, useState } from 'react';
+import { useUserData } from 'context/UserDataContext';
+import { useIsFocused } from '@react-navigation/native'
 
 const LastMemorizedBanner = ({
     style,
     navigation
 }) => {
+    const { userDataState } = useUserData()
+    const { memorizationHistory } = userDataState
+    const isFocused = useIsFocused()
+    
+    const [lastMemorized,setLastMemorized] = useState({
+        surah: 'Al-Fatihah',
+        ayah: 1,
+    })
+
+    useEffect(() => {
+        if (memorizationHistory && memorizationHistory.length > 0) {
+            setLastMemorized({
+                surah: memorizationHistory[0].surahName,
+                ayah: memorizationHistory[0].ayahNumber,
+            })
+        }
+    },[memorizationHistory, isFocused])
+
     return (
         <LinearGradient
             colors={['#1FD365', '#00B145']}
@@ -38,10 +59,10 @@ const LastMemorizedBanner = ({
                 </View>
                 <View style={{ marginTop: 8 }}>
                     <Text style={{ fontSize: 28, color: '#FFFFFF', fontWeight: '600' }}>
-                        Al-Fatihah
+                        {lastMemorized.surah}
                     </Text>
                     <Text style={{ fontSize: 20, color: 'rgba(255,255,255,0.75)' }}>
-                        Ayat 1
+                        Ayat {lastMemorized.ayah}
                     </Text>
                 </View>
                 <TouchableOpacity

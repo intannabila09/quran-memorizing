@@ -119,7 +119,10 @@ const UpperSection = ({ navigation }) => {
                     <TouchableOpacity>
                         <Ionicons name="settings" size={20} color="#CCCCCC" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ marginLeft: 24}}>
+                    <TouchableOpacity
+                        style={{ marginLeft: 24}}
+                        onPress={() => navigation.navigate('Notes')}
+                    >
                         <FontAwesome name="file-text" size={20} color="#CCCCCC" />
                     </TouchableOpacity>
                 </View>

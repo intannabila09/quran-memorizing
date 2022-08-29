@@ -9,6 +9,7 @@ import InputByJuz from 'screens/Onboarding/InputMemorization/InputByJuz';
 import { OnBoardingProvider } from './context/OnBoardingContext';
 import InputBySurah from 'screens/Onboarding/InputMemorization/InputBySurah';
 import PersonalizationConfig from 'screens/Onboarding/PersonalizationConfig';
+import Notes from 'screens/Notes';
 
 import Homepage from 'screens/Homepage';
 import MemorizationProgress from 'screens/Progress';
@@ -51,6 +52,7 @@ const App = () => {
       })
       return setLoading(false)
     } catch (e) {
+      setLoading(false)
       console.log(e)
     }
   }
@@ -83,6 +85,8 @@ const App = () => {
               <Stack.Screen name="MemorizationProgress" component={MemorizationProgress} />
               {/* Mushaf */}
               <Stack.Screen name="Mushaf" component={Mushaf} />
+              {/* Notes */}
+              <Stack.Screen name="Notes" component={Notes} />
         </Stack.Navigator>
       </NavigationContainer>
   );

@@ -15,6 +15,10 @@ import PlayerProvider from 'context/PlayerContext'
 import AudioConfig from 'components/BottomSheet/AudioConfig'
 import AddNoteModalContent from 'components/BottomSheet/AddNote'
 
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useOnBoardingState } from 'context/OnBoardingContext';
+import _ from 'lodash'
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#f8f5e9',
@@ -59,8 +63,11 @@ const Mushaf = ({ navigation }) => {
 
     const { mushafState, dispatch } = useMushafState()
     const { selectedAyah } = mushafState
-    const { userDataState } = useUserData()
+    const { userDataState, dispatch: userDataDispatch } = useUserData()
     const { memorized } = userDataState
+
+    // OnBoarding State
+    const {onBoardingState, dispatch: onBoardingDispatch} = useOnBoardingState()
 
     const handleSnapChange = (index) => {
         if (index === -1) return setAyahMenuVisible(false)
@@ -111,6 +118,33 @@ const Mushaf = ({ navigation }) => {
         setTargetAyah(target)
         setAddNoteVisible(true)
     }
+
+    useEffect(() => {
+        const handleIgnoreOnboarding = async () => {
+            const { initialUsage, ...resProps } = onBoardingState
+            const newUserData = {
+                ...resProps,
+                memorizationHistory: [],
+                memorized: {
+                    juz: {},
+                    surah: {},
+                },
+                notes: {},
+            }
+            await AsyncStorage.setItem("userPreferences", JSON.stringify(newUserData))
+            onBoardingDispatch({
+                type: 'SET_ONBOARDING_STATUS',
+                payload: false
+            })
+            userDataDispatch({
+                action: 'SET_USER_DATA',
+                payload: newUserData
+            })
+        }
+        if (_.isEmpty(userDataState)) {
+            handleIgnoreOnboarding()
+        }
+    },[userDataState])
 
     useEffect(() => {
         toggleMenu(!showMenu)
