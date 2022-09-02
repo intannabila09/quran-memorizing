@@ -7,7 +7,7 @@
         "key": "89:1:1",
         "top": 21.6,
         "right": 6.2,
-        "width": 39,
+        "width": 12,
         "height": 4.7
       }
     ],
@@ -18,10 +18,37 @@
           "key": "98:1:1",
           "top": 21.6,
           "right": 6.2,
-          "width": 39,
+          "width": 12,
           "height": 4.7
         }
       ]
+    }
+  },
+  {
+    "key": "592-2",
+    "verse": "89:2",
+    "coord": [],
+    "covers": {
+      "firstWord": [],
+      "invisible": []
+    }
+  },
+  {
+    "key": "592-3",
+    "verse": "89:3",
+    "coord": [],
+    "covers": {
+      "firstWord": [],
+      "invisible": []
+    }
+  },
+  {
+    "key": "592-4",
+    "verse": "89:4",
+    "coord": [],
+    "covers": {
+      "firstWord": [],
+      "invisible": []
     }
   }
 ]
