@@ -5,9 +5,9 @@
     "coord": [
       {
         "key": "97:1:1",
-        "top": 21.6,
-        "right": 3,
-        "width": 39,
+        "top": 11.4,
+        "right": 2,
+        "width": 39.8,
         "height": 4.7
       }
     ],
@@ -16,9 +16,9 @@
       "invisible": [
         {
           "key": "97:1:1",
-          "top": 21.6,
-          "right": 3,
-          "width": 39,
+          "top": 11.4,
+          "right": 2,
+          "width": 39.8,
           "height": 4.7
         }
       ]
