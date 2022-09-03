@@ -1,12 +1,12 @@
 [
   {
     "key": "583-1",
-    "verse": "97:1",
+    "verse": "79:1",
     "coord": [
       {
-        "key": "97:1:1",
-        "top": 21.6,
-        "right": 3,
+        "key": "79:1:1",
+        "top": 11.4,
+        "right": 2,
         "width": 39,
         "height": 4.7
       }
@@ -15,9 +15,9 @@
       "firstWord": [],
       "invisible": [
         {
-          "key": "97:1:1",
-          "top": 21.6,
-          "right": 3,
+          "key": "79:1:1",
+          "top": 11.4,
+          "right": 2,
           "width": 39,
           "height": 4.7
         }
