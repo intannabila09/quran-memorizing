@@ -13,6 +13,7 @@ const MushafContext = createContext({})
 const initialMushafState = {
     count: 0,
     maxCount: 40,
+    counterRound: 0,
     duration: TikrarDuration[0].ms,
     selectedAyah: null,
     remainingDuration: 0,
@@ -44,12 +45,16 @@ const MushafStateReducer = (
         case 'ADD_COUNT':
             return {
                 ...state,
-                count: state.count === state.maxCount ? 0 : state.count + 1,
+                count: state.count === Number(state.maxCount) ? 0 : state.count + 1,
+                ...(Number(state.maxCount) === state.count && {
+                    counterRound: state.counterRound + 1
+                })
             }
         case 'RESET_COUNT':
             return {
                 ...state,
                 count: 0,
+                counterRound: 0
             }
 
         case 'TOGGLE_TIMER_STATE':

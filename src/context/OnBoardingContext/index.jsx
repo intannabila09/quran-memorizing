@@ -99,8 +99,8 @@ export const OnBoardingProvider = ({ children }) => {
         {
             personalization: {
                 ayahVisibility: 'firstWord',
-                tikrarMethod: 'duration',
-                tikrarMethodImplementation: '1min',
+                tikrarMethod: 'count',
+                tikrarMethodImplementation: '10',
             },
             memorized: {
                 juz: [],

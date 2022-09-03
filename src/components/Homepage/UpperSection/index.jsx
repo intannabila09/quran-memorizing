@@ -117,13 +117,13 @@ const UpperSection = ({ navigation }) => {
                 <Text style={{ fontSize: 14, fontWeight: '500', color: '#939393'}}>Pencapaian Hafalan</Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center'}}>
                     <TouchableOpacity>
-                        <Ionicons name="settings" size={20} color="#CCCCCC" />
+                        <Ionicons name="settings" size={20} color="#454545" />
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={{ marginLeft: 24}}
                         onPress={() => navigation.navigate('Notes')}
                     >
-                        <FontAwesome name="file-text" size={20} color="#CCCCCC" />
+                        <FontAwesome name="file-text" size={20} color="#454545" />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -207,30 +207,33 @@ const UpperSection = ({ navigation }) => {
                     </View>
                 )
             }
-            <View style={{ marginTop: 20 }}>
+            <View style={{
+                marginTop: 20,
+                borderBottomWidth: 1,
+                paddingBottom: 16,
+                borderBottomColor: '#EEEDED'
+            }}>
                 <TouchableOpacity
                     style={{
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'center',
                         padding: 12,
-                        backgroundColor: '#FFFFFF',
-                        borderWidth: 1,
-                        borderColor: '#E4E4E4',
-                        borderRadius: 8,
+                        backgroundColor: '#2E2E2E',
+                        borderRadius: 12,
                     }}
                     onPress={() => navigation.navigate('MemorizationProgress')}
                 >
                     <Text
                         style={{
                             marginRight: 8,
-                            color: '#484848',
-                            fontWeight: '500'
+                            color: '#FFFFFF',
+                            fontWeight: '600',
                         }}
                     >
-                        Lihat seluruh progress hafalan
+                        Lihat Seluruh Progress Menghafal
                     </Text>
-                    <FontAwesome name="angle-right" size={14} color="#484848" />
+                    {/* <FontAwesome name="angle-right" size={20} color="#FFFFFF" /> */}
                 </TouchableOpacity>
             </View>
             <View>
