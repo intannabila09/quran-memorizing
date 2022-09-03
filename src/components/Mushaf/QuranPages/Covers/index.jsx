@@ -18,7 +18,7 @@ const AyahCovers = ({
             }} 
         >
             {/* START – USED DURING DEVELOPMENT ONLY */}
-            {/* {
+            {
                 firstWords.length > 0
                 && firstWords.map((item) => {
                     const {
@@ -65,7 +65,7 @@ const AyahCovers = ({
                         />
                     )
                 })
-            } */}
+            }
             {/* END – USED DURING DEVELOPMENT ONLY*/}
             {
                 covers.length > 0

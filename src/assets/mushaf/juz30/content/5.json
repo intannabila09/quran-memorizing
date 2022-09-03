@@ -1,0 +1,27 @@
+[
+  {
+    "key": "585-1",
+    "verse": "81:1",
+    "coord": [
+      {
+        "key": "81:1:1",
+        "top": 21.6,
+        "right": 2,
+        "width": 39,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [],
+      "invisible": [
+        {
+          "key": "81:1:1",
+          "top": 21.6,
+          "right": 2,
+          "width": 39,
+          "height": 4.7
+        }
+      ]
+    }
+  }
+]
