@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, StyleSheet, Text, Platform, TouchableOpacity } from "react-native"
+import { View, StyleSheet, Text, Platform, TouchableOpacity, Switch } from "react-native"
 import { SurahItems } from "utils/constants";
 import { useMushafState } from "context/MushafContext";
 import AyahMenuButton from "components/Buttons/AyahMenuButton";
@@ -157,12 +157,12 @@ Surah ${surah.name.id}:${ayah.number}
     }
     
     const AYAH_MENU_ITEMS = (memorized) => [
-        {
-            key: 'memorize',
-            label: `${memorized ? 'Tandai Belum Hafal' : 'Tandai Sudah Hafal'}`,
-            icon: !memorized ? <FontAwesome name="check-square-o" size={16} color="black" /> : <FontAwesome name="times-circle-o" size={16} color="black" />,
-            action: memorized ? unmemorizeAyah : memorizeAyah
-        },
+        // {
+        //     key: 'memorize',
+        //     label: `${memorized ? 'Tandai Belum Hafal' : 'Tandai Sudah Hafal'}`,
+        //     icon: !memorized ? <FontAwesome name="check-square-o" size={16} color="black" /> : <FontAwesome name="times-circle-o" size={16} color="black" />,
+        //     action: memorized ? unmemorizeAyah : memorizeAyah
+        // },
         {
             key: 'copy',
             label: 'Salin Ayat',
@@ -194,8 +194,8 @@ Surah ${surah.name.id}:${ayah.number}
         <View style={styles.container}>     
             <View
                 style={{
-                    paddingVertical: 16,
-                    paddingBottom: os === 'ios' ? 20 : 12,
+                    paddingTop: 16,
+                    // paddingBottom: os === 'ios' ? 20 : 12,
                     flexDirection: "row",
                     alignItems: os === 'ios' ? 'center' : 'flex-start',
                     justifyContent: 'space-between',
@@ -203,7 +203,7 @@ Surah ${surah.name.id}:${ayah.number}
             >
                 <View>
                     <Text style={{ fontSize: 18, fontWeight: "700"}}>{`${activeAyah['surahNumber']}. ${activeAyah['surahName']}: ${activeAyah['ayah']}`}</Text>
-                    {
+                    {/* {
                         os === 'android' && (
                             <View
                                 style={{
@@ -221,9 +221,9 @@ Surah ${surah.name.id}:${ayah.number}
                                 </Text>
                             </View>
                         )
-                    }
+                    } */}
                 </View>
-                {
+                {/* {
                     os === 'ios' && (
                         <View
                             style={{
@@ -240,7 +240,7 @@ Surah ${surah.name.id}:${ayah.number}
                             </Text>
                         </View>
                     )
-                }
+                } */}
                 {
                     os === 'android' && (
                         <TouchableOpacity
@@ -255,6 +255,43 @@ Surah ${surah.name.id}:${ayah.number}
                 }
             </View>
             <View>
+                <View
+                    style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        marginBottom: 12,
+                    }}
+                >
+                    <View
+                        style={{
+                            borderWidth: 1,
+                            paddingVertical: 4,
+                            paddingHorizontal: 12,
+                            borderRadius: 999,
+                            borderColor: memorized ? "#86efac" : "#e2e8f0",
+                            backgroundColor: memorized ? "#dcfce7" : "#f1f5f9",
+                            marginTop: 8
+                        }}
+                    >
+                        <Text style={{ fontWeight: "700", fontSize: 14, color: memorized ? "#16a34a" : "#475569", textAlign: 'center'}}>
+                            {memorized ? 'Sudah Hafal' : 'Belum Hafal'}
+                        </Text>
+                    </View>
+                    <Switch
+                        trackColor={{ false: '#767577', true: '#16a34a' }}
+                        // thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={() => {
+                            if (memorized) {
+                                unmemorizeAyah(selectedAyah)
+                            } else {
+                                memorizeAyah(selectedAyah)
+                            }
+                        }}
+                        value={memorized}
+                    />
+                </View>
                 {AYAH_MENU_ITEMS(memorized).map(item => {
                     return (
                         <AyahMenuButton
