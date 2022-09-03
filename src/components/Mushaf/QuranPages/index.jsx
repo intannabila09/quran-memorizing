@@ -156,15 +156,20 @@ const QuranPages = ({
   return (
     <SafeAreaView>
       <FlatList
+        style={{
+          // height: '50%',
+          // aspectRatio: 0.506,
+          position: 'relative'
+        }}
         ref={flatListRef}
         viewabilityConfig={viewConfigRef.current}
         onViewableItemsChanged={onViewChanged.current}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
         pagingEnabled={true}
-        snapToInterval={width}
-        snapToAlignment={"center"}
-        decelerationRate={0}
+        // snapToInterval={width}
+        // snapToAlignment={"center"}
+        // decelerationRate={0}
         data={pages}
         keyExtractor={(item) => item.toString()}
         renderItem={(page) => {

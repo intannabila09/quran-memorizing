@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#f8f5e9',
         width: '100%',
-        height: '100%',
+        // height: '100%',
         position: 'relative',
         // justifyContent: 'center'
     }
@@ -87,7 +87,7 @@ const Mushaf = ({ navigation }) => {
 
     const toggleMenu = (menuVisible) => {
         Animated.timing(bottomMenuPosition, {
-            toValue: menuVisible ? -100 : OS === 'ios' ? 15 : 32,
+            toValue: menuVisible ? -150 : OS === 'ios' ? -28 : 5,
             duration: 200,
             useNativeDriver: false,
         }).start()
