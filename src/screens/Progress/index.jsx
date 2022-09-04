@@ -7,7 +7,7 @@ import JuzProgressList from 'components/Progress/Juz'
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 20,
+        paddingHorizontal: 12,
         paddingVertical: 16,
         backgroundColor: '#FFFFFF',
         paddingBottom: 40,
@@ -86,7 +86,7 @@ const MemorizationProgress = ({ navigation }) => {
                             >
                                 <FontAwesome name="sort-amount-desc" size={12} color="#717171" />
                                 <Text style={{ marginLeft: 8, color: '#717171' }}>
-                                    Berdasarkan {sortParam === 'number' ? 'Nomor' : 'Progress'}
+                                    Berdasarkan {sortParam === 'number' ? 'Progress' : 'Nomor'}
                                 </Text>
                             </TouchableOpacity>
                         </View>
