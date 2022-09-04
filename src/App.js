@@ -10,6 +10,7 @@ import { OnBoardingProvider } from './context/OnBoardingContext';
 import InputBySurah from 'screens/Onboarding/InputMemorization/InputBySurah';
 import PersonalizationConfig from 'screens/Onboarding/PersonalizationConfig';
 import Notes from 'screens/Notes';
+import Setting from 'screens/Setting';
 
 import Homepage from 'screens/Homepage';
 import MemorizationProgress from 'screens/Progress';
@@ -87,6 +88,8 @@ const App = () => {
               <Stack.Screen name="Mushaf" component={Mushaf} />
               {/* Notes */}
               <Stack.Screen name="Notes" component={Notes} />
+              {/* Setting */}
+              <Stack.Screen name="Setting" component={Setting} />
         </Stack.Navigator>
       </NavigationContainer>
   );
