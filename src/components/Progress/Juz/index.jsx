@@ -15,7 +15,7 @@ const JuzProgressList = ({
 
     useEffect(() => {
         if (userDataState?.memorized?.juz) {
-            const newJuzList = JuzItems.reduce((acc,cur) => {
+            let newJuzList = JuzItems.reduce((acc,cur) => {
                 const memorized =
                     userDataState.memorized.juz[cur.id.replace(/^juz/,'')] || 0
                 return [
@@ -26,11 +26,28 @@ const JuzProgressList = ({
                     }
                 ]
             },[])
+            if (sortParam && sortParam === 'progress' ) {
+                newJuzList = newJuzList.reduce((acc,cur) => {
+                    if (cur.memorized > 0) {
+                        acc.memorized.push(cur)
+                    } else {
+                        acc.unmemorized.push(cur)
+                    }
+                    return acc
+                }, {
+                    memorized: [],
+                    unmemorized: [],
+                })
+                newJuzList = [
+                    ...newJuzList.memorized,
+                    ...newJuzList.unmemorized
+                ]
+            }
             setJuzList(newJuzList)
         } else {
             setJuzList(JuzItems)
         }
-    },[userDataState])
+    },[userDataState, sortParam])
 
     return (
         <View style={{ backgroundColor: '#FFFFFF'}}>
