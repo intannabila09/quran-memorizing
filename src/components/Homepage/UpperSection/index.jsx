@@ -116,11 +116,15 @@ const UpperSection = ({ navigation }) => {
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <Text style={{ fontSize: 14, fontWeight: '500', color: '#939393'}}>Pencapaian Hafalan</Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate('Setting')}
-                    >
-                        <Ionicons name="settings" size={20} color="#454545" />
-                    </TouchableOpacity>
+                    {
+                        !onBoardingState?.initialUsage && (
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate('Setting')}
+                            >
+                                <Ionicons name="settings" size={20} color="#454545" />
+                            </TouchableOpacity>
+                        )
+                    }
                     <TouchableOpacity
                         style={{ marginLeft: 24}}
                         onPress={() => navigation.navigate('Notes')}

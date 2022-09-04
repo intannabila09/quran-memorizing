@@ -8,7 +8,7 @@ import { useUserData } from 'context/UserDataContext'
 const renderList = (juz) => <ProgressJuzItem juz={juz} />
 
 const JuzProgressList = ({
-    sortBy = 'number',
+    sortParam = 'number',
 }) => {
     const [juzList,setJuzList] = useState([])
     const { userDataState } = useUserData()

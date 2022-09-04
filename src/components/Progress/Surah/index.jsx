@@ -15,7 +15,7 @@ const generateSurahNameAliases = (surahName) => {
 }
 
 const SurahProgressList = ({
-    sortBy = 'number',
+    sortParam = 'number',
     search = null,
 }) => {
     const [surahList,setSurahList] = useState([]);

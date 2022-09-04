@@ -27,7 +27,7 @@ const LowerSection = () => {
             />
             <MemorizationHistory />
             {/* DELETE IN PRODUCTION */}
-            <View style={{ marginTop: 16}}>
+            {/* <View style={{ marginTop: 16}}>
                 <TouchableOpacity
                     style={{
                         padding: 12,
@@ -48,8 +48,8 @@ const LowerSection = () => {
                         textAlign: 'center',
                         fontWeight: "500"
                     }}>Delete Storage</Text>
-                </TouchableOpacity>
-            </View>
+                </TouchableOpacity> */}
+            {/* </View> */}
         </View>
     )
 }

@@ -42,8 +42,8 @@ const RenderPage = ({
     page = {},
     activePage = null,
     // START – DEVELOPMENT VARIABLES
-    firstWordCovers = [],
-    invisibleCovers = [],
+    // firstWordCovers = [],
+    // invisibleCovers = [],
     // END – DEVELOPMENT VARIABLES
 }) => {
     return (
@@ -85,8 +85,8 @@ const RenderPage = ({
                     <AyahCovers
                         covers={covers}
                         // START – DEVELOPMENT VARIABLES
-                        firstWords={firstWordCovers}
-                        invisibles={invisibleCovers}
+                        // firstWords={firstWordCovers}
+                        // invisibles={invisibleCovers}
                         // END – DEVELOPMENT VARIABLES
                     />
                 </ImageBackground>
