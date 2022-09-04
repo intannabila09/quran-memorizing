@@ -23,7 +23,7 @@ const SurahProgressList = ({
 
     useEffect(() => {
         if (userDataState?.memorized?.surah) {
-            const newSurahList = SurahItems.reduce((acc,cur) => {
+            let newSurahList = SurahItems.reduce((acc,cur) => {
                 const memorized = 
                     userDataState.memorized.surah[cur.no] ?
                         userDataState.memorized.surah[cur.no].length : 0
@@ -35,11 +35,28 @@ const SurahProgressList = ({
                     }
                 ]
             }, [])
+            if (sortParam && sortParam === 'progress') {
+                newSurahList = newSurahList.reduce((acc,cur) => {
+                    if (cur.memorized > 0) {
+                        acc.memorized.push(cur)
+                    } else {
+                        acc.unmemorized.push(cur)
+                    }
+                    return acc
+                }, {
+                    memorized: [],
+                    unmemorized: []
+                })
+                newSurahList = [
+                    ...newSurahList.memorized,
+                    ...newSurahList.unmemorized,
+                ]
+            }
             setSurahList(newSurahList)
         } else {
             setSurahList(SurahItems)
         }
-    },[userDataState])
+    },[userDataState, sortParam])
 
     return (
         <View style={{ backgroundColor: '#FFFFFF'}}>
