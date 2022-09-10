@@ -19,7 +19,7 @@ const FindSurah = ({
     const [query, setQuery] = useState(null)
 
     const surahData = useMemo(() => {
-        if (!query) return SurahItems.reverse()
+        if (!query) return SurahItems
         else return SurahItems.map((surah) => {
             const surahName = String(surah.name).toLowerCase()
             const aliases = [
@@ -30,7 +30,7 @@ const FindSurah = ({
             ]
             if (aliases.some(alias => alias.includes(query.toLowerCase()))) return surah 
             else return null
-        }).filter((surah) => !!surah).reverse()
+        }).filter((surah) => !!surah)
     },[query])
 
     if (visible) {

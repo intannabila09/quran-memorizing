@@ -91,8 +91,6 @@ const AddNoteModalContent = ({
 
     useEffect(() => {
         if (targetContent) {
-            console.log(targetContent.surahNumber)
-            console.log(targetContent.ayahNumber)
             if (
                 userDataState.notes[targetContent.surahNumber]
                 && userDataState.notes[targetContent.surahNumber][targetContent.ayahNumber]

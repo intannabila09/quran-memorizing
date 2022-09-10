@@ -186,6 +186,7 @@ Surah ${surah.name.id}:${ayah.number}
     useEffect(() => {
         if (selectedAyah) {
             const [surahIndex,ayahNumber] = selectedAyah.split(":")
+            
             setActiveAyah({ surahNumber: SurahItems[surahIndex-1].no, surahName: SurahItems[surahIndex-1].name, ayah: ayahNumber })
         }
     },[selectedAyah])

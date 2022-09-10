@@ -1,6 +1,7 @@
 import { registerRootComponent } from 'expo';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import FlashMessage from "react-native-flash-message";
 
 // Screen
 import WelcomeScreen from 'screens/Onboarding/WelcomeScreen';
@@ -100,6 +101,7 @@ const AppWrapper = () => {
     <UserDataProvider>
       <OnBoardingProvider>
         <App />
+        <FlashMessage position="bottom" />
       </OnBoardingProvider>
     </UserDataProvider>
   )
