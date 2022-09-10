@@ -151,6 +151,7 @@ const UpperSection = ({ navigation }) => {
                     total={lastMemorizedData.totalAyahInJuz}
                     juz={lastMemorizedData.juzName}
                     style={{ flexGrow: 1 }}
+                    navigation={navigation}
                 />
                 <View style={{  paddingLeft: 16, borderLeftWidth: 1, borderLeftColor: '#EEEDED', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 16, fontWeight: '600'}}>

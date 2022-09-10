@@ -8,9 +8,12 @@ import ProgressSurahItem from './Item'
 const renderList = (surah) => <ProgressSurahItem surah={surah} />
 
 const generateSurahNameAliases = (surahName) => {
+    const surahNameLower = String(surahName).toLowerCase()
     return [
-        surahName.toLowerCase(),
-        surahName.toLowerCase().replace(/[^a-z]/gi, ''),
+        surahNameLower,
+        surahNameLower.replace('-',''),
+        surahNameLower.replace('-', ' '),
+        surahNameLower.replace(/'/g, ''),
     ]
 }
 
