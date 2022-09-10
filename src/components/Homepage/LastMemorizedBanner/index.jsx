@@ -17,7 +17,7 @@ const LastMemorizedBanner = ({
     const isFocused = useIsFocused()
     
     const [lastMemorized,setLastMemorized] = useState({
-        surah: 'Al-Fatihah',
+        surah: 'An-Nas',
         ayah: 1,
     })
 

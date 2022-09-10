@@ -195,7 +195,7 @@ const Mushaf = ({ route, navigation }) => {
                                 memorized={(() => {
                                     if (selectedAyah) {
                                         const [surahIndex,ayahNumber] = selectedAyah.split(':')
-                                        if (memorized.surah[surahIndex]) return memorized.surah[surahIndex].includes(ayahNumber)
+                                        if (memorized.surah[surahIndex]) return memorized.surah[surahIndex].includes(Number(ayahNumber))
                                         else return false
                                     }
                                     return false
