@@ -133,14 +133,14 @@ const QuranPages = ({
   }, []);
 
   // Scroll to page
-  // useEffect(() => {
-  //   if (pageIndex) {
-  //     flatListRef.current.scrollToIndex({
-  //       index: pageIndex,
-  //       animated: false,
-  //     });
-  //   }
-  // },[pageIndex])
+  useEffect(() => {
+    if (typeof pageIndex === "number") {
+      flatListRef.current.scrollToIndex({
+        index: pageIndex,
+        animated: false,
+      });
+    }
+  },[pageIndex])
 
   // START – DEVELOPMENT VARIABLES
   // useEffect(() => {

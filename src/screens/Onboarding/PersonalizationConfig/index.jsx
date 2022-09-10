@@ -131,6 +131,10 @@ const PersonalizationConfig = ({ navigation }) => {
                     },{})
             }
 
+            if (resProps.memorized.surah.length === 0 && resProps.memorized.juz.length === 0) {
+                console.log('remove memorization history')
+            }
+
             await AsyncStorage.setItem(
                 'userPreferences',
                 JSON.stringify({

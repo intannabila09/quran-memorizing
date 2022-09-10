@@ -109,6 +109,17 @@ const UpperSection = ({ navigation }) => {
                     totalMemorizedInQuran: totalMemorizedInQuran
                 })
             }
+        } else {
+            setLastMemorizedData({
+                surahName: 'An-Nas',
+                memorizedAyah: 0,
+                totalAyah: 6,
+                juzName: 'Juz 30',
+                memorizedAyahInJuz: 0,
+                totalAyahInJuz: 564,
+                totalMemorizedInQuran: 0,
+                page: 0,
+            })
         }
     },[isFocused])
 

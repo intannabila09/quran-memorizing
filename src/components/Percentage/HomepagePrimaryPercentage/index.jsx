@@ -10,7 +10,7 @@ const HomepagePrimaryPercentage = ({
     page,
 }) => {
     const navigateToSurah = (target) => {
-        if (!target) return
+        if (typeof target !== 'number') return
         navigation.navigate('Mushaf', { pageIndex: Number(target) })
     }
     return (

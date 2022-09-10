@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 0,
         flexDirection: 'row',
         alignItems: 'center',
-        // justifyContent: 'space-between',
         paddingLeft: 12,
         flexGrow: 1,
+        width: '80%'
     }
 })
 
@@ -30,7 +30,7 @@ const TikrarCount = () => {
                 <TouchableOpacity
                     style={{
                         backgroundColor: '#FFFFFF',
-                        flexGrow: 0,
+                        flexGrow: 1,
                         width: 32,
                         height: 32,
                         alignItems: 'center',
@@ -52,6 +52,7 @@ const TikrarCount = () => {
                         borderColor: '#EEEEEE',
                         marginLeft: 8,
                         flexGrow: 19,
+                        position: 'relative'
                     }}
                 >
                     <View
@@ -86,7 +87,7 @@ const TikrarCount = () => {
                         paddingHorizontal: 8,
                         borderRadius: 999,
                         backgroundColor: '#16a34a',
-                        marginRight: 28,
+                        marginRight: 8,
                     }}
                 >
                     <Text style={{ color: '#FFFFFF', fontWeight: '600' }}>

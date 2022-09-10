@@ -3,11 +3,15 @@ import TextButton from 'components/Buttons/TextButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
 import AccentPattern from 'assets/accent-pattern.png'
 import CheckableListInput from 'components/CheckableListInput'
+import { useUserData } from 'context/UserDataContext'
 
 import { JuzItems } from 'utils/constants'
 import JuzInputListItem from 'components/JuzInputListItem';
 
-import { useOnBoardingState } from '../../../../context/OnBoardingContext'
+import { useOnBoardingState } from 'context/OnBoardingContext'
+
+import { useEffect } from 'react'
+import _ from 'lodash'
 
 const styles = StyleSheet.create({
     container: {
@@ -25,6 +29,8 @@ const styles = StyleSheet.create({
 
 const InputByJuz = ({ navigation }) => {
     const { onBoardingState, dispatch } = useOnBoardingState()
+    const { userDataState } = useUserData()
+
     const renderJuzItem = (juz) => {
         return (
             <JuzInputListItem
@@ -51,6 +57,28 @@ const InputByJuz = ({ navigation }) => {
             />
         )
     }
+
+    useEffect(() => {
+        const populateOnBoardingData = () => {
+            const initialUsage = _.isEmpty(userDataState)
+            if (!initialUsage) {
+                const memorizedJuz = Object.keys(userDataState?.memorized?.juz).map((juz) => {
+                    if (
+                        userDataState?.memorized?.juz[juz] ===
+                        JuzItems[String(Number(juz) - 1)]?.numberOfAyah
+                    ) return juz
+                    return null
+                }).filter((juz) => !!juz)
+                .map((item) => `juz${item}`)
+                dispatch({
+                    action: 'ADD_BULK_JUZ',
+                    payload: memorizedJuz
+                })
+            }
+        }
+
+        populateOnBoardingData()
+    },[])
 
     return (
         <View style={styles.container}>

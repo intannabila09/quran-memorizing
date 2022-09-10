@@ -23,9 +23,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#f8f5e9',
         width: '100%',
-        // height: '100%',
         position: 'relative',
-        // justifyContent: 'center'
     }
 })
 

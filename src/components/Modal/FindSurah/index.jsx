@@ -42,24 +42,19 @@ const FindSurah = ({
                     onRequestClose={() => {
                         setVisibility(false)
                     }}
+                    style={{
+                        position: 'relative'
+                    }}
                 >
-                    <Pressable
-                        style={{
-                            flex: 1,
-                            width: '100%',
-                            height: '100%',
-                            backgroundColor: 'rgba(0,0,0,0.5)',
-                            position: 'absolute',
-                        }}
-                        onPress={() => setVisibility(false)}
-                    >
-                    </Pressable>
                     <View
                         style={{
                             flex: 1,
                             justifyContent: 'center',
                             alignItems: 'center',
                             marginTop: 20,
+                            position: 'relative',
+                            zIndex: 999,
+                            elevation: 999
                         }}
                     >
                         <View
@@ -176,6 +171,21 @@ const FindSurah = ({
                             </View>
                         </View>
                     </View>
+                    <Pressable
+                        style={{
+                            flex: 1,
+                            width: '100%',
+                            height: '100%',
+                            backgroundColor: 'rgba(0,0,0,0.5)',
+                            position: 'absolute',
+                            zIndex: 100,
+                            elevation: 100,
+                        }}
+                        onPress={() => {
+                            setVisibility(false)
+                        }}
+                    >
+                    </Pressable>
                 </Modal>
         )
     } else return <></>

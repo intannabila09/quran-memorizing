@@ -17,7 +17,7 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigati
     },[activeSurah])
 
     const surahContent = useMemo(() => {
-        if (!activeSurah) return {}
+        // if (!activeSurah) return {}
         return SurahItems[String(Number(surah?.item?.no) - 1)]
     },[activeSurah])
 
@@ -27,6 +27,7 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigati
     },[active])
 
     const navigateToSurah = () => {
+        console.log(surahContent)
         if (!surahContent?.hasOwnProperty('page')) return showMessage({
             message: "Halaman yang diminta belum tersedia saat ini.",
             type: 'warning',
