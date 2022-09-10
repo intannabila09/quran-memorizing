@@ -11,10 +11,12 @@ const { width } = Dimensions.get("window");
 const QuranPages = ({
   showMenu,
   setShowMenu,
+  pageIndex,
   handleDisplayAyahMenu = () => {},
 }) => {
+  // console.log('renderer', initialJuz, initialPage)
   const [activeJuz, setActiveJuz] = useState(30);
-  const [pages] = useState([
+  const [pages, setPages] = useState([
     "23",
     "22",
     "21",
@@ -130,6 +132,16 @@ const QuranPages = ({
     }, 1000);
   }, []);
 
+  // Scroll to page
+  // useEffect(() => {
+  //   if (pageIndex) {
+  //     flatListRef.current.scrollToIndex({
+  //       index: pageIndex,
+  //       animated: false,
+  //     });
+  //   }
+  // },[pageIndex])
+
   // START – DEVELOPMENT VARIABLES
   // useEffect(() => {
   //   if (currentContent) {
@@ -167,11 +179,19 @@ const QuranPages = ({
         showsHorizontalScrollIndicator={false}
         horizontal={true}
         pagingEnabled={true}
+        getItemLayout={(data, index) => ({
+          length: width,
+          offset: width * index,
+          index,
+        })}
+        initialScrollIndex={pageIndex}
         // snapToInterval={width}
         // snapToAlignment={"center"}
         // decelerationRate={0}
         data={pages}
-        keyExtractor={(item) => item.toString()}
+        keyExtractor={(item) => {
+          return item;
+        }}
         renderItem={(page) => {
           if (!content) return <></>;
           return (

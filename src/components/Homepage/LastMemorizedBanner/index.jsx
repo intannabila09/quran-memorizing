@@ -31,7 +31,11 @@ const LastMemorizedBanner = ({
 
     return (
         <TouchableOpacity
-            onPress={() => navigation.navigate('Mushaf')}
+            onPress={() => {
+                navigation.navigate('Mushaf', {
+                    id: 'test'
+                })
+            }}
         >
             <LinearGradient
                 colors={['#1FD365', '#00B145']}

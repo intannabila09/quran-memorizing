@@ -36,7 +36,8 @@ const ForwardTranslationMenuContent = forwardRef((props, ref) => <TranslationMod
 const ForwardAudioConfig = forwardRef((props, ref) => <AudioConfig {...props} forwardedRef={ref} />)
 const ForwardAddNote = forwardRef((props, ref) => <AddNoteModalContent {...props} forwardedRef={ref} />)
 
-const Mushaf = ({ navigation }) => {
+const Mushaf = ({ route, navigation }) => {
+    const { pageIndex = 0 } = route.params || {}
     const [showMenu, setShowMenu] = useState(true)
     const bottomMenuPosition = useRef(new Animated.Value(0)).current
     const topMenuPosition = useRef(new Animated.Value(0)).current
@@ -172,6 +173,7 @@ const Mushaf = ({ navigation }) => {
                                 showMenu={showMenu}
                                 setShowMenu={setShowMenu}
                                 handleDisplayAyahMenu={handleDisplayAyahMenu}
+                                pageIndex={pageIndex}
                             />
                         </View>
                     <MushafMenuBar
@@ -256,11 +258,14 @@ const Mushaf = ({ navigation }) => {
     )
 }
 
-const MushafPage = ({ navigation }) => {
+const MushafPage = ({ route, navigation }) => {
     return (
         <MushafProvider>
             <PlayerProvider>
-                <Mushaf navigation={navigation} />
+                <Mushaf
+                    route={route}
+                    navigation={navigation}
+                />
             </PlayerProvider>
         </MushafProvider>
     )
