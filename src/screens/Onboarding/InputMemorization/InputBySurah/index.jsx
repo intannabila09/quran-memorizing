@@ -6,7 +6,10 @@ import PrimaryButton from 'components/Buttons/PrimaryButton'
 import CheckableListInput from 'components/CheckableListInput'
 import SurahInputListItem from 'components/SurahInputListItem'
 import { SurahItems } from 'utils/constants'
-import { useOnBoardingState } from '../../../../context/OnBoardingContext'
+import { useUserData } from 'context/UserDataContext'
+import { useOnBoardingState } from 'context/OnBoardingContext'
+import { useEffect } from 'react'
+import _ from 'lodash'
 
 const styles = StyleSheet.create({
     container: {
@@ -25,6 +28,9 @@ const styles = StyleSheet.create({
 
 const InputBySurah = ({ navigation }) => {
     const [activeSurah, setActiveSurah] = useState(null)
+
+    const { userDataState } = useUserData()
+    const { onBoardingState, dispatch } = useOnBoardingState()
     
     const renderSurahItem = (surah) => {
         return (
@@ -35,6 +41,29 @@ const InputBySurah = ({ navigation }) => {
             />
         )
     }
+    
+    useEffect(() => {
+        const populateOnBoardingData = () => {
+            const initialUsage = _.isEmpty(userDataState)
+            if (!initialUsage && !_.isEmpty(userDataState?.memorized?.surah)) {
+                const memorizedSurah = Object.keys(userDataState.memorized.surah)
+                .map((surahKey) => {
+                    return userDataState.memorized.surah[surahKey].map((ayah) => {
+                        return `${surahKey}:${ayah}`
+                    })
+                })
+                .reduce((acc,cur) => {
+                    return [...acc, ...cur]
+                },[])
+                dispatch({
+                    action: 'SET_MULTIPLE_SURAH_AND_AYAH',
+                    payload: memorizedSurah
+                })
+            }
+        }
+        populateOnBoardingData()
+    }, [])
+
     return (
         <>
         {Platform.OS === 'ios' && (

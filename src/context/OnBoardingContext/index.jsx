@@ -82,6 +82,14 @@ const OnBoardingStateReducer = (state,
                         surah: state.memorized.surah.filter(surah => surah !== `${payload.numberOfSurah}:${payload.numberOfAyah}`),
                     }
                 }
+            case 'SET_MULTIPLE_SURAH_AND_AYAH':
+                return {
+                    ...state,
+                    memorized: {
+                        juz: [],
+                        surah: payload
+                    }
+                }
             case 'SET_PERSONALIZATION':
                 return {
                     ...state,
