@@ -5,10 +5,11 @@ import { useUserData } from 'context/UserDataContext'
 
 import ProgressSurahItem from './Item'
 
-const renderList = (surah, active, setActive) => <ProgressSurahItem
+const renderList = (surah, active, setActive, navigation) => <ProgressSurahItem
         surah={surah}
         activeSurah={active}
         setActiveSurah={setActive}
+        navigation={navigation}
     />
 
 const generateSurahNameAliases = (surahName) => {
@@ -24,6 +25,7 @@ const generateSurahNameAliases = (surahName) => {
 const SurahProgressList = ({
     sortParam = 'number',
     search = null,
+    navigation,
 }) => {
     const [surahList,setSurahList] = useState([]);
     const {userDataState} = useUserData()
@@ -76,7 +78,7 @@ const SurahProgressList = ({
                             const aliases = generateSurahNameAliases(surah.name)
                             return aliases.some(alias => alias.includes(search.toLowerCase()))
                         })}
-                renderItem={surah => renderList(surah, activeSurah, setActiveSurah)}
+                renderItem={surah => renderList(surah, activeSurah, setActiveSurah, navigation)}
                 keyExtractor={item => item.id}
             />
         </View>

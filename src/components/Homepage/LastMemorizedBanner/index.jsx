@@ -6,6 +6,7 @@ import Quran from 'assets/Quran.png'
 import { useEffect, useState } from 'react';
 import { useUserData } from 'context/UserDataContext';
 import { useIsFocused } from '@react-navigation/native'
+import { SurahItems } from 'utils/constants';
 
 const LastMemorizedBanner = ({
     style,
@@ -29,13 +30,20 @@ const LastMemorizedBanner = ({
         }
     },[memorizationHistory, isFocused])
 
+    const navigateToSurah = () => {
+        if (!memorizationHistory || memorizationHistory?.length < 1) return navigation.navigate('Mushaf')
+        const surahContent = SurahItems[String(
+            Number(memorizationHistory[0].surahNumber) - 1
+        )]
+        if(!surahContent.hasOwnProperty('page')) return navigation.navigate('Mushaf')
+        return navigation.navigate('Mushaf', {
+            pageIndex: Number(surahContent?.page)
+        })
+    }
+
     return (
         <TouchableOpacity
-            onPress={() => {
-                navigation.navigate('Mushaf', {
-                    id: 'test'
-                })
-            }}
+            onPress={navigateToSurah}
         >
             <LinearGradient
                 colors={['#1FD365', '#00B145']}

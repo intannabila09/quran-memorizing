@@ -31,7 +31,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   const [loading,setLoading] = useState(true)
   const { _, dispatch } = useOnBoardingState()
-  const { userDataState, dispatch: userDispatch } = useUserData()
+  const { dispatch: userDispatch } = useUserData()
 
   const getUserPreference = async () => {
     setLoading(true)

@@ -152,6 +152,7 @@ const MemorizationProgress = ({ navigation }) => {
                              <SurahProgressList
                                 search={searchQuery}
                                 sortParam={sortParam}
+                                navigation={navigation}
                             />
                         </View>
                     )}

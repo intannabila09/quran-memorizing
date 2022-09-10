@@ -41,7 +41,7 @@ const LowerSection = ({ navigation }) => {
                 })()}
                 onPress={() => setSurahVisible(!searchSurahVisible)}
             />
-            <MemorizationHistory />
+            <MemorizationHistory navigation={navigation} />
             {/* DELETE IN PRODUCTION */}
             <View style={{ marginTop: 16}}>
                 <TouchableOpacity

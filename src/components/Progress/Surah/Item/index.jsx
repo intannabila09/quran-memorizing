@@ -4,9 +4,10 @@ import { AntDesign } from '@expo/vector-icons';
 import { useMemo } from 'react';
 import { SurahItems } from 'utils/constants'
 import { useUserData } from 'context/UserDataContext';
+import { showMessage } from 'react-native-flash-message';
 
 
-const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah }) => {
+const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigation }) => {
     const memorized = surah.item.memorized ?? 0
     const { userDataState } = useUserData()
 
@@ -25,6 +26,17 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah }) => {
         else return userDataState?.memorized?.surah[surah?.item?.no]
     },[active])
 
+    const navigateToSurah = () => {
+        if (!surahContent?.hasOwnProperty('page')) return showMessage({
+            message: "Halaman yang diminta belum tersedia saat ini.",
+            type: 'warning',
+            color: '#472a00'
+        })
+        return navigation.navigate('Mushaf', {
+            pageIndex: Number(surahContent?.page)
+        })
+    }
+
     return (
         <View
             style={{
@@ -35,11 +47,12 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah }) => {
                 borderRadius: 8,
             }}
         >
-            <View
+            <TouchableOpacity
                 style={{
                     padding: 12,
                     paddingBottom: 4,
                 }}
+                onPress={navigateToSurah}
             >
                 <View
                     style={{
@@ -115,7 +128,7 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah }) => {
                     </Text>
                 </View>
             </View>
-            </View>
+            </TouchableOpacity>
             {active && (
                 <View
                     style={{
@@ -132,7 +145,7 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah }) => {
                     .map((ayahItem) => {
                         const isMemorized = memorizedAyahs?.includes(ayahItem)
                         return (
-                            <View
+                            <TouchableOpacity
                                 key={ayahItem}
                                 style={{
                                     marginHorizontal: 8,
@@ -144,6 +157,7 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah }) => {
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
                                 }}
+                                onPress={navigateToSurah}
                             >
                                 <Text style={{ fontSize: 12 }}>Ayat {ayahItem}</Text>
                                 <View>
@@ -161,7 +175,7 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah }) => {
                                         </View> 
                                     )}
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                         )
                     })}
                 </View>
