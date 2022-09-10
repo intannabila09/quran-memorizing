@@ -160,6 +160,7 @@ const MemorizationProgress = ({ navigation }) => {
                         <View style={{ marginTop: 20, paddingBottom: 40, backgroundColor: '#FFFFFF' }}>
                             <JuzProgressList
                                 sortParam={sortParam}
+                                navigation={navigation}
                             />
                         </View>
                     )}

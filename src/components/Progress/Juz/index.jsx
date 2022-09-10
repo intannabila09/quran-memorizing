@@ -5,10 +5,11 @@ import { JuzItems } from 'utils/constants'
 import ProgressJuzItem from './Item'
 import { useUserData } from 'context/UserDataContext'
 
-const renderList = (juz) => <ProgressJuzItem juz={juz} />
+const renderList = (juz, navigation) => <ProgressJuzItem juz={juz} navigation={navigation} />
 
 const JuzProgressList = ({
     sortParam = 'number',
+    navigation,
 }) => {
     const [juzList,setJuzList] = useState([])
     const { userDataState } = useUserData()
@@ -53,7 +54,7 @@ const JuzProgressList = ({
         <View style={{ backgroundColor: '#FFFFFF'}}>
             <FlatList
                 data={juzList}
-                renderItem={renderList}
+                renderItem={item => renderList(item, navigation)}
                 keyExtractor={item => item.id}
             />
         </View>
