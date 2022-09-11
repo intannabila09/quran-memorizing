@@ -120,7 +120,10 @@ const AyatInSurah = ({ surahNumber = null, numberOfAyat = 0 }) => {
 
 const SurahInputListItem = ({ surah, showAyat, setShowAyat }) => {
     const { onBoardingState, dispatch } = useOnBoardingState()
-    const memorizedAyah = onBoardingState.memorized.surah.filter((item) => item.includes(`${surah.item.no}:`))
+    const memorizedAyah = onBoardingState.memorized.surah.filter((item) => {
+        const [surahNumber, _] = item.split(':')
+        return surahNumber === surah.item.no
+    })
     const checked = memorizedAyah.length === Number(surah.item.numberOfAyah)
 
     const memorizeAllAyahInThisSurah = () => {

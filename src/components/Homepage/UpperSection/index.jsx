@@ -16,6 +16,7 @@ import { findJuzFromAyah } from 'utils/helpers';
 
 import { useIsFocused } from '@react-navigation/native'
 import _ from 'lodash'
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 const styles = StyleSheet.create({
     container: {
@@ -40,6 +41,7 @@ const UpperSection = ({ navigation }) => {
         memorizedAyahInJuz: 0,
         totalAyahInJuz: 564,
         totalMemorizedInQuran: 0,
+        page: 0,
     })
     
     const handleIgnoreOnboarding = async () => {
@@ -86,7 +88,8 @@ const UpperSection = ({ navigation }) => {
                     juzName: lastJuzMemorized.label,
                     totalAyahInJuz: lastJuzMemorized.numberOfAyah,
                     memorizedAyahInJuz: userDataState.memorized.juz[findJuzFromAyah(lastSurahMemorizedNo,lastAyahMemorized)],
-                    totalMemorizedInQuran: totalMemorizedInQuran
+                    totalMemorizedInQuran: totalMemorizedInQuran,
+                    page: lastSurahMemorized?.page
                 })
             } else {
                 const lastMemorized = userDataState.memorizationHistory[0]
@@ -99,12 +102,24 @@ const UpperSection = ({ navigation }) => {
                     surahName: lastMemorized.surahName,
                     memorizedAyah: lastMemorized.ayahNumber,
                     totalAyah: lastSurahMemorized.numberOfAyah,
+                    page: lastSurahMemorized?.page,
                     juzName: lastJuzMemorized.label,
                     totalAyahInJuz: lastJuzMemorized.numberOfAyah,
                     memorizedAyahInJuz: userDataState.memorized.juz[lastJuzMemorizedId],
                     totalMemorizedInQuran: totalMemorizedInQuran
                 })
             }
+        } else {
+            setLastMemorizedData({
+                surahName: 'An-Nas',
+                memorizedAyah: 0,
+                totalAyah: 6,
+                juzName: 'Juz 30',
+                memorizedAyahInJuz: 0,
+                totalAyahInJuz: 564,
+                totalMemorizedInQuran: 0,
+                page: 0,
+            })
         }
     },[isFocused])
 
@@ -138,6 +153,8 @@ const UpperSection = ({ navigation }) => {
                 surah={lastMemorizedData.surahName}
                 memorized={lastMemorizedData.memorizedAyah}
                 total={lastMemorizedData.totalAyah}
+                page={lastMemorizedData?.page}
+                navigation={navigation}
             />
             <View style={{ marginTop: 16, flexDirection: 'row', justifyContent: 'space-between' }}>
                 <HomepageSecondaryPercentage
@@ -145,6 +162,7 @@ const UpperSection = ({ navigation }) => {
                     total={lastMemorizedData.totalAyahInJuz}
                     juz={lastMemorizedData.juzName}
                     style={{ flexGrow: 1 }}
+                    navigation={navigation}
                 />
                 <View style={{  paddingLeft: 16, borderLeftWidth: 1, borderLeftColor: '#EEEDED', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 16, fontWeight: '600'}}>

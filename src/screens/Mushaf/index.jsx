@@ -23,9 +23,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#f8f5e9',
         width: '100%',
-        // height: '100%',
         position: 'relative',
-        // justifyContent: 'center'
     }
 })
 
@@ -36,7 +34,8 @@ const ForwardTranslationMenuContent = forwardRef((props, ref) => <TranslationMod
 const ForwardAudioConfig = forwardRef((props, ref) => <AudioConfig {...props} forwardedRef={ref} />)
 const ForwardAddNote = forwardRef((props, ref) => <AddNoteModalContent {...props} forwardedRef={ref} />)
 
-const Mushaf = ({ navigation }) => {
+const Mushaf = ({ route, navigation }) => {
+    const { pageIndex = 0 } = route.params || {}
     const [showMenu, setShowMenu] = useState(true)
     const bottomMenuPosition = useRef(new Animated.Value(0)).current
     const topMenuPosition = useRef(new Animated.Value(0)).current
@@ -172,6 +171,7 @@ const Mushaf = ({ navigation }) => {
                                 showMenu={showMenu}
                                 setShowMenu={setShowMenu}
                                 handleDisplayAyahMenu={handleDisplayAyahMenu}
+                                pageIndex={pageIndex}
                             />
                         </View>
                     <MushafMenuBar
@@ -195,7 +195,7 @@ const Mushaf = ({ navigation }) => {
                                 memorized={(() => {
                                     if (selectedAyah) {
                                         const [surahIndex,ayahNumber] = selectedAyah.split(':')
-                                        if (memorized.surah[surahIndex]) return memorized.surah[surahIndex].includes(ayahNumber)
+                                        if (memorized.surah[surahIndex]) return memorized.surah[surahIndex].includes(Number(ayahNumber))
                                         else return false
                                     }
                                     return false
@@ -256,11 +256,14 @@ const Mushaf = ({ navigation }) => {
     )
 }
 
-const MushafPage = ({ navigation }) => {
+const MushafPage = ({ route, navigation }) => {
     return (
         <MushafProvider>
             <PlayerProvider>
-                <Mushaf navigation={navigation} />
+                <Mushaf
+                    route={route}
+                    navigation={navigation}
+                />
             </PlayerProvider>
         </MushafProvider>
     )

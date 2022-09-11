@@ -21,6 +21,15 @@ const OnBoardingStateReducer = (state,
                         juz: [...state.memorized.juz, payload]
                     },
                 }
+            case 'ADD_BULK_JUZ':
+                return {
+                    ...state,
+                    memorized: {
+                        ...state.memorized,
+                        surah: [],
+                        juz: [...state.memorized.juz, ...payload]
+                    }
+                }
             case 'REMOVE_JUZ':
                 return {
                     ...state,
@@ -71,6 +80,14 @@ const OnBoardingStateReducer = (state,
                     memorized: {
                         juz: [],
                         surah: state.memorized.surah.filter(surah => surah !== `${payload.numberOfSurah}:${payload.numberOfAyah}`),
+                    }
+                }
+            case 'SET_MULTIPLE_SURAH_AND_AYAH':
+                return {
+                    ...state,
+                    memorized: {
+                        juz: [],
+                        surah: payload
                     }
                 }
             case 'SET_PERSONALIZATION':

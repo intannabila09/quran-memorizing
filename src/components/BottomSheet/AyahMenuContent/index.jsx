@@ -30,6 +30,7 @@ const AyahMenuContent = ({
     const [activeAyah,setActiveAyah] = useState({ surahNumber: 0, surahName: "", ayah: "" })
     const { userDataState, dispatch } = useUserData()
     const { dispatch: playerDispatch } = usePlayerProvider()
+    // console.log(userDataState.memorized)
 
     const memorizeAyah = async (target) => {
         try {
@@ -39,9 +40,9 @@ const AyahMenuContent = ({
             const juzOfAyah = findJuzFromAyah(surahIndex,ayahNumber)
     
             if (memorizedSurah[surahIndex]) {
-                memorizedSurah[surahIndex].push(ayahNumber)
+                memorizedSurah[surahIndex].push(Number(ayahNumber))
             } else {
-                memorizedSurah[surahIndex] = [ayahNumber]
+                memorizedSurah[surahIndex] = [Number(ayahNumber)]
             }
             if (memorizedJuz[juzOfAyah]) {
                 memorizedJuz[juzOfAyah] += 1
@@ -52,12 +53,12 @@ const AyahMenuContent = ({
             const memorizationHistory = userDataState.memorizationHistory
             const indexInHistory = memorizationHistory.findIndex((item) => item.surahNumber === surahIndex)
             if (indexInHistory >= 0) {
-                memorizationHistory[indexInHistory].ayahNumber = ayahNumber
+                memorizationHistory[indexInHistory].ayahNumber = Number(ayahNumber)
                 memorizationHistory[indexInHistory].memorizedAt = new Date().getTime()
             } else {
                 memorizationHistory.push({
                     surahNumber: surahIndex,
-                    ayahNumber: ayahNumber,
+                    ayahNumber: Number(ayahNumber),
                     surahName: SurahItems[surahIndex - 1].name,
                     memorizedAt: new Date().getTime(),
                 })
@@ -92,7 +93,7 @@ const AyahMenuContent = ({
             const memorizedJuz = userDataState.memorized.juz
             const juzOfAyah = findJuzFromAyah(surahIndex,ayahNumber)
     
-            memorizedSurah[surahIndex] = memorizedSurah[surahIndex].filter(ayah => ayah !== ayahNumber)
+            memorizedSurah[surahIndex] = memorizedSurah[surahIndex].filter(ayah => ayah !== Number(ayahNumber))
             memorizedJuz[juzOfAyah] -= 1
             if (memorizedSurah[surahIndex].length === 0) delete memorizedSurah[surahIndex]
             if (memorizedJuz[juzOfAyah] === 0) delete memorizedJuz[juzOfAyah]
@@ -186,6 +187,7 @@ Surah ${surah.name.id}:${ayah.number}
     useEffect(() => {
         if (selectedAyah) {
             const [surahIndex,ayahNumber] = selectedAyah.split(":")
+            
             setActiveAyah({ surahNumber: SurahItems[surahIndex-1].no, surahName: SurahItems[surahIndex-1].name, ayah: ayahNumber })
         }
     },[selectedAyah])
