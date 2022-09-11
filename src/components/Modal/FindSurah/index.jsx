@@ -89,7 +89,7 @@ const FindSurah = ({
                                         borderWidth: 1,
                                         borderColor: '#D1D1D1',
                                         borderRadius: 4,
-                                        padding: 4,
+                                        padding: 8,
                                     }}
                                     placeholder="Cari surat"
                                     value={query}
@@ -112,7 +112,7 @@ const FindSurah = ({
                                 }}
                             >
                                 <FlatList
-                                    data={surahData}
+                                    data={surahData.slice().reverse()}
                                     renderItem={({item}) => {
                                         return (
                                             <TouchableOpacity
@@ -123,7 +123,7 @@ const FindSurah = ({
                                                     flexDirection: 'row',
                                                     alignItems: 'center',
                                                     ...(Number(item.no) < 78 && {
-                                                        backgroundColor: '#f0f0f0'
+                                                        backgroundColor: '#f0f0f0',
                                                     })
                                                 }}
                                                 onPress={() => {
@@ -141,6 +141,9 @@ const FindSurah = ({
                                                     <Text
                                                         style={{
                                                             textAlign: 'center',
+                                                            ...(Number(item.no) < 78 && {
+                                                                color: '#b3b3b3',
+                                                            })
                                                         }}
                                                     >
                                                         {item.no}
@@ -149,7 +152,10 @@ const FindSurah = ({
                                                 <View style={{ marginLeft: 8 }}>
                                                     <Text
                                                         style={{
-                                                            fontWeight: '600'
+                                                            fontWeight: '600',
+                                                            ...(Number(item.no) < 78 && {
+                                                                color: '#b3b3b3',
+                                                            })
                                                         }}
                                                     >
                                                         {item.name}
@@ -158,6 +164,9 @@ const FindSurah = ({
                                                         style={{
                                                             fontSize: 12,
                                                             color: "#616161",
+                                                            ...(Number(item.no) < 78 && {
+                                                                color: '#b3b3b3',
+                                                            })
                                                         }}
                                                     >
                                                         {item.meaning} | {item.category} ({item.numberOfAyah})
