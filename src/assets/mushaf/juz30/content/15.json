@@ -7,12 +7,20 @@
         "key": "92:15:1",
         "top": 11.3,
         "right": 2,
-        "width": 36,
+        "width": 41.1,
         "height": 4.7
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "92:15:1",
+          "top": 11.3,
+          "right": 8,
+          "width": 30,
+          "height": 4.7
+        }
+      ],
       "invisible": [
         {
           "key": "92:15:1",
@@ -32,12 +40,20 @@
         "key": "92:16:1",
         "top": 11.3,
         "right": 43.4,
-        "width": 24.6,
+        "width": 30,
         "height": 4.7
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "92:16:1",
+          "top": 11.3,
+          "right": 52.4,
+          "width": 15.6,
+          "height": 4.7
+        }
+      ],
       "invisible": [
         {
           "key": "92:16:1",
@@ -64,12 +80,20 @@
         "key": "92:17:2",
         "top": 16.4,
         "right": 2,
-        "width": 13,
+        "width": 18.2,
         "height": 4.7
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "92:17:2",
+          "top": 16.4,
+          "right": 2,
+          "width": 13,
+          "height": 4.7
+        }
+      ],
       "invisible": [
         {
           "key": "92:17:1",
@@ -96,12 +120,20 @@
         "key": "92:18:1",
         "top": 16.4,
         "right": 20.6,
-        "width": 31.8,
+        "width": 36.9,
         "height": 4.7
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "92:18:1",
+          "top": 16.4,
+          "right": 28.6,
+          "width": 23.8,
+          "height": 4.7
+        }
+      ],
       "invisible": [
         {
           "key": "92:18:1",
@@ -128,12 +160,27 @@
         "key": "92:19:2",
         "top": 21.5,
         "right": 2,
-        "width": 19.5,
+        "width": 24.4,
         "height": 4.8
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "92:19:1",
+          "top": 16.4,
+          "right": 63.2,
+          "width": 30.5,
+          "height": 4.8
+        },
+        {
+          "key": "92:19:2",
+          "top": 21.5,
+          "right": 2,
+          "width": 19.5,
+          "height": 4.8
+        }
+      ],
       "invisible": [
         {
           "key": "92:19:1",
@@ -160,12 +207,20 @@
         "key": "92:20:1",
         "top": 21.5,
         "right": 26.46,
-        "width": 36,
+        "width": 41,
         "height": 4.8
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "92:20:1",
+          "top": 21.5,
+          "right": 31.46,
+          "width": 31,
+          "height": 4.8
+        }
+      ],
       "invisible": [
         {
           "key": "92:20:1",
@@ -185,12 +240,20 @@
         "key": "92:21:1",
         "top": 21.5,
         "right": 67.86,
-        "width": 19.5,
+        "width": 24.5,
         "height": 4.8
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "92:21:1",
+          "top": 21.5,
+          "right": 78.86,
+          "width": 8.5,
+          "height": 4.8
+        }
+      ],
       "invisible": [
         {
           "key": "92:21:1",
@@ -210,7 +273,7 @@
         "key": "93:1:1",
         "top": 36.95,
         "right": 2,
-        "width": 16.5,
+        "width": 21.6,
         "height": 4.8
       }
     ],
@@ -235,12 +298,20 @@
         "key": "93:2:1",
         "top": 36.95,
         "right": 23.9,
-        "width": 24.5,
+        "width": 29.6,
         "height": 4.8
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "93:2:1",
+          "top": 36.85,
+          "right": 34,
+          "width": 14.5,
+          "height": 4.8
+        }
+      ],
       "invisible": [
         {
           "key": "93:2:1",
@@ -260,12 +331,20 @@
         "key": "93:3:1",
         "top": 36.95,
         "right": 53.8,
-        "width": 34.5,
+        "width": 39.6,
         "height": 4.8
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "93:3:1",
+          "top": 36.85,
+          "right": 57.8,
+          "width": 30.5,
+          "height": 4.8
+        }
+      ],
       "invisible": [
         {
           "key": "93:3:1",
@@ -285,12 +364,20 @@
         "key": "93:4:1",
         "top": 42.1,
         "right": 2,
-        "width": 45,
+        "width": 50.1,
         "height": 4.8
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "93:4:1",
+          "top": 42.1,
+          "right": 17,
+          "width": 30,
+          "height": 4.8
+        }
+      ],
       "invisible": [
         {
           "key": "93:4:1",
@@ -317,12 +404,27 @@
         "key": "93:5:2",
         "top": 47.2,
         "right": 2,
-        "width": 12.5,
+        "width": 17.6,
         "height": 4.8
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "93:5:1",
+          "top": 42.1,
+          "right": 67,
+          "width": 26.4,
+          "height": 4.8
+        },
+        {
+          "key": "93:5:2",
+          "top": 47.2,
+          "right": 2,
+          "width": 12.5,
+          "height": 4.8
+        }
+      ],
       "invisible": [
         {
           "key": "93:5:1",
@@ -349,12 +451,20 @@
         "key": "93:6:1",
         "top": 47.2,
         "right": 19.9,
-        "width": 42,
+        "width": 47.1,
         "height": 4.8
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "93:6:1",
+          "top": 47.2,
+          "right": 24.9,
+          "width": 37,
+          "height": 4.8
+        }
+      ],
       "invisible": [
         {
           "key": "93:6:1",
@@ -373,7 +483,7 @@
       {
         "key": "93:7:1",
         "top": 47.2,
-        "right": 67.3,
+        "right": 67.5,
         "width": 26,
         "height": 4.8
       },
@@ -381,12 +491,27 @@
         "key": "93:7:2",
         "top": 52.3,
         "right": 2,
-        "width": 10.5,
+        "width": 15.6,
         "height": 4.8
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "93:7:1",
+          "top": 47.2,
+          "right": 83.3,
+          "width": 10,
+          "height": 4.8
+        },
+        {
+          "key": "93:7:2",
+          "top": 52.3,
+          "right": 2,
+          "width": 10.5,
+          "height": 4.8
+        }
+      ],
       "invisible": [
         {
           "key": "93:7:1",
@@ -412,13 +537,21 @@
       {
         "key": "93:8:1",
         "top": 52.3,
-        "right": 19,
-        "width": 38.5,
+        "right": 18.8,
+        "width": 41.6,
         "height": 4.85
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "93:8:1",
+          "top": 52.3,
+          "right": 33.9,
+          "width": 22.5,
+          "height": 4.85
+        }
+      ],
       "invisible": [
         {
           "key": "93:8:1",
@@ -440,10 +573,25 @@
         "right": 61.8,
         "width": 31.59,
         "height": 4.85
+      },
+      {
+        "key": "93:9:2",
+        "top": 57.4,
+        "right": 2,
+        "width": 5.1,
+        "height": 4.85
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "93:9:1",
+          "top": 52.3,
+          "right": 68.8,
+          "width": 24.59,
+          "height": 4.85
+        }
+      ],
       "invisible": [
         {
           "key": "93:9:1",
@@ -463,12 +611,20 @@
         "key": "93:10:1",
         "top": 57.4,
         "right": 7.48,
-        "width": 34.55,
+        "width": 39.65,
         "height": 4.85
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "93:10:1",
+          "top": 57.4,
+          "right": 15.48,
+          "width": 26.55,
+          "height": 4.85
+        }
+      ],
       "invisible": [
         {
           "key": "93:10:1",
@@ -488,12 +644,20 @@
         "key": "93:11:1",
         "top": 57.4,
         "right": 47.48,
-        "width": 40,
+        "width": 45.1,
         "height": 4.85
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "93:11:1",
+          "top": 57.4,
+          "right": 55,
+          "width": 32.48,
+          "height": 4.85
+        }
+      ],
       "invisible": [
         {
           "key": "93:11:1",
@@ -513,12 +677,20 @@
         "key": "94:1:1",
         "top": 72.8,
         "right": 2,
-        "width": 35.5,
+        "width": 40.2,
         "height": 4.85
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "9:1:1",
+          "top": 72.8,
+          "right": 7,
+          "width": 30.5,
+          "height": 4.85
+        }
+      ],
       "invisible": [
         {
           "key": "9:1:1",
@@ -538,12 +710,20 @@
         "key": "94:2:1",
         "top": 72.8,
         "right": 43,
-        "width": 36,
+        "width": 41.1,
         "height": 4.85
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "9:2:1",
+          "top": 72.8,
+          "right": 58,
+          "width": 21,
+          "height": 4.85
+        }
+      ],
       "invisible": [
         {
           "key": "9:2:1",
@@ -570,12 +750,20 @@
         "key": "94:3:2",
         "top": 77.9,
         "right": 2,
-        "width": 18.5,
+        "width": 24,
         "height": 4.85
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "94:3:2",
+          "top": 77.9,
+          "right": 2,
+          "width": 18.5,
+          "height": 4.85
+        }
+      ],
       "invisible": [
         {
           "key": "9:3:1",
@@ -602,12 +790,20 @@
         "key": "94:4:1",
         "top": 77.9,
         "right": 26.2,
-        "width": 24.2,
+        "width": 29.3,
         "height": 4.85
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "94:4:1",
+          "top": 77.9,
+          "right": 40.2,
+          "width": 10.2,
+          "height": 4.85
+        }
+      ],
       "invisible": [
         {
           "key": "94:4:1",
@@ -627,12 +823,20 @@
         "key": "94:5:1",
         "top": 77.9,
         "right": 55.45,
-        "width": 27.55,
+        "width": 32.65,
         "height": 4.85
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "94:5:1",
+          "top": 77.9,
+          "right": 61.45,
+          "width": 21.55,
+          "height": 4.85
+        }
+      ],
       "invisible": [
         {
           "key": "94:5:1",
@@ -659,12 +863,20 @@
         "key": "94:6:2",
         "top": 83.2,
         "right": 2,
-        "width": 23.195,
+        "width": 28.295,
         "height": 4.85
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "94:6:2",
+          "top": 83.2,
+          "right": 2,
+          "width": 23.195,
+          "height": 4.85
+        }
+      ],
       "invisible": [
         {
           "key": "94:6:1",
@@ -690,13 +902,21 @@
       {
         "key": "94:7:1",
         "top": 83.2,
-        "right": 30.1,
-        "width": 23.195,
+        "right": 30.3,
+        "width": 31.75,
         "height": 4.85
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "94:7:1",
+          "top": 83.2,
+          "right": 36.75,
+          "width": 21,
+          "height": 4.85
+        }
+      ],
       "invisible": [
         {
           "key": "94:7:1",
@@ -716,12 +936,20 @@
         "key": "94:8:1",
         "top": 83.2,
         "right": 62.85,
-        "width": 25.2,
+        "width": 30.1,
         "height": 4.85
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "94:8:1",
+          "top": 83.2,
+          "right": 69.35,
+          "width": 18.7,
+          "height": 4.85
+        }
+      ],
       "invisible": [
         {
           "key": "94:8:1",
