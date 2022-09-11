@@ -27,7 +27,6 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigati
     },[active])
 
     const navigateToSurah = () => {
-        console.log(surahContent)
         if (!surahContent?.hasOwnProperty('page')) return showMessage({
             message: "Halaman yang diminta belum tersedia saat ini.",
             type: 'warning',
