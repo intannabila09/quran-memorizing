@@ -3,6 +3,7 @@ import { View, Platform, StyleSheet, TouchableOpacity, Text } from "react-native
 import { FontAwesome } from '@expo/vector-icons';
 import DropDownPicker from "react-native-dropdown-picker";
 import { SurahItems } from 'utils/constants';
+import SelectDropdown from 'react-native-select-dropdown';
 
 import {
     AVAILABLE_QARI_NAMES,
@@ -36,7 +37,11 @@ const AudioConfig = ({
         delay: false
     })
     const [startFromOptions, setStartFromOptions] = useState({
-        surah: SurahItems.map((surah) => ({ value: Number(surah.no), label: surah.name})),
+        surah: SurahItems.map((surah) => {
+            return {
+                value: Number(surah.no), label: surah.name
+            }
+        }),
         ayah: []
     })
     const [startFrom, setStartFrom] = useState({
@@ -168,6 +173,8 @@ const AudioConfig = ({
         )
     },[until.surah])
 
+    console.log(until.surah)
+
     return (
         <View style={styles.container}>
              <View
@@ -213,7 +220,7 @@ const AudioConfig = ({
                         }}
                     >
                         <Text style={{ marginBottom: 8 }}>Putar dari surat</Text>
-                        <DropDownPicker
+                        {/* <DropDownPicker
                             open={optionsVisibility.startFromSurah}
                             value={startFrom.surah}
                             items={startFromOptions.surah}
@@ -225,11 +232,41 @@ const AudioConfig = ({
                                 borderWidth: 0,
                             }}
                             placeholder="Surat"
+                        /> */}
+                        <SelectDropdown
+                            data={startFromOptions.surah}
+                            value={startFrom.surah}
+                            rowTextForSelection={(item) => item.label}
+                            onSelect={(selectedItem) => {
+                                setStartFrom((prev) => ({...prev, surah: selectedItem.value}))
+                            }}
+                            buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                            search={true}
+                            buttonStyle={{
+                                backgroundColor: '#F7F7F7',
+                                width: '100%',
+                                borderRadius: 8,
+                                height: 40,
+                            }}
+                            buttonTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            rowStyle={{
+                                backgroundColor: '#F7F7F7',
+                                height: 40,
+                                borderBottomColor: '#e0e0e0',
+                            }}
+                            rowTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            defaultButtonText="Pilih Surat"
                         />
                     </View>
                     <View style={{ width: '30%'}}>
                         <Text style={{ marginBottom: 8 }}>Ayat</Text>
-                        <DropDownPicker
+                        {/* <DropDownPicker
                             open={optionsVisibility.startFromAyah}
                             value={startFrom.ayah}
                             items={startFromOptions.ayah}
@@ -241,6 +278,36 @@ const AudioConfig = ({
                                 borderWidth: 0,
                             }}
                             placeholder="Ayat"
+                        /> */}
+                        <SelectDropdown
+                            data={startFromOptions.ayah}
+                            value={startFrom.ayah}
+                            rowTextForSelection={(item) => item.label}
+                            onSelect={(selectedItem) => {
+                                setStartFrom((prev) => ({...prev, ayah: selectedItem.value}))
+                            }}
+                            buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                            search={true}
+                            buttonStyle={{
+                                backgroundColor: '#F7F7F7',
+                                width: '100%',
+                                borderRadius: 8,
+                                height: 40,
+                            }}
+                            buttonTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            rowStyle={{
+                                backgroundColor: '#F7F7F7',
+                                height: 40,
+                                borderBottomColor: '#e0e0e0',
+                            }}
+                            rowTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            defaultButtonText="Pilih Ayat"
                         />
                     </View>
                 </View>
@@ -259,7 +326,7 @@ const AudioConfig = ({
                         marginBottom: 12,
                     }}>
                         <Text style={{ marginBottom: 8 }}>Sampai surat</Text>
-                        <DropDownPicker
+                        {/* <DropDownPicker
                             open={optionsVisibility.untilSurah}
                             value={until.surah}
                             items={untilOptions.surah}
@@ -271,11 +338,41 @@ const AudioConfig = ({
                                 borderWidth: 0,
                             }}
                             placeholder="Surat"
+                        /> */}
+                        <SelectDropdown
+                            data={untilOptions.surah}
+                            value={until.surah}
+                            rowTextForSelection={(item) => item.label}
+                            onSelect={(selectedItem) => {
+                                setUntil((prev) => ({...prev, surah: selectedItem.value}))
+                            }}
+                            buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                            search={true}
+                            buttonStyle={{
+                                backgroundColor: '#F7F7F7',
+                                width: '100%',
+                                borderRadius: 8,
+                                height: 40,
+                            }}
+                            buttonTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            rowStyle={{
+                                backgroundColor: '#F7F7F7',
+                                height: 40,
+                                borderBottomColor: '#e0e0e0',
+                            }}
+                            rowTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            defaultButtonText="Pilih Surat"
                         />
                     </View>
                     <View style={{ width: '30%'}}>
                         <Text style={{ marginBottom: 8 }}>Ayat</Text>
-                        <DropDownPicker
+                        {/* <DropDownPicker
                             open={optionsVisibility.untilAyah}
                             value={until.ayah}
                             items={untilOptions.ayah}
@@ -287,6 +384,36 @@ const AudioConfig = ({
                                 borderWidth: 0,
                             }}
                             placeholder="Ayat"
+                        /> */}
+                        <SelectDropdown
+                            data={untilOptions.ayah}
+                            value={until.ayah}
+                            rowTextForSelection={(item) => item.label}
+                            onSelect={(selectedItem) => {
+                                setUntil((prev) => ({...prev, ayah: selectedItem.value}))
+                            }}
+                            buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                            search={true}
+                            buttonStyle={{
+                                backgroundColor: '#F7F7F7',
+                                width: '100%',
+                                borderRadius: 8,
+                                height: 40,
+                            }}
+                            buttonTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            rowStyle={{
+                                backgroundColor: '#F7F7F7',
+                                height: 40,
+                                borderBottomColor: '#e0e0e0',
+                            }}
+                            rowTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            defaultButtonText="Pilih Ayat"
                         />
                     </View>
                 </View>
@@ -299,7 +426,7 @@ const AudioConfig = ({
                     }}
                 >
                     <Text style={{ marginBottom: 8 }}>Qari</Text>
-                    <DropDownPicker
+                    {/* <DropDownPicker
                         open={optionsVisibility.qari}
                         value={qari}
                         items={qariOptions}
@@ -311,6 +438,36 @@ const AudioConfig = ({
                             borderWidth: 0,
                         }}
                         placeholder="Qari"
+                    /> */}
+                    <SelectDropdown
+                        data={qariOptions}
+                        value={qari}
+                        rowTextForSelection={(item) => item.label}
+                        onSelect={(selectedItem) => {
+                            setQari(selectedItem.value)
+                        }}
+                        buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                        search={true}
+                        buttonStyle={{
+                            backgroundColor: '#F7F7F7',
+                            width: '100%',
+                            borderRadius: 8,
+                            height: 40,
+                        }}
+                        buttonTextStyle={{
+                            fontSize: 14,
+                            textAlign: 'left'
+                        }}
+                        rowStyle={{
+                            backgroundColor: '#F7F7F7',
+                            height: 40,
+                            borderBottomColor: '#e0e0e0',
+                        }}
+                        rowTextStyle={{
+                            fontSize: 14,
+                            textAlign: 'left'
+                        }}
+                        defaultButtonText="Pilih Qari"
                     />
                 </View>
                 <View
@@ -323,7 +480,7 @@ const AudioConfig = ({
                 >
                     <View style={{ flexGrow: 1, maxWidth: '65%', marginRight: '5%' }}>
                         <Text style={{ marginBottom: 8 }}>Ulangi pemutaran sebanyak</Text>
-                        <DropDownPicker
+                        {/* <DropDownPicker
                             open={optionsVisibility.repeat}
                             value={repeat}
                             items={repeatOptions}
@@ -334,11 +491,41 @@ const AudioConfig = ({
                                 backgroundColor: '#F7F7F7',
                                 borderWidth: 0,
                             }}
+                        /> */}
+                        <SelectDropdown
+                            data={repeatOptions}
+                            value={repeat}
+                            rowTextForSelection={(item) => item.label}
+                            onSelect={(selectedItem) => {
+                                setRepeat(selectedItem.value)
+                            }}
+                            buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                            search={true}
+                            buttonStyle={{
+                                backgroundColor: '#F7F7F7',
+                                width: '100%',
+                                borderRadius: 8,
+                                height: 40,
+                            }}
+                            buttonTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            rowStyle={{
+                                backgroundColor: '#F7F7F7',
+                                height: 40,
+                                borderBottomColor: '#e0e0e0',
+                            }}
+                            rowTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            defaultButtonText="Pilih Jumlah Pemutaran"
                         />
                     </View>
                     <View style={{ flexGrow: 1, maxWidth: '30%' }}>
                         <Text style={{ marginBottom: 8 }}>Jeda tiap ayat</Text>
-                        <DropDownPicker
+                        {/* <DropDownPicker
                             open={optionsVisibility.delay}
                             value={delay}
                             items={delayOptions}
@@ -349,6 +536,36 @@ const AudioConfig = ({
                                 backgroundColor: '#F7F7F7',
                                 borderWidth: 0,
                             }}
+                        /> */}
+                        <SelectDropdown
+                            data={delayOptions}
+                            value={delay}
+                            rowTextForSelection={(item) => item.label}
+                            onSelect={(selectedItem) => {
+                                setDelay(selectedItem.value)
+                            }}
+                            buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                            search={true}
+                            buttonStyle={{
+                                backgroundColor: '#F7F7F7',
+                                width: '100%',
+                                borderRadius: 8,
+                                height: 40,
+                            }}
+                            buttonTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            rowStyle={{
+                                backgroundColor: '#F7F7F7',
+                                height: 40,
+                                borderBottomColor: '#e0e0e0',
+                            }}
+                            rowTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            defaultButtonText="Jeda"
                         />
                     </View>
                 </View>

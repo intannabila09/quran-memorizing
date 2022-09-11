@@ -11,10 +11,12 @@ const { width } = Dimensions.get("window");
 const QuranPages = ({
   showMenu,
   setShowMenu,
+  pageIndex,
   handleDisplayAyahMenu = () => {},
 }) => {
+  // console.log('renderer', initialJuz, initialPage)
   const [activeJuz, setActiveJuz] = useState(30);
-  const [pages] = useState([
+  const [pages, setPages] = useState([
     "23",
     "22",
     "21",
@@ -50,8 +52,8 @@ const QuranPages = ({
   const { playerState, dispatch: playerDispatch } = usePlayerProvider();
 
   // START – DEVELOPMENT VARIABLES
-  const [firstWordCovers, setFirstWordCovers] = useState({});
-  const [invisibleCovers, setInvisibleCovers] = useState({});
+  // const [firstWordCovers, setFirstWordCovers] = useState({});
+  // const [invisibleCovers, setInvisibleCovers] = useState({});
   // END – DEVELOPMENT VARIABLES
 
   // Active Ayah
@@ -130,43 +132,66 @@ const QuranPages = ({
     }, 1000);
   }, []);
 
-  // START – DEVELOPMENT VARIABLES
+  // Scroll to page
   useEffect(() => {
-    if (currentContent) {
-      const newFirstWordCovers = currentContent
-        .map((ayah) => {
-          return ayah.covers["firstWord"];
-        })
-        .reduce((acc, cur) => {
-          return [...acc, ...cur];
-        }, []);
-      setFirstWordCovers(newFirstWordCovers);
-      const newInvisibleCovers = currentContent
-        .map((ayah) => {
-          return ayah.covers["invisible"];
-        })
-        .reduce((acc, cur) => {
-          return [...acc, ...cur];
-        }, []);
-      setInvisibleCovers(newInvisibleCovers);
+    if (typeof pageIndex === "number") {
+      flatListRef.current.scrollToIndex({
+        index: pageIndex,
+        animated: false,
+      });
     }
-  }, [currentContent]);
+  },[pageIndex])
+
+  // START – DEVELOPMENT VARIABLES
+  // useEffect(() => {
+  //   if (currentContent) {
+  //     const newFirstWordCovers = currentContent
+  //       .map((ayah) => {
+  //         return ayah.covers["firstWord"];
+  //       })
+  //       .reduce((acc, cur) => {
+  //         return [...acc, ...cur];
+  //       }, []);
+  //     setFirstWordCovers(newFirstWordCovers);
+  //     const newInvisibleCovers = currentContent
+  //       .map((ayah) => {
+  //         return ayah.covers["invisible"];
+  //       })
+  //       .reduce((acc, cur) => {
+  //         return [...acc, ...cur];
+  //       }, []);
+  //     setInvisibleCovers(newInvisibleCovers);
+  //   }
+  // }, [currentContent]);
   // END – DEVELOPMENT VARIABLES
 
   return (
     <SafeAreaView>
       <FlatList
+        style={{
+          // height: '50%',
+          // aspectRatio: 0.506,
+          position: 'relative'
+        }}
         ref={flatListRef}
         viewabilityConfig={viewConfigRef.current}
         onViewableItemsChanged={onViewChanged.current}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
         pagingEnabled={true}
-        snapToInterval={width}
-        snapToAlignment={"center"}
-        decelerationRate={0}
+        getItemLayout={(data, index) => ({
+          length: width,
+          offset: width * index,
+          index,
+        })}
+        initialScrollIndex={pageIndex}
+        // snapToInterval={width}
+        // snapToAlignment={"center"}
+        // decelerationRate={0}
         data={pages}
-        keyExtractor={(item) => item.toString()}
+        keyExtractor={(item) => {
+          return item;
+        }}
         renderItem={(page) => {
           if (!content) return <></>;
           return (
@@ -197,8 +222,8 @@ const QuranPages = ({
                 }, [])}
               activePage={activePage}
               // START – DEVELOPMENT VARIABLES
-              invisibleCovers={invisibleCovers}
-              firstWordCovers={firstWordCovers}
+              // invisibleCovers={invisibleCovers}
+              // firstWordCovers={firstWordCovers}
               // END – DEVELOPMENT VARIABLES
             />
           );

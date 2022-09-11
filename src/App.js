@@ -1,6 +1,7 @@
 import { registerRootComponent } from 'expo';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import FlashMessage from "react-native-flash-message";
 
 // Screen
 import WelcomeScreen from 'screens/Onboarding/WelcomeScreen';
@@ -9,6 +10,8 @@ import InputByJuz from 'screens/Onboarding/InputMemorization/InputByJuz';
 import { OnBoardingProvider } from './context/OnBoardingContext';
 import InputBySurah from 'screens/Onboarding/InputMemorization/InputBySurah';
 import PersonalizationConfig from 'screens/Onboarding/PersonalizationConfig';
+import Notes from 'screens/Notes';
+import Setting from 'screens/Setting';
 
 import Homepage from 'screens/Homepage';
 import MemorizationProgress from 'screens/Progress';
@@ -28,7 +31,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   const [loading,setLoading] = useState(true)
   const { _, dispatch } = useOnBoardingState()
-  const { userDataState, dispatch: userDispatch } = useUserData()
+  const { dispatch: userDispatch } = useUserData()
 
   const getUserPreference = async () => {
     setLoading(true)
@@ -51,6 +54,7 @@ const App = () => {
       })
       return setLoading(false)
     } catch (e) {
+      setLoading(false)
       console.log(e)
     }
   }
@@ -83,6 +87,10 @@ const App = () => {
               <Stack.Screen name="MemorizationProgress" component={MemorizationProgress} />
               {/* Mushaf */}
               <Stack.Screen name="Mushaf" component={Mushaf} />
+              {/* Notes */}
+              <Stack.Screen name="Notes" component={Notes} />
+              {/* Setting */}
+              <Stack.Screen name="Setting" component={Setting} />
         </Stack.Navigator>
       </NavigationContainer>
   );
@@ -93,6 +101,7 @@ const AppWrapper = () => {
     <UserDataProvider>
       <OnBoardingProvider>
         <App />
+        <FlashMessage position="bottom" />
       </OnBoardingProvider>
     </UserDataProvider>
   )
