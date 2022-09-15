@@ -32,7 +32,6 @@ const UpperSection = ({ navigation }) => {
     const { onBoardingState, dispatch } = useOnBoardingState()
     const { userDataState, dispatch: userDispatch} = useUserData()
     const isFocused = useIsFocused()
-    console.log(userDataState?.memorized?.surah["114"])
 
     const [lastMemorizedData,setLastMemorizedData] = useState({
         surahName: 'An-Nas',

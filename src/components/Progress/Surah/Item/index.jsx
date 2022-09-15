@@ -161,7 +161,7 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigati
                             >
                                 <Text style={{ fontSize: 12 }}>Ayat {ayahItem}</Text>
                                 <View>
-                                    {memorized ? (
+                                    {isMemorized ? (
                                         <View>
                                             <Text style={{ fontSize: 12, color: 'green'}}>
                                                 Sudah Hafal
