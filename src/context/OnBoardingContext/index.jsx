@@ -107,6 +107,14 @@ const OnBoardingStateReducer = (state,
                 return {
                     ...payload,
                 }
+            case 'RESET_ONBOARDING_DATA':
+                return {
+                    ...state,
+                    memorized: {
+                        juz: [],
+                        surah: [],
+                    }
+                }
         }
     }
 

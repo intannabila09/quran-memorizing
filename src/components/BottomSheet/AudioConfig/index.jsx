@@ -173,8 +173,6 @@ const AudioConfig = ({
         )
     },[until.surah])
 
-    console.log(until.surah)
-
     return (
         <View style={styles.container}>
              <View

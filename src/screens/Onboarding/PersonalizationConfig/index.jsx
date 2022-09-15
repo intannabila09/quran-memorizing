@@ -151,6 +151,9 @@ const PersonalizationConfig = ({ navigation }) => {
                 action: 'SET_ONBOARDING_STATUS',
                 payload: false,
             })
+            dispatch({
+                action: 'RESET_ONBOARDING_DATA',
+            })
             userDataDispatch({
                 action: 'SET_USER_DATA',
                 payload: {

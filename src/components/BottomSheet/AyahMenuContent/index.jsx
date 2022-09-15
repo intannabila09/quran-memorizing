@@ -149,7 +149,6 @@ ${ayah.text}
 
 Surah ${surah.name.id}:${ayah.number}
 `
-        console.log(text)
         Clipboard.setStringAsync(text)
     }
 

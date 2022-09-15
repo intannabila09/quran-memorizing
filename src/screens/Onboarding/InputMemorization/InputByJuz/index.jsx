@@ -57,7 +57,7 @@ const InputByJuz = ({ navigation }) => {
             />
         )
     }
-
+    
     useEffect(() => {
         const populateOnBoardingData = () => {
             const initialUsage = _.isEmpty(userDataState)
@@ -70,6 +70,7 @@ const InputByJuz = ({ navigation }) => {
                     return null
                 }).filter((juz) => !!juz)
                 .map((item) => `juz${item}`)
+                
                 dispatch({
                     action: 'ADD_BULK_JUZ',
                     payload: memorizedJuz
