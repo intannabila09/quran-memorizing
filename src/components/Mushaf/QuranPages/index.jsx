@@ -52,8 +52,8 @@ const QuranPages = ({
   const { playerState, dispatch: playerDispatch } = usePlayerProvider();
 
   // START – DEVELOPMENT VARIABLES
-  const [firstWordCovers, setFirstWordCovers] = useState({});
-  const [invisibleCovers, setInvisibleCovers] = useState({});
+  // const [firstWordCovers, setFirstWordCovers] = useState({});
+  // const [invisibleCovers, setInvisibleCovers] = useState({});
   // END – DEVELOPMENT VARIABLES
 
   // Active Ayah
@@ -140,29 +140,29 @@ const QuranPages = ({
         animated: false,
       });
     }
-  },[pageIndex])
+  }, [pageIndex]);
 
   // START – DEVELOPMENT VARIABLES
-  useEffect(() => {
-    if (currentContent) {
-      const newFirstWordCovers = currentContent
-        .map((ayah) => {
-          return ayah.covers["firstWord"];
-        })
-        .reduce((acc, cur) => {
-          return [...acc, ...cur];
-        }, []);
-      setFirstWordCovers(newFirstWordCovers);
-      const newInvisibleCovers = currentContent
-        .map((ayah) => {
-          return ayah.covers["invisible"];
-        })
-        .reduce((acc, cur) => {
-          return [...acc, ...cur];
-        }, []);
-      setInvisibleCovers(newInvisibleCovers);
-    }
-  }, [currentContent]);
+  // useEffect(() => {
+  //   if (currentContent) {
+  //     const newFirstWordCovers = currentContent
+  //       .map((ayah) => {
+  //         return ayah.covers["firstWord"];
+  //       })
+  //       .reduce((acc, cur) => {
+  //         return [...acc, ...cur];
+  //       }, []);
+  //     setFirstWordCovers(newFirstWordCovers);
+  //     const newInvisibleCovers = currentContent
+  //       .map((ayah) => {
+  //         return ayah.covers["invisible"];
+  //       })
+  //       .reduce((acc, cur) => {
+  //         return [...acc, ...cur];
+  //       }, []);
+  //     setInvisibleCovers(newInvisibleCovers);
+  //   }
+  // }, [currentContent]);
   // END – DEVELOPMENT VARIABLES
 
   return (
@@ -222,8 +222,8 @@ const QuranPages = ({
                 }, [])}
               activePage={activePage}
               // START – DEVELOPMENT VARIABLES
-              invisibleCovers={invisibleCovers}
-              firstWordCovers={firstWordCovers}
+              // invisibleCovers={invisibleCovers}
+              // firstWordCovers={firstWordCovers}
               // END – DEVELOPMENT VARIABLES
             />
           );
