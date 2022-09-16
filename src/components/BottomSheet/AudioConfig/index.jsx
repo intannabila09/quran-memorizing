@@ -48,7 +48,7 @@ const AudioConfig = ({
         surah: 1,
         ayah: 1
     })
-    // console.log(startFromOptions.ayah)
+    
     const [untilOptions, setUntilOptions] = useState({
         surah: SurahItems.map((surah) => ({ value: Number(surah.no), label: surah.name})),
         ayah: [],
@@ -233,7 +233,7 @@ const AudioConfig = ({
                         /> */}
                         <SelectDropdown
                             data={startFromOptions.surah}
-                            value={startFrom.surah}
+                            defaultValue={startFromOptions.surah[0]}
                             rowTextForSelection={(item) => item.label}
                             onSelect={(selectedItem) => {
                                 setStartFrom((prev) => ({...prev, surah: selectedItem.value}))
@@ -279,7 +279,7 @@ const AudioConfig = ({
                         /> */}
                         <SelectDropdown
                             data={startFromOptions.ayah}
-                            value={startFrom.ayah}
+                            defaultValue={startFromOptions.ayah[0]}
                             rowTextForSelection={(item) => item.label}
                             onSelect={(selectedItem) => {
                                 setStartFrom((prev) => ({...prev, ayah: selectedItem.value}))
@@ -339,7 +339,7 @@ const AudioConfig = ({
                         /> */}
                         <SelectDropdown
                             data={untilOptions.surah}
-                            value={until.surah}
+                            defaultValue={untilOptions.surah[0]}
                             rowTextForSelection={(item) => item.label}
                             onSelect={(selectedItem) => {
                                 setUntil((prev) => ({...prev, surah: selectedItem.value}))
@@ -385,7 +385,7 @@ const AudioConfig = ({
                         /> */}
                         <SelectDropdown
                             data={untilOptions.ayah}
-                            value={until.ayah}
+                            defaultValue={untilOptions.ayah[0]}
                             rowTextForSelection={(item) => item.label}
                             onSelect={(selectedItem) => {
                                 setUntil((prev) => ({...prev, ayah: selectedItem.value}))
@@ -439,7 +439,7 @@ const AudioConfig = ({
                     /> */}
                     <SelectDropdown
                         data={qariOptions}
-                        value={qari}
+                        defaultValue={qariOptions[0]}
                         rowTextForSelection={(item) => item.label}
                         onSelect={(selectedItem) => {
                             setQari(selectedItem.value)
@@ -492,7 +492,7 @@ const AudioConfig = ({
                         /> */}
                         <SelectDropdown
                             data={repeatOptions}
-                            value={repeat}
+                            defaultValue={repeatOptions[0]}
                             rowTextForSelection={(item) => item.label}
                             onSelect={(selectedItem) => {
                                 setRepeat(selectedItem.value)
@@ -537,7 +537,7 @@ const AudioConfig = ({
                         /> */}
                         <SelectDropdown
                             data={delayOptions}
-                            value={delay}
+                            defaultValue={delayOptions[0]}
                             rowTextForSelection={(item) => item.label}
                             onSelect={(selectedItem) => {
                                 setDelay(selectedItem.value)
