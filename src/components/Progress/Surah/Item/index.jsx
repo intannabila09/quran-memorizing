@@ -129,16 +129,42 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigati
                 </View>
             </View>
             </TouchableOpacity>
+            <TouchableOpacity
+                style={{
+                    backgroundColor: '#f2f2f2',
+                    padding: 8,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
+                }}
+                onPress={() => {
+                    if (!active) return setActiveSurah(surah.item.no)
+                    return setActiveSurah(null)
+                }}
+            >
+                <Text
+                    style={{
+                        fontSize: 12,
+                        fontWeight: '600',
+                        color: '#454545'
+                    }}
+                >{active ? 'Sembunyikan' : 'Lihat'} Ayat</Text>
+                {
+                    !active ? (
+                        <AntDesign name="caretdown" size={12} color="#969696" />
+                    ) : (
+                        <AntDesign name="caretup" size={12} color="#969696" />
+                    )
+                }
+            </TouchableOpacity>
             {active && (
                 <View
                     style={{
                         paddingTop: 8,
                         paddingBottom: 4,
-                        borderTopWidth: 1,
-                        borderTopColor: '#e0e0e0',
-                        borderBottomColor: '#e0e0e0',
-                        borderBottomWidth: 1,
-                        backgroundColor: '#fafafa'
+                        backgroundColor: '#fafafa',
+                        borderBottomRightRadius: 8,
+                        borderBottomLeftRadius:8,
                     }}
                 >
                     {Array.from({ length: Number(surahContent?.numberOfAyah) }, (_, i) => i + 1)
@@ -180,34 +206,6 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigati
                     })}
                 </View>
             )}
-            <TouchableOpacity
-                style={{
-                    backgroundColor: '#f2f2f2',
-                    padding: 8,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between'
-                }}
-                onPress={() => {
-                    if (!active) return setActiveSurah(surah.item.no)
-                    return setActiveSurah(null)
-                }}
-            >
-                <Text
-                    style={{
-                        fontSize: 12,
-                        fontWeight: '600',
-                        color: '#454545'
-                    }}
-                >{active ? 'Sembunyikan' : 'Lihat'} Ayat</Text>
-                {
-                    !active ? (
-                        <AntDesign name="caretdown" size={12} color="#969696" />
-                    ) : (
-                        <AntDesign name="caretup" size={12} color="#969696" />
-                    )
-                }
-            </TouchableOpacity>
         </View>
     )
 }
