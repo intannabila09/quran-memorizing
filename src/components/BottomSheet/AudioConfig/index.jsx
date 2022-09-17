@@ -86,36 +86,6 @@ const AudioConfig = ({
         })
     }
 
-    const handlePlay = () => {
-        const playlistItems = generatePlaylistItems(
-            startFrom.surah ?? defaultStartFrom.surah.value,
-            startFrom.ayah ?? defaultStartFrom.ayah.value,
-            until.surah ?? defaultUntil.surah.value,
-            until.ayah ?? defaultUntil.ayah.value,
-            qari,
-        )
-        dispatch({
-            type: 'SET_RAW_DATA',
-            payload: {
-                surahStart: startFrom.surah ?? defaultStartFrom.surah.value,
-                ayahStart: startFrom.ayah ?? defaultStartFrom.ayah.value,
-                surahEnd: until.surah ?? defaultUntil.surah.value,
-                ayahEnd: until.ayah ?? defaultUntil.ayah.value,
-            }
-        })
-        dispatch({
-            type: 'SET_ALL_PLAYER_DATA',
-            payload: {
-                playlist: playlistItems,
-                delay,
-                status: 'playing',
-                loop: repeat,
-                index: 0,
-            }
-        })
-        forwardedRef.current.close()
-    }
-
     const startFromOptions = useMemo(() => {
         const surahIndex = startFrom.surah ? startFrom.surah - 1 : surahStart ? surahStart - 1 : 0
         const numberOfAyah = SurahItems[surahIndex].numberOfAyah
@@ -200,6 +170,36 @@ const AudioConfig = ({
             setUntil((prev) => ({ ...prev, ayah: startFrom.ayah }))
         }
     },[startFrom.ayah])
+
+    const handlePlay = () => {
+        const playlistItems = generatePlaylistItems(
+            startFrom.surah ?? defaultStartFrom.surah.value,
+            startFrom.ayah ?? defaultStartFrom.ayah.value,
+            until.surah ?? defaultUntil.surah.value,
+            until.ayah ?? defaultUntil.ayah.value,
+            qari,
+        )
+        dispatch({
+            type: 'SET_RAW_DATA',
+            payload: {
+                surahStart: startFrom.surah ?? defaultStartFrom.surah.value,
+                ayahStart: startFrom.ayah ?? defaultStartFrom.ayah.value,
+                surahEnd: until.surah ?? defaultUntil.surah.value,
+                ayahEnd: until.ayah ?? defaultUntil.ayah.value,
+            }
+        })
+        dispatch({
+            type: 'SET_ALL_PLAYER_DATA',
+            payload: {
+                playlist: playlistItems,
+                delay,
+                status: 'playing',
+                loop: repeat,
+                index: 0,
+            }
+        })
+        forwardedRef.current.close()
+    }
 
     return (
         <View style={styles.container}>
