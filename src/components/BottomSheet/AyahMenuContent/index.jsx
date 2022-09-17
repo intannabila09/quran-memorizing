@@ -119,6 +119,15 @@ const AyahMenuContent = ({
     const playAyah = async (target) => {
         const [surahIndex,ayahNumber] = target.split(":")
         playerDispatch({
+            type: 'SET_RAW_DATA',
+            payload: {
+                surahStart: Number(surahIndex),
+                ayahStart: Number(ayahNumber),
+                surahEnd: Number(surahIndex),
+                ayahEnd: Number(ayahNumber),
+            }
+        })
+        playerDispatch({
             type: 'SET_ALL_PLAYER_DATA',
             payload: {
                 playlist: generatePlaylistItems(
