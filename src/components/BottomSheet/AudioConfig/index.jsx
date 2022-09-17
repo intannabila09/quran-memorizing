@@ -2,7 +2,8 @@ import { useState, useEffect, useMemo } from 'react'
 import { View, Platform, StyleSheet, TouchableOpacity, Text } from "react-native"
 import { FontAwesome } from '@expo/vector-icons';
 import { SurahItems } from 'utils/constants';
-import SelectDropdown from 'react-native-select-dropdown';
+// import SelectDropdown from 'react-native-select-dropdown';
+import SelectDropdown from 'lib/SelectDropdown'
 
 import {
     AVAILABLE_QARI_NAMES,
@@ -201,6 +202,28 @@ const AudioConfig = ({
         forwardedRef.current.close()
     }
 
+    const onSearchSurah = (q, data) => {
+        return data.filter((surah) => {
+            const surahName = String(surah.label).toLowerCase()
+            const aliases = [
+                surahName,
+                surahName.replace('-',''),
+                surahName.replace('-', ' '),
+                surahName.replace(/'/g, ''),
+            ]
+            if (aliases.some(alias => alias.includes(q.toLowerCase()))) return surah 
+            return false
+        })
+    }
+
+    const onAyahSearch = (q, data) => {
+        return data.filter((ayah) => {
+            const ayahNumber = String(ayah.label).toLowerCase()
+            if (ayahNumber.includes(q.toLowerCase())) return ayah
+            return false
+        })
+    }
+
     return (
         <View style={styles.container}>
              <View
@@ -248,6 +271,7 @@ const AudioConfig = ({
                         <Text style={{ marginBottom: 8 }}>Putar dari surat</Text>
                         <SelectDropdown
                             data={startFromOptions.surah}
+                            onSearch={onSearchSurah}
                             defaultValue={defaultStartFrom.surah}
                             rowTextForSelection={(item) => item.label}
                             onSelect={(selectedItem) => {
@@ -281,6 +305,7 @@ const AudioConfig = ({
                         <Text style={{ marginBottom: 8 }}>Ayat</Text>
                         <SelectDropdown
                             data={startFromOptions.ayah}
+                            onSearch={onAyahSearch}
                             defaultValue={defaultStartFrom.ayah}
                             rowTextForSelection={(item) => item.label}
                             onSelect={(selectedItem) => {
@@ -328,6 +353,7 @@ const AudioConfig = ({
                         <Text style={{ marginBottom: 8 }}>Sampai surat</Text>
                         <SelectDropdown
                             data={untilOptions.surah}
+                            onSearch={onSearchSurah}
                             defaultValue={defaultUntil.surah}
                             rowTextForSelection={(item) => item.label}
                             onSelect={(selectedItem) => {
@@ -361,6 +387,7 @@ const AudioConfig = ({
                         <Text style={{ marginBottom: 8 }}>Ayat</Text>
                         <SelectDropdown
                             data={untilOptions.ayah}
+                            onSearch={onAyahSearch}
                             defaultValue={until.surah ? untilOptions.ayah[0] : defaultUntil.ayah}
                             rowTextForSelection={(item) => item.label}
                             onSelect={(selectedItem) => {
