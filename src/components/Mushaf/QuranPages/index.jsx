@@ -107,6 +107,15 @@ const QuranPages = ({
         currentContent[currentContent.length - 1].verse.split(":");
       if (playerState.status === "stopped") {
         playerDispatch({
+          type: "SET_RAW_DATA",
+          payload: {
+            surahStart,
+            ayahStart,
+            surahEnd,
+            ayahEnd,
+          }
+        })
+        playerDispatch({
           type: "SET_PLAYLIST",
           payload: generatePlaylistItems(
             Number(surahStart),
