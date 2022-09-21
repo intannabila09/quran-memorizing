@@ -19,6 +19,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useOnBoardingState } from 'context/OnBoardingContext';
 import _ from 'lodash'
 
+import { useKeepAwake } from 'expo-keep-awake'
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#f8f5e9',
@@ -35,6 +37,7 @@ const ForwardAudioConfig = forwardRef((props, ref) => <AudioConfig {...props} fo
 const ForwardAddNote = forwardRef((props, ref) => <AddNoteModalContent {...props} forwardedRef={ref} />)
 
 const Mushaf = ({ route, navigation }) => {
+    useKeepAwake()
     const { pageIndex = 0 } = route.params || {}
     const [showMenu, setShowMenu] = useState(true)
     const bottomMenuPosition = useRef(new Animated.Value(0)).current
