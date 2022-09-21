@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { View, StyleSheet, Platform, Text, TextInput, TouchableOpacity } from "react-native"
+import { View, StyleSheet, Platform, Text, TextInput, TouchableOpacity, BackHandler } from "react-native"
 import { FontAwesome } from '@expo/vector-icons';
 import ContentMapper from 'assets/mushaf/ContentMapper'
 import { findJuzFromAyah } from 'utils/helpers'
@@ -78,6 +78,18 @@ const NoteViewerModalContent = ({
         setText('')
         forwardedRef.current.close()
     }
+
+    useEffect(() => {
+        const backAction = () => {
+            forwardedRef.current.close()
+            return true
+        }
+        const backHandler = BackHandler.addEventListener(
+            'hardwareBackPress',
+            backAction,
+        )
+        return () => backHandler.remove()
+    },[])
 
     return (
         <View style={styles.container}>     

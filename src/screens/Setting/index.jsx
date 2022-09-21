@@ -69,6 +69,36 @@ const Setting = ({ navigation }) => {
                             </Text>
                         </TouchableOpacity>
                     </View>
+                    <View style={{
+                        paddingTop: 12
+                    }}>
+                        <Text style={{ fontSize: 16, fontWeight: '600'}}>
+                            Tentang Aplikasi Menghafal Alquran
+                        </Text>
+                        <Text style={{ marginTop: 8, fontSize: 12, lineHeight: 20, textAlign: 'justify' }}>
+                            Aplikasi menghafal Alquran ini merupakan proyek riset yang dikembangkan oleh Pusat Studi Digitalisasi Ilmu Alquran Jurusan Informatika, Universitas Islam Indonesia untuk memudahkan proses belajar menghafal Alquran bagi para mahasiswa dan umat muslim.
+                        </Text>
+                    </View>
+                    <View>
+                        <Text style={{ fontSize: 16, fontWeight: '600', marginTop: 12}}>
+                            Versi Aplikasi
+                        </Text>
+                        <View style={{ marginTop: 12 }}>
+                            <Text>1.01</Text>
+                            <Text style={{ fontSize: 12, marginTop: 8, lineHeight: 20}}>
+                                Minimum Viable Product dengan fitur:{'\n'}
+                                1. Mushaf Juz 30 dengan layout Alquran standar Indonesia{'\n'}
+                                2. Fitur pencatatan progress hafalan{'\n'}
+                                3. Fitur pengaturan mode tikrar dan tutup ayat{'\n'}
+                                4. Terjemah ayat{'\n'}
+                                5. Fitur pencarian ayat{'\n'}
+                                6. Fitur pencarian surat{'\n'}
+                                7. Fitur pencarian juz{'\n'}
+                                8. Riwayat Hafalan{'\n'}
+                                9. Catatan pada ayat{'\n'}
+                            </Text>
+                        </View>
+                    </View>
                 </View>
             </SafeAreaView>
         </>

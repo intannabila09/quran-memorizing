@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { View, Platform, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native"
+import { View, Platform, StyleSheet, Text, TouchableOpacity, ScrollView, BackHandler } from "react-native"
 import { useMushafState } from "context/MushafContext"
 import { FontAwesome } from '@expo/vector-icons';
 import ContentMapper from "assets/mushaf/ContentMapper"
@@ -40,6 +40,18 @@ const TranslationModalContent = ({
         
         }
     },[juz])
+
+    useEffect(() => {
+        const backAction = () => {
+            forwardedRef.current.close()
+            return true
+        }
+        const backHandler = BackHandler.addEventListener(
+            'hardwareBackPress',
+            backAction,
+        )
+        return () => backHandler.remove()
+    },[])
 
     return (
         <View style={styles.container}>

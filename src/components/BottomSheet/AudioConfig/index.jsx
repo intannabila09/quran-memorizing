@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
-import { View, Platform, StyleSheet, TouchableOpacity, Text } from "react-native"
+import { View, Platform, StyleSheet, TouchableOpacity, Text, BackHandler } from "react-native"
 import { FontAwesome } from '@expo/vector-icons';
 import { SurahItems } from 'utils/constants';
 // import SelectDropdown from 'react-native-select-dropdown';
@@ -223,6 +223,18 @@ const AudioConfig = ({
             return false
         })
     }
+
+    useEffect(() => {
+        const backAction = () => {
+            forwardedRef.current.close()
+            return true
+        }
+        const backHandler = BackHandler.addEventListener(
+            'hardwareBackPress',
+            backAction,
+        )
+        return () => backHandler.remove()
+    },[])
 
     return (
         <View style={styles.container}>

@@ -89,7 +89,7 @@ const Mushaf = ({ route, navigation }) => {
 
     const toggleMenu = (menuVisible) => {
         Animated.timing(bottomMenuPosition, {
-            toValue: menuVisible ? -150 : OS === 'ios' ? -28 : 5,
+            toValue: menuVisible ? -150 : OS === 'ios' ? -28 : 28,
             duration: 200,
             useNativeDriver: false,
         }).start()
