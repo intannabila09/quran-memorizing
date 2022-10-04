@@ -76,7 +76,7 @@ const Setting = ({ navigation }) => {
                             Tentang Aplikasi Menghafal Alquran
                         </Text>
                         <Text style={{ marginTop: 8, fontSize: 12, lineHeight: 20, textAlign: 'justify' }}>
-                            Aplikasi menghafal Alquran ini merupakan proyek riset yang dikembangkan oleh Pusat Studi Digitalisasi Ilmu Alquran Jurusan Informatika, Universitas Islam Indonesia untuk memudahkan proses belajar menghafal Alquran bagi para mahasiswa dan umat muslim.
+                            Aplikasi menghafal Al-Quran ini diinisiasi oleh dosen Jurusan Informatika dan dosen Fakultas Ilmu Agama Islam (FIAI) Universitas Islam Indonesia. Tim pelaksana program adalah dua programmer dari mahasiswa program studi Informatika. Program ini merupakan hibah penelitian unggulan Direktorat Penelitian dan Pengabdian Masyarakat UII tahun 2022. Aplikasi ini akan didedikasikan ke masyarakat melalui komunitas Pusat Kontribusi Teknologi Islami (Contribution Center of Islamic Technology).
                         </Text>
                     </View>
                     <View>
@@ -90,12 +90,13 @@ const Setting = ({ navigation }) => {
                                 1. Mushaf Juz 30 dengan layout Alquran standar Indonesia{'\n'}
                                 2. Fitur pencatatan progress hafalan{'\n'}
                                 3. Fitur pengaturan mode tikrar dan tutup ayat{'\n'}
-                                4. Terjemah ayat{'\n'}
-                                5. Fitur pencarian ayat{'\n'}
-                                6. Fitur pencarian surat{'\n'}
-                                7. Fitur pencarian juz{'\n'}
-                                8. Riwayat Hafalan{'\n'}
-                                9. Catatan pada ayat{'\n'}
+                                4. Fitur audio dan mode perulangan{'\n'}
+                                5. Terjemah ayat{'\n'}
+                                6. Fitur pencarian ayat{'\n'}
+                                7. Fitur pencarian surat{'\n'}
+                                8. Fitur pencarian juz{'\n'}
+                                9. Riwayat Hafalan{'\n'}
+                                10. Catatan pada ayat{'\n'}
                             </Text>
                         </View>
                     </View>
