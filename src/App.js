@@ -78,8 +78,8 @@ const App = () => {
               {/* Onboarding Screen */}
               <Stack.Screen name="Welcome" component={WelcomeScreen} />
               <Stack.Screen name="InputMemorization" component={InputMemorization} />
-              <Stack.Screen name="InputByJuz" component={InputByJuz} />
-              <Stack.Screen name="InputBySurah" component={InputBySurah} />
+              <Stack.Screen name="InputByJuz" component={InputByJuz} options={{gestureEnabled: false}} />
+              <Stack.Screen name="InputBySurah" component={InputBySurah} options={{gestureEnabled: false}} />
               <Stack.Screen name="PersonalizationConfig" component={PersonalizationConfig} />
               {/* Homepage */}
               <Stack.Screen name="Homepage" component={Homepage} />

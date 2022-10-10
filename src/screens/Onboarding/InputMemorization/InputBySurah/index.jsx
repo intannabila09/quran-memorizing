@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {StyleSheet, View, Image, Text, SafeAreaView, Platform} from 'react-native'
+import {StyleSheet, View, Image, Text, SafeAreaView, Platform, Alert, BackHandler} from 'react-native'
 import AccentPattern from 'assets/accent-pattern.png'
 import TextButton from 'components/Buttons/TextButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
@@ -41,6 +41,32 @@ const InputBySurah = ({ navigation }) => {
             />
         )
     }
+
+    const handleBack = () => {
+        Alert.alert(
+            'Apakah anda yakin untuk kembali?',
+            'Progress yang sudah ada tandai pada halaman ini belum disimpan.',
+            [
+                {
+                    text: 'Batal',
+                    onPress: () => {},
+                    style: 'cancel'
+                },
+                {
+                    text: 'Ya',
+                    onPress: () => navigation.goBack()
+                }
+            ]
+        )
+    }
+
+    useEffect(() => {
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            handleBack
+        );
+        return () => backHandler.remove();
+    },[])
     
     useEffect(() => {
         const populateOnBoardingData = () => {
@@ -82,7 +108,7 @@ const InputBySurah = ({ navigation }) => {
                             renderItem={renderSurahItem}
                         />
                         <PrimaryButton title="Selanjutnya"  onPress={() => navigation.navigate('PersonalizationConfig') }/>
-                        <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={() => navigation.goBack()}/>
+                        <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={handleBack}/>
                     </View>
                     <View style={{ position: 'absolute', bottom: 0, right: 0, zIndex: 1, elevation: 1 }}>
                         <Image source={AccentPattern} />

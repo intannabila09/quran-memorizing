@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Image, Text, TouchableOpacity, BackHandler, Alert } from 'react-native'
 import TextButton from 'components/Buttons/TextButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
 import AccentPattern from 'assets/accent-pattern.png'
@@ -75,6 +75,24 @@ const InputByJuz = ({ navigation }) => {
             })
         }
     }
+
+    const handleBack = () => {
+        Alert.alert(
+            'Apakah anda yakin untuk kembali?',
+            'Progress yang sudah ada tandai pada halaman ini belum disimpan.',
+            [
+                {
+                    text: 'Batal',
+                    onPress: () => {},
+                    style: 'cancel'
+                },
+                {
+                    text: 'Ya',
+                    onPress: () => navigation.goBack()
+                }
+            ]
+        )
+    }
     
     useEffect(() => {
         const populateOnBoardingData = () => {
@@ -97,6 +115,13 @@ const InputByJuz = ({ navigation }) => {
         }
 
         populateOnBoardingData()
+    },[])
+
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', handleBack)
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', handleBack)
+        }
     },[])
 
     return (
@@ -136,7 +161,7 @@ const InputByJuz = ({ navigation }) => {
                     items={JuzItems}
                 />
                 <PrimaryButton title="Selanjutnya" onPress={() => navigation.navigate('PersonalizationConfig') }/>
-                <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={() => navigation.goBack()}/>
+                <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={handleBack}/>
             </View>
             <View style={{ position: 'absolute', zIndex: 1, elevation: 1, right: 0, bottom: 0 }}>
                 <Image source={AccentPattern} />
