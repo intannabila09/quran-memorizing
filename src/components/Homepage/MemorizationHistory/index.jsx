@@ -40,14 +40,11 @@ const MemorizationHistory = ({ navigation }) => {
                     ) : (
                         <View
                             style={{
-                                backgroundColor: '#e5e7eb',
-                                borderWidth: 1,
-                                borderColor: '#d1d5db',
-                                padding: 12,
+                                paddingVertical: 0,
                                 borderRadius: 4,
                             }}
                         >
-                            <Text style={{ color: '#6b7280' }}>Kamu belum memiliki riwayat hafalan.</Text>
+                            <Text style={{ color: '#4f4f4f' }}>Kamu belum memiliki riwayat hafalan.</Text>
                         </View>
                     )
                 }
