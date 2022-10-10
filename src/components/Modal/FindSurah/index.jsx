@@ -79,6 +79,32 @@ const FindSurah = ({
                                 style={{
                                     flexDirection: 'row',
                                     alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    marginBottom: 12,
+                                    width: '100%'
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        fontSize: 20,
+                                        fontWeight: '700'
+                                    }}
+                                >
+                                    Pencarian Surat
+                                </Text>
+                                <TouchableOpacity
+                                    style={{
+                                        paddingLeft: 8,
+                                    }}
+                                    onPress={() => setVisibility(false)}
+                                >
+                                    <AntDesign name="closecircle" size={16} color="#6e6e6e" />
+                                </TouchableOpacity>
+                            </View>
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
                                     justifyContent: 'center',
                                     width: '100%',
                                 }}
@@ -91,18 +117,11 @@ const FindSurah = ({
                                         borderRadius: 4,
                                         padding: 8,
                                     }}
-                                    placeholder="Cari surat"
+                                    placeholderTextColor="#787878"
+                                    placeholder="Ketik surat"
                                     value={query}
                                     onChangeText={(e) => setQuery(e)}
                                 />
-                                <TouchableOpacity
-                                    style={{
-                                        paddingLeft: 8,
-                                    }}
-                                    onPress={() => setVisibility(false)}
-                                >
-                                    <AntDesign name="closecircle" size={16} color="#6e6e6e" />
-                                </TouchableOpacity>
                             </View>
                             <View
                                 style={{
