@@ -1,16 +1,17 @@
-import { View, StyleSheet, Image, Text } from 'react-native'
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
 import TextButton from 'components/Buttons/TextButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
 import AccentPattern from 'assets/accent-pattern.png'
 import CheckableListInput from 'components/CheckableListInput'
 import { useUserData } from 'context/UserDataContext'
+import Checkbox from 'expo-checkbox'
 
 import { JuzItems } from 'utils/constants'
 import JuzInputListItem from 'components/JuzInputListItem';
 
 import { useOnBoardingState } from 'context/OnBoardingContext'
 
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import _ from 'lodash'
 
 const styles = StyleSheet.create({
@@ -30,6 +31,11 @@ const styles = StyleSheet.create({
 const InputByJuz = ({ navigation }) => {
     const { onBoardingState, dispatch } = useOnBoardingState()
     const { userDataState } = useUserData()
+    const { memorized: { juz: memorizedJuz }} = onBoardingState
+
+    const memorizedAll = useMemo(() => {
+        return memorizedJuz?.length === 30
+    },[memorizedJuz])
 
     const renderJuzItem = (juz) => {
         return (
@@ -56,6 +62,18 @@ const InputByJuz = ({ navigation }) => {
                 }}
             />
         )
+    }
+
+    const handleCheckAll = () => {
+        if (memorizedAll) {
+            dispatch({
+                action: 'REMOVE_ALL_JUZ'
+            })
+        } else {
+            dispatch({
+                action: 'ADD_ALL_JUZ'
+            })
+        }
     }
     
     useEffect(() => {
@@ -84,7 +102,31 @@ const InputByJuz = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{ width: '100%', position: 'relative', zIndex: 3, elevation: 3 }}>
-                <Text style={{ marginBottom: 24, fontSize: 32, fontWeight: 'bold'}}>Pilih Juz yang sudah kamu hafalkan</Text>
+                <Text style={{ fontSize: 32, fontWeight: 'bold'}}>Pilih Juz yang sudah kamu hafalkan</Text>
+                <TouchableOpacity
+                    style={{
+                        marginVertical: 20,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                    }}
+                    onPress={handleCheckAll}
+                >
+                    <Checkbox
+                        style={{
+                            width: 16,
+                            height: 16,
+                            borderColor: '#AEAEAE',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            marginRight: 12,
+                        }}
+                        value={memorizedAll}
+                        color={memorizedAll ? '#1DC25D' : null}
+                    />
+                    <Text>
+                        Tandai Sudah Hafal Semua
+                    </Text>
+                </TouchableOpacity>
                 <CheckableListInput
                     style={{
                         height: 310,

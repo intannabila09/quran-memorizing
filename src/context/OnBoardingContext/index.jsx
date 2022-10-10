@@ -115,6 +115,22 @@ const OnBoardingStateReducer = (state,
                         surah: [],
                     }
                 }
+            case 'ADD_ALL_JUZ':
+                return {
+                    ...state,
+                    memorized: {
+                        surah: [],
+                        juz: [...Array.from({ length: 30 }, (_, i) => `juz${i + 1}`)]
+                    }
+                }
+            case 'REMOVE_ALL_JUZ':
+                return {
+                    ...state,
+                    memorized: {
+                        juz: [],
+                        surah: [],
+                    }
+                }
         }
     }
 
