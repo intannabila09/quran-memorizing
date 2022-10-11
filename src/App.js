@@ -18,6 +18,9 @@ import MemorizationProgress from 'screens/Progress';
 import Mushaf from 'screens/Mushaf';
 import Loading from 'screens/Onboarding/Loading';
 
+import About from 'screens/Setting/About';
+import Contact from 'screens/Setting/Contact';
+
 // Storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -91,6 +94,10 @@ const App = () => {
               <Stack.Screen name="Notes" component={Notes} />
               {/* Setting */}
               <Stack.Screen name="Setting" component={Setting} />
+              {/* About */}
+              <Stack.Screen name="About" component={About} />
+              {/* Contact */}
+              <Stack.Screen name="Contact" component={Contact} />
         </Stack.Navigator>
       </NavigationContainer>
   );

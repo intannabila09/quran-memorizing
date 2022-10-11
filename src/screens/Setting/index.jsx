@@ -69,36 +69,44 @@ const Setting = ({ navigation }) => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={{
-                        paddingTop: 12
-                    }}>
-                        <Text style={{ fontSize: 16, fontWeight: '600'}}>
-                            Tentang Aplikasi Menghafal Alquran
-                        </Text>
-                        <Text style={{ marginTop: 8, fontSize: 12, lineHeight: 20, textAlign: 'justify' }}>
-                            Aplikasi menghafal Al-Quran ini diinisiasi oleh dosen Jurusan Informatika dan dosen Fakultas Ilmu Agama Islam (FIAI) Universitas Islam Indonesia. Tim pelaksana program adalah dua programmer dari mahasiswa program studi Informatika. Program ini merupakan hibah penelitian unggulan Direktorat Penelitian dan Pengabdian Masyarakat UII tahun 2022. Aplikasi ini akan didedikasikan ke masyarakat melalui komunitas Pusat Kontribusi Teknologi Islami (Contribution Center of Islamic Technology).
-                        </Text>
-                    </View>
-                    <View>
-                        <Text style={{ fontSize: 16, fontWeight: '600', marginTop: 12}}>
-                            Versi Aplikasi
-                        </Text>
-                        <View style={{ marginTop: 12 }}>
-                            <Text>1.01</Text>
-                            <Text style={{ fontSize: 12, marginTop: 8, lineHeight: 20}}>
-                                Minimum Viable Product dengan fitur:{'\n'}
-                                1. Mushaf Juz 30 dengan layout Alquran standar Indonesia{'\n'}
-                                2. Fitur pencatatan progress hafalan{'\n'}
-                                3. Fitur pengaturan mode tikrar dan tutup ayat{'\n'}
-                                4. Fitur audio dan mode perulangan{'\n'}
-                                5. Terjemah ayat{'\n'}
-                                6. Fitur pencarian ayat{'\n'}
-                                7. Fitur pencarian surat{'\n'}
-                                8. Fitur pencarian juz{'\n'}
-                                9. Riwayat Hafalan{'\n'}
-                                10. Catatan pada ayat{'\n'}
+                    <View
+                        style={{
+                            paddingTop: 16,
+                        }}
+                    >
+                        <TouchableOpacity
+                            style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                padding: 12,
+                                borderRadius: 4,
+                                borderWidth: 1,
+                                borderColor: '#e2e2e2',
+                                marginBottom: 8
+                            }}
+                            onPress={() => navigation.navigate('About')}
+                        >
+                            <Ionicons name="information-circle" size={16} color="#8a8a8a" />
+                            <Text style={{ marginLeft: 8, fontWeight: '500'}}>
+                                Tentang Aplikasi Tikrar
                             </Text>
-                        </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                padding: 12,
+                                borderRadius: 4,
+                                borderWidth: 1,
+                                borderColor: '#e2e2e2'
+                            }}
+                            onPress={() => navigation.navigate('Contact')}
+                        >
+                            <Ionicons name="call" size={16} color="#8a8a8a" />
+                            <Text style={{ marginLeft: 8, fontWeight: '500'}}>
+                                Hubungi Pengembang Aplikasi
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </SafeAreaView>
