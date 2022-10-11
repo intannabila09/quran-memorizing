@@ -44,7 +44,7 @@ const Mushaf = ({ route, navigation }) => {
     const topMenuPosition = useRef(new Animated.Value(0)).current
 
     const ayahMenuRef = useRef(null)
-    const snapPoints = useMemo(() => ['40%', '50%'],[])
+    const snapPoints = useMemo(() => ['40%', '50%','60%'],[])
     const [ayahMenuVisible,setAyahMenuVisible] = useState(false)
 
     // Translation
@@ -188,7 +188,7 @@ const Mushaf = ({ route, navigation }) => {
                     ayahMenuVisible && (
                         <BottomSheet
                             ref={ayahMenuRef}
-                            index={1}
+                            index={2}
                             snapPoints={snapPoints}
                             backdropComponent={renderBottomSheetBackdrop}
                             {...(OS === 'android' && { handleComponent: null})}

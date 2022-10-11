@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { View, StyleSheet, Text, Platform, TouchableOpacity, Switch } from "react-native"
 import { SurahItems } from "utils/constants";
 import { useMushafState } from "context/MushafContext";
@@ -30,6 +30,16 @@ const AyahMenuContent = ({
     const [activeAyah,setActiveAyah] = useState({ surahNumber: 0, surahName: "", ayah: "" })
     const { userDataState, dispatch } = useUserData()
     const { dispatch: playerDispatch } = usePlayerProvider()
+    const translation = useMemo(() => {
+        if (!selectedAyah) return ''
+        const [surahIndex,ayahNumber] = selectedAyah.split(":")
+        const juz = findJuzFromAyah(Number(surahIndex),Number(ayahNumber))
+        const surah = ContentMapper()[juz]
+            .metadata
+            .find(surah => surah.number === Number(surahIndex))
+        const ayah = surah.ayah.find(ayah => ayah.number === Number(ayahNumber))
+        return ayah?.translation ?? ''
+    },[selectedAyah])
     // console.log(userDataState.memorized)
 
     const memorizeAyah = async (target) => {
@@ -270,7 +280,7 @@ Surah ${surah.name.id}:${ayah.number}
                         flexDirection: "row",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        marginBottom: 12,
+                        marginBottom: 4,
                     }}
                 >
                     <View
@@ -301,6 +311,11 @@ Surah ${surah.name.id}:${ayah.number}
                         }}
                         value={memorized}
                     />
+                </View>
+                <View style={{ paddingTop: 8, paddingBottom: 12, }}>
+                    <Text>
+                         {translation?.length > 255 ? translation.slice(0,250) + '...' : translation} 
+                    </Text>
                 </View>
                 {AYAH_MENU_ITEMS(memorized).map(item => {
                     return (
