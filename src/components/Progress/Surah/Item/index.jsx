@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { SurahItems } from 'utils/constants'
 import { useUserData } from 'context/UserDataContext';
 import { showMessage } from 'react-native-flash-message';
+import Content from 'assets/mushaf/juz30'
 
 
 const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigation }) => {
@@ -26,14 +27,16 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigati
         else return userDataState?.memorized?.surah[surah?.item?.no]
     },[active])
 
-    const navigateToSurah = () => {
+    const navigateToSurah = (targetType = 'surah', ayahNumber = null) => {
         if (!surahContent?.hasOwnProperty('page')) return showMessage({
             message: "Halaman yang diminta belum tersedia saat ini.",
             type: 'warning',
             color: '#472a00'
         })
+        const content = Content()['metadata'].find(item => String(item.number) === String(surahContent.no))
+        const pageTarget = targetType === 'surah' ? surahContent?.page : content['ayah'][ayahNumber - 1]['pageIndex']
         return navigation.navigate('Mushaf', {
-            pageIndex: Number(surahContent?.page)
+            pageIndex: Number(pageTarget)
         })
     }
 
@@ -52,7 +55,7 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigati
                     padding: 12,
                     paddingBottom: 4,
                 }}
-                onPress={navigateToSurah}
+                onPress={() => navigateToSurah()}
             >
                 <View
                     style={{
@@ -183,7 +186,7 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigati
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
                                 }}
-                                onPress={navigateToSurah}
+                                onPress={() => navigateToSurah('ayah', ayahItem)}
                             >
                                 <Text style={{ fontSize: 12 }}>Ayat {ayahItem}</Text>
                                 <View>
