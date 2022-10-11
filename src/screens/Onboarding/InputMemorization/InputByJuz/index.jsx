@@ -147,6 +147,7 @@ const InputByJuz = ({ navigation }) => {
                         }}
                         value={memorizedAll}
                         color={memorizedAll ? '#1DC25D' : null}
+                        onValueChange={handleCheckAll}
                     />
                     <Text>
                         Tandai Sudah Hafal Semua
