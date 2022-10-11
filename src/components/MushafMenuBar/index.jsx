@@ -330,7 +330,7 @@ const MushafMenuBar = ({
                     >
                         <View styles={styles.buttonContainer}>
                             <FontAwesome name="eye" size={24} color={visibilityMode === 'all' ? '#A0A0A0' : '#16a34a'} style={{ marginLeft: 8}} />
-                            <Text style={styles.buttonText}>Tampilan</Text>
+                            <Text style={styles.buttonText}>Tutup Ayat</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

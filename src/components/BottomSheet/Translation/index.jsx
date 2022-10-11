@@ -108,12 +108,13 @@ const TranslationModalContent = ({
                                     </View>
                                     <View style={{ padding: 8}}>
                                         {
-                                            content[key].ayah.map((verse) => {
+                                            verses[key] && verses[key].map((item) => {
+                                                const ayah = content[key].ayah.find((ayah) => String(ayah.number) === String(item))
                                                 return (
-                                                    <View style={{ flexDirection: 'row', marginBottom: 8 }} key={verse.id}>
-                                                        <Text style={{ marginRight: 8, fontWeight: '600'}}>{verse.number}.</Text>
+                                                    <View style={{ flexDirection: 'row', marginBottom: 8 }} key={ayah.id}>
+                                                        <Text style={{ marginRight: 8, fontWeight: '600'}}>{ayah.number}.</Text>
                                                         <Text>
-                                                            {verse.translation}
+                                                            {ayah.translation}
                                                         </Text>
                                                     </View>
                                                 )
