@@ -36,7 +36,8 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigati
         const content = Content()['metadata'].find(item => String(item.number) === String(surahContent.no))
         const pageTarget = targetType === 'surah' ? surahContent?.page : content['ayah'][ayahNumber - 1]['pageIndex']
         return navigation.navigate('Mushaf', {
-            pageIndex: Number(pageTarget)
+            pageIndex: Number(pageTarget),
+            activeAyah: targetType === 'surah' ? null : `${surahContent.no}:${ayahNumber}`,
         })
     }
 

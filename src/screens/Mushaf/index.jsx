@@ -38,7 +38,7 @@ const ForwardAddNote = forwardRef((props, ref) => <AddNoteModalContent {...props
 
 const Mushaf = ({ route, navigation }) => {
     useKeepAwake()
-    const { pageIndex = 0 } = route.params || {}
+    const { pageIndex = 0, activeAyah = null } = route.params || {}
     const [showMenu, setShowMenu] = useState(true)
     const bottomMenuPosition = useRef(new Animated.Value(0)).current
     const topMenuPosition = useRef(new Animated.Value(0)).current
@@ -175,6 +175,7 @@ const Mushaf = ({ route, navigation }) => {
                                 setShowMenu={setShowMenu}
                                 handleDisplayAyahMenu={handleDisplayAyahMenu}
                                 pageIndex={pageIndex}
+                                highlightedAyahValue={activeAyah}
                             />
                         </View>
                     <MushafMenuBar

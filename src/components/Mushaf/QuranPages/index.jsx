@@ -12,10 +12,13 @@ const QuranPages = ({
   showMenu,
   setShowMenu,
   pageIndex,
+  highlightedAyahValue,
   handleDisplayAyahMenu = () => {},
 }) => {
   // console.log('renderer', initialJuz, initialPage)
   const [activeJuz, setActiveJuz] = useState(30);
+  const [highlightedAyah,setHighlightedAyah] = useState(highlightedAyahValue)
+
   const [pages, setPages] = useState([
     "23",
     "22",
@@ -74,9 +77,10 @@ const QuranPages = ({
   const versePress = () => {
     setActiveAyah(null);
     setShowMenu(!showMenu);
+    if (!!highlightedAyah) setHighlightedAyah(null)
     console.log("press");
   };
-
+  
   useEffect(() => {
     if (activePage) {
       setActiveAyah(null);
@@ -140,6 +144,12 @@ const QuranPages = ({
       setShowMenu(false);
     }, 1000);
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!!highlightedAyah) setHighlightedAyah(null)
+    },5000)
+  },[])
 
   // Scroll to page
   useEffect(() => {
@@ -230,6 +240,7 @@ const QuranPages = ({
                   return [...acc, ...cur];
                 }, [])}
               activePage={activePage}
+              highlightedAyah={highlightedAyah}
               // START – DEVELOPMENT VARIABLES
               // invisibleCovers={invisibleCovers}
               // firstWordCovers={firstWordCovers}

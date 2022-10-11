@@ -38,6 +38,7 @@ const RenderPage = ({
   verseLongPress = () => {},
   covers = [],
   setActiveAyah = () => {},
+  highlightedAyah = null,
   // Used to chech if current page is displayed on screen
   page = {},
   activePage = null,
@@ -77,6 +78,7 @@ const RenderPage = ({
             ayahPositions={ayahPositions}
             versePress={versePress}
             verseLongPress={verseLongPress}
+            highlightedAyah={highlightedAyah}
           />
           {/* Covers Layer */}
           <AyahCovers
