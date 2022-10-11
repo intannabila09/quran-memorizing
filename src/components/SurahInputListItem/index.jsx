@@ -7,9 +7,7 @@ import InputSuratItemPercentage from 'components/Percentage/InputSuratItemPercen
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#FFFFFF',
         borderWidth: 1,
-        borderColor: '#E6E6E6',
         width: '100%',
         borderRadius: 8,
         marginBottom: 8,
@@ -86,7 +84,7 @@ const AyatInSurah = ({ surahNumber = null, numberOfAyat = 0 }) => {
                                 style={{
                                     paddingVertical: 12,
                                     paddingHorizontal: 16,
-                                    backgroundColor: '#FDFDFD',
+                                    backgroundColor: thisAyahIsMemorized(ayat, memorizedAyah) ? '#dcfce7' : '#FFFFFF',
                                     borderTopWidth: 1,
                                     borderTopColor: '#F7F7F7',
                                     flex: 1,
@@ -95,7 +93,7 @@ const AyatInSurah = ({ surahNumber = null, numberOfAyat = 0 }) => {
                                     justifyContent: 'space-between',
                                 }}
                             >
-                                <Text style={{ fontWeight: '500' }}>
+                                <Text style={{ fontWeight: '500', color: thisAyahIsMemorized(ayat, memorizedAyah) ? "#166534" : '#111827' }}>
                                     Ayat {ayat}
                                 </Text>
                                 <Checkbox
@@ -108,6 +106,13 @@ const AyatInSurah = ({ surahNumber = null, numberOfAyat = 0 }) => {
                                     }}
                                     color={thisAyahIsMemorized(ayat,memorizedAyah) ? '#1DC25D' : null}
                                     value={thisAyahIsMemorized(ayat,memorizedAyah)}
+                                    onValueChange={() => {
+                                        if (!thisAyahIsMemorized(ayat,memorizedAyah)) {
+                                            memorizeThisAyah(ayat)
+                                        } else {
+                                            unmemorizeThisAyah(ayat)
+                                        }
+                                    }}
                                 />
                             </View>
                         </TouchableOpacity>
@@ -147,7 +152,13 @@ const SurahInputListItem = ({ surah, showAyat, setShowAyat }) => {
     }
 
     return (
-        <View style={styles.container}>
+        <View
+            style={{
+                ...styles.container,
+                backgroundColor: checked ? '#f0fdf4' : '#FFFFFF',
+                borderColor: checked ? '#86efac' : '#D1D5DB'
+            }}
+        >
             <TouchableOpacity
                 onPress={() => {
                     if (!checked) {
@@ -160,7 +171,12 @@ const SurahInputListItem = ({ surah, showAyat, setShowAyat }) => {
                 <View style={styles.detail_container}>
                     <View style={styles.detail_container_surah}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row'}}>
-                            <View style={styles.number_wrapper}>
+                            <View
+                                style={{
+                                    ...styles.number_wrapper,
+                                    backgroundColor: checked ? '#dcfce7' : '#F7F7F7',
+                                }}
+                            >
                                 <Text style={{ fontSize: 14, fontWeight: '600', color: '#000000'}}>
                                     {surah.item.no}
                                 </Text>
@@ -181,6 +197,13 @@ const SurahInputListItem = ({ surah, showAyat, setShowAyat }) => {
                                 }}
                                 color={checked ? '#1DC25D' : null}
                                 value={checked}
+                                onValueChange={() => {
+                                    if (!checked) {
+                                        memorizeAllAyahInThisSurah()
+                                    } else {
+                                        unmemorizeAllAyahInThisSurah()
+                                    }
+                                }}
                             />
                     </View>
                     <InputSuratItemPercentage total={Number(surah.item.numberOfAyah)} memorized={memorizedAyah.length}  />
