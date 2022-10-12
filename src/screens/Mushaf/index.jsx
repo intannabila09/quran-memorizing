@@ -67,6 +67,7 @@ const Mushaf = ({ route, navigation }) => {
     const { selectedAyah } = mushafState
     const { userDataState, dispatch: userDataDispatch } = useUserData()
     const { memorized } = userDataState
+    console.log(mushafState, userDataState)
 
     // OnBoarding State
     const {onBoardingState, dispatch: onBoardingDispatch} = useOnBoardingState()

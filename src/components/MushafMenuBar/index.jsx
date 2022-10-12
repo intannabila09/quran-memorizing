@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { TouchableOpacity, View, Animated, Text, StyleSheet  } from 'react-native'
+import { TouchableOpacity, View, Animated, Text, StyleSheet, Image  } from 'react-native'
 import { FontAwesome5, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useMushafState } from 'context/MushafContext';
+// import TikrarPlus from 'assets/TikrarPlus.png';
 
 import { Audio } from 'expo-av'
 import { usePlayerProvider } from 'context/PlayerContext';
@@ -307,7 +308,15 @@ const MushafMenuBar = ({
                     onPress={mushafState.tikrarMethod === 'count' ? increaseCounter : toggleTimerState}
                 >
                     {mushafState.tikrarMethod === 'count' ? (
-                        <FontAwesome5 name="angle-double-up" size={32} color="#FFFFFF" style={{ marginBottom: 0 }} />
+                        <Image
+                            style={{
+                                width: 35,
+                                height: 32,
+                                marginLeft: 2,
+                            }}
+                            source={require('../../assets/tikrarPlus.png')}
+                        />
+                        // <FontAwesome5 name="angle-double-up" size={32} color="#FFFFFF" style={{ marginBottom: 0 }} />
                     ): mushafState.timerState === 'iddle' ? (
                         <FontAwesome5 name="stopwatch" size={32} color="#FFFFFF" />
                     ): (
