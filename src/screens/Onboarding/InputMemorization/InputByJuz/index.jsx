@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text, TouchableOpacity, BackHandler, Alert } from 'react-native'
+import { View, StyleSheet, Image, Text, TouchableOpacity, BackHandler, Alert, SafeAreaView } from 'react-native'
 import TextButton from 'components/Buttons/TextButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
 import AccentPattern from 'assets/accent-pattern.png'
@@ -16,7 +16,8 @@ import _ from 'lodash'
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
+        height: '100%',
         justifyContent: "flex-end",
         alignItems: "center",
         backgroundColor: '#FFFFFF',
@@ -125,49 +126,51 @@ const InputByJuz = ({ navigation }) => {
     },[])
 
     return (
-        <View style={styles.container}>
-            <View style={{ width: '100%', position: 'relative', zIndex: 3, elevation: 3 }}>
-                <Text style={{ fontSize: 32, fontWeight: 'bold'}}>Pilih Juz yang sudah kamu hafalkan</Text>
-                <TouchableOpacity
-                    style={{
-                        marginVertical: 20,
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                    }}
-                    onPress={handleCheckAll}
-                >
-                    <Checkbox
+        <SafeAreaView>
+            <View style={styles.container}>
+                <View style={{ width: '100%', position: 'relative', zIndex: 3, elevation: 3 }}>
+                    <Text style={{ fontSize: 32, fontWeight: 'bold'}}>Pilih Juz yang sudah kamu hafalkan</Text>
+                    <TouchableOpacity
                         style={{
-                            width: 16,
-                            height: 16,
-                            borderColor: '#AEAEAE',
-                            borderWidth: 1,
-                            borderRadius: 4,
-                            marginRight: 12,
+                            marginVertical: 20,
+                            flexDirection: 'row',
+                            alignItems: 'center',
                         }}
-                        value={memorizedAll}
-                        color={memorizedAll ? '#1DC25D' : null}
-                        onValueChange={handleCheckAll}
+                        onPress={handleCheckAll}
+                    >
+                        <Checkbox
+                            style={{
+                                width: 16,
+                                height: 16,
+                                borderColor: '#AEAEAE',
+                                borderWidth: 1,
+                                borderRadius: 4,
+                                marginRight: 12,
+                            }}
+                            value={memorizedAll}
+                            color={memorizedAll ? '#1DC25D' : null}
+                            onValueChange={handleCheckAll}
+                        />
+                        <Text>
+                            Tandai Sudah Hafal Semua
+                        </Text>
+                    </TouchableOpacity>
+                    <CheckableListInput
+                        style={{
+                            height: 310,
+                            marginBottom: 24
+                        }}
+                        renderItem={renderJuzItem}
+                        items={JuzItems}
                     />
-                    <Text>
-                        Tandai Sudah Hafal Semua
-                    </Text>
-                </TouchableOpacity>
-                <CheckableListInput
-                    style={{
-                        height: 310,
-                        marginBottom: 24
-                    }}
-                    renderItem={renderJuzItem}
-                    items={JuzItems}
-                />
-                <PrimaryButton title="Selanjutnya" onPress={() => navigation.navigate('PersonalizationConfig') }/>
-                <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={handleBack}/>
+                    <PrimaryButton title="Selanjutnya" onPress={() => navigation.navigate('PersonalizationConfig') }/>
+                    <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={handleBack}/>
+                </View>
+                <View style={{ position: 'absolute', zIndex: 1, elevation: 1, right: 0, bottom: 0 }}>
+                    <Image source={AccentPattern} />
+                </View>
             </View>
-            <View style={{ position: 'absolute', zIndex: 1, elevation: 1, right: 0, bottom: 0 }}>
-                <Image source={AccentPattern} />
-            </View>
-        </View>
+        </SafeAreaView>
     )
 }
 

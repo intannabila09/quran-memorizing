@@ -16,7 +16,6 @@ import {
 } from 'utils/constants'
 
 import DropDownPicker from 'react-native-dropdown-picker'
-import { Entypo } from '@expo/vector-icons';
 import { useOnBoardingState } from 'context/OnBoardingContext'
 import { JuzItems, JUZ_TO_SURAH } from 'utils/constants'
 
@@ -44,11 +43,12 @@ const styles = StyleSheet.create({
     }
 })
 
-const PersonalizationConfig = ({ navigation }) => {
+const PersonalizationConfig = ({ route, navigation }) => {
     const { onBoardingState, dispatch } = useOnBoardingState()
     const [activeOption, setActiveOption] = useState('tikrarDuration')
-
-    const { dispatch: userDataDispatch } = useUserData()
+    const { saveMemorizationProgress = true } = route.params || {}
+    
+    const { userDataState, dispatch: userDataDispatch } = useUserData()
 
     const [ayahVisibilityOptionsOpen, setAyahVisbilityOptionsOpen] = useState(false)
     const [ayahVisibilityValue, setAyahVisibilityValue] = useState(onBoardingState.personalization.ayahVisibility)
@@ -140,8 +140,8 @@ const PersonalizationConfig = ({ navigation }) => {
                 JSON.stringify({
                     personalization: resProps['personalization'],
                     memorized: {
-                        surah: memorizedSurah,
-                        juz: memorizedJuz,
+                        surah: saveMemorizationProgress ? memorizedSurah : userDataState.memorized.surah,
+                        juz: saveMemorizationProgress ? memorizedJuz : userDataState.memorized.juz,
                     },
                     memorizationHistory: [],
                     notes: {},
@@ -159,8 +159,8 @@ const PersonalizationConfig = ({ navigation }) => {
                 payload: {
                     personalization: resProps['personalization'],
                     memorized: {
-                        surah: memorizedSurah,
-                        juz: memorizedJuz,
+                        surah: saveMemorizationProgress ? memorizedSurah : userDataState.memorized.surah,
+                        juz: saveMemorizationProgress ? memorizedJuz : userDataState.memorized.juz,
                     },
                     memorizationHistory: [],
                     notes: {},

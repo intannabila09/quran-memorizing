@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {StyleSheet, View, Image, Text, SafeAreaView, Platform, Alert, BackHandler} from 'react-native'
+import {StyleSheet, View, Image, Text, SafeAreaView, Platform, Alert, BackHandler } from 'react-native'
 import AccentPattern from 'assets/accent-pattern.png'
 import TextButton from 'components/Buttons/TextButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'

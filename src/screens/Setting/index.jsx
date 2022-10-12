@@ -61,7 +61,7 @@ const Setting = ({ navigation }) => {
                                 borderWidth: 1,
                                 borderColor: '#e2e2e2'
                             }}
-                            onPress={() => navigation.navigate('PersonalizationConfig')}
+                            onPress={() => navigation.navigate('PersonalizationConfig', { saveMemorizationProgress: false })}
                         >
                             <Ionicons name="timer-outline" size={16} color="#8a8a8a" />
                             <Text style={{ marginLeft: 8, fontWeight: '500'}}>
