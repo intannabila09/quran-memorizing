@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { SafeAreaView, Dimensions, FlatList } from "react-native";
+import { SafeAreaView, Dimensions, FlatList, ScrollView } from "react-native";
 import ContentMapper from "assets/mushaf/ContentMapper";
 import { useMushafState } from "context/MushafContext";
 import RenderPage from "./RenderPage";
@@ -185,7 +185,7 @@ const QuranPages = ({
   // END – DEVELOPMENT VARIABLES
 
   return (
-    <SafeAreaView>
+    <ScrollView>
       <FlatList
         style={{
           // height: '50%',
@@ -249,7 +249,7 @@ const QuranPages = ({
           );
         }}
       />
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
