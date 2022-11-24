@@ -166,7 +166,7 @@ const UpperSection = ({ navigation }) => {
                 />
                 <View style={{  paddingLeft: 16, borderLeftWidth: 1, borderLeftColor: '#EEEDED', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 16, fontWeight: '600'}}>
-                        {(lastMemorizedData.totalMemorizedInQuran/6236).toPrecision(1) * 100}%
+                        {String(Number(lastMemorizedData.totalMemorizedInQuran/6236).toPrecision(1) * 100).slice(0,4) + '%'}
                     </Text>
                     <Text style={{ fontWeight: '500', fontSize: 12, marginTop: 4 }}>
                         dari Alquran
