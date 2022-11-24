@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text, TouchableOpacity, BackHandler, Alert, SafeAreaView } from 'react-native'
+import { View, StyleSheet, Image, Text, TouchableOpacity, BackHandler, Alert, SafeAreaView, Dimensions } from 'react-native'
 import TextButton from 'components/Buttons/TextButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
 import AccentPattern from 'assets/accent-pattern.png'
@@ -33,6 +33,7 @@ const InputByJuz = ({ navigation }) => {
     const { onBoardingState, dispatch } = useOnBoardingState()
     const { userDataState } = useUserData()
     const { memorized: { juz: memorizedJuz }} = onBoardingState
+    const { height } = Dimensions.get('window')
 
     const memorizedAll = useMemo(() => {
         return memorizedJuz?.length === 30
@@ -126,51 +127,57 @@ const InputByJuz = ({ navigation }) => {
     },[])
 
     return (
-        <SafeAreaView>
-            <View style={styles.container}>
-                <View style={{ width: '100%', position: 'relative', zIndex: 3, elevation: 3 }}>
-                    <Text style={{ fontSize: 32, fontWeight: 'bold'}}>Pilih Juz yang sudah kamu hafalkan</Text>
-                    <TouchableOpacity
-                        style={{
-                            marginVertical: 20,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                        }}
-                        onPress={handleCheckAll}
-                    >
-                        <Checkbox
+        <View
+            style={{
+                backgroundColor: '#FFFFFF',
+            }}
+        >
+            <SafeAreaView>
+                <View style={styles.container}>
+                    <View style={{ width: '100%', position: 'relative', zIndex: 3, elevation: 3 }}>
+                        <Text style={{ fontSize: 32, fontWeight: 'bold'}}>Pilih Juz yang sudah kamu hafalkan</Text>
+                        <TouchableOpacity
                             style={{
-                                width: 16,
-                                height: 16,
-                                borderColor: '#AEAEAE',
-                                borderWidth: 1,
-                                borderRadius: 4,
-                                marginRight: 12,
+                                marginVertical: 20,
+                                flexDirection: 'row',
+                                alignItems: 'center',
                             }}
-                            value={memorizedAll}
-                            color={memorizedAll ? '#1DC25D' : null}
-                            onValueChange={handleCheckAll}
+                            onPress={handleCheckAll}
+                        >
+                            <Checkbox
+                                style={{
+                                    width: 16,
+                                    height: 16,
+                                    borderColor: '#AEAEAE',
+                                    borderWidth: 1,
+                                    borderRadius: 4,
+                                    marginRight: 12,
+                                }}
+                                value={memorizedAll}
+                                color={memorizedAll ? '#1DC25D' : null}
+                                onValueChange={handleCheckAll}
+                            />
+                            <Text>
+                                Tandai Sudah Hafal Semua
+                            </Text>
+                        </TouchableOpacity>
+                        <CheckableListInput
+                            style={{
+                                height: height > 800 ? 310 : 250,
+                                marginBottom: 24
+                            }}
+                            renderItem={renderJuzItem}
+                            items={JuzItems}
                         />
-                        <Text>
-                            Tandai Sudah Hafal Semua
-                        </Text>
-                    </TouchableOpacity>
-                    <CheckableListInput
-                        style={{
-                            height: 310,
-                            marginBottom: 24
-                        }}
-                        renderItem={renderJuzItem}
-                        items={JuzItems}
-                    />
-                    <PrimaryButton title="Selanjutnya" onPress={() => navigation.navigate('PersonalizationConfig') }/>
-                    <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={handleBack}/>
+                        <PrimaryButton title="Selanjutnya" onPress={() => navigation.navigate('PersonalizationConfig') }/>
+                        <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={handleBack}/>
+                    </View>
+                    <View style={{ position: 'absolute', zIndex: 1, elevation: 1, right: 0, bottom: 0 }}>
+                        <Image source={AccentPattern} />
+                    </View>
                 </View>
-                <View style={{ position: 'absolute', zIndex: 1, elevation: 1, right: 0, bottom: 0 }}>
-                    <Image source={AccentPattern} />
-                </View>
-            </View>
-        </SafeAreaView>
+            </SafeAreaView>
+        </View>
     )
 }
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView } from "react-native"
+import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, ScrollView } from "react-native"
 import AccentPattern from 'assets/accent-pattern.png'
 import TextButton from 'components/Buttons/TextButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
         alignItems: "center",
         backgroundColor: '#FFFFFF',
+        paddingTop: 50,
         paddingBottom: 50,
         paddingLeft: 40,
         paddingRight: 40,
@@ -194,99 +195,51 @@ const PersonalizationConfig = ({ route, navigation }) => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1}}>
-            <View style={styles.container}>
-                <View style={{ width: '100%', marginBottom: 40 }}>
-                    <Text style={{ fontSize: 28, fontWeight: 'bold', marginBottom: 8 }}>Konfiguras Gaya Menghafal</Text>
-                    <Text style={{ fontSize: 14, color: '#A7A7A7' }}>Kamu dapat mengubahnya nanti di pengaturan.</Text>
-                </View>
-                <View style={{ position: 'relative', width: '100%', elevation: 3, zIndex: 3}}>
-                    <View style={{ marginBottom: 24 }}>
-                        <Image
-                            source={(() => {
-                                switch (ayahVisibilityValue) {
-                                    case 'firstWord':
-                                        return firstWord
-                                    case 'invisible':
-                                        return hideAll
-                                    case 'summary':
-                                        return summary
-                                }
-                            })()}
-                            style={{ width: 311, height: 135 }}
-                        />
-                    </View>
-                    <View
-                        style={{
-                            marginBottom: 24,
-                            position: 'relative',
-                            zIndex: activeOption === 'ayahVisibility' ? 4 : 3,
-                            elevation: activeOption === 'ayahVisibility' ? 4 : 3,
-                        }}
-                    >
-                        <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Mode Tutup Ayat</Text>
-                        <DropDownPicker
-                            open={ayahVisibilityOptionsOpen}
-                            value={ayahVisibilityValue}
-                            items={AyahVisibilityMode}
-                            setOpen={setAyahVisbilityOptionsOpen}
-                            setValue={setAyahVisibilityValue}
-                            onChangeValue={val => dispatchPersonalizationValue(val, 'ayahVisibility')}
-                            style={{
-                                borderWidth: 1,
-                                borderColor: '#D6D6D6',
-                                borderRadius: 8,
-                                backgroundColor: '#FBFBFB',
-                            }}
-                            textStyle={{
-                                fontWeight: '600'
-                            }}
-                        />
-                    </View>
-                    <View
-                        style={{
-                            marginBottom: 24,
-                            position: 'relative',
-                            zIndex: activeOption === 'tikrarMode' ? 4 : 3,
-                            elevation: activeOption === 'tikrarMode' ? 4 : 3,
-                        }}>
-                        <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Metode Tikrar</Text>
-                        <DropDownPicker
-                            open={tikrarModeOptionsOpen}
-                            value={tikrarModeValue}
-                            items={TikrarMethod}
-                            setOpen={setTikrarModeOptionsOpen}
-                            setValue={setTikrarModeValue}
-                            onChangeValue={val => dispatchPersonalizationValue(val,'tikrarMethod')}
-                            style={{
-                                borderWidth: 1,
-                                borderColor: '#D6D6D6',
-                                borderRadius: 8,
-                                backgroundColor: '#FBFBFB',
-                            }}
-                            textStyle={{
-                                fontWeight: '600'
-                            }}
-                        />
-                    </View>
-                    {
-                        tikrarModeValue === 'duration' && (
+        <View
+            style={{
+                backgroundColor: '#fff',
+                flex: 1,
+            }}
+        >
+            <SafeAreaView>
+                <ScrollView>
+                    <View style={styles.container}>
+                        <View style={{ width: '100%', marginBottom: 40 }}>
+                            <Text style={{ fontSize: 28, fontWeight: 'bold', marginBottom: 8 }}>Konfiguras Gaya Menghafal</Text>
+                            <Text style={{ fontSize: 14, color: '#A7A7A7' }}>Kamu dapat mengubahnya nanti di pengaturan.</Text>
+                        </View>
+                        <View style={{ position: 'relative', width: '100%', elevation: 3, zIndex: 3}}>
+                            <View style={{ marginBottom: 24 }}>
+                                <Image
+                                    source={(() => {
+                                        switch (ayahVisibilityValue) {
+                                            case 'firstWord':
+                                                return firstWord
+                                            case 'invisible':
+                                                return hideAll
+                                            case 'summary':
+                                                return summary
+                                        }
+                                    })()}
+                                    style={{ width: 311, height: 135 }}
+                                />
+                            </View>
                             <View
                                 style={{
                                     marginBottom: 24,
                                     position: 'relative',
-                                    zIndex: activeOption === 'tikrarDuration' ? 4 : 3,
-                                    elevation: activeOption === 'tikrarDuration' ? 4 : 3,
+                                    zIndex: activeOption === 'ayahVisibility' ? 4 : 3,
+                                    elevation: activeOption === 'ayahVisibility' ? 4 : 3,
                                 }}
                             >
-                                <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Durasi Tikrar</Text>
+                                <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Mode Tutup Ayat</Text>
                                 <DropDownPicker
-                                    open={tikrarDurationOptionsOpen}
-                                    value={tikrarDurationValue}
-                                    items={TikrarDuration}
-                                    setOpen={setTikrarDurationOptionsOpen}
-                                    setValue={setTikrarDurationValue}
-                                    onChangeValue={val => dispatchPersonalizationValue(val,'tikrarMethodImplementation')}
+                                    open={ayahVisibilityOptionsOpen}
+                                    value={ayahVisibilityValue}
+                                    items={AyahVisibilityMode}
+                                    setOpen={setAyahVisbilityOptionsOpen}
+                                    setValue={setAyahVisibilityValue}
+                                    onChangeValue={val => dispatchPersonalizationValue(val, 'ayahVisibility')}
                                     style={{
                                         borderWidth: 1,
                                         borderColor: '#D6D6D6',
@@ -298,27 +251,21 @@ const PersonalizationConfig = ({ route, navigation }) => {
                                     }}
                                 />
                             </View>
-                        )
-                    }
-                    {
-                        tikrarModeValue === 'count' && (
                             <View
                                 style={{
                                     marginBottom: 24,
                                     position: 'relative',
-                                    zIndex: activeOption === 'tikrarCount' ? 4 : 3,
-                                    elevation: activeOption === 'tikrarCount' ? 4 : 3,
-                                    
-                                }}
-                            >
-                                <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Jumlah Tikrar</Text>
+                                    zIndex: activeOption === 'tikrarMode' ? 4 : 3,
+                                    elevation: activeOption === 'tikrarMode' ? 4 : 3,
+                                }}>
+                                <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Metode Tikrar</Text>
                                 <DropDownPicker
-                                    open={tikrarCountOptionsOpen}
-                                    value={tikrarCountValue}
-                                    items={TikrarCount}
-                                    setOpen={setTikrarCountOptionsOpen}
-                                    setValue={setTikrarCountValue}
-                                    onChangeValue={val => dispatchPersonalizationValue(val,'tikrarMethodImplementation')}
+                                    open={tikrarModeOptionsOpen}
+                                    value={tikrarModeValue}
+                                    items={TikrarMethod}
+                                    setOpen={setTikrarModeOptionsOpen}
+                                    setValue={setTikrarModeValue}
+                                    onChangeValue={val => dispatchPersonalizationValue(val,'tikrarMethod')}
                                     style={{
                                         borderWidth: 1,
                                         borderColor: '#D6D6D6',
@@ -330,36 +277,99 @@ const PersonalizationConfig = ({ route, navigation }) => {
                                     }}
                                 />
                             </View>
-                        )
-                    }
-                    <View style={{ flexDirection: 'row'}}>
-                        {/* <TouchableOpacity style={{ alignItems: 'center', backgroundColor: '#FFFFFF',borderWidth: 1, borderColor: '#e0e0e0', justifyContent: 'center', paddingHorizontal: 16, marginRight: 8, borderRadius: 12}}>
-                            <Entypo name="help-with-circle" size={16} color="#757575" />
-                        </TouchableOpacity> */}
-                        <PrimaryButton
-                            title="Selesai"
-                            onPress={submitMemorizingConfiguration}
+                            {
+                                tikrarModeValue === 'duration' && (
+                                    <View
+                                        style={{
+                                            marginBottom: 24,
+                                            position: 'relative',
+                                            zIndex: activeOption === 'tikrarDuration' ? 4 : 3,
+                                            elevation: activeOption === 'tikrarDuration' ? 4 : 3,
+                                        }}
+                                    >
+                                        <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Durasi Tikrar</Text>
+                                        <DropDownPicker
+                                            open={tikrarDurationOptionsOpen}
+                                            value={tikrarDurationValue}
+                                            items={TikrarDuration}
+                                            setOpen={setTikrarDurationOptionsOpen}
+                                            setValue={setTikrarDurationValue}
+                                            onChangeValue={val => dispatchPersonalizationValue(val,'tikrarMethodImplementation')}
+                                            style={{
+                                                borderWidth: 1,
+                                                borderColor: '#D6D6D6',
+                                                borderRadius: 8,
+                                                backgroundColor: '#FBFBFB',
+                                            }}
+                                            textStyle={{
+                                                fontWeight: '600'
+                                            }}
+                                        />
+                                    </View>
+                                )
+                            }
+                            {
+                                tikrarModeValue === 'count' && (
+                                    <View
+                                        style={{
+                                            marginBottom: 24,
+                                            position: 'relative',
+                                            zIndex: activeOption === 'tikrarCount' ? 4 : 3,
+                                            elevation: activeOption === 'tikrarCount' ? 4 : 3,
+                                            
+                                        }}
+                                    >
+                                        <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: '600'}}>Jumlah Tikrar</Text>
+                                        <DropDownPicker
+                                            open={tikrarCountOptionsOpen}
+                                            value={tikrarCountValue}
+                                            items={TikrarCount}
+                                            setOpen={setTikrarCountOptionsOpen}
+                                            setValue={setTikrarCountValue}
+                                            onChangeValue={val => dispatchPersonalizationValue(val,'tikrarMethodImplementation')}
+                                            style={{
+                                                borderWidth: 1,
+                                                borderColor: '#D6D6D6',
+                                                borderRadius: 8,
+                                                backgroundColor: '#FBFBFB',
+                                            }}
+                                            textStyle={{
+                                                fontWeight: '600'
+                                            }}
+                                        />
+                                    </View>
+                                )
+                            }
+                            <View style={{ flexDirection: 'row'}}>
+                                {/* <TouchableOpacity style={{ alignItems: 'center', backgroundColor: '#FFFFFF',borderWidth: 1, borderColor: '#e0e0e0', justifyContent: 'center', paddingHorizontal: 16, marginRight: 8, borderRadius: 12}}>
+                                    <Entypo name="help-with-circle" size={16} color="#757575" />
+                                </TouchableOpacity> */}
+                                <PrimaryButton
+                                    title="Selesai"
+                                    onPress={submitMemorizingConfiguration}
+                                    style={{
+                                        width: 'auto',
+                                        flexGrow: 1,
+                                    }}
+                                />
+                            </View>
+                            <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={() => navigation.goBack()}/>
+                        </View>
+                        <View
                             style={{
-                                width: 'auto',
-                                flexGrow: 1,
+                                position: 'absolute',
+                                elevation: 1,
+                                zIndex: 1,
+                                right: 0,
+                                bottom: 0
                             }}
-                        />
+                        >
+                            <Image source={AccentPattern} />
+                        </View>
                     </View>
-                    <TextButton title="Sebelumnya" style={{ paddingTop: 20 }} onPress={() => navigation.goBack()}/>
-                </View>
-                <View
-                    style={{
-                        position: 'absolute',
-                        elevation: 1,
-                        zIndex: 1,
-                        right: 0,
-                        bottom: 0
-                    }}
-                >
-                    <Image source={AccentPattern} />
-                </View>
-            </View>
-        </SafeAreaView>
+                </ScrollView>
+            </SafeAreaView>
+        </View>
     )
 }
 

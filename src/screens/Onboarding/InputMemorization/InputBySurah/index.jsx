@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {StyleSheet, View, Image, Text, SafeAreaView, Platform, Alert, BackHandler } from 'react-native'
+import {StyleSheet, View, Image, Text, SafeAreaView, Alert, BackHandler, Dimensions } from 'react-native'
 import AccentPattern from 'assets/accent-pattern.png'
 import TextButton from 'components/Buttons/TextButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
 
 const InputBySurah = ({ navigation }) => {
     const [activeSurah, setActiveSurah] = useState(null)
+    const { height } = Dimensions.get('window')
 
     const { userDataState } = useUserData()
     const { onBoardingState, dispatch } = useOnBoardingState()
@@ -91,17 +92,18 @@ const InputBySurah = ({ navigation }) => {
     }, [])
 
     return (
-        <>
-        {Platform.OS === 'ios' && (
-            <View style={{ height: 47, backgroundColor: '#FFFFFF'}} />
-        )}
+        <View
+            style={{
+                backgroundColor: '#FFFFFF'
+            }}
+        >
             <SafeAreaView>
                 <View style={styles.container}>
                     <View style={{ position: 'relative', zIndex: 3, elevation: 3, width: '100%'}}>
                         <Text style={{ marginBottom: 24, fontSize: 32, fontWeight: 'bold'}}>Pilih surat dan ayat yang sudah kamu hafalkan</Text>
                         <CheckableListInput
                             style={{
-                                height: 450,
+                                height: height > 800 ? 450 : 300,
                                 marginBottom: 24,
                             }}
                             items={SurahItems}
@@ -115,7 +117,7 @@ const InputBySurah = ({ navigation }) => {
                     </View>
                 </View>
             </SafeAreaView>
-        </>
+        </View>
     )
 }
 
