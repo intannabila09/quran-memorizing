@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "quran-memorizing",
+    "name": "Qur'an Tikrar Hafalan",
     "slug": "quran-memorizing",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -30,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f1dc7300-8df1-48ff-964b-8e8fa5cf7177"
+      }
     }
   }
 }

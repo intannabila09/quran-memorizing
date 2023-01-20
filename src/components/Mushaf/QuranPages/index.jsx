@@ -5,6 +5,7 @@ import { useMushafState } from "context/MushafContext";
 import RenderPage from "./RenderPage";
 import { usePlayerProvider } from "context/PlayerContext";
 import { generatePlaylistItems } from "utils/helpers";
+import JuzToPages from "assets/mushaf/PageMapper";
 
 const { width } = Dimensions.get("window");
 
@@ -12,12 +13,13 @@ const QuranPages = ({
   showMenu,
   setShowMenu,
   pageIndex,
+  juzNo,
   highlightedAyahValue,
   handleDisplayAyahMenu = () => {},
 }) => {
   // console.log('renderer', initialJuz, initialPage)
   const [activeJuz, setActiveJuz] = useState(30);
-  const [highlightedAyah,setHighlightedAyah] = useState(highlightedAyahValue)
+  const [highlightedAyah, setHighlightedAyah] = useState(highlightedAyahValue);
 
   const [pages, setPages] = useState([
     "23",
@@ -44,6 +46,7 @@ const QuranPages = ({
     "2",
     "1",
   ]);
+
   const [activePage, setActivePage] = useState(null);
   const [content, setContent] = useState(null);
   const [currentContent, setCurrentContent] = useState(null);
@@ -77,10 +80,10 @@ const QuranPages = ({
   const versePress = () => {
     setActiveAyah(null);
     setShowMenu(!showMenu);
-    if (!!highlightedAyah) setHighlightedAyah(null)
+    if (!!highlightedAyah) setHighlightedAyah(null);
     console.log("press");
   };
-  
+
   useEffect(() => {
     if (activePage) {
       setActiveAyah(null);
@@ -117,8 +120,8 @@ const QuranPages = ({
             ayahStart,
             surahEnd,
             ayahEnd,
-          }
-        })
+          },
+        });
         playerDispatch({
           type: "SET_PLAYLIST",
           payload: generatePlaylistItems(
@@ -135,7 +138,8 @@ const QuranPages = ({
 
   useEffect(() => {
     if (activeJuz) {
-      setContent(ContentMapper()[activeJuz].pages);
+      // console.log(ContentMapper()[String(activeJuz)]);
+      setContent(ContentMapper()[String(activeJuz)].pages);
     }
   }, [activeJuz]);
 
@@ -147,9 +151,13 @@ const QuranPages = ({
 
   useEffect(() => {
     setTimeout(() => {
-      if (!!highlightedAyah) setHighlightedAyah(null)
-    },5000)
-  },[])
+      if (!!highlightedAyah) setHighlightedAyah(null);
+    }, 5000);
+  }, []);
+
+  useEffect(() => {
+    setPages(JuzToPages[activeJuz]);
+  }, [content, activeJuz]);
 
   // Scroll to page
   useEffect(() => {
@@ -159,7 +167,11 @@ const QuranPages = ({
         animated: false,
       });
     }
-  }, [pageIndex]);
+  }, [pageIndex, juzNo]);
+
+  useEffect(() => {
+    if (juzNo) setActiveJuz(juzNo);
+  }, [juzNo]);
 
   // START – DEVELOPMENT VARIABLES
   // useEffect(() => {
