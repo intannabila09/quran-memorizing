@@ -3,6 +3,7 @@ import { View, Platform, StyleSheet, Text, TouchableOpacity, ScrollView, BackHan
 import { useMushafState } from "context/MushafContext"
 import { FontAwesome } from '@expo/vector-icons';
 import ContentMapper from "assets/mushaf/ContentMapper"
+import { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 
 const { OS: os } = Platform
 
@@ -55,7 +56,7 @@ const TranslationModalContent = ({
 
     return (
         <View style={styles.container}>
-            <View
+            <BottomSheetView
                 style={{
                     paddingVertical: 16,
                     paddingBottom: os === 'ios' ? 20 : 12,
@@ -79,9 +80,9 @@ const TranslationModalContent = ({
                         </TouchableOpacity>
                     )
                 }
-            </View>
-            <View style={{ height: '80%'}}>
-                <ScrollView>
+            </BottomSheetView>
+            <View style={{ height: '90%', paddingBottom: 20 }}>
+                <BottomSheetScrollView>
                     {
                         content && Object.keys(content).map((key) => {
                             return (
@@ -113,7 +114,7 @@ const TranslationModalContent = ({
                                                 return (
                                                     <View style={{ flexDirection: 'row', marginBottom: 8 }} key={ayah.id}>
                                                         <Text style={{ marginRight: 8, fontWeight: '600'}}>{ayah.number}.</Text>
-                                                        <Text>
+                                                        <Text style={{ paddingRight: 15 }}>
                                                             {ayah.translation}
                                                         </Text>
                                                     </View>
@@ -125,7 +126,7 @@ const TranslationModalContent = ({
                             )
                         })
                     }
-                </ScrollView>
+                </BottomSheetScrollView>
             </View>
         </View>
     )

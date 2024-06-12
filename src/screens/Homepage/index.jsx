@@ -7,7 +7,7 @@ const Homepage = ({ navigation }) => {
     return (
         <>
         <View style={{ backgroundColor: '#FFFFFF', width: '100%', height: 48}} />
-            <SafeAreaView>
+            <SafeAreaView style={{ flex: 1 }}>
                 <ScrollView>
                     <UpperSection navigation={navigation} />
                     <LowerSection navigation={navigation} />

@@ -8,22 +8,24 @@ import {
 } from "react";
 import {
   View,
-  SafeAreaView,
   StyleSheet,
   Animated,
   Platform,
   Text,
+  ScrollView,
 } from "react-native";
 import MushafMenuBar from "components/MushafMenuBar";
 import MushafTopMenu from "components/MushafTopMenu";
 import QuranPages from "components/Mushaf/QuranPages";
 import { MushafProvider } from "context/MushafContext";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
 import AyahMenuContent from "components/BottomSheet/AyahMenuContent";
 import { useMushafState } from "context/MushafContext";
 import { useUserData } from "context/UserDataContext";
 import TranslationModalContent from "components/BottomSheet/Translation";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import PlayerProvider from "context/PlayerContext";
 import AudioConfig from "components/BottomSheet/AudioConfig";
@@ -192,9 +194,10 @@ const Mushaf = ({ route, navigation }) => {
     <>
       <View style={{ backgroundColor: !showMenu ? "#f8f5e9" : "#FFFFFF" }}>
         <SafeAreaView>
-          <View style={styles.container}>
+          {/* <ScrollView style={styles.container}> */}
+          <GestureHandlerRootView style={styles.container}>
             <MushafTopMenu top={topMenuPosition} navigation={navigation} />
-            <View style={{ flexGrow: 1, backgroundColor: "#f8f5e9" }}>
+            <View style={{ flexGrow: 1, backgroundColor: "#f8f5e9", flexDirection: "row", alignItems: "center", paddingBottom: 5 }}>
               <QuranPages
                 showMenu={showMenu}
                 setShowMenu={setShowMenu}
@@ -202,6 +205,7 @@ const Mushaf = ({ route, navigation }) => {
                 pageIndex={pageIndex}
                 juzNo={juzNo}
                 highlightedAyahValue={activeAyah}
+                // style={{ flexGrow: 1, backgroundColor: "#f8f5e9", borderStyle: "solid", borderColor: "black" }}
               />
             </View>
             <MushafMenuBar
@@ -209,73 +213,163 @@ const Mushaf = ({ route, navigation }) => {
               handleDisplayTranslation={handleDisplayTranslation}
               handleDisplayAudioConfig={handleDisplayAudioConfig}
             />
-          </View>
-          {ayahMenuVisible && (
-            <BottomSheet
-              ref={ayahMenuRef}
-              index={2}
-              snapPoints={snapPoints}
-              backdropComponent={renderBottomSheetBackdrop}
-              {...(OS === "android" && { handleComponent: null })}
-              enablePanDownToClose
-              onChange={handleSnapChange}
-            >
-              <ForwardAyahMenuContent
-                memorized={(() => {
-                  if (selectedAyah) {
-                    const [surahIndex, ayahNumber] = selectedAyah.split(":");
-                    if (memorized.surah[surahIndex])
-                      return memorized.surah[surahIndex].includes(
-                        Number(ayahNumber)
-                      );
-                    else return false;
-                  }
-                  return false;
-                })()}
+
+            {translationModalVisible && 
+              <BottomSheet
+                ref={translationModalRef}
+                index={1}
+                snapPoints={translationModalSnapPoints}
+                backdropComponent={renderBottomSheetBackdrop}
+                {...(OS === "android" && { handleComponent: null })}
+                enablePanDownToClose={true}
+                onChange={handleTranslationSnapChange}
+              >
+                {/* <BottomSheetScrollView> */}
+                  <ForwardTranslationMenuContent ref={translationModalRef} />
+                {/* </BottomSheetScrollView> */}
+              </BottomSheet>
+            }
+
+            {ayahMenuVisible && 
+              <BottomSheet
                 ref={ayahMenuRef}
-                handleDisplayAddNote={handleDisplayAddNote}
-              />
-            </BottomSheet>
-          )}
-          {translationModalVisible && (
-            <BottomSheet
-              ref={translationModalRef}
-              index={1}
-              snapPoints={translationModalSnapPoints}
-              backdropComponent={renderBottomSheetBackdrop}
-              {...(OS === "android" && { handleComponent: null })}
-              enablePanDownToClose
-              onChange={handleTranslationSnapChange}
-            >
-              <ForwardTranslationMenuContent ref={translationModalRef} />
-            </BottomSheet>
-          )}
-          {audioConfigVisible && (
-            <BottomSheet
-              ref={audioConfigRef}
-              index={1}
-              snapPoints={audioConfigSnaps}
-              backdropComponent={renderBottomSheetBackdrop}
-              {...(OS === "android" && { handleComponent: null })}
-              enablePanDownToClose
-              onChange={handleAudioConfigSnapChange}
-            >
-              <ForwardAudioConfig ref={audioConfigRef} />
-            </BottomSheet>
-          )}
-          {addNoteVisible && (
-            <BottomSheet
-              ref={addNoteRef}
-              index={0}
-              snapPoints={addNoteSnaps}
-              backdropComponent={renderBottomSheetBackdrop}
-              {...(OS === "android" && { handleComponent: null })}
-              enablePanDownToClose
-              onChange={handleAddNoteSnapChange}
-            >
-              <ForwardAddNote ref={addNoteRef} target={targetAyah} />
-            </BottomSheet>
-          )}
+                index={2}
+                snapPoints={snapPoints}
+                backdropComponent={renderBottomSheetBackdrop}
+                {...(OS === "android" && { handleComponent: null })}
+                enablePanDownToClose
+                onChange={handleSnapChange}
+              >
+                <BottomSheetScrollView style={{ flex: 1 }}>
+                  <ForwardAyahMenuContent
+                    memorized={(() => {
+                      if (selectedAyah) {
+                        const [surahIndex, ayahNumber] = selectedAyah.split(":");
+                        if (memorized.surah[surahIndex])
+                          return memorized.surah[surahIndex].includes(
+                            Number(ayahNumber)
+                          );
+                        else return false;
+                      }
+                      return false;
+                    })()}
+                    ref={ayahMenuRef}
+                    handleDisplayAddNote={handleDisplayAddNote}
+                  />
+                </BottomSheetScrollView>
+              </BottomSheet>
+            }
+
+            {audioConfigVisible && 
+              <BottomSheet
+                ref={audioConfigRef}
+                index={1}
+                snapPoints={audioConfigSnaps}
+                backdropComponent={renderBottomSheetBackdrop}
+                {...(OS === "android" && { handleComponent: null })}
+                enablePanDownToClose
+                onChange={handleAudioConfigSnapChange}
+              >
+                <BottomSheetScrollView style={{ flex: 1 }}>
+                  <ForwardAudioConfig ref={audioConfigRef} />
+                </BottomSheetScrollView>
+              </BottomSheet>
+            }
+
+            {addNoteVisible && 
+              <BottomSheet
+                ref={addNoteRef}
+                index={0}
+                snapPoints={addNoteSnaps}
+                backdropComponent={renderBottomSheetBackdrop}
+                {...(OS === "android" && { handleComponent: null })}
+                enablePanDownToClose
+                onChange={handleAddNoteSnapChange}
+              >
+                {/* <BottomSheetScrollView style={{ flex: 1 }}> */}
+                  <ForwardAddNote ref={addNoteRef} target={targetAyah} />
+                {/* </BottomSheetScrollView> */}
+              </BottomSheet>
+            }
+
+
+          </GestureHandlerRootView>
+          {/* </ScrollView> */}
+
+          {/* {ayahMenuVisible && (
+            <GestureHandlerRootView style={{ flex: 1 }}>
+              <BottomSheet
+                ref={ayahMenuRef}
+                index={2}
+                snapPoints={snapPoints}
+                backdropComponent={renderBottomSheetBackdrop}
+                {...(OS === "android" && { handleComponent: null })}
+                enablePanDownToClose
+                onChange={handleSnapChange}
+              >
+                <ForwardAyahMenuContent
+                  memorized={(() => {
+                    if (selectedAyah) {
+                      const [surahIndex, ayahNumber] = selectedAyah.split(":");
+                      if (memorized.surah[surahIndex])
+                        return memorized.surah[surahIndex].includes(
+                          Number(ayahNumber)
+                        );
+                      else return false;
+                    }
+                    return false;
+                  })()}
+                  ref={ayahMenuRef}
+                  handleDisplayAddNote={handleDisplayAddNote}
+                />
+              </BottomSheet>
+            </GestureHandlerRootView>
+          )} */}
+          {/* {translationModalVisible && (
+            <GestureHandlerRootView style={{ flex: 1 }}>
+              <BottomSheet
+                ref={translationModalRef}
+                index={1}
+                snapPoints={translationModalSnapPoints}
+                backdropComponent={renderBottomSheetBackdrop}
+                {...(OS === "android" && { handleComponent: null })}
+                enablePanDownToClose={true}
+                onChange={handleTranslationSnapChange}
+              >
+                <ForwardTranslationMenuContent ref={translationModalRef} />
+              </BottomSheet>
+            </GestureHandlerRootView>
+          )} */}
+          {/* {audioConfigVisible && (
+            <GestureHandlerRootView style={{ flex: 1 }}>
+              <BottomSheet
+                ref={audioConfigRef}
+                index={1}
+                snapPoints={audioConfigSnaps}
+                backdropComponent={renderBottomSheetBackdrop}
+                {...(OS === "android" && { handleComponent: null })}
+                enablePanDownToClose
+                onChange={handleAudioConfigSnapChange}
+              >
+                <ForwardAudioConfig ref={audioConfigRef} />
+              </BottomSheet>
+            </GestureHandlerRootView>
+          )} */}
+          {/* {addNoteVisible && (
+            <GestureHandlerRootView style={{ flex: 1 }}>
+              <BottomSheet
+                ref={addNoteRef}
+                index={0}
+                snapPoints={addNoteSnaps}
+                backdropComponent={renderBottomSheetBackdrop}
+                {...(OS === "android" && { handleComponent: null })}
+                enablePanDownToClose
+                onChange={handleAddNoteSnapChange}
+              >
+                <ForwardAddNote ref={addNoteRef} target={targetAyah} />
+              </BottomSheet>
+            </GestureHandlerRootView>
+          )} */}
         </SafeAreaView>
       </View>
     </>

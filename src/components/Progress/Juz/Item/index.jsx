@@ -3,7 +3,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { showMessage } from "react-native-flash-message";
 import JuzToPage from "assets/mushaf/PageMapper";
 
-const availableJuz = [29, 30];
+const availableJuz = [25, 26, 27, 28, 29, 30];
 
 const ProgressJuzItem = ({ juz, navigation }) => {
   const memorized = juz.item.memorized ?? 0;
