@@ -15,10 +15,12 @@ const QuranPages = ({
   pageIndex,
   juzNo,
   highlightedAyahValue,
+  activeMapAyah,
+  handleSetDeactivateMap = () => {},
   handleDisplayAyahMenu = () => {},
 }) => {
   // console.log('renderer', initialJuz, initialPage)
-  const [activeJuz, setActiveJuz] = useState(30);
+  const [activeJuz, setActiveJuz] = useState(28);
   const [highlightedAyah, setHighlightedAyah] = useState(highlightedAyahValue);
 
   const [pages, setPages] = useState([
@@ -79,6 +81,7 @@ const QuranPages = ({
 
   const versePress = () => {
     setActiveAyah(null);
+    handleSetDeactivateMap();
     setShowMenu(!showMenu);
     if (!!highlightedAyah) setHighlightedAyah(null);
     console.log("press");
@@ -172,6 +175,10 @@ const QuranPages = ({
   useEffect(() => {
     if (juzNo) setActiveJuz(juzNo);
   }, [juzNo]);
+
+  useEffect(() => {
+    if (activeMapAyah) {setActiveAyah(activeMapAyah)} else {setActiveAyah(null)}
+  }, [activeMapAyah])
 
   // START – DEVELOPMENT VARIABLES
   // useEffect(() => {

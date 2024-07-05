@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { View, StyleSheet, Text, Platform, TouchableOpacity, Switch } from "react-native"
+import { View, StyleSheet, Text, Platform, TouchableOpacity, Switch, ScrollView } from "react-native"
 import { SurahItems } from "utils/constants";
 import { useMushafState } from "context/MushafContext";
 import AyahMenuButton from "components/Buttons/AyahMenuButton";
@@ -11,6 +11,8 @@ import { usePlayerProvider } from "context/PlayerContext";
 import { generatePlaylistItems } from "utils/helpers";
 import * as Clipboard from 'expo-clipboard'
 import ContentMapper from "assets/mushaf/ContentMapper"
+import DataMindMap from "../../../assets/mushaf/DataMindMap";
+import { BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
 
 const styles = StyleSheet.create({
     container: {
@@ -39,6 +41,21 @@ const AyahMenuContent = ({
             .find(surah => surah.number === Number(surahIndex))
         const ayah = surah.ayah.find(ayah => ayah.number === Number(ayahNumber))
         return ayah?.translation ?? ''
+    },[selectedAyah])
+    const mindMap = useMemo(() => {
+        if (!selectedAyah) return ''
+        const [surahIndex,ayahNumber] = selectedAyah.split(":")
+        const juz = findJuzFromAyah(Number(surahIndex),Number(ayahNumber))
+        const surah = ContentMapper()[juz]
+            .metadata
+            .find(surah => surah.number === Number(surahIndex))
+        const ayah = surah.ayah.find(ayah => ayah.number === Number(ayahNumber))
+        const dataMindMap = DataMindMap
+        const mapSurah = dataMindMap.find(mmSurah => mmSurah.id === surah.name.id)
+        if (mapSurah) {
+            const mapAyah = mapSurah.mindMap.find(mmAyah => mmAyah.id === ayah.mmParentId)
+            return mapAyah?.value ?? ''
+        } else return 'Mind Map Ayat'
     },[selectedAyah])
     // console.log(userDataState.memorized)
 
@@ -274,59 +291,67 @@ Surah ${surah.name.id}:${ayah.number}
                     )
                 }
             </View>
-            <View>
-                <View
-                    style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        marginBottom: 4,
-                    }}
-                >
+            
+            <View style={{ height: '85%', paddingBottom: 20 }}>
+                <BottomSheetScrollView>
                     <View
                         style={{
-                            borderWidth: 1,
-                            paddingVertical: 4,
-                            paddingHorizontal: 12,
-                            borderRadius: 999,
-                            borderColor: memorized ? "#86efac" : "#e2e8f0",
-                            backgroundColor: memorized ? "#dcfce7" : "#f1f5f9",
-                            marginTop: 8
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            marginBottom: 4,
                         }}
                     >
-                        <Text style={{ fontWeight: "700", fontSize: 14, color: memorized ? "#16a34a" : "#475569", textAlign: 'center'}}>
-                            {memorized ? 'Sudah Hafal' : 'Belum Hafal'}
+                        <View
+                            style={{
+                                borderWidth: 1,
+                                paddingVertical: 4,
+                                paddingHorizontal: 12,
+                                borderRadius: 999,
+                                borderColor: memorized ? "#86efac" : "#e2e8f0",
+                                backgroundColor: memorized ? "#dcfce7" : "#f1f5f9",
+                                marginTop: 8
+                            }}
+                        >
+                            <Text style={{ fontWeight: "700", fontSize: 14, color: memorized ? "#16a34a" : "#475569", textAlign: 'center'}}>
+                                {memorized ? 'Sudah Hafal' : 'Belum Hafal'}
+                            </Text>
+                        </View>
+                        <Switch
+                            trackColor={{ false: '#767577', true: '#16a34a' }}
+                            // thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={() => {
+                                if (memorized) {
+                                    unmemorizeAyah(selectedAyah)
+                                } else {
+                                    memorizeAyah(selectedAyah)
+                                }
+                            }}
+                            value={memorized}
+                        />
+                    </View>
+                    <View style={{ marginTop: 15, marginBottom: 5, paddingTop: 10, paddingBottom: 12, backgroundColor: '#1DC25D', borderColor: '#1DC25D', borderWidth: 1, borderRadius: 10}}>
+                        <Text style={{ paddingHorizontal: 10, color: '#FFF', fontWeight: 500 }}>
+                            {mindMap}
                         </Text>
                     </View>
-                    <Switch
-                        trackColor={{ false: '#767577', true: '#16a34a' }}
-                        // thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                        ios_backgroundColor="#3e3e3e"
-                        onValueChange={() => {
-                            if (memorized) {
-                                unmemorizeAyah(selectedAyah)
-                            } else {
-                                memorizeAyah(selectedAyah)
-                            }
-                        }}
-                        value={memorized}
-                    />
-                </View>
-                <View style={{ paddingTop: 8, paddingBottom: 12, }}>
-                    <Text>
-                         {translation?.length > 255 ? translation.slice(0,250) + '...' : translation} 
-                    </Text>
-                </View>
-                {AYAH_MENU_ITEMS(memorized).map(item => {
-                    return (
-                        <AyahMenuButton
-                            menu={item}
-                            key={item.key}
-                            forwardedRef={forwardedRef}
-                            target={selectedAyah}
-                        />
-                    )
-                })}
+                    <View style={{ paddingTop: 8, paddingBottom: 12, marginBottom: 20 }}>
+                        <Text>
+                            {translation?.length > 255 ? translation.slice(0,250) + '...' : translation} 
+                        </Text>
+                    </View>
+                    {AYAH_MENU_ITEMS(memorized).map(item => {
+                        return (
+                            <AyahMenuButton
+                                menu={item}
+                                key={item.key}
+                                forwardedRef={forwardedRef}
+                                target={selectedAyah}
+                            />
+                        )
+                    })}
+                </BottomSheetScrollView>
             </View>
         </View>
     )
