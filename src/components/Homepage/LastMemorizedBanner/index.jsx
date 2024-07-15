@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useUserData } from 'context/UserDataContext';
 import { useIsFocused } from '@react-navigation/native'
 import { SurahItems } from 'utils/constants';
+import { findJuzFromAyah } from '../../../utils/helpers';
 
 const LastMemorizedBanner = ({
     style,
@@ -37,7 +38,8 @@ const LastMemorizedBanner = ({
         )]
         if(!surahContent.hasOwnProperty('page')) return navigation.navigate('Mushaf')
         return navigation.navigate('Mushaf', {
-            pageIndex: Number(surahContent?.page)
+            pageIndex: Number(surahContent?.page),
+            juzNo: findJuzFromAyah(Number(surahContent?.no, 1))
         })
     }
 

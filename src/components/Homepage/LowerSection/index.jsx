@@ -6,6 +6,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
 
 import FindSurah from "components/Modal/FindSurah";
+import { SURAH_TO_JUZ } from 'utils/constants';
+import { findJuzFromAyah } from "../../../utils/helpers";
 
 const styles = StyleSheet.create({
   container: {
@@ -20,7 +22,8 @@ const LowerSection = ({ navigation }) => {
 
   const navigateToSurah = (target) => {
     if (!target) return null;
-    navigation.navigate("Mushaf", { pageIndex: Number(target.page) });
+    const juz = findJuzFromAyah(Number(target.no), 1)
+    navigation.navigate("Mushaf", { pageIndex: Number(target.page), juzNo: juz });
   };
 
   return (
