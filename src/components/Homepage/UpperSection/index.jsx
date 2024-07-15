@@ -150,6 +150,7 @@ const UpperSection = ({ navigation }) => {
             </View>
             <HomepagePrimaryPercentage
                 style={{ marginTop: 16 }}
+                juz={lastMemorizedData.juzName}
                 surah={lastMemorizedData.surahName}
                 memorized={lastMemorizedData.memorizedAyah}
                 total={lastMemorizedData.totalAyah}

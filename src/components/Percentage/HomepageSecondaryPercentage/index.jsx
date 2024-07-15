@@ -7,14 +7,26 @@ const HomepageSecondaryPercentage = ({ style, memorized, total, juz, navigation 
         <TouchableOpacity
             onPress={() => {
                 const target = juz.split(' ')[1]
-                if (Number(target) !== 30) {
+                if (Number(target) === 30) { return navigation.navigate('Mushaf', { pageIndex: 22 }) }
+                else if (Number(target) === 29 || Number(target) === 28) {
+                    return navigation.navigate('Mushaf', { pageIndex: 19, juzNo: Number(target) })
+                } else {
                     showMessage({
                         message: "Halaman yang diminta belum tersedia saat ini.",
                         type: 'warning',
                         color: '#472a00'
                     });
                     return null
-                } else return navigation.navigate('Mushaf', { pageIndex: 22 })
+                }
+
+                // if (Number(target) !== 30) {
+                //     showMessage({
+                //         message: "Halaman yang diminta belum tersedia saat ini.",
+                //         type: 'warning',
+                //         color: '#472a00'
+                //     });
+                //     return null
+                // } else return navigation.navigate('Mushaf', { pageIndex: 22 })
             }}
             style={{
                 ...style,

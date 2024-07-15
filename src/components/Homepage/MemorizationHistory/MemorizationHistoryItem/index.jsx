@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, Text } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
-import { SurahItems } from 'utils/constants';
 import { findJuzFromAyah } from '../../../../utils/helpers';
+import ContentMapper from "assets/mushaf/ContentMapper";
 
 const MemorizationHistoryItem = ({
     surah,
@@ -13,11 +13,15 @@ const MemorizationHistoryItem = ({
 }) => {
 
     const navigateToSurah = () => {
-        const surahContent = SurahItems[Number(item.surahNumber) - 1]
-        if (!surahContent?.hasOwnProperty('page')) return navigation.navigate('Mushaf')
+        const juzNo = findJuzFromAyah(Number(item.surahNumber), 1)
+        const surahContent = ContentMapper()[juzNo].metadata
+        .find(item => item.name.id === surah)
+        const ayahContent = surahContent?.ayah.find(item => item.number === ayah) ?? ''
+
+        // if (!surahContent?.hasOwnProperty('page')) return navigation.navigate('Mushaf')
         return navigation.navigate('Mushaf', {
-            pageIndex: Number(surahContent?.page),
-            juzNo: findJuzFromAyah(Number(surahContent?.no, 1))
+            pageIndex: ayahContent?.pageIndex ?? 0,
+            juzNo: juzNo
         })
     }
     

@@ -82,17 +82,17 @@ export default Data = () => ({
       image: require("assets/mushaf/juz29/pages/581.png"),
       content: require("assets/mushaf/juz29/content/20.json"),
     },
-    21: {
-      image: require("assets/mushaf/juz30/pages/601.png"),
-      content: require("assets/mushaf/juz29/content/21.json"),
-    },
-    22: {
-      image: require("assets/mushaf/juz30/pages/602.png"),
-      content: require("assets/mushaf/juz29/content/22.json"),
-    },
-    23: {
-      image: require("assets/mushaf/juz30/pages/603.png"),
-      content: require("assets/mushaf/juz30/content/23.json"),
-    },
+    // 21: {
+    //   image: require("assets/mushaf/juz30/pages/601.png"),
+    //   content: require("assets/mushaf/juz29/content/21.json"),
+    // },
+    // 22: {
+    //   image: require("assets/mushaf/juz30/pages/602.png"),
+    //   content: require("assets/mushaf/juz29/content/22.json"),
+    // },
+    // 23: {
+    //   image: require("assets/mushaf/juz30/pages/603.png"),
+    //   content: require("assets/mushaf/juz30/content/23.json"),
+    // },
   },
 });

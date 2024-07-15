@@ -4,14 +4,16 @@ import { LinearGradient } from 'expo-linear-gradient';
 const HomepagePrimaryPercentage = ({
     style = {},
     surah = '',
+    juz = 0,
     memorized = 0,
     total = 0,
     navigation,
     page,
 }) => {
     const navigateToSurah = (target) => {
+        const juzNo = juz.split(' ')[1]
         if (typeof target !== 'number') return
-        navigation.navigate('Mushaf', { pageIndex: Number(target) })
+        navigation.navigate('Mushaf', { pageIndex: Number(target), juzNo: Number(juzNo) })
     }
     return (
         <TouchableOpacity

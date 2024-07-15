@@ -1052,7 +1052,7 @@ export const SurahItems = [
     numberOfAyah: "22",
     meaning: "Gugatan",
     category: "Madaniyah",
-    page: 22,
+    page: 19,
   },
   {
     id: "surah_59",
@@ -1062,7 +1062,7 @@ export const SurahItems = [
     numberOfAyah: "24",
     meaning: "Pengusiran",
     category: "Madaniyah",
-    page: 19,
+    page: 16,
   },
   {
     id: "surah_60",
@@ -1072,7 +1072,7 @@ export const SurahItems = [
     numberOfAyah: "13",
     meaning: "Wanita Yang Diuji",
     category: "Madaniyah",
-    page: 15,
+    page: 12,
   },
   {
     id: "surah_61",
@@ -1082,7 +1082,7 @@ export const SurahItems = [
     numberOfAyah: "14",
     meaning: "Barisan",
     category: "Madaniyah",
-    page: 13,
+    page: 10,
   },
   {
     id: "surah_62",
@@ -1092,7 +1092,7 @@ export const SurahItems = [
     numberOfAyah: "11",
     meaning: "Jumat",
     category: "Madaniyah",
-    page: 11,
+    page: 8,
   },
   {
     id: "surah_63",
@@ -1102,7 +1102,7 @@ export const SurahItems = [
     numberOfAyah: "11",
     meaning: "Orang-Orang Munafik",
     category: "Madaniyah",
-    page: 10,
+    page: 7,
   },
   {
     id: "surah_64",
@@ -1112,7 +1112,7 @@ export const SurahItems = [
     numberOfAyah: "18",
     meaning: "Pengungkapan Kesalahan",
     category: "Madaniyah",
-    page: 8,
+    page: 5,
   },
   {
     id: "surah_65",
@@ -1122,7 +1122,7 @@ export const SurahItems = [
     numberOfAyah: "12",
     meaning: "Talak",
     category: "Madaniyah",
-    page: 6,
+    page: 3,
   },
   {
     id: "surah_66",
@@ -1132,7 +1132,7 @@ export const SurahItems = [
     numberOfAyah: "12",
     meaning: "Pengharaman",
     category: "Madaniyah",
-    page: 4,
+    page: 1,
   },
   {
     id: "surah_67",
@@ -1142,7 +1142,7 @@ export const SurahItems = [
     numberOfAyah: "30",
     meaning: "Kerajaan",
     category: "Makiyah",
-    page: 22,
+    page: 19,
   },
   {
     id: "surah_68",
@@ -1152,7 +1152,7 @@ export const SurahItems = [
     numberOfAyah: "52",
     meaning: "Pena",
     category: "Makiyah",
-    page: 20,
+    page: 17,
   },
   {
     id: "surah_69",
@@ -1162,7 +1162,7 @@ export const SurahItems = [
     numberOfAyah: "52",
     meaning: "Hari Kiamat",
     category: "Makiyah",
-    page: 18,
+    page: 15,
   },
   {
     id: "surah_70",
@@ -1172,7 +1172,7 @@ export const SurahItems = [
     numberOfAyah: "44",
     meaning: "Tempat Naik",
     category: "Makiyah",
-    page: 16,
+    page: 13,
   },
   {
     id: "surah_71",
@@ -1182,7 +1182,7 @@ export const SurahItems = [
     numberOfAyah: "28",
     meaning: "Nuh",
     category: "Makiyah",
-    page: 14,
+    page: 11,
   },
   {
     id: "surah_72",
@@ -1192,7 +1192,7 @@ export const SurahItems = [
     numberOfAyah: "28",
     meaning: "Jin",
     category: "Makiyah",
-    page: 12,
+    page: 9,
   },
   {
     id: "surah_73",
@@ -1202,7 +1202,7 @@ export const SurahItems = [
     numberOfAyah: "20",
     meaning: "Orang Yang Berselimut",
     category: "Makiyah",
-    page: 10,
+    page: 7,
   },
   {
     id: "surah_74",
@@ -1212,7 +1212,7 @@ export const SurahItems = [
     numberOfAyah: "56",
     meaning: "Orang Yang Berkemul",
     category: "Makiyah",
-    page: 9,
+    page: 6,
   },
   {
     id: "surah_75",
@@ -1222,7 +1222,7 @@ export const SurahItems = [
     numberOfAyah: "40",
     meaning: "Hari Kiamat",
     category: "Makiyah",
-    page: 7,
+    page: 4,
   },
   {
     id: "surah_76",
@@ -1232,7 +1232,7 @@ export const SurahItems = [
     numberOfAyah: "31",
     meaning: "Manusia",
     category: "Madaniyah",
-    page: 6,
+    page: 3,
   },
   {
     id: "surah_77",
@@ -1242,7 +1242,7 @@ export const SurahItems = [
     numberOfAyah: "50",
     meaning: "Malaikat Yang Diutus",
     category: "Makiyah",
-    page: 4,
+    page: 1,
   },
   {
     id: "surah_78",
