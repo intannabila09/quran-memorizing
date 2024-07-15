@@ -59,13 +59,13 @@ const MushafStateReducer = (state, { action, payload }) => {
 
     case "TOGGLE_VIEW_MODE":
       // START – USED DURING DEVELOPMENT
-      // const currentIndex = VISIBILITY_MODE.indexOf(state.visibilityMode);
-      // const newIndex =
-      //   currentIndex === VISIBILITY_MODE.length - 1 ? 0 : currentIndex + 1;
-      // return {
-      //   ...state,
-      //   visibilityMode: VISIBILITY_MODE[newIndex],
-      // };
+      const currentIndex = VISIBILITY_MODE.indexOf(state.visibilityMode);
+      const newIndex =
+        currentIndex === VISIBILITY_MODE.length - 1 ? 0 : currentIndex + 1;
+      return {
+        ...state,
+        visibilityMode: VISIBILITY_MODE[newIndex],
+      };
       // END – USED DURING DEVELOPMENT
       return {
         ...state,

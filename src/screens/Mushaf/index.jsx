@@ -63,7 +63,7 @@ const ForwardAddNote = forwardRef((props, ref) => (
 
 const Mushaf = ({ route, navigation }) => {
   useKeepAwake();
-  const { pageIndex = 0, activeAyah = null, juzNo } = route.params || {};
+  const { pageIndex = 22, activeAyah = null, juzNo } = route.params || {};
   const [showMenu, setShowMenu] = useState(true);
   const bottomMenuPosition = useRef(new Animated.Value(0)).current;
   const topMenuPosition = useRef(new Animated.Value(0)).current;

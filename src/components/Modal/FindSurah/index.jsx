@@ -141,12 +141,12 @@ const FindSurah = ({
                                                     borderBottomColor: "#e6e6e6",
                                                     flexDirection: 'row',
                                                     alignItems: 'center',
-                                                    ...(Number(item.no) < 78 && {
+                                                    ...(Number(item.no) < 41 && {
                                                         backgroundColor: '#f0f0f0',
                                                     })
                                                 }}
                                                 onPress={() => {
-                                                    if (Number(item.no) >= 78) {
+                                                    if (Number(item.no) >= 41) {
                                                         navigateToSurah(item)
                                                         setVisibility(false)
                                                     } else return null
@@ -160,7 +160,7 @@ const FindSurah = ({
                                                     <Text
                                                         style={{
                                                             textAlign: 'center',
-                                                            ...(Number(item.no) < 78 && {
+                                                            ...(Number(item.no) < 41 && {
                                                                 color: '#b3b3b3',
                                                             })
                                                         }}
@@ -172,7 +172,7 @@ const FindSurah = ({
                                                     <Text
                                                         style={{
                                                             fontWeight: '600',
-                                                            ...(Number(item.no) < 78 && {
+                                                            ...(Number(item.no) < 41 && {
                                                                 color: '#b3b3b3',
                                                             })
                                                         }}
@@ -183,7 +183,7 @@ const FindSurah = ({
                                                         style={{
                                                             fontSize: 12,
                                                             color: "#616161",
-                                                            ...(Number(item.no) < 78 && {
+                                                            ...(Number(item.no) < 41 && {
                                                                 color: '#b3b3b3',
                                                             })
                                                         }}
