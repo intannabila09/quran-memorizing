@@ -5,7 +5,8 @@ import { useMemo } from 'react';
 import { SurahItems } from 'utils/constants'
 import { useUserData } from 'context/UserDataContext';
 import { showMessage } from 'react-native-flash-message';
-import Content from 'assets/mushaf/juz30'
+import Content from 'assets/mushaf/juz30';
+import { findJuzFromAyah } from 'utils/helpers';
 
 
 const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigation }) => {
@@ -33,11 +34,13 @@ const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigati
             type: 'warning',
             color: '#472a00'
         })
+        const juzNo = findJuzFromAyah(Number(surahContent?.no), 1)
         const content = Content()['metadata'].find(item => String(item.number) === String(surahContent.no))
         const pageTarget = targetType === 'surah' ? surahContent?.page : content['ayah'][ayahNumber - 1]['pageIndex']
         return navigation.navigate('Mushaf', {
             pageIndex: Number(pageTarget),
             activeAyah: targetType === 'surah' ? null : `${surahContent.no}:${ayahNumber}`,
+            juzNo: juzNo
         })
     }
 
