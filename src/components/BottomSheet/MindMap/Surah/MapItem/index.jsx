@@ -1,27 +1,15 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import DataMindMap from '../../../../assets/mushaf/DataMindMap';
-import AyahPerMap from '../AyahPerMap';
+import AyahPerMap from '../../AyahPerMap';
 // import MindMapChildrenView from '../Children/surah';
 
-const MindMapSurahView = ({item}) => {
-  const mmData = DataMindMap
-  const mmSurah = mmData.find(ele => ele.id === item.name.id)
+const MindMapSurahView = ({item, mmItem}) => {
+  const [viewChildren, setViewChildren] = useState(false)
+  const ayahs = item.ayah.filter((ayah) => ayah.mmParentId === mmItem.id)
 
   return (
     <View>
-      { !mmSurah && (
-        <View style={{ alignItems: "center", marginTop: 5, marginBottom: 15, opacity: 0.5 }}>
-          <Text>Belum Tersedia</Text>
-        </View>
-      )}
-
-      { mmSurah && mmSurah.mindMap.map((mm) => {
-        const [viewChildren, setViewChildren] = useState(false)
-        const ayahs = item.ayah.filter((ayah) => ayah.mmParentId === mm.id)
-
-        return (
-        <View style={{ flexDirection: 'column', flex:1 }} key={mm.id}>
+        <View style={{ flexDirection: 'column', flex:1 }} key={mmItem.id}>
           {/* map parent */}
           <View
             style={{
@@ -45,7 +33,7 @@ const MindMapSurahView = ({item}) => {
                 justifyContent: 'space-between', alignItems: 'center' 
               }}
             >
-              <Text style={{ paddingHorizontal: 12,  paddingVertical: 12, fontWeight: '700', maxWidth: '80%' }}>{mm.value}</Text>
+              <Text style={{ paddingHorizontal: 12,  paddingVertical: 12, fontWeight: '700', maxWidth: '80%' }}>{mmItem.value}</Text>
               <View 
                 style={{ 
                   paddingVertical: 5, paddingHorizontal: 7, 
@@ -53,19 +41,19 @@ const MindMapSurahView = ({item}) => {
                   borderRadius: 6, backgroundColor: '#1DC25D' 
                 }}
               >
-                <AyahPerMap mmId={mm.id} ayahList={item.ayah} level='parent' />
+                <AyahPerMap mmId={mmItem.id} ayahList={item.ayah} level='parent' />
               </View>
             </TouchableOpacity>
           </View>
       
           {/* map children */}
-          { viewChildren && mm.children && (
-            mm.children.map((itemChild) => (
+          { viewChildren && mmItem.children && (
+            mmItem.children.map((itemChild) => (
               <MindMapChildrenView item={itemChild} ayahList={item.ayah} />
             ))
           )}
 
-          { viewChildren && !mm.children && (
+          { viewChildren && !mmItem.children && (
             <TouchableOpacity 
               style={{ 
                 flex: 1, minHeight: 30, padding: 10,
@@ -87,7 +75,6 @@ const MindMapSurahView = ({item}) => {
             </TouchableOpacity>
           )}
         </View>
-      )})}
     </View>
   )
 }

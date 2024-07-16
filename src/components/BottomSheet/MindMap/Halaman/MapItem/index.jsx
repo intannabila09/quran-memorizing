@@ -1,72 +1,25 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useEffect, useMemo, useState } from 'react'
-import DataMindMap from '../../../../assets/mushaf/DataMindMap';
-import AyahPerMap from '../AyahPerMap';
+import React, { useEffect, useState } from 'react'
+import AyahPerMap from '../../AyahPerMap';
 // import MindMapChildrenView from '../Children/halaman';
 
 const MindMapHalamanView = ({
-  item, listAyah, surahId, surahNumber, 
-  activeMapAyah, activeMapStatus, setActiveMapStatus,
+  item, mmItem,
+  listAyah, surahNumber, 
+  activeMap, setActiveMap,
+  mapParentIdToBeShow, mapChildrenIdToBeShow,
+  activeMapStatus, setActiveMapStatus,
   handleSetActiveMap = () => {}
 }) => {
-  const [activeMap, setActiveMap] = useState(null)
-  const mmData = DataMindMap
-  const mmHalaman = useMemo(() => {
-    const listMMId = []
-    listAyah.map((i) => { listMMId.push(i.mmParentId) })
-
-    const activeMapSurah = mmData.find(ele => ele.id === surahId)
-    const listMM = []
-    { activeMapSurah && activeMapSurah.mindMap.map((j) => {
-        const exist = listMMId.find(ele => ele === j.id)
-        if (exist) {listMM.push(j)}
-      })
-    }
-
-    if (listMM.length != 0) {return listMM} 
-    else {return null}
-  })
-  // const [activeMapAyahNum, setActiveMapAyahNum] = useState(null)
-  const [mapParentIdToBeShow, setMapParentIdToBeShow] = useState(null)
-  const [mapChildrenIdToBeShow, setMapChildrenIdToBeShow] = useState(null)
-
-  useEffect (() => {
-    if (activeMapStatus === false) setActiveMap(null)
-  }, [activeMapStatus])
-
-  useEffect (() => {
-    if (activeMapAyah) {
-      setActiveMap(activeMapAyah)
-      
-      const ayah = item.ayah.find(i => i.number === Number(activeMapAyah.split(':')[1]))
-      setMapParentIdToBeShow(ayah.mmParentId)
-      setMapChildrenIdToBeShow(ayah.mmChildrenId)
-    }
-    else {
-      setActiveMap(null)
-    }
-  }, [activeMapAyah])
-
-  // console.log(activeMap)
-  // console.log(activeMapAyah)
+  const [viewChildren, setViewChildren] = useState(false)
+  const ayahs = listAyah.filter((ayah) => ayah.mmParentId === mmItem.id)
+          
+  useEffect(() => {
+    if (mapParentIdToBeShow === mmItem.id ) setViewChildren(true)
+  }, [mapParentIdToBeShow])
 
   return (
     <View>
-      { !mmHalaman && (
-        <View style={{ alignItems: "center", marginTop: 5, marginBottom: 15, opacity: 0.5 }}>
-          <Text>Belum Tersedia</Text>
-        </View>
-      )}
-
-      { mmHalaman && mmHalaman.map((mmItem) => {
-        const [viewChildren, setViewChildren] = useState(false)
-        const ayahs = listAyah.filter((ayah) => ayah.mmParentId === mmItem.id)
-          
-        useEffect(() => {
-          if (mapParentIdToBeShow === mmItem.id ) setViewChildren(true)
-        }, [mapParentIdToBeShow])
-
-        return (
         <View style={{ flexDirection: 'column', flex:1 }} key={mmItem.id}>
           {/* map parent */}
           <View
@@ -162,7 +115,6 @@ const MindMapHalamanView = ({
             </View>
           )}
         </View>
-      )})}
     </View>
   )
 }
@@ -184,8 +136,6 @@ const MindMapChildrenView = ({
   useEffect(() => {
     if (mapChildrenIdToBeShow === item.id ) setViewTranslation(true)
   }, [mapChildrenIdToBeShow])
-
-  // console.log(viewTranslation)
 
   return (
     <View style={{ flexDirection: 'column', flex:1 }}>

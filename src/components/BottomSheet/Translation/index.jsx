@@ -4,8 +4,8 @@ import { useMushafState } from "context/MushafContext"
 import { FontAwesome } from '@expo/vector-icons';
 import ContentMapper from "assets/mushaf/ContentMapper"
 import { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
-import MindMapSurahView from '../MindMap/Parent/surah';
-import MindMapHalamanView from '../MindMap/Parent/halaman';
+import MindMapSurahList from '../MindMap/Surah';
+import MindMapHalamanList from '../MindMap/Halaman';
 
 const { OS: os } = Platform
 
@@ -60,7 +60,7 @@ const TranslationModalContent = ({
         )
         
         }
-    },[juz])
+    },[activeContent])
 
     useEffect(() => {
         const backAction = () => {
@@ -245,11 +245,11 @@ const TranslationModalContent = ({
                                         listAyah.push(ayah)
                                     })
                                 }
-                                {/* <MindMapView item={content[key]} listAyah={listAyah} surahId={content[key].name.id} activeTab={activeTab} /> */}
-                                { activeTab === 'surah' && <MindMapSurahView item={content[key]} /> }
+                                
+                                { activeTab === 'surah' && <MindMapSurahList item={content[key]} /> }
                                 
                                 { activeTab === 'halaman' && 
-                                    <MindMapHalamanView 
+                                    <MindMapHalamanList 
                                         item={content[key]} 
                                         listAyah={listAyah} 
                                         surahId={content[key].name.id} 
