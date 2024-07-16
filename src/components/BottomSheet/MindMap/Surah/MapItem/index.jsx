@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import AyahPerMap from '../../AyahPerMap';
-// import MindMapChildrenView from '../Children/surah';
 
 const MindMapSurahView = ({item, mmItem}) => {
   const [viewChildren, setViewChildren] = useState(false)

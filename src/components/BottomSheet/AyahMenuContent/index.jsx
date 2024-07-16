@@ -294,6 +294,7 @@ Surah ${surah.name.id}:${ayah.number}
             
             <View style={{ height: '85%', paddingBottom: 20 }}>
                 <BottomSheetScrollView>
+                    <ScrollView>
                     <View
                         style={{
                             flexDirection: "row",
@@ -351,6 +352,7 @@ Surah ${surah.name.id}:${ayah.number}
                             />
                         )
                     })}
+                    </ScrollView>
                 </BottomSheetScrollView>
             </View>
         </View>

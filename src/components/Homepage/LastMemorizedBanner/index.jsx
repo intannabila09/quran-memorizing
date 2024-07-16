@@ -5,8 +5,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Quran from 'assets/Quran.png'
 import { useEffect, useState } from 'react';
 import { useUserData } from 'context/UserDataContext';
-import { useIsFocused } from '@react-navigation/native'
-import { SurahItems } from 'utils/constants';
+import { useIsFocused } from '@react-navigation/native';
+import { findJuzFromAyah } from '../../../utils/helpers';
+import ContentMapper from "assets/mushaf/ContentMapper";
 
 const LastMemorizedBanner = ({
     style,
@@ -32,12 +33,15 @@ const LastMemorizedBanner = ({
 
     const navigateToSurah = () => {
         if (!memorizationHistory || memorizationHistory?.length < 1) return navigation.navigate('Mushaf')
-        const surahContent = SurahItems[String(
-            Number(memorizationHistory[0].surahNumber) - 1
-        )]
-        if(!surahContent.hasOwnProperty('page')) return navigation.navigate('Mushaf')
+
+        const juzNo = findJuzFromAyah(Number(memorizationHistory[0].surahNumber), 1)
+        const surahContent = ContentMapper()[juzNo].metadata
+        .find(item => item.name.id === memorizationHistory[0].surahName)
+        const ayahContent = surahContent.ayah.find(item => item.number === memorizationHistory[0].ayahNumber)
+
         return navigation.navigate('Mushaf', {
-            pageIndex: Number(surahContent?.page)
+            pageIndex: ayahContent.pageIndex,
+            juzNo: juzNo
         })
     }
 

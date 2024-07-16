@@ -135,17 +135,17 @@ const Mushaf = ({ route, navigation }) => {
   };
 
   const handleDisplayAyahMenu = (ayah) => {
-    if (!translationModalVisible){
+    // if (!translationModalVisible){
       setAyahMenuVisible(true);
       setSplitView(true)
       dispatch({
         action: "SET_SELECTED_AYAH",
         payload: ayah,
       });
-    }
-    else {
-      setActiveMapAyah(ayah)
-    }
+    // }
+    // else {
+      // setActiveMapAyah(ayah)
+    // }
   };
 
   useEffect(() => {
@@ -239,6 +239,7 @@ const Mushaf = ({ route, navigation }) => {
                 highlightedAyahValue={activeAyah}
                 activeMapAyah={activeMapAyah}
                 handleSetDeactivateMap={handleSetDeactivateMap}
+                translationModalVisible={translationModalVisible}
               />
             </View>
             <MushafMenuBar

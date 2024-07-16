@@ -16,6 +16,7 @@ const QuranPages = ({
   juzNo,
   highlightedAyahValue,
   activeMapAyah,
+  translationModalVisible,
   handleSetDeactivateMap = () => {},
   handleDisplayAyahMenu = () => {},
 }) => {
@@ -75,13 +76,19 @@ const QuranPages = ({
   });
 
   const verseLongPress = (ayah) => {
-    setActiveAyah(ayah);
-    handleDisplayAyahMenu(ayah);
+    if(!translationModalVisible){
+      setActiveAyah(ayah);
+      handleDisplayAyahMenu(ayah);
+    }
   };
+
+  const handleDeactivateMap = () => {
+    handleSetDeactivateMap()
+  }
 
   const versePress = () => {
     setActiveAyah(null);
-    handleSetDeactivateMap();
+    handleDeactivateMap();
     setShowMenu(!showMenu);
     if (!!highlightedAyah) setHighlightedAyah(null);
     console.log("press");

@@ -1,22 +1,27 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import AyahPerMap from '../../AyahPerMap';
-// import MindMapChildrenView from '../Children/halaman';
 
 const MindMapHalamanView = ({
   item, mmItem,
   listAyah, surahNumber, 
   activeMap, setActiveMap,
-  mapParentIdToBeShow, mapChildrenIdToBeShow,
+  activeMapAyah,
+  // mapParentIdToBeShow, mapChildrenIdToBeShow,
   activeMapStatus, setActiveMapStatus,
   handleSetActiveMap = () => {}
 }) => {
   const [viewChildren, setViewChildren] = useState(false)
   const ayahs = listAyah.filter((ayah) => ayah.mmParentId === mmItem.id)
           
+  // useEffect(() => {
+  //   if (mapParentIdToBeShow === mmItem.id ) setViewChildren(true)
+  // }, [mapParentIdToBeShow])
+  console.log(activeMap)
+
   useEffect(() => {
-    if (mapParentIdToBeShow === mmItem.id ) setViewChildren(true)
-  }, [mapParentIdToBeShow])
+    if(activeMapAyah) setActiveMap(activeMapAyah)
+  })
 
   return (
     <View>
@@ -76,7 +81,7 @@ const MindMapHalamanView = ({
                       activeMap={activeMap}
                       setActiveMap={setActiveMap}
                       handleSetActiveMap={handleSetActiveMap}
-                      mapChildrenIdToBeShow={mapChildrenIdToBeShow}
+                      // mapChildrenIdToBeShow={mapChildrenIdToBeShow}
                     />
                   )}
                 </View>
@@ -123,7 +128,7 @@ const MindMapChildrenView = ({
   item, ayahList, surahNumber, 
   activeMap, setActiveMap, 
   activeMapStatus, setActiveMapStatus,
-  mapChildrenIdToBeShow,
+  // mapChildrenIdToBeShow,
   handleSetActiveMap = () => {},
 }) => {
   const [viewTranslation, setViewTranslation] = useState(false)
@@ -133,9 +138,10 @@ const MindMapChildrenView = ({
     if (activeMapStatus === false) setActiveMap(null)
   }, [activeMapStatus])
 
-  useEffect(() => {
-    if (mapChildrenIdToBeShow === item.id ) setViewTranslation(true)
-  }, [mapChildrenIdToBeShow])
+  // useEffect(() => {
+  //   if (mapChildrenIdToBeShow === item.id ) setViewTranslation(true)
+  // }, [mapChildrenIdToBeShow])
+  // console.log(activeMap)
 
   return (
     <View style={{ flexDirection: 'column', flex:1 }}>

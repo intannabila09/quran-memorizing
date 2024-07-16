@@ -5,7 +5,8 @@ import MindMapHalamanView from './MapItem';
 
 const MindMapHalamanList = ({
   item, listAyah, surahId, surahNumber, 
-  activeMapAyah, activeMapStatus, setActiveMapStatus,
+  activeMapAyah, 
+  activeMapStatus, setActiveMapStatus,
   handleSetActiveMap = () => {}
 }) => {
   const [activeMap, setActiveMap] = useState(null)
@@ -25,25 +26,25 @@ const MindMapHalamanList = ({
     if (listMM.length != 0) {return listMM} 
     else {return null}
   })
-  const [mapParentIdToBeShow, setMapParentIdToBeShow] = useState(null)
-  const [mapChildrenIdToBeShow, setMapChildrenIdToBeShow] = useState(null)
+  // const [mapParentIdToBeShow, setMapParentIdToBeShow] = useState(null)
+  // const [mapChildrenIdToBeShow, setMapChildrenIdToBeShow] = useState(null)
 
   useEffect (() => {
     if (activeMapStatus === false) setActiveMap(null)
   }, [activeMapStatus])
 
-  useEffect (() => {
-    if (activeMapAyah) {
-      setActiveMap(activeMapAyah)
+  // useEffect (() => {
+  //   if (activeMapAyah) {
+  //     setActiveMap(activeMapAyah)
       
-      const ayah = item.ayah.find(i => i.number === Number(activeMapAyah.split(':')[1]))
-      setMapParentIdToBeShow(ayah.mmParentId)
-      setMapChildrenIdToBeShow(ayah.mmChildrenId)
-    }
-    else {
-      setActiveMap(null)
-    }
-  }, [activeMapAyah])
+  //     const ayah = item.ayah.find(i => i.number === Number(activeMapAyah.split(':')[1]))
+  //     setMapParentIdToBeShow(ayah.mmParentId)
+  //     setMapChildrenIdToBeShow(ayah.mmChildrenId)
+  //   }
+  //   else {
+  //     setActiveMap(null)
+  //   }
+  // }, [activeMapAyah])
 
   return (
     <View>
@@ -61,10 +62,11 @@ const MindMapHalamanList = ({
               mmItem={mmItem}
               listAyah={listAyah}
               surahNumber={surahNumber}
+              activeMapAyah={activeMapAyah}
               activeMap={activeMap}
               setActiveMap={setActiveMap}
-              mapParentIdToBeShow={mapParentIdToBeShow}
-              mapChildrenIdToBeShow={mapChildrenIdToBeShow}
+              // mapParentIdToBeShow={mapParentIdToBeShow}
+              // mapChildrenIdToBeShow={mapChildrenIdToBeShow}
               activeMapStatus={activeMapStatus}
               setActiveMapStatus={setActiveMapStatus}
               handleSetActiveMap={handleSetActiveMap}
