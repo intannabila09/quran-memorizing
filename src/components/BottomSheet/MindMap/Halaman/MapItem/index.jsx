@@ -17,7 +17,7 @@ const MindMapHalamanView = ({
   // useEffect(() => {
   //   if (mapParentIdToBeShow === mmItem.id ) setViewChildren(true)
   // }, [mapParentIdToBeShow])
-  console.log(activeMap)
+  // console.log(activeMap)
 
   useEffect(() => {
     if(activeMapAyah) setActiveMap(activeMapAyah)

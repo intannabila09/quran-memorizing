@@ -19,21 +19,21 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.aoohan.quranmemorizing"
+      "bundleIdentifier": "com.intanazz.quranmemorizing"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.aoohan.quranmemorizing"
+      "package": "com.intanazz.quranmemorizing"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "f1dc7300-8df1-48ff-964b-8e8fa5cf7177"
+        "projectId": "ec804700-bdf6-4c9f-9e29-561a0f924487"
       }
     }
   }

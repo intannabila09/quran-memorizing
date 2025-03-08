@@ -198,7 +198,7 @@ const MushafMenuBar = ({
                     await audio.stopAsync()
                     setAudio(null)
                 } else {
-                    console.log('unhandled')
+                    // console.log('unhandled')
                 }
             }
             return () => {
